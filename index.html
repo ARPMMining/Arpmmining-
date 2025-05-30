@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARPM MINING - MOBILE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 12px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin-top: 220px;
+        }
+        #home-container {
+            position: relative;
+            min-height: 500px;
+            width: 100%;
+            max-width: 400px;
+            margin: 220px auto 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(30, 58, 138, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+        }
+        #home-container > * {
+            position: relative;
+            z-index: 1;
+        }
+        #home-container h2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #home-container h2 span:first-child {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        #home-container h2 span:last-child {
+            font-size: 27px;
+            font-weight: 700;
+        }
+        .form-group {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+        .form-control::placeholder {
+            color: #d1d5db;
+            font-size: 18px;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #60a5fa;
+            font-size: 18px;
+        }
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 22px;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #2563eb, #60a5fa);
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #22c55e, #86efac);
+        }
+        .btn-danger {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .start-mining-btn {
+            background: linear-gradient(45deg, #22c55e, #86efac);
+            border: none;
+            color: #fff;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            font-size: 30px;
+            margin: 15px auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .start-mining-btn:hover {
+            transform: translateY(-2px);
+        }
+        .start-mining-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        .timer {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+            font-size: 30px;
+        }
+        .balance-info {
+            margin: 15px 0;
+            background: rgba(30, 58, 138, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        .profile-info {
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        .profile-info p {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .divider {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #000, transparent);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .profile-info p:last-child .divider {
+            display: none;
+        }
+        .navbar-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1e3a8a;
+            display: none;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+        .navbar-bottom a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            flex: 1;
+            text-align: center;
+        }
+        .navbar-bottom a i {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 3px;
+        }
+        .navbar-bottom a.active {
+            color: #60a5fa;
+        }
+        .link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .footer-text {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        .copy-btn {
+            background: linear-gradient(45deg, #2563eb, #60a5fa);
+            border: none;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 22px;
+            margin-left: 10px;
+        }
+        .logout-btn {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            width: 180px;
+        }
+        .logout-btn i {
+            margin-right: 8px;
+            font-size: 24px;
+        }
+        .income-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .income-card:hover {
+            transform: translateY(-5px);
+        }
+        .youtube-card {
+            background: linear-gradient(45deg, #ff0000, #ff6666);
+        }
+        .x-card {
+            background: linear-gradient(45deg, #000000, #333333);
+        }
+        .income-card h3 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+        .income-card p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .income-card .btn {
+            font-size: 22px;
+            padding: 10px 20px;
+            width: auto;
+            display: inline-block;
+        }
+        .income-card .btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 15px auto;
+            background-size: cover;
+            border: 3px solid #60a5fa;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .profile-picture-options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .profile-picture-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+            transition: transform 0.2s;
+        }
+        .profile-picture-option:hover {
+            transform: scale(1.1);
+        }
+        #profile-container, #income-container, #settings-container {
+            max-height: calc(100vh - 280px);
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+        #profile-container, #settings-container {
+            position: relative;
+        }
+        #profile-container .profile-info, #settings-container .settings-options {
+            flex-grow: 1;
+        }
+        .settings-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: #60a5fa;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .settings-icon:hover {
+            transform: rotate(45deg);
+        }
+        .settings-menu {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background: rgba(30, 58, 138, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: none;
+        }
+        .settings-menu.active {
+            display: block;
+        }
+        .settings-menu .logout-btn {
+            margin: 0;
+            width: 100%;
+            font-size: 20px;
+        }
+        .navbar-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            height: 200px;
+            z-index: 1000;
+        }
+        .logo-circle {
+            width: 200px;
+            height: 200px;
+            background-color: #007BFF;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+        }
+        .logo-circle h1 {
+            color: white;
+            font-size: 44px;
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .logo-circle p {
+            color: white;
+            font-size: 24px;
+            margin: 5px 0 0;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .settings-option {
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .settings-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .language-options {
+            display: none;
+            margin-top: 10px;
+        }
+        .language-options.active {
+            display: block;
+        }
+        .language-option {
+            margin: 5px 0;
+            cursor: pointer;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 576px) {
+            body {
+                font-size: 16px;
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+                max-width: 95%;
+                margin-top: 180px;
+            }
+            #home-container {
+                min-height: 400px;
+                width: 100%;
+                max-width: 95%;
+                margin: 180px auto 15px;
+            }
+            #home-container h2 span:first-child {
+                font-size: 20px;
+            }
+            #home-container h2 span:last-child {
+                font-size: 24px;
+            }
+            .start-mining-btn {
+                width: 150px;
+                height: 150px;
+                font-size: 24px;
+            }
+            .timer {
+                width: 150px;
+                height: 150px;
+                font-size: 24px;
+            }
+            .form-control {
+                font-size: 16px;
+                padding: 8px;
+            }
+            .form-control::placeholder {
+                font-size: 16px;
+            }
+            .btn, .copy-btn, .logout-btn, .start-mining-btn {
+                font-size: 20px;
+                padding: 8px;
+            }
+            .balance-info, .profile-info, .settings-options {
+                font-size: 16px;
+                padding: 8px;
+            }
+            .navbar-bottom {
+                padding: 6px 0;
+            }
+            .navbar-bottom a {
+                font-size: 14px;
+            }
+            .navbar-bottom a i {
+                font-size: 24px;
+            }
+            .link {
+                font-size: 16px;
+            }
+            .footer-text {
+                font-size: 16px;
+            }
+            .navbar-top {
+                padding: 15px 0;
+                height: 150px;
+            }
+            .logo-circle {
+                width: 150px;
+                height: 150px;
+            }
+            .logo-circle h1 {
+                font-size: 36px;
+            }
+            .logo-circle p {
+                font-size: 20px;
+            }
+            .income-card {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .income-card h3 {
+                font-size: 24px;
+            }
+            .income-card p {
+                font-size: 16px;
+            }
+            .income-card .btn {
+                font-size: 20px;
+                padding: 8px 15px;
+            }
+            .profile-picture {
+                width: 100px;
+                height: 100px;
+            }
+            .profile-picture-option {
+                width: 50px;
+                height: 50px;
+            }
+            #profile-container, #income-container, #settings-container {
+                max-height: calc(100vh - 230px);
+                padding-bottom: 60px;
+            }
+            .settings-icon {
+                top: 15px;
+                right: 15px;
+                font-size: 36px;
+            }
+            .settings-menu {
+                top: 40px;
+                right: 15px;
+            }
+            .settings-menu .logout-btn {
+                font-size: 18px;
+            }
+            .settings-option, .language-option {
+                font-size: 16px;
+                padding: 8px;
+            }
+        }
+        @media (max-width: 400px) {
+            .container {
+                margin: 8px;
+                padding: 12px;
+                margin-top: 160px;
+            }
+            #home-container {
+                min-height: 350px;
+                width: 100%;
+                max-width: 95%;
+                margin: 160px auto 10px;
+            }
+            #home-container h2 span:first-child {
+                font-size: 18px;
+            }
+            #home-container h2 span:last-child {
+                font-size: 22px;
+            }
+            .start-mining-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 20px;
+            }
+            .timer {
+                width: 120px;
+                height: 120px;
+                font-size: 20px;
+            }
+            .logo-circle {
+                width: 120px;
+                height: 120px;
+            }
+            .logo-circle h1 {
+                font-size: 30px;
+            }
+            .logo-circle p {
+                font-size: 18px;
+            }
+            .income-card {
+                padding: 12px;
+                margin: 15px 0;
+            }
+            .income-card h3 {
+                font-size: 22px;
+            }
+            .income-card p {
+                font-size: 14px;
+            }
+            .income-card .btn {
+                font-size: 18px;
+                padding: 6px 12px;
+            }
+            .profile-picture {
+                width: 80px;
+                height: 80px;
+            }
+            .profile-picture-option {
+                width: 40px;
+                height: 40px;
+            }
+            #profile-container, #income-container, #settings-container {
+                max-height: calc(100vh - 210px);
+                padding-bottom: 50px;
+            }
+            .navbar-bottom a {
+                font-size: 12px;
+            }
+            .navbar-bottom a i {
+                font-size: 20px;
+            }
+            .settings-icon {
+                top: 10px;
+                right: 10px;
+                font-size: 32px;
+            }
+            .settings-menu {
+                top: 35px;
+                right: 10px;
+            }
+            .settings-menu .logout-btn {
+                font-size: 16px;
+            }
+            .settings-option, .language-option {
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+        .dark-mode {
+            background: #1a1a1a !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .container {
+            background: rgba(40, 40, 40, 0.7) !important;
+        }
+        .dark-mode #home-container {
+            background: rgba(50, 50, 50, 0.8) !important;
+        }
+        .dark-mode .balance-info, .dark-mode .profile-info, .dark-mode .settings-options {
+            background: rgba(60, 60, 60, 0.5) !important;
+        }
+        .dark-mode .navbar-bottom {
+            background: #2a2a2a !important;
+        }
+        .dark-mode .form-control {
+            background: rgba(80, 80, 80, 0.3) !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .form-control::placeholder {
+            color: #b0b0b0 !important;
+        }
+        .dark-mode .btn-primary {
+            background: linear-gradient(45deg, #1e4db7, #4d8aff) !important;
+        }
+        .dark-mode .btn-success {
+            background: linear-gradient(45deg, #1a8e44, #5dd89a) !important;
+        }
+        .dark-mode .btn-danger {
+            background: linear-gradient(45deg, #b32424, #e65c5c) !important;
+        }
+        .dark-mode .start-mining-btn {
+            background: linear-gradient(45deg, #1a8e44, #5dd89a) !important;
+        }
+        .dark-mode .income-card {
+            background: rgba(70, 70, 70, 0.3) !important;
+        }
+        .dark-mode .youtube-card {
+            background: linear-gradient(45deg, #cc0000, #e63333) !important;
+        }
+        .dark-mode .x-card {
+            background: linear-gradient(45deg, #1a1a1a, #404040) !important;
+        }
+        .dark-mode .profile-picture {
+            border-color: #4d8aff !important;
+        }
+        .dark-mode .settings-option, .dark-mode .language-option {
+            background: rgba(70, 70, 70, 0.3) !important;
+        }
+        .dark-mode .settings-option:hover, .dark-mode .language-option:hover {
+            background: rgba(90, 90, 90, 0.4) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar with Logo -->
+    <div class="navbar-top" id="navbar-top" aria-label="ARPM MINING LOGO">
+        <div class="logo-circle">
+            <h1>ARPM</h1>
+            <p>MINING</p>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-container" class="container">
+        <h2>LOGIN</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="email" class="form-control" id="login-email" placeholder="EMAIL" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="login-password" placeholder="PASSWORD" required>
+                <i class="fas fa-eye password-toggle" id="toggle-password" onclick="togglePasswordVisibility()"></i>
+            </div>
+            <button type="submit" class="btn btn-primary">LOGIN</button>
+            <p class="footer-text">
+                <a href="#" class="link" onclick="showReset()">FORGOT PASSWORD?</a><br>
+                DON'T HAVE AN ACCOUNT? <a href="#" class="link" onclick="showSignup()">REGISTER</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Registration Page -->
+    <div id="signup-container" class="container hidden">
+        <h2>REGISTER</h2>
+        <form id="signup-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="signup-username" placeholder="USERNAME" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="signup-email" placeholder="EMAIL" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="signup-invite-code" placeholder="INVITE CODE (OPTIONAL)">
+            </div>
+            <button type="submit" class="btn btn-success">REGISTER</button>
+            <p class="footer-text">
+                BACK TO LOGIN? <a href="#" class="link" onclick="showLogin()">LOGIN</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Password Reset Page -->
+    <div id="reset-container" class="container hidden">
+        <h2>RESET PASSWORD</h2>
+        <form id="reset-form">
+            <div class="form-group">
+                <input type="email" class="form-control" id="reset-email" placeholder="EMAIL" required>
+            </div>
+            <button type="submit" class="btn btn-success">SEND RESET LINK</button>
+            <p class="footer-text">
+                BACK TO LOGIN? <a href="#" class="link" onclick="showLogin()">LOGIN</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-container" class="hidden">
+        <h2>
+            <span>WELCOME TO</span>
+            <span>ARPM MINING</span>
+        </h2>
+        <div class="balance-info">
+            <p><strong>BALANCE:</strong> <span id="balance">0.0000</span> ARPM</p>
+        </div>
+        <div id="mining-area">
+            <button class="start-mining-btn" id="start-mining-btn" onclick="startMining()" aria-label="START MINING BUTTON">START MINING</button>
+            <div class="timer" id="timer" style="display: none;" aria-label="START MINING TIMER"></div>
+        </div>
+        <div id="ad-container" class="hidden"></div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile-container" class="container hidden">
+        <div>
+            <h2>PROFILE</h2>
+            <i class="fas fa-cog settings-icon" onclick="navigateTo('settings')"></i>
+            <div class="profile-picture" id="profile-picture" aria-label="PROFILE PICTURE"></div>
+            <div class="profile-picture-options">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Boy" class="profile-picture-option" onclick="selectProfilePicture('boy')">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Girl" class="profile-picture-option" onclick="selectProfilePicture('girl')">
+                <img src="https://images.unsplash.com/photo-1574158622682-e40e69881003?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Old Man" class="profile-picture-option" onclick="selectProfilePicture('oldman')">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f054bfc9482?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Old Woman" class="profile-picture-option" onclick="selectProfilePicture('oldwoman')">
+            </div>
+            <div class="profile-info">
+                <p><strong>USERNAME:</strong> <span id="profile-username">N/A</span><span class="divider"></span></p>
+                <p><strong>REGISTERED:</strong> <span id="profile-registration-date">N/A</span><span class="divider"></span></p>
+                <p><strong>EMAIL:</strong> <span id="profile-email">N/A</span><span class="divider"></span></p>
+                <p><strong>BALANCE:</strong> <span id="profile-balance">0.0000</span> ARPM<span class="divider"></span></p>
+                <p><strong>REFERRALS:</strong> <span id="profile-referrals">0</span><span class="divider"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div id="settings-container" class="container hidden">
+        <h2>SETTINGS</h2>
+        <div class="settings-options">
+            <div class="settings-option" onclick="window.toggleDarkMode()">
+                <span>Dark Mode: </span><span id="dark-mode-status">Off</span>
+            </div>
+            <div class="settings-option" onclick="window.toggleLanguageOptions()">Language</div>
+            <div class="language-options" id="language-options">
+                <div class="language-option" onclick="window.changeLanguage('en')">English</div>
+                <div class="language-option" onclick="window.changeLanguage('bn')">বাংলা</div>
+                <div class="language-option" onclick="window.changeLanguage('hi')">हिंदी</div>
+            </div>
+            <button class="logout-btn" onclick="signOutUser()">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </button>
+        </div>
+    </div>
+
+    <!-- Income Page -->
+    <div id="income-container" class="container hidden">
+        <h2>INCOME</h2>
+        <div class="income-card youtube-card">
+            <h3>YOUTUBE SUBSCRIBE</h3>
+            <p>EARN 5 ARPM BY SUBSCRIBING TO OUR YOUTUBE CHANNEL!</p>
+            <button class="btn btn-success" id="youtube-btn" onclick="checkSubscription(event)">SUBSCRIBE NOW</button>
+            <p id="youtube-status" class="mt-2 hidden">CLAIMED!</p>
+        </div>
+        <div class="income-card x-card">
+            <h3>X FOLLOW</h3>
+            <p>EARN 5 ARPM BY FOLLOWING US ON X!</p>
+            <button class="btn btn-success" id="x-btn" onclick="checkFollow(event)">FOLLOW NOW</button>
+            <p id="x-status" class="mt-2 hidden">CLAIMED!</p>
+        </div>
+    </div>
+
+    <!-- Invite Page -->
+    <div id="invite-container" class="container hidden">
+        <h2>INVITE</h2>
+        <div class="balance-info">
+            <p><strong>INVITE CODE:</strong> <span id="invite-code-display">LOADING...</span>
+                <button class="copy-btn" onclick="copyInviteCode()">COPY</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navbar-bottom" id="navbar-bottom">
+        <a href="#" onclick="navigateTo('home')" class="active">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">HOME</span>
+        </a>
+        <a href="#" onclick="navigateTo('invite')">
+            <i class="fas fa-user-plus"></i>
+            <span class="nav-text">INVITE</span>
+        </a>
+        <a href="#" onclick="navigateTo('wallet')">
+            <i class="fas fa-wallet"></i>
+            <span class="nav-text">WALLET</span>
+        </a>
+        <a href="#" onclick="navigateTo('income')">
+            <i class="fas fa-money-bill-wave"></i>
+            <span class="nav-text">INCOME</span>
+        </a>
+        <a href="#" onclick="navigateTo('profile')">
+            <i class="fas fa-user"></i>
+            <span class="nav-text">PROFILE</span>
+        </a>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
+            authDomain: "arpm-mining.firebaseapp.com",
+            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com",
+            projectId: "arpm-mining",
+            storageBucket: "arpm-mining.firebasestorage.app",
+            messagingSenderId: "854582920631",
+            appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
+            measurementId: "G-8YVW5EK6N1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const containers = {
+            login: document.getElementById('login-container'),
+            signup: document.getElementById('signup-container'),
+            reset: document.getElementById('reset-container'),
+            home: document.getElementById('home-container'),
+            profile: document.getElementById('profile-container'),
+            settings: document.getElementById('settings-container'),
+            income: document.getElementById('income-container'),
+            invite: document.getElementById('invite-container'),
+            navbar: document.getElementById('navbar-bottom')
+        };
+        const forms = {
+            login: document.getElementById('login-form'),
+            signup: document.getElementById('signup-form'),
+            reset: document.getElementById('reset-form')
+        };
+        const miningElements = {
+            balance: document.getElementById('balance'),
+            startBtn: document.getElementById('start-mining-btn'),
+            timer: document.getElementById('timer'),
+            ad: document.getElementById('ad-container')
+        };
+        const incomeElements = {
+            youtubeBtn: document.getElementById('youtube-btn'),
+            xBtn: document.getElementById('x-btn'),
+            youtubeStatus: document.getElementById('youtube-status'),
+            xStatus: document.getElementById('x-status')
+        };
+        let isDarkMode = false;
+        let currentLanguage = 'en';
+        const languageOptions = document.getElementById('language-options');
+
+        async function loadAd(containerId) {
+            const adContainer = document.getElementById(containerId);
+            if (!adContainer) return false;
+            adContainer.innerHTML = '<p style="font-size: 18px; color: #fff;">AD PLACEHOLDER (5S)</p>';
+            adContainer.classList.remove('hidden');
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            adContainer.classList.add('hidden');
+            return true;
+        }
+
+        function showPage(page) {
+            Object.values(containers).forEach(c => {
+                if (c.id !== 'navbar-top') c.style.display = 'none';
+            });
+            containers[page].style.display = 'block';
+            containers.navbar.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'none' : 'flex';
+            document.querySelectorAll('.navbar-bottom a').forEach(link => link.classList.remove('active'));
+            document.querySelector(`.navbar-bottom a[onclick="navigateTo('${page}')"]`)?.classList.add('active');
+            if (page === 'invite') loadInviteCode();
+            if (page === 'profile') loadProfileInfo();
+            if (page === 'home') loadMiningState();
+            if (page === 'income') loadIncomeState();
+            if (page === 'settings') {
+                updateSettingsUI();
+            }
+        }
+
+        window.showLogin = () => showPage('login');
+        window.showSignup = () => showPage('signup');
+        window.showReset = () => showPage('reset');
+
+        forms.login.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showPage('home');
+            } catch (error) {
+                alert(`LOGIN FAILED: ${error.code === 'auth/wrong-password' ? 'INCORRECT PASSWORD' : 'INVALID EMAIL OR USER NOT FOUND'}`);
+            }
+        });
+
+        forms.signup.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const inviteCode = document.getElementById('signup-invite-code').value;
+
+            if (password !== confirmPassword) return alert('PASSWORDS DO NOT MATCH!');
+            if (inviteCode) {
+                const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
+                const snapshot = await get(inviteQuery);
+                if (!snapshot.exists()) return alert('INVALID INVITE CODE!');
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+                await set(ref(db, 'users/' + user.uid), {
+                    username: username || "N/A",
+                    email: email,
+                    tokens: 0,
+                    earnings: 0,
+                    inviteCode: inviteCode || null,
+                    uniqueCode: uniqueCode,
+                    registrationDate: new Date().toLocaleDateString('en-GB'),
+                    miningStartTime: 0,
+                    miningEndTime: 0,
+                    taxCompleted: false,
+                    referrals: 0,
+                    youtubeBonusClaimed: false,
+                    xBonusClaimed: false,
+                    profilePicture: 'default',
+                    darkMode: false,
+                    language: 'en'
+                });
+                if (inviteCode) {
+                    const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
+                    const snapshot = await get(inviteQuery);
+                    snapshot.forEach((childSnapshot) => {
+                        update(ref(db, 'users/' + childSnapshot.key), { referrals: (childSnapshot.val().referrals || 0) + 1 });
+                    });
+                }
+                showPage('login');
+            } catch (error) {
+                alert(`REGISTRATION FAILED: ${error.message}`);
+            }
+        });
+
+        forms.reset.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('reset-email').value;
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert('PASSWORD RESET LINK SENT!');
+                showPage('login');
+            } catch (error) {
+                alert(`PASSWORD RESET FAILED: ${error.message}`);
+            }
+        });
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                showPage('home');
+                updateBalance();
+                loadMiningState();
+                loadProfileInfo();
+                loadSettings();
+            } else {
+                showPage('login');
+            }
+        });
+
+        window.startMining = async () => {
+            if (!auth.currentUser) return alert('PLEASE LOG IN TO START MINING.');
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            const currentTime = Date.now();
+            if (currentTime < userData.miningEndTime) {
+                alert('MINING SESSION ALREADY IN PROGRESS.');
+                miningElements.startBtn.disabled = true;
+                return;
+            }
+
+            const adLoaded = await loadAd('ad-container');
+            if (!adLoaded) {
+                alert('FAILED TO LOAD AD. PLEASE TRY AGAIN.');
+                return;
+            }
+
+            const miningDuration = 6 * 3600 * 1000;
+            const startTime = Date.now();
+            const endTime = startTime + miningDuration;
+            await update(userRef, { miningStartTime: startTime, miningEndTime: endTime });
+            miningElements.startBtn.style.display = 'none';
+            miningElements.timer.style.display = 'flex';
+            startTimer(endTime);
+            miningElements.startBtn.disabled = true;
+        };
+
+        function startTimer(endTime) {
+            const totalDuration = 6 * 3600 * 1000;
+            const totalTokens = 3;
+            const minutesPerUpdate = 360;
+            const tokenPerMinute = totalTokens / minutesPerUpdate;
+            let lastUpdate = Date.now();
+
+            const interval = setInterval(async () => {
+                const currentTime = Date.now();
+                const timeLeft = endTime - currentTime;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    miningElements.timer.textContent = '06:00:00';
+                    miningElements.timer.style.display = 'none';
+                    miningElements.startBtn.style.display = 'block';
+                    miningElements.startBtn.disabled = false;
+                    if (auth.currentUser) {
+                        const userRef = ref(db, 'users/' + auth.currentUser.uid);
+                        const snapshot = await get(userRef);
+                        const userData = snapshot.val() || {};
+                        let earnedTokens = totalTokens;
+                        if (userData.taxCompleted) earnedTokens *= 1.5;
+                        await update(userRef, {
+                            tokens: (userData.tokens || 0) + earnedTokens,
+                            earnings: (userData.earnings || 0) + earnedTokens,
+                            miningStartTime: 0,
+                            miningEndTime: 0
+                        });
+                        updateBalance();
+                    }
+                    return;
+                }
+
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                miningElements.timer.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (currentTime - lastUpdate >= 60 * 1000 && auth.currentUser) {
+                    const userRef = ref(db, 'users/' + auth.currentUser.uid);
+                    const snapshot = await get(userRef);
+                    const userData = snapshot.val() || {};
+                    const newTokens = (userData.tokens || 0) + tokenPerMinute;
+                    const newEarnings = (userData.earnings || 0) + tokenPerMinute;
+                    await update(userRef, { tokens: newTokens, earnings: newEarnings });
+                    updateBalance();
+                    lastUpdate = currentTime;
+                }
+            }, 1000);
+        }
+
+        async function loadMiningState() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            const currentTime = Date.now();
+            if (currentTime < userData.miningEndTime) {
+                miningElements.startBtn.style.display = 'none';
+                miningElements.timer.style.display = 'flex';
+                miningElements.startBtn.disabled = true;
+                startTimer(userData.miningEndTime);
+            } else {
+                miningElements.startBtn.style.display = 'block';
+                miningElements.timer.style.display = 'none';
+                miningElements.startBtn.disabled = false;
+            }
+        }
+
+        async function updateBalance() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            miningElements.balance.textContent = (userData.tokens || 0).toFixed(4);
+            document.getElementById('profile-balance').textContent = (userData.tokens || 0).toFixed(4);
+        }
+
+        async function loadProfileInfo() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            try {
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    document.getElementById('profile-username').textContent = userData.username || 'N/A';
+                    document.getElementById('profile-registration-date').textContent = userData.registrationDate || 'N/A';
+                    document.getElementById('profile-email').textContent = userData.email || 'N/A';
+                    document.getElementById('profile-balance').textContent = (userData.tokens || 0).toFixed(4);
+                    document.getElementById('profile-referrals').textContent = userData.referrals || 0;
+                    updateProfilePicture(userData.profilePicture);
+                } else {
+                    console.log("NO USER DATA FOUND IN DATABASE. SAVING DEFAULT DATA...");
+                    await set(ref(db, 'users/' + auth.currentUser.uid), {
+                        username: "N/A",
+                        email: auth.currentUser.email,
+                        tokens: 0,
+                        earnings: 0,
+                        uniqueCode: Math.floor(10000000 + Math.random() * 90000000).toString(),
+                        registrationDate: new Date().toLocaleDateString('en-GB'),
+                        miningStartTime: 0,
+                        miningEndTime: 0,
+                        taxCompleted: false,
+                        referrals: 0,
+                        youtubeBonusClaimed: false,
+                        xBonusClaimed: false,
+                        profilePicture: 'default',
+                        darkMode: false,
+                        language: 'en'
+                    });
+                    await loadProfileInfo();
+                }
+            } catch (error) {
+                console.error("ERROR LOADING PROFILE INFO:", error);
+                alert("FAILED TO LOAD PROFILE INFO. PLEASE TRY AGAIN.");
+            }
+        }
+
+        function updateProfilePicture(pictureType) {
+            const profilePicture = document.getElementById('profile-picture');
+            const pictureUrls = {
+                'default': 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                'boy': 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                'girl': 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                'oldman': 'https://images.unsplash.com/photo-1574158622682-e40e69881003?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                'oldwoman': 'https://images.unsplash.com/photo-1531123897727-8f054bfc9482?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
+            };
+            profilePicture.style.backgroundImage = `url('${pictureUrls[pictureType]}')`;
+        }
+
+        window.selectProfilePicture = async (pictureType) => {
+            if (!auth.currentUser) return alert('PLEASE LOG IN TO SELECT A PROFILE PICTURE.');
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            await update(userRef, { profilePicture: pictureType });
+            updateProfilePicture(pictureType);
+            document.querySelectorAll('.profile-picture-option').forEach(option => {
+                option.style.display = 'none';
+            });
+        };
+
+        async function loadIncomeState() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            if (userData.youtubeBonusClaimed) {
+                incomeElements.youtubeBtn.disabled = true;
+                incomeElements.youtubeStatus.classList.remove('hidden');
+            }
+            if (userData.xBonusClaimed) {
+                incomeElements.xBtn.disabled = true;
+                incomeElements.xStatus.classList.remove('hidden');
+            }
+        }
+
+        window.checkSubscription = async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            if (userData.youtubeBonusClaimed) {
+                alert('YOUTUBE BONUS ALREADY CLAIMED!');
+                return;
+            }
+            if (confirm('SUBSCRIBED TO OUR YOUTUBE CHANNEL?')) {
+                const bonusTokens = 5;
+                await update(userRef, {
+                    tokens: (userData.tokens || 0) + bonusTokens,
+                    earnings: (userData.earnings || 0) + bonusTokens,
+                    youtubeBonusClaimed: true
+                });
+                updateBalance();
+                alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
+                incomeElements.youtubeBtn.disabled = true;
+                incomeElements.youtubeStatus.classList.remove('hidden');
+                window.open('https://www.youtube.com/@ARPMMining-l3x7o', '_blank');
+            } else {
+                window.open('https://www.youtube.com/@ARPMMining-l3x7o', '_blank');
+            }
+        };
+
+        window.checkFollow = async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            if (userData.xBonusClaimed) {
+                alert('X BONUS ALREADY CLAIMED!');
+                return;
+            }
+            if (confirm('FOLLOWED US ON X?')) {
+                const bonusTokens = 5;
+                await update(userRef, {
+                    tokens: (userData.tokens || 0) + bonusTokens,
+                    earnings: (userData.earnings || 0) + bonusTokens,
+                    xBonusClaimed: true
+                });
+                updateBalance();
+                alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
+                incomeElements.xBtn.disabled = true;
+                incomeElements.xStatus.classList.remove('hidden');
+                window.open('https://x.com/Arpmmining22', '_blank');
+            } else {
+                window.open('https://x.com/Arpmmining22', '_blank');
+            }
+        };
+
+        async function loadInviteCode() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            let uniqueCode = userData.uniqueCode;
+            if (!uniqueCode) {
+                uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+                await update(userRef, { uniqueCode });
+            }
+            document.getElementById('invite-code-display').textContent = uniqueCode;
+        }
+
+        window.copyInviteCode = () => {
+            const inviteCode = document.getElementById('invite-code-display').textContent;
+            navigator.clipboard.writeText(inviteCode).then(() => alert('INVITE CODE COPIED!')).catch(() => alert('FAILED TO COPY INVITE CODE.'));
+        };
+
+        window.navigateTo = (section) => {
+            if (!auth.currentUser && section !== 'login') {
+                alert('PLEASE LOG IN TO ACCESS THIS SECTION.');
+                showPage('login');
+                return;
+            }
+            if (section === 'wallet') {
+                alert('WALLET FEATURE COMING SOON!');
+                section = 'home';
+            }
+            showPage(section);
+        };
+
+        window.signOutUser = async () => {
+            await signOut(auth);
+            showPage('login');
+        };
+
+        window.togglePasswordVisibility = () => {
+            const passwordInput = document.getElementById('login-password');
+            const toggleIcon = document.getElementById('toggle-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        };
+
+        window.toggleDarkMode = () => {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            const darkModeStatus = document.getElementById('dark-mode-status');
+            if (darkModeStatus) {
+                darkModeStatus.textContent = isDarkMode ? 'On' : 'Off';
+            }
+            if (auth.currentUser) {
+                const userRef = ref(db, 'users/' + auth.currentUser.uid);
+                update(userRef, { darkMode: isDarkMode });
+            }
+        };
+
+        window.toggleLanguageOptions = () => {
+            if (languageOptions) {
+                languageOptions.classList.toggle('active');
+            }
+        };
+
+        window.changeLanguage = (lang) => {
+            currentLanguage = lang;
+            if (languageOptions) {
+                languageOptions.classList.remove('active');
+            }
+            if (auth.currentUser) {
+                const userRef = ref(db, 'users/' + auth.currentUser.uid);
+                update(userRef, { language: lang });
+            }
+            updateLanguage();
+        };
+
+        function updateLanguage() {
+            const translations = {
+                en: {
+                    login: 'LOGIN',
+                    register: 'REGISTER',
+                    reset: 'RESET PASSWORD',
+                    home: 'HOME',
+                    invite: 'INVITE',
+                    wallet: 'WALLET',
+                    income: 'INCOME',
+                    profile: 'PROFILE',
+                    settings: 'SETTINGS',
+                    darkMode: 'Dark Mode',
+                    language: 'Language',
+                    logout: 'LOGOUT'
+                },
+                bn: {
+                    login: 'লগইন',
+                    register: 'রেজিস্টার',
+                    reset: 'পাসওয়ার্ড রিসেট',
+                    home: 'হোম',
+                    invite: 'আমন্ত্রণ',
+                    wallet: 'ওয়ালেট',
+                    income: 'আয়',
+                    profile: 'প্রোফাইল',
+                    settings: 'সেটিংস',
+                    darkMode: 'ডার্ক মোড',
+                    language: 'ভাষা',
+                    logout: 'লগ আউট'
+                },
+                hi: {
+                    login: 'लॉगिन',
+                    register: 'रजिस्टर',
+                    reset: 'पासवर्ड रीसेट',
+                    home: 'होम',
+                    invite: 'आमंत्रण',
+                    wallet: 'वॉलेट',
+                    income: 'आय',
+                    profile: 'प्रोफ़ाइल',
+                    settings: 'सेटिंग्स',
+                    darkMode: 'डार्क मोड',
+                    language: 'भाषा',
+                    logout: 'लॉग आउट'
+                }
+            };
+            const t = translations[currentLanguage];
+            document.querySelector('#login-container h2').textContent = t.login;
+            document.querySelector('#signup-container h2').textContent = t.register;
+            document.querySelector('#reset-container h2').textContent = t.reset;
+            document.querySelector('#home-container h2 span:last-child').textContent = t.home;
+            document.querySelector('#invite-container h2').textContent = t.invite;
+            document.querySelector('#income-container h2').textContent = t.income;
+            document.querySelector('#profile-container h2').textContent = t.profile;
+            document.querySelector('#settings-container h2').textContent = t.settings;
+
+            const navLinks = document.querySelectorAll('.navbar-bottom a');
+            navLinks[0].querySelector('.nav-text').textContent = t.home;
+            navLinks[1].querySelector('.nav-text').textContent = t.invite;
+            navLinks[2].querySelector('.nav-text').textContent = t.wallet;
+            navLinks[3].querySelector('.nav-text').textContent = t.income;
+            navLinks[4].querySelector('.nav-text').textContent = t.profile;
+
+            const darkModeOption = document.querySelector('.settings-option:nth-child(1) span:first-child');
+            if (darkModeOption) darkModeOption.textContent = `${t.darkMode}: `;
+            const languageOption = document.querySelector('.settings-option:nth-child(2)');
+            if (languageOption) languageOption.textContent = t.language;
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) logoutBtn.lastChild.textContent = ` ${t.logout}`;
+        }
+
+        async function loadSettings() {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            isDarkMode = userData.darkMode || false;
+            currentLanguage = userData.language || 'en';
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            const darkModeStatus = document.getElementById('dark-mode-status');
+            if (darkModeStatus) {
+                darkModeStatus.textContent = isDarkMode ? 'On' : 'Off';
+            }
+            updateLanguage();
+        }
+
+        function updateSettingsUI() {
+            const darkModeStatus = document.getElementById('dark-mode-status');
+            if (darkModeStatus) {
+                darkModeStatus.textContent = isDarkMode ? 'On' : 'Off';
+            }
+        }
+
+        showPage('login');
+    </script>
+</body>
+</html>
