@@ -269,7 +269,15 @@
             margin-bottom: 10px;
         }
         .income-card p {
-            font-size: 18px;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .youtube-card h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .youtube-card p {
+            font-size: 10px;
             margin-bottom: 15px;
         }
         .income-card .btn {
@@ -277,6 +285,10 @@
             padding: 10px 20px;
             width: auto;
             display: inline-block;
+        }
+        .youtube-card .btn {
+            font-size: 14px;
+            padding: 6px 12px;
         }
         .income-card .btn:disabled {
             background: #d1d5db;
@@ -332,7 +344,7 @@
         }
         .settings-menu {
             position: absolute;
-            top: 50px;
+            top: SMALL50px;
             right: 20px;
             background: rgba(30, 58, 138, 0.9);
             border-radius: 10px;
@@ -417,6 +429,18 @@
         .language-option:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+        .bonus-info {
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: left;
+            line-height: 1.5;
+        }
+        .bonus-info p {
+            margin: 5px 0;
+        }
         @media (max-width: 576px) {
             body {
                 font-size: 16px;
@@ -460,9 +484,25 @@
                 font-size: 20px;
                 padding: 8px;
             }
-            .balance-info, .profile-info, .settings-options {
-                font-size: 16px;
+            .balance-info, .profile-info, .settings-options, .bonus-info {
+                font-size: 14px;
                 padding: 8px;
+            }
+            .income-card p {
+                font-size: 15px;
+            }
+            .income-card h3 {
+                font-size: 20px;
+            }
+            .youtube-card h3 {
+                font-size: 10px;
+            }
+            .youtube-card p {
+                font-size: 8px;
+            }
+            .youtube-card .btn {
+                font-size: 12px;
+                padding: 5px 10px;
             }
             .navbar-bottom {
                 padding: 6px 0;
@@ -496,12 +536,6 @@
             .income-card {
                 padding: 15px;
                 margin: 15px 0;
-            }
-            .income-card h3 {
-                font-size: 24px;
-            }
-            .income-card p {
-                font-size: 16px;
             }
             .income-card .btn {
                 font-size: 20px;
@@ -579,10 +613,20 @@
                 margin: 15px 0;
             }
             .income-card h3 {
-                font-size: 22px;
+                font-size: 18px;
             }
             .income-card p {
                 font-size: 14px;
+            }
+            .youtube-card h3 {
+                font-size: 9px;
+            }
+            .youtube-card p {
+                font-size: 7px;
+            }
+            .youtube-card .btn {
+                font-size: 10px;
+                padding: 4px 8px;
             }
             .income-card .btn {
                 font-size: 18px;
@@ -620,6 +664,10 @@
             }
             .settings-option, .language-option {
                 font-size: 14px;
+                padding: 6px;
+            }
+            .bonus-info {
+                font-size: 12px;
                 padding: 6px;
             }
         }
@@ -772,6 +820,14 @@
                 <button class="copy-btn" onclick="copyReferralLink()">COPY LINK</button>
             </p>
         </div>
+        <div class="bonus-info">
+            <p>💡 How the Bonus Works</p>
+            <p>✅ If you share your referral code with someone,</p>
+            <p>✅ And your friend registers using that code,</p>
+            <p><strong>Then:</strong></p>
+            <p>You will receive: <strong>5 ARPM Tokens</strong></p>
+            <p>Your friend will receive: <strong>1.5 ARPM Tokens</strong></p>
+        </div>
     </div>
 
     <!-- Bottom Navigation -->
@@ -848,10 +904,10 @@
         };
         let currentLanguage = 'en';
         const languageOptions = document.getElementById('language-options');
-        const REFERRAL_BONUS = 5; // Bonus in ARPM for each successful referral
+        const REFERRAL_BONUS = 5;
+        const NEW_USER_BONUS = 1.5;
         const BASE_REFERRAL_URL = 'https://arpmmining.github.io/Arpmmining-/';
 
-        // Function to get referral code from URL
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('ref');
@@ -887,7 +943,6 @@
         window.showLogin = () => showPage('login');
         window.showSignup = () => {
             showPage('signup');
-            // Pre-fill invite code from URL if present
             const referralCode = getReferralCodeFromURL();
             if (referralCode) {
                 document.getElementById('signup-invite-code').value = referralCode;
@@ -931,17 +986,18 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
+                const initialTokens = inviteCode ? NEW_USER_BONUS : 0;
+                const initialEarnings = inviteCode ? NEW_USER_BONUS : 0;
                 await set(ref(db, 'users/' + user.uid), {
                     username: username || "N/A",
                     email: email,
-                    tokens: 0,
-                    earnings: 0,
+                    tokens: initialTokens,
+                    earnings: initialEarnings,
                     inviteCode: inviteCode || null,
                     uniqueCode: uniqueCode,
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
-                    taxCompleted: false,
                     referrals: 0,
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
@@ -1042,8 +1098,7 @@
                         const userRef = ref(db, 'users/' + auth.currentUser.uid);
                         const snapshot = await get(userRef);
                         const userData = snapshot.val() || {};
-                        let earnedTokens = totalTokens;
-                        if (userData.taxCompleted) earnedTokens *= 1.5;
+                        const earnedTokens = totalTokens;
                         await update(userRef, {
                             tokens: (userData.tokens || 0) + earnedTokens,
                             earnings: (userData.earnings || 0) + earnedTokens,
@@ -1124,7 +1179,6 @@
                         registrationDate: new Date().toLocaleDateString('en-GB'),
                         miningStartTime: 0,
                         miningEndTime: 0,
-                        taxCompleted: false,
                         referrals: 0,
                         youtubeBonusClaimed: false,
                         xBonusClaimed: false,
@@ -1313,7 +1367,7 @@
                     profile: 'PROFILE',
                     settings: 'SETTINGS',
                     language: 'Language',
-                    logout: 'LOGOUT'
+                    logout: 'LOGOOUT'
                 },
                 bn: {
                     login: 'লগইন',
