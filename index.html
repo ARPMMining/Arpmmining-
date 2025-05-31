@@ -307,7 +307,7 @@
         .profile-picture-option:hover {
             transform: scale(1.1);
         }
-        #profile-container, #income-container, #settings-container {
+        #profile-container, #income-container, #settings-container, #invite-container {
             max-height: calc(100vh - 280px);
             overflow-y: auto;
             padding-bottom: 80px;
@@ -515,7 +515,7 @@
                 width: 50px;
                 height: 50px;
             }
-            #profile-container, #income-container, #settings-container {
+            #profile-container, #income-container, #settings-container, #invite-container {
                 max-height: calc(100vh - 230px);
                 padding-bottom: 60px;
             }
@@ -596,7 +596,7 @@
                 width: 40px;
                 height: 40px;
             }
-            #profile-container, #income-container, #settings-container {
+            #profile-container, #income-container, #settings-container, #invite-container {
                 max-height: calc(100vh - 210px);
                 padding-bottom: 50px;
             }
@@ -768,8 +768,8 @@
     <div id="invite-container" class="container hidden">
         <h2>INVITE</h2>
         <div class="balance-info">
-            <p><strong>INVITE CODE:</strong> <span id="invite-code-display">LOADING...</span>
-                <button class="copy-btn" onclick="copyInviteCode()">COPY</button>
+            <p><strong>REFERRAL LINK:</strong> <span id="referral-link-display">LOADING...</span>
+                <button class="copy-btn" onclick="copyReferralLink()">COPY LINK</button>
             </p>
         </div>
     </div>
@@ -848,6 +848,14 @@
         };
         let currentLanguage = 'en';
         const languageOptions = document.getElementById('language-options');
+        const REFERRAL_BONUS = 5; // Bonus in ARPM for each successful referral
+        const BASE_REFERRAL_URL = 'https://arpmmining.github.io/Arpmmining-/';
+
+        // Function to get referral code from URL
+        function getReferralCodeFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('ref');
+        }
 
         async function loadAd(containerId) {
             const adContainer = document.getElementById(containerId);
@@ -877,7 +885,14 @@
         }
 
         window.showLogin = () => showPage('login');
-        window.showSignup = () => showPage('signup');
+        window.showSignup = () => {
+            showPage('signup');
+            // Pre-fill invite code from URL if present
+            const referralCode = getReferralCodeFromURL();
+            if (referralCode) {
+                document.getElementById('signup-invite-code').value = referralCode;
+            }
+        };
         window.showReset = () => showPage('reset');
 
         forms.login.addEventListener('submit', async (e) => {
@@ -901,10 +916,15 @@
             const inviteCode = document.getElementById('signup-invite-code').value;
 
             if (password !== confirmPassword) return alert('PASSWORDS DO NOT MATCH!');
+
+            let referrerUid = null;
             if (inviteCode) {
                 const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
                 const snapshot = await get(inviteQuery);
                 if (!snapshot.exists()) return alert('INVALID INVITE CODE!');
+                snapshot.forEach((childSnapshot) => {
+                    referrerUid = childSnapshot.key;
+                });
             }
 
             try {
@@ -928,13 +948,21 @@
                     profilePicture: 'default',
                     language: 'en'
                 });
-                if (inviteCode) {
-                    const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
-                    const snapshot = await get(inviteQuery);
-                    snapshot.forEach((childSnapshot) => {
-                        update(ref(db, 'users/' + childSnapshot.key), { referrals: (childSnapshot.val().referrals || 0) + 1 });
+
+                if (referrerUid && inviteCode) {
+                    const referrerRef = ref(db, 'users/' + referrerUid);
+                    const referrerSnapshot = await get(referrerRef);
+                    const referrerData = referrerSnapshot.val();
+                    const newReferrals = (referrerData.referrals || 0) + 1;
+                    const newTokens = (referrerData.tokens || 0) + REFERRAL_BONUS;
+                    const newEarnings = (referrerData.earnings || 0) + REFERRAL_BONUS;
+                    await update(referrerRef, {
+                        referrals: newReferrals,
+                        tokens: newTokens,
+                        earnings: newEarnings
                     });
                 }
+
                 showPage('login');
             } catch (error) {
                 alert(`REGISTRATION FAILED: ${error.message}`);
@@ -1212,12 +1240,13 @@
                 uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
                 await update(userRef, { uniqueCode });
             }
-            document.getElementById('invite-code-display').textContent = uniqueCode;
+            const referralLink = `${BASE_REFERRAL_URL}?ref=${uniqueCode}`;
+            document.getElementById('referral-link-display').textContent = referralLink;
         }
 
-        window.copyInviteCode = () => {
-            const inviteCode = document.getElementById('invite-code-display').textContent;
-            navigator.clipboard.writeText(inviteCode).then(() => alert('INVITE CODE COPIED!')).catch(() => alert('FAILED TO COPY INVITE CODE.'));
+        window.copyReferralLink = () => {
+            const referralLink = document.getElementById('referral-link-display').textContent;
+            navigator.clipboard.writeText(referralLink).then(() => alert('REFERRAL LINK COPIED!')).catch(() => alert('FAILED TO COPY REFERRAL LINK.'));
         };
 
         window.navigateTo = (section) => {
