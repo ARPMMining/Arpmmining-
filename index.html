@@ -291,6 +291,32 @@
             margin-top: 220px;
             max-width: 440px;
             border-radius: 15px;
+            scroll-behavior: smooth;
+            max-height: calc(100vh - 280px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* স্মুথ স্ক্রলিং মোবাইলে */
+            overscroll-behavior: contain; /* ওভারস্ক্রল নিয়ন্ত্রণ */
+            touch-action: pan-y; /* টাচ ইন্টারঅ্যাকশন উন্নত করা */
+            padding-bottom: 80px;
+        }
+        /* কাস্টম স্ক্রলবার স্টাইলিং */
+        #income-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        #income-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        #income-container::-webkit-scrollbar-thumb {
+            background: #60a5fa;
+            border-radius: 10px;
+        }
+        #income-container::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+        #income-container {
+            scrollbar-width: thin; /* ফায়ারফক্সের জন্য */
+            scrollbar-color: #60a5fa rgba(255, 255, 255, 0.1);
         }
         #income-container h2 {
             text-align: center;
@@ -479,6 +505,32 @@
         .bonus-info p {
             margin: 5px 0;
         }
+        .loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #60a5fa;
+        }
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
@@ -569,6 +621,17 @@
                 max-height: calc(100vh - 230px);
                 padding-bottom: 60px;
             }
+            #income-container {
+                width: 95%;
+                padding: 15px;
+                margin-top: 180px;
+                max-height: calc(100vh - 230px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+                touch-action: pan-y;
+                padding-bottom: 60px;
+            }
             #income-container h2 {
                 font-size: 26px;
             }
@@ -591,6 +654,13 @@
             .settings-menu {
                 top: 50px;
                 right: 12px;
+            }
+            .loading-overlay {
+                width: 180px;
+                height: 90px;
+            }
+            .loading-text {
+                font-size: 18px;
             }
         }
         @media (max-width: 480px) {
@@ -645,10 +715,17 @@
             }
             #income-container {
                 width: 95%;
-                padding: 15px;
+                padding: 12px;
+                margin-top: 160px;
+                max-height: calc(100vh - 210px);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+                touch-action: pan-y;
+                padding-bottom: 50px;
             }
             #income-container h2 {
-                font-size: 26px;
+                font-size: 24px;
             }
             .task-box {
                 margin: 12px auto;
@@ -693,10 +770,22 @@
                 font-size: 12px;
                 padding: 6px;
             }
+            .loading-overlay {
+                width: 160px;
+                height: 80px;
+            }
+            .loading-text {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-text">Loading...</div>
+    </div>
+
     <!-- Top Navigation Bar with Logo -->
     <div class="navbar-top" id="navbar-top" aria-label="ARPM MINING LOGO">
         <div class="logo-circle">
@@ -714,7 +803,7 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="login-password" placeholder="PASSWORD" required>
-                <i class="fas fa-eye password-toggle" id="toggle-password" onclick="togglePasswordVisibility()"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-login-password" onclick="togglePasswordVisibility('login-password', 'toggle-login-password')"></i>
             </div>
             <button type="submit" class="btn btn-primary">LOGIN</button>
             <p class="footer-text">
@@ -736,9 +825,11 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-password" onclick="togglePasswordVisibility('signup-password', 'toggle-signup-password')"></i>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" onclick="togglePasswordVisibility('signup-confirm-password', 'toggle-signup-confirm-password')"></i>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="signup-invite-code" placeholder="Code (OPTIONAL)">
@@ -839,6 +930,18 @@
             <button class="claim-button hidden" id="x-claim-btn" onclick="claimXBonus()">CLAIM</button>
             <div class="claimed hidden" id="x-status">CLAIMED!</div>
         </div>
+        <!-- Instagram Follow Task -->
+        <div class="task-box" id="instagram-task">
+            <div class="task-header">
+                <img class="task-logo" src="https://img.icons8.com/color/240/instagram-new.png" alt="Instagram Logo">
+                <div class="task-title">INSTAGRAM FOLLOW</div>
+            </div>
+            <div class="task-sub">FOLLOW ARPM ON INSTAGRAM</div>
+            <div class="token-text">TOKENS: 5.0 ARPM</div>
+            <button class="claim-button" id="instagram-btn" onclick="goToInstagram()">FOLLOW</button>
+            <button class="claim-button hidden" id="instagram-claim-btn" onclick="claimInstagramBonus()">CLAIM</button>
+            <div class="claimed hidden" id="instagram-status">CLAIMED!</div>
+        </div>
     </div>
 
     <!-- Invite Page -->
@@ -931,8 +1034,12 @@
             youtubeStatus: document.getElementById('youtube-status'),
             xBtn: document.getElementById('x-btn'),
             xClaimBtn: document.getElementById('x-claim-btn'),
-            xStatus: document.getElementById('x-status')
+            xStatus: document.getElementById('x-status'),
+            instagramBtn: document.getElementById('instagram-btn'),
+            instagramClaimBtn: document.getElementById('instagram-claim-btn'),
+            instagramStatus: document.getElementById('instagram-status')
         };
+        const loadingOverlay = document.getElementById('loading-overlay');
         let currentLanguage = 'en';
         const languageOptions = document.getElementById('language-options');
         const REFERRAL_BONUS = 5;
@@ -940,6 +1047,7 @@
         const BASE_REFERRAL_URL = 'https://arpmmining.github.io/Arpmmining-/';
         let youtubeVisited = false;
         let xVisited = false;
+        let instagramVisited = false;
 
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -956,7 +1064,22 @@
             return true;
         }
 
-        function showPage(page) {
+        async function showLoadingScreen() {
+            loadingOverlay.classList.add('active');
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            loadingOverlay.classList.remove('active');
+        }
+
+        async function showPage(page) {
+            if (['login', 'signup', 'reset', 'home', 'wallet'].includes(page)) {
+                await showLoadingScreen();
+            }
+
+            if (page === 'wallet') {
+                alert('WALLET FEATURE COMING SOON!');
+                page = 'home';
+            }
+
             Object.values(containers).forEach(c => {
                 if (c.id !== 'navbar-top') c.style.display = 'none';
             });
@@ -973,21 +1096,22 @@
             }
         }
 
-        window.showLogin = () => showPage('login');
-        window.showSignup = () => {
-            showPage('signup');
+        window.showLogin = async () => showPage('login');
+        window.showSignup = async () => {
+            await showPage('signup');
             const referralCode = getReferralCodeFromURL();
             if (referralCode) {
                 document.getElementById('signup-invite-code').value = referralCode;
             }
         };
-        window.showReset = () => showPage('reset');
+        window.showReset = async () => showPage('reset');
 
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             try {
+                await showLoadingScreen();
                 await signInWithEmailAndPassword(auth, email, password);
                 showPage('home');
             } catch (error) {
@@ -1016,6 +1140,7 @@
             }
 
             try {
+                await showLoadingScreen();
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
@@ -1034,6 +1159,7 @@
                     referrals: 0,
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
+                    instagramBonusClaimed: false,
                     profilePicture: 'boy',
                     language: 'en'
                 });
@@ -1062,6 +1188,7 @@
             e.preventDefault();
             const email = document.getElementById('reset-email').value;
             try {
+                await showLoadingScreen();
                 await sendPasswordResetEmail(auth, email);
                 alert('PASSWORD RESET LINK SENT!');
                 showPage('login');
@@ -1070,15 +1197,15 @@
             }
         });
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                showPage('home');
+                await showPage('home');
                 updateBalance();
                 loadMiningState();
                 loadProfileInfo();
                 loadSettings();
             } else {
-                showPage('login');
+                await showPage('login');
             }
         });
 
@@ -1215,6 +1342,7 @@
                         referrals: 0,
                         youtubeBonusClaimed: false,
                         xBonusClaimed: false,
+                        instagramBonusClaimed: false,
                         profilePicture: 'boy',
                         language: 'en'
                     });
@@ -1238,7 +1366,6 @@
             const snapshot = await get(userRef);
             const userData = snapshot.val() || {};
 
-            // Update YouTube task
             if (userData.youtubeBonusClaimed) {
                 incomeElements.youtubeBtn.classList.add('hidden');
                 incomeElements.youtubeClaimBtn.classList.add('hidden');
@@ -1255,7 +1382,6 @@
                 incomeElements.youtubeBtn.disabled = false;
             }
 
-            // Update X task
             if (userData.xBonusClaimed) {
                 incomeElements.xBtn.classList.add('hidden');
                 incomeElements.xClaimBtn.classList.add('hidden');
@@ -1272,13 +1398,31 @@
                 incomeElements.xBtn.disabled = false;
             }
 
-            // Update text based on language
+            if (userData.instagramBonusClaimed) {
+                incomeElements.instagramBtn.classList.add('hidden');
+                incomeElements.instagramClaimBtn.classList.add('hidden');
+                incomeElements.instagramStatus.classList.remove('hidden');
+                incomeElements.instagramBtn.disabled = true;
+            } else if (instagramVisited) {
+                incomeElements.instagramBtn.classList.add('hidden');
+                incomeElements.instagramClaimBtn.classList.remove('hidden');
+                incomeElements.instagramStatus.classList.add('hidden');
+            } else {
+                incomeElements.instagramBtn.classList.remove('hidden');
+                incomeElements.instagramClaimBtn.classList.add('hidden');
+                incomeElements.instagramStatus.classList.add('hidden');
+                incomeElements.instagramBtn.disabled = false;
+            }
+
             const youtubeTitle = document.querySelector('#youtube-task .task-title');
             const youtubeSub = document.querySelector('#youtube-task .task-sub');
             const youtubeToken = document.querySelector('#youtube-task .token-text');
             const xTitle = document.querySelector('#x-task .task-title');
             const xSub = document.querySelector('#x-task .task-sub');
             const xToken = document.querySelector('#x-task .token-text');
+            const instagramTitle = document.querySelector('#instagram-task .task-title');
+            const instagramSub = document.querySelector('#instagram-task .task-sub');
+            const instagramToken = document.querySelector('#instagram-task .token-text');
 
             if (youtubeTitle) youtubeTitle.textContent = translations[currentLanguage].youtubeTitle;
             if (youtubeSub) youtubeSub.textContent = translations[currentLanguage].youtubeText;
@@ -1286,14 +1430,19 @@
             if (xTitle) xTitle.textContent = translations[currentLanguage].xTitle;
             if (xSub) xSub.textContent = translations[currentLanguage].xText;
             if (xToken) xToken.textContent = translations[currentLanguage].xTokenText;
+            if (instagramTitle) instagramTitle.textContent = translations[currentLanguage].instagramTitle;
+            if (instagramSub) instagramSub.textContent = translations[currentLanguage].instagramText;
+            if (instagramToken) instagramToken.textContent = translations[currentLanguage].instagramTokenText;
 
-            // Update button text
             if (incomeElements.youtubeBtn) incomeElements.youtubeBtn.textContent = translations[currentLanguage].subscribeBtn;
             if (incomeElements.youtubeClaimBtn) incomeElements.youtubeClaimBtn.textContent = translations[currentLanguage].claimBtn;
             if (incomeElements.xBtn) incomeElements.xBtn.textContent = translations[currentLanguage].followBtn;
             if (incomeElements.xClaimBtn) incomeElements.xClaimBtn.textContent = translations[currentLanguage].claimBtn;
+            if (incomeElements.instagramBtn) incomeElements.instagramBtn.textContent = translations[currentLanguage].followBtn;
+            if (incomeElements.instagramClaimBtn) incomeElements.instagramClaimBtn.textContent = translations[currentLanguage].claimBtn;
             if (incomeElements.youtubeStatus) incomeElements.youtubeStatus.textContent = translations[currentLanguage].claimed;
             if (incomeElements.xStatus) incomeElements.xStatus.textContent = translations[currentLanguage].claimed;
+            if (incomeElements.instagramStatus) incomeElements.instagramStatus.textContent = translations[currentLanguage].claimed;
         }
 
         window.goToYouTube = () => {
@@ -1350,6 +1499,33 @@
             loadIncomeState();
         };
 
+        window.goToInstagram = () => {
+            if (!auth.currentUser) return;
+            instagramVisited = true;
+            window.open('https://www.instagram.com/ARPMMining', '_blank');
+            loadIncomeState();
+        };
+
+        window.claimInstagramBonus = async () => {
+            if (!auth.currentUser) return;
+            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            const snapshot = await get(userRef);
+            const userData = snapshot.val() || {};
+            if (userData.instagramBonusClaimed) {
+                alert('INSTAGRAM BONUS ALREADY CLAIMED!');
+                return;
+            }
+            const bonusTokens = 5;
+            await update(userRef, {
+                tokens: (userData.tokens || 0) + bonusTokens,
+                earnings: (userData.earnings || 0) + bonusTokens,
+                instagramBonusClaimed: true
+            });
+            updateBalance();
+            alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
+            loadIncomeState();
+        };
+
         async function loadInviteCode() {
             if (!auth.currentUser) return;
             const userRef = ref(db, 'users/' + auth.currentUser.uid);
@@ -1369,27 +1545,23 @@
             navigator.clipboard.writeText(referralLink).then(() => alert('REFERRAL LINK COPIED!')).catch(() => alert('FAILED TO COPY REFERRAL LINK.'));
         };
 
-        window.navigateTo = (section) => {
+        window.navigateTo = async (section) => {
             if (!auth.currentUser && section !== 'login') {
                 alert('PLEASE LOG IN TO ACCESS THIS SECTION.');
-                showPage('login');
+                await showPage('login');
                 return;
             }
-            if (section === 'wallet') {
-                alert('WALLET FEATURE COMING SOON!');
-                section = 'home';
-            }
-            showPage(section);
+            await showPage(section);
         };
 
         window.signOutUser = async () => {
             await signOut(auth);
-            showPage('login');
+            await showPage('login');
         };
 
-        window.togglePasswordVisibility = () => {
-            const passwordInput = document.getElementById('login-password');
-            const toggleIcon = document.getElementById('toggle-password');
+        window.togglePasswordVisibility = (inputId, toggleId) => {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(toggleId);
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('fa-eye');
@@ -1407,14 +1579,14 @@
             }
         };
 
-        window.changeLanguage = (lang) => {
+        window.changeLanguage = async (lang) => {
             currentLanguage = lang;
             if (languageOptions) {
                 languageOptions.classList.remove('active');
             }
             if (auth.currentUser) {
                 const userRef = ref(db, 'users/' + auth.currentUser.uid);
-                update(userRef, { language: lang });
+                await update(userRef, { language: lang });
             }
             updateLanguage();
         };
@@ -1439,6 +1611,9 @@
                 xTitle: 'X FOLLOW',
                 xText: 'FOLLOW ON ARPM X',
                 xTokenText: 'TOKENS: 5.0 ARPM',
+                instagramTitle: 'INSTAGRAM FOLLOW',
+                instagramText: 'FOLLOW ARPM ON INSTAGRAM',
+                instagramTokenText: 'TOKENS: 5.0 ARPM',
                 subscribeBtn: 'SUBSCRIBE',
                 followBtn: 'FOLLOW',
                 claimBtn: 'CLAIM',
@@ -1463,6 +1638,9 @@
                 xTitle: 'এক্স ফলো',
                 xText: 'এআরপিএম এক্স-এ ফলো করুন',
                 xTokenText: 'টোকেন: ৫.০ এআরপিএম',
+                instagramTitle: 'ইনস্টাগ্রাম ফলো',
+                instagramText: 'এআরপিএম ইনস্টাগ্রামে ফলো করুন',
+                instagramTokenText: 'টোকেন: ৫.০ এআরপিএম',
                 subscribeBtn: 'সাবস্ক্রাইব',
                 followBtn: 'ফলো',
                 claimBtn: 'দাবি',
@@ -1487,6 +1665,9 @@
                 xTitle: 'एक्स फॉलो',
                 xText: 'एआरपीएम एक्स पर फॉलो करें',
                 xTokenText: 'टोकन: 5.0 एआरपीएम',
+                instagramTitle: 'इंस्टाग्राम फॉलो',
+                instagramText: 'एआरपीएम को इंस्टाग्राम पर फॉलो करें',
+                instagramTokenText: 'टोकन: 5.0 एआरपीएम',
                 subscribeBtn: 'सब्सक्राइब',
                 followBtn: 'फॉलो',
                 claimBtn: 'दावा',
@@ -1512,6 +1693,9 @@
             const xTitle = document.querySelector('#x-task .task-title');
             const xSub = document.querySelector('#x-task .task-sub');
             const xToken = document.querySelector('#x-task .token-text');
+            const instagramTitle = document.querySelector('#instagram-task .task-title');
+            const instagramSub = document.querySelector('#instagram-task .task-sub');
+            const instagramToken = document.querySelector('#instagram-task .token-text');
 
             if (youtubeTitle) youtubeTitle.textContent = t.youtubeTitle;
             if (youtubeSub) youtubeSub.textContent = t.youtubeText;
@@ -1519,13 +1703,19 @@
             if (xTitle) xTitle.textContent = t.xTitle;
             if (xSub) xSub.textContent = t.xText;
             if (xToken) xToken.textContent = t.xTokenText;
+            if (instagramTitle) instagramTitle.textContent = t.instagramTitle;
+            if (instagramSub) instagramSub.textContent = t.instagramText;
+            if (instagramToken) instagramToken.textContent = t.instagramTokenText;
 
             if (incomeElements.youtubeBtn) incomeElements.youtubeBtn.textContent = t.subscribeBtn;
             if (incomeElements.youtubeClaimBtn) incomeElements.youtubeClaimBtn.textContent = t.claimBtn;
             if (incomeElements.xBtn) incomeElements.xBtn.textContent = t.followBtn;
             if (incomeElements.xClaimBtn) incomeElements.xClaimBtn.textContent = t.claimBtn;
+            if (incomeElements.instagramBtn) incomeElements.instagramBtn.textContent = t.followBtn;
+            if (incomeElements.instagramClaimBtn) incomeElements.instagramClaimBtn.textContent = t.claimBtn;
             if (incomeElements.youtubeStatus) incomeElements.youtubeStatus.textContent = t.claimed;
             if (incomeElements.xStatus) incomeElements.xStatus.textContent = t.claimed;
+            if (incomeElements.instagramStatus) incomeElements.instagramStatus.textContent = t.claimed;
 
             const navLinks = document.querySelectorAll('.navbar-bottom a');
             navLinks[0].querySelector('.nav-text').textContent = t.home;
@@ -1550,7 +1740,6 @@
         }
 
         function updateSettingsUI() {
-            // No dark mode status to update
         }
 
         showPage('login');
