@@ -335,6 +335,43 @@
             white-space: nowrap;
             cursor: pointer;
         }
+        .referral-section {
+            margin: 20px;
+            text-align: center;
+        }
+        .referral-section p {
+            font-size: 18px;
+            color: #00ffcc;
+            margin-bottom: 10px;
+        }
+        .referral-link {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #000;
+            word-break: break-all;
+            margin-bottom: 10px;
+        }
+        .copy-button {
+            background: #00cc99;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .copy-button:hover {
+            transform: translateY(-2px);
+        }
+        .referral-count {
+            font-size: 18px;
+            color: #00ffcc;
+            font-weight: bold;
+            margin-top: 20px;
+        }
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
@@ -383,6 +420,16 @@
             .loading-text {
                 font-size: 18px;
             }
+            .referral-link {
+                font-size: 14px;
+            }
+            .copy-button {
+                font-size: 14px;
+                padding: 6px 12-kitpx;
+            }
+            .referral-count {
+                font-size: 16px;
+            }
         }
         @media (max-width: 480px) {
             .container {
@@ -406,6 +453,16 @@
             }
             .loading-text {
                 font-size: 16px;
+            }
+            .referral-link {
+                font-size: 12px;
+            }
+            .copy-button {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .referral-count {
+                font-size: 14px;
             }
         }
     </style>
@@ -504,13 +561,19 @@
     <!-- Profile Section -->
     <div id="profile" class="page-section hidden">
         <div class="section-title">Profile</div>
-        <div class="black-box">Profile Content Coming Soon</div>
+        <div class=""></div>
     </div>
 
     <!-- Invite Section -->
     <div id="invite" class="page-section hidden">
         <div class="section-title">Invite</div>
-        <div class="black-box">Invite Content Coming Soon</div>
+        <div class=""></div>
+        <div class="referral-section">
+            <p>Your Referral Link:</p>
+            <div class="referral-link" id="referral-link">Loading...</div>
+            <button class="copy-button" onclick="copyReferralLink()">Copy</button>
+            <p class="referral-count" id="referral-count">Referrals: 0</p>
+        </div>
     </div>
 
     <!-- Wallet Section -->
@@ -527,9 +590,9 @@
         <div class="task-box">
             <i class="fab fa-youtube youtube-icon" style="color: #FF0000;"></i>
             <div class="task-text">
-                YOUTUBE SUBSCRIBE
+                YOUTUBE
                 <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
-                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
+                <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <a href="https://youtube.com" target="_blank" class="go-button">SUBSCRIBE</a>
         </div>
@@ -538,7 +601,7 @@
             <div class="task-text">
                 X FOLLOW
                 <small>FOLLOW ON ARPM X</small>
-                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
+                <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <a href="https://x.com" target="_blank" class="go-button">FOLLOW</a>
         </div>
@@ -547,7 +610,7 @@
             <div class="task-text">
                 INSTAGRAM FOLLOW
                 <small>FOLLOW ARPM ON INSTAGRAM</small>
-                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
+                <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <a href="https://instagram.com" target="_blank" class="go-button">FOLLOW</a>
         </div>
@@ -612,6 +675,8 @@
         const bottomNav = document.getElementById('bottom-nav');
         const startMiningBtn = document.getElementById('start-mining-btn');
         const balanceBox = document.getElementById('balance-box');
+        const referralLinkElement = document.getElementById('referral-link');
+        const referralCountElement = document.getElementById('referral-count');
         const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
 
@@ -640,11 +705,34 @@
                     document.getElementById('signup-invite-code').value = referralCode;
                 }
             }
+            if (page === 'invite') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const referralLink = `https://arpmmining.github.io/Arpmmining-/?ref=${userData.uniqueCode}`;
+                        referralLinkElement.textContent = referralLink;
+                        referralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                    }
+                }
+            }
             const navItems = document.querySelectorAll('.bottom-nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
             const activeNav = document.querySelector(`.bottom-nav-item[data-target="${page}"]`);
             if (activeNav) activeNav.classList.add('active');
         }
+
+        window.copyReferralLink = async () => {
+            const referralLink = referralLinkElement.textContent;
+            try {
+                await navigator.clipboard.writeText(referralLink);
+                alert('Referral link copied to clipboard!');
+            } catch (error) {
+                alert('Failed to copy referral link: ' + error.message);
+            }
+        };
 
         window.showLogin = async () => showPage('login');
         window.showSignup = async () => showPage('signup');
@@ -748,14 +836,18 @@
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     balanceBox.textContent = `Balance: ${userData.tokens.toFixed(3)} ARPM`;
+                    if (containers.invite.style.display === 'block') {
+                        const referralLink = `https://arpmmining.github.io/Arpmmining-/?ref=${userData.uniqueCode}`;
+                        referralLinkElement.textContent = referralLink;
+                        referralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                    }
 
                     // Check if mining is already in progress
                     if (userData.miningEndTime > Date.now()) {
                         startMiningBtn.disabled = true;
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
-                        let totalMinedTokens = Math.floor((Date.now() - userData.miningStartTime) / (60 * 1000));
 
-                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`;
+                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`;
 
                         const miningInterval = setInterval(async () => {
                             if (timeLeft <= 0) {
@@ -763,35 +855,18 @@
                                 startMiningBtn.disabled = false;
                                 startMiningBtn.innerHTML = 'START MINING';
 
-                                const snapshot = await get(userRef);
-                                if (snapshot.exists()) {
-                                    const userData = snapshot.val();
-                                    const newTokens = (userData.tokens || 0) + totalMinedTokens;
-                                    await update(userRef, {
-                                        tokens: newTokens,
-                                        earnings: newTokens,
-                                        miningStartTime: 0,
-                                        miningEndTime: 0
-                                    });
-                                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                                }
-                                alert(`Mining completed! You earned ${totalMinedTokens} ARPM.`);
+                                await update(userRef, {
+                                    miningStartTime: 0,
+                                    miningEndTime: 0
+                                });
                                 return;
                             }
 
                             timeLeft--;
-                            const minutes = Math.floor(timeLeft / 60);
+                            const hours = Math.floor(timeLeft / 3600);
+                            const minutes = Math.floor((timeLeft % 3600) / 60);
                             const seconds = timeLeft % 60;
-                            startMiningBtn.innerHTML = `Time Left:<br>${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-                            if (timeLeft % 60 === 0) {
-                                totalMinedTokens += 1;
-                                const snapshot = await get(userRef);
-                                if (snapshot.exists()) {
-                                    const userData = snapshot.val();
-                                    balanceBox.textContent = `Balance: ${(userData.tokens + totalMinedTokens).toFixed(3)} ARPM`;
-                                }
-                            }
+                            startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                         }, 1000);
                     }
                 }
@@ -851,16 +926,23 @@
 
             // Start mining
             startMiningBtn.disabled = true;
-            let timeLeft = 30 * 60; // 30 minutes in seconds
-            let totalMinedTokens = 0;
+            let timeLeft = 6 * 60 * 60; // 6 hours in seconds
 
-            // Update Firebase with mining start time
-            await update(userRef, {
-                miningStartTime: Date.now(),
-                miningEndTime: Date.now() + 30 * 60 * 1000
-            });
+            // Add 6 tokens to the balance immediately
+            const snapshotBeforeUpdate = await get(userRef);
+            if (snapshotBeforeUpdate.exists()) {
+                const userData = snapshotBeforeUpdate.val();
+                const newTokens = (userData.tokens || 0) + 6;
+                await update(userRef, {
+                    tokens: newTokens,
+                    earnings: newTokens,
+                    miningStartTime: Date.now(),
+                    miningEndTime: Date.now() + 6 * 60 * 60 * 1000
+                });
+                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+            }
 
-            startMiningBtn.innerHTML = `Time Left:<br>30:00`;
+            startMiningBtn.innerHTML = `Time Left:<br>6:00:00`;
 
             miningInterval = setInterval(async () => {
                 if (timeLeft <= 0) {
@@ -868,37 +950,20 @@
                     startMiningBtn.disabled = false;
                     startMiningBtn.innerHTML = 'START MINING';
 
-                    // Update tokens in Firebase
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        const newTokens = (userData.tokens || 0) + totalMinedTokens;
-                        await update(userRef, {
-                            tokens: newTokens,
-                            earnings: newTokens,
-                            miningStartTime: 0,
-                            miningEndTime: 0
-                        });
-                        balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                    }
-                    alert(`Mining completed! You earned ${totalMinedTokens} ARPM.`);
+                    // Reset mining times in Firebase
+                    await update(userRef, {
+                        miningStartTime: 0,
+                        miningEndTime: 0
+                    });
+                    alert('Mining completed! You earned 6 ARPM.');
                     return;
                 }
 
                 timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
                 const seconds = timeLeft % 60;
-                startMiningBtn.innerHTML = `Time Left:<br>${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-                // Add 1 token per minute (every 60 seconds)
-                if (timeLeft % 60 === 0) {
-                    totalMinedTokens += 1;
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        balanceBox.textContent = `Balance: ${(userData.tokens + totalMinedTokens).toFixed(3)} ARPM`;
-                    }
-                }
+                startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
         });
     </script>
