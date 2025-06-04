@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARPM MINING - MOBILE</title>
+    <title>ARPM MINING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -14,14 +14,13 @@
             box-sizing: border-box;
         }
         body {
-            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-            background-size: cover;
+            background: #ffffff;
             font-family: 'Poppins', sans-serif;
             color: #fff;
             min-height: 100vh;
             font-size: 18px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .container {
             width: 100%;
@@ -36,36 +35,6 @@
             position: relative;
             z-index: 1;
             margin-top: 220px;
-        }
-        #home-container {
-            position: relative;
-            min-height: 500px;
-            width: 100%;
-            max-width: 400px;
-            margin: 220px auto 20px;
-            padding: 20px;
-            border-radius: 15px;
-            background: rgba(30, 58, 138, 0.8);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
-        }
-        #home-container > * {
-            position: relative;
-            z-index: 1;
-        }
-        #home-container h2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #home-container h2 span:first-child {
-            font-size: 22px;
-            font-weight: 400;
-            margin-bottom: 5px;
-        }
-        #home-container h2 span:last-child {
-            font-size: 27px;
-            font-weight: 700;
         }
         .form-group {
             margin-bottom: 12px;
@@ -107,125 +76,8 @@
         .btn-success {
             background: linear-gradient(45deg, #22c55e, #86efac);
         }
-        .btn-danger {
-            background: linear-gradient(45deg, #ef4444, #f87171);
-        }
         .btn:hover {
             transform: translateY(-2px);
-        }
-        .start-mining-btn {
-            background: linear-gradient(45deg, #22c55e, #86efac);
-            border: none;
-            color: #fff;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            font-size: 30px;
-            margin: 15px auto;
-            cursor: pointer;
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-        .start-mining-btn:hover {
-            transform: translateY(-2px);
-        }
-        .start-mining-btn:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-        }
-        .timer {
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
-            font-size: 30px;
-        }
-        .balance-info {
-            margin: 15px 0;
-            background: rgba(30, 58, 138, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 18px;
-        }
-        .profile-info {
-            margin: 15px 0;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 18px;
-        }
-        .profile-info p {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .profile-info p strong {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        .profile-info p span {
-            font-size: 24px;
-            font-weight: 400;
-        }
-        .divider {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #000, transparent);
-            border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .profile-info p:last-child .divider {
-            display: none;
-        }
-        .navbar-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(30, 58, 138, 0.9);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            z-index: 1000;
-            flex-wrap: nowrap;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
-        }
-        .navbar-bottom a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            flex: 1;
-            text-align: center;
-            padding: 8px;
-            transition: background 0.2s, transform 0.2s;
-            touch-action: manipulation;
-        }
-        .navbar-bottom a i {
-            display: block;
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-        .navbar-bottom a.active {
-            color: #60a5fa;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-        }
-        .navbar-bottom a:hover,
-        .navbar-bottom a:focus {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            outline: none;
         }
         .link {
             color: #60a5fa;
@@ -242,188 +94,31 @@
         .hidden {
             display: none;
         }
-        .copy-btn {
-            background: linear-gradient(45deg, #2563eb, #60a5fa);
-            border: none;
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 22px;
-            margin-left: 10px;
-        }
-        .logout-btn {
-            background: linear-gradient(45deg, #ef4444, #f87171);
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 22px;
+        .loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin: 10px auto;
-            width: 180px;
-        }
-        .logout-btn i {
-            margin-right: 8px;
-            font-size: 24px;
-        }
-        .profile-picture {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 15px auto;
-            background-size: cover;
-            border: 3px solid #60a5fa;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        #profile-container, #income-container, #settings-container, #invite-container {
-            max-height: calc(100vh - 280px);
-            overflow-y: auto;
-            padding-bottom: 80px;
-        }
-        #profile-container, #settings-container {
-            position: relative;
-        }
-        #income-container {
-            background: #000;
-            padding: 20px;
-            margin-top: 220px;
-            max-width: 440px;
-            border-radius: 15px;
-            scroll-behavior: smooth;
-            max-height: calc(100vh - 280px);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch; /* স্মুথ স্ক্রলিং মোবাইলে */
-            overscroll-behavior: contain; /* ওভারস্ক্রল নিয়ন্ত্রণ */
-            touch-action: pan-y; /* টাচ ইন্টারঅ্যাকশন উন্নত করা */
-            padding-bottom: 80px;
-        }
-        /* কাস্টম স্ক্রলবার স্টাইলিং */
-        #income-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        #income-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-        #income-container::-webkit-scrollbar-thumb {
-            background: #60a5fa;
-            border-radius: 10px;
-        }
-        #income-container::-webkit-scrollbar-thumb:hover {
-            background: #2563eb;
-        }
-        #income-container {
-            scrollbar-width: thin; /* ফায়ারফক্সের জন্য */
-            scrollbar-color: #60a5fa rgba(255, 255, 255, 0.1);
-        }
-        #income-container h2 {
-            text-align: center;
-            font-size: 32px;
-            color: #22c55e;
-            margin-bottom: 25px;
-        }
-        .task-box {
-            background-color: #111;
-            border-radius: 16px;
-            padding: 15px;
-            margin: 15px auto;
-            max-width: 420px;
-            box-shadow: 0 0 10px #22c55e;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .task-header {
-            display: flex;
             align-items: center;
-            gap: 12px;
-        }
-        .task-logo {
-            width: 45px;
-            height: 45px;
-        }
-        .task-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-        }
-        .task-sub {
-            font-size: 14px;
-            color: #ccc;
-        }
-        .token-text {
-            font-size: 15px;
-            font-weight: bold;
-            color: #22c55e;
-        }
-        .claim-button {
-            padding: 10px;
-            background-color: #22c55e;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            color: #000;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            transition: transform 0.2s;
-        }
-        .claim-button:hover {
-            transform: translateY(-2px);
-        }
-        .claim-button:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-        }
-        .claimed {
-            color: #ccc;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-        }
-        .settings-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 32px;
-            color: #60a5fa;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 50%;
-            transition: transform 0.2s, background 0.2s, scale 0.2s;
-            touch-action: manipulation;
-        }
-        .settings-icon:hover,
-        .settings-icon:focus {
-            transform: rotate(45deg) scale(1.1);
-            background: rgba(255, 255, 255, 0.15);
-            outline: 2px solid #60a5fa;
-        }
-        .settings-menu {
-            position: absolute;
-            top: 60px;
-            right: 15px;
-            background: rgba(30, 58, 138, 0.9);
             border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            display: none;
-            animation: fadeIn 0.3s ease-in;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .settings-menu.active {
-            display: block;
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .settings-menu .logout-btn {
-            margin: 0;
-            width: 100%;
+        .loading-text {
             font-size: 20px;
+            font-weight: 700;
+            color: #60a5fa;
         }
         .navbar-top {
             position: fixed;
@@ -463,73 +158,182 @@
             text-align: center;
             letter-spacing: 2px;
         }
-        .settings-option {
-            margin: 10px 0;
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            color: #fff;
+            padding: 10px 15px;
+        }
+        .menu-icon {
+            font-size: 24px;
             cursor: pointer;
+        }
+        .title {
             font-size: 18px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            transition: background 0.2s;
+            font-weight: bold;
         }
-        .settings-option:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .language-options {
-            display: none;
-            margin-top: 10px;
-        }
-        .language-options.active {
-            display: block;
-        }
-        .language-option {
-            margin: 5px 0;
-            cursor: pointer;
-            padding: 5px 10px;
-            background: rgba(255, 255, 255, 0.1);
+        .balance-box {
+            background: #000;
+            color: #00ffcc;
+            padding: 4px 10px;
             border-radius: 5px;
-            transition: background 0.2s;
+            font-weight: bold;
+            font-size: 14px;
         }
-        .language-option:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .bonus-info {
-            margin: 15px 0;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            text-align: left;
-            line-height: 1.5;
-        }
-        .bonus-info p {
-            margin: 5px 0;
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.9);
+        .black-box {
+            padding: 20px;
+            background: #000;
+            color: #00ffcc;
+            border-radius: 8px;
+            margin: 20px;
+            font-size: 18px;
+            text-align: center;
+            min-height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .loading-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .page-section {
+            display: none;
         }
-        .loading-text {
+        .page-section.active {
+            display: block;
+        }
+        .dashboard-header h2 {
+            font-size: 24px;
+            text-align: center;
+            color: #00cc99;
+            margin: 20px 0;
+        }
+        .welcome {
+            background: #fff;
+            color: #000;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
             font-size: 20px;
-            font-weight: 700;
-            color: #60a5fa;
+            font-weight: bold;
+        }
+        .image-half {
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .start-button {
+            background: #00ffcc;
+            border: none;
+            border-radius: 60px;
+            width: 120px;
+            height: 120px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.2;
+            padding: 5px;
+        }
+        .home-bottom-text {
+            margin: 20px 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            z-index: 1000;
+            border-top: 1px solid #ccc;
+        }
+        .bottom-nav-item {
+            color: #000;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .bottom-nav-item i {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .bottom-nav-item.active {
+            color: #00ffcc;
+        }
+        #profile .section-title,
+        #invite .section-title,
+        #income .section-title,
+        #wallet .section-title,
+        #dashboard .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: #00cc99;
+        }
+        .wallet-section p {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #999;
+            margin-top: 60px;
+        }
+        .task-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f1f1;
+            padding: 10px 15px;
+            margin: 15px 20px;
+            border-radius: 8px;
+        }
+        .youtube-icon {
+            font-size: 28px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .task-text {
+            flex: 1;
+            font-size: 16px;
+            color: #000;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .task-text small {
+            font-weight: normal;
+            font-size: 13px;
+            color: #555;
+            display: block;
+            margin-top: 4px;
+        }
+        .go-button {
+            background: #00cc99;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+            white-space: nowrap;
+            cursor: pointer;
         }
         @media (max-width: 768px) {
             body {
@@ -541,28 +345,6 @@
                 max-width: 95%;
                 margin-top: 180px;
             }
-            #home-container {
-                min-height: 400px;
-                width: 100%;
-                max-width: 95%;
-                margin: 180px auto 15px;
-            }
-            #home-container h2 span:first-child {
-                font-size: 20px;
-            }
-            #home-container h2 span:last-child {
-                font-size: 24px;
-            }
-            .start-mining-btn {
-                width: 150px;
-                height: 150px;
-                font-size: 24px;
-            }
-            .timer {
-                width: 150px;
-                height: 150px;
-                font-size: 24px;
-            }
             .form-control {
                 font-size: 16px;
                 padding: 8px;
@@ -570,28 +352,9 @@
             .form-control::placeholder {
                 font-size: 16px;
             }
-            .btn, .copy-btn, .logout-btn, .start-mining-btn {
+            .btn {
                 font-size: 20px;
                 padding: 8px;
-            }
-            .balance-info, .profile-info, .settings-options, .bonus-info {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .profile-info p strong,
-            .profile-info p span {
-                font-size: 20px;
-            }
-            .navbar-bottom {
-                padding: 8px 0;
-            }
-            .navbar-bottom a {
-                font-size: 12px;
-                padding: 6px;
-            }
-            .navbar-bottom a i {
-                font-size: 20px;
-                margin-bottom: 3px;
             }
             .link {
                 font-size: 14px;
@@ -613,48 +376,6 @@
             .logo-circle p {
                 font-size: 20px;
             }
-            .profile-picture {
-                width: 100px;
-                height: 100px;
-            }
-            #profile-container, #income-container, #settings-container, #invite-container {
-                max-height: calc(100vh - 230px);
-                padding-bottom: 60px;
-            }
-            #income-container {
-                width: 95%;
-                padding: 15px;
-                margin-top: 180px;
-                max-height: calc(100vh - 230px);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                overscroll-behavior: contain;
-                touch-action: pan-y;
-                padding-bottom: 60px;
-            }
-            #income-container h2 {
-                font-size: 26px;
-            }
-            .task-title {
-                font-size: 15px;
-            }
-            .task-sub, .token-text {
-                font-size: 13px;
-            }
-            .task-logo {
-                width: 40px;
-                height: 40px;
-            }
-            .settings-icon {
-                font-size: 28px;
-                top: 12px;
-                right: 12px;
-                padding: 8px;
-            }
-            .settings-menu {
-                top: 50px;
-                right: 12px;
-            }
             .loading-overlay {
                 width: 180px;
                 height: 90px;
@@ -669,28 +390,6 @@
                 padding: 12px;
                 margin-top: 160px;
             }
-            #home-container {
-                min-height: 350px;
-                width: 100%;
-                max-width: 95%;
-                margin: 160px auto 10px;
-            }
-            #home-container h2 span:first-child {
-                font-size: 18px;
-            }
-            #home-container h2 span:last-child {
-                font-size: 22px;
-            }
-            .start-mining-btn {
-                width: 120px;
-                height: 120px;
-                font-size: 20px;
-            }
-            .timer {
-                width: 120px;
-                height: 120px;
-                font-size: 20px;
-            }
             .logo-circle {
                 width: 120px;
                 height: 120px;
@@ -700,75 +399,6 @@
             }
             .logo-circle p {
                 font-size: 18px;
-            }
-            .profile-info p strong,
-            .profile-info p span {
-                font-size: 18px;
-            }
-            .profile-picture {
-                width: 80px;
-                height: 80px;
-            }
-            #profile-container, #income-container, #settings-container, #invite-container {
-                max-height: calc(100vh - 210px);
-                padding-bottom: 50px;
-            }
-            #income-container {
-                width: 95%;
-                padding: 12px;
-                margin-top: 160px;
-                max-height: calc(100vh - 210px);
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                overscroll-behavior: contain;
-                touch-action: pan-y;
-                padding-bottom: 50px;
-            }
-            #income-container h2 {
-                font-size: 24px;
-            }
-            .task-box {
-                margin: 12px auto;
-                padding: 12px;
-            }
-            .task-title {
-                font-size: 15px;
-            }
-            .task-sub, .token-text {
-                font-size: 13px;
-            }
-            .task-logo {
-                width: 40px;
-                height: 40px;
-            }
-            .claim-button {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .claimed {
-                font-size: 14px;
-            }
-            .navbar-bottom a {
-                font-size: 10px;
-                padding: 4px;
-            }
-            .navbar-bottom a i {
-                font-size: 18px;
-                margin-bottom: 2px;
-            }
-            .settings-icon {
-                font-size: 24px;
-                top: 10px;
-                right: 10px;
-                padding: 6px;
-            }
-            .settings-menu {
-                top: 45px;
-                right: 10px;
-            }
-            .bonus-info {
-                font-size: 12px;
-                padding: 6px;
             }
             .loading-overlay {
                 width: 160px;
@@ -855,140 +485,96 @@
         </form>
     </div>
 
-    <!-- Home Page -->
-    <div id="home-container" class="hidden">
-        <h2>
-            <span>WELCOME TO</span>
-            <span>ARPM MINING</span>
-        </h2>
-        <div class="balance-info">
-            <p><strong>BALANCE:</strong> <span id="balance">0.0000</span> ARPM</p>
+    <!-- Home Section -->
+    <div id="home" class="page-section hidden">
+        <div class="topbar">
+            <div class="menu-icon" id="menuBtn">⋮</div>
+            <div class="title">ARPM Mining</div>
+            <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
         </div>
-        <div id="mining-area">
-            <button class="start-mining-btn" id="start-mining-btn" onclick="startMining()" aria-label="START MINING BUTTON">START MINING</button>
-            <div class="timer" id="timer" style="display: none;" aria-label="START MINING TIMER"></div>
+        <div class="dashboard-header">
+            <h2>Welcome To ARPM Mining</h2>
         </div>
-        <div id="ad-container" class="hidden"></div>
+        <div class="image-half">
+            <button class="start-button" id="start-mining-btn">START MINING</button>
+        </div>
+        <div class="home-bottom-text"></div>
     </div>
 
-    <!-- Profile Page -->
-    <div id="profile-container" class="container hidden">
-        <div>
-            <h2>PROFILE</h2>
-            <i class="fas fa-cog settings-icon" onclick="navigateTo('settings')" aria-label="Open Settings" tabindex="0"></i>
-            <div class="profile-picture" id="profile-picture" aria-label="PROFILE PICTURE" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.2.1&auto=format&fit=crop&w=200&q=80')"></div>
-            <div class="profile-info">
-                <p><strong>USERNAME:</strong> <span id="profile-username">N/A</span><span class="divider"></span></p>
-                <p><strong>REGISTERED:</strong> <span id="profile-registration-date">N/A</span><span class="divider"></span></p>
-                <p><strong>EMAIL:</strong> <span id="profile-email">N/A</span><span class="divider"></span></p>
-                <p><strong>BALANCE:</strong> <span id="profile-balance">0.0000</span> ARPM<span class="divider"></span></p>
-                <p><strong>REFERRALS:</strong> <span id="profile-referrals">0</span><span class="divider"></span></p>
-            </div>
-        </div>
+    <!-- Profile Section -->
+    <div id="profile" class="page-section hidden">
+        <div class="section-title">Profile</div>
+        <div class="black-box">Profile Content Coming Soon</div>
     </div>
 
-    <!-- Settings Page -->
-    <div id="settings-container" class="container hidden">
-        <h2>SETTINGS</h2>
-        <div class="settings-options">
-            <div class="settings-option" onclick="window.toggleLanguageOptions()">Language</div>
-            <div class="language-options" id="language-options">
-                <div class="language-option" onclick="window.changeLanguage('en')">English</div>
-                <div class="language-option" onclick="window.changeLanguage('bn')">বাংলা</div>
-                <div class="language-option" onclick="window.changeLanguage('hi')">हिंदी</div>
-            </div>
-            <button class="logout-btn" onclick="signOutUser()">
-                <i class="fas fa-sign-out-alt"></i> LOGOUT
-            </button>
+    <!-- Invite Section -->
+    <div id="invite" class="page-section hidden">
+        <div class="section-title">Invite</div>
+        <div class="black-box">Invite Content Coming Soon</div>
+    </div>
+
+    <!-- Wallet Section -->
+    <div id="wallet" class="page-section hidden">
+        <div class="section-title">Wallet</div>
+        <div class="wallet-section">
+            <p>Coming Soon</p>
         </div>
     </div>
 
-    <!-- Income Page -->
-    <div id="income-container" class="container hidden">
-        <h2>INCOME</h2>
-        <!-- YouTube Subscribe Task -->
-        <div class="task-box" id="youtube-task">
-            <div class="task-header">
-                <img class="task-logo" src="https://img.icons8.com/color/240/youtube-play.png" alt="YouTube Logo">
-                <div class="task-title">YOUTUBE SUBSCRIBE</div>
+    <!-- Income Section -->
+    <div id="income" class="page-section hidden">
+        <div class="section-title">Income</div>
+        <div class="task-box">
+            <i class="fab fa-youtube youtube-icon" style="color: #FF0000;"></i>
+            <div class="task-text">
+                YOUTUBE SUBSCRIBE
+                <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
+                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
             </div>
-            <div class="task-sub">SUBSCRIBE ARPM YOUTUBE CHANNEL</div>
-            <div class="token-text">TOKENS: 5.0 ARPM</div>
-            <button class="claim-button" id="youtube-btn" onclick="goToYouTube()">SUBSCRIBE</button>
-            <button class="claim-button hidden" id="youtube-claim-btn" onclick="claimYouTubeBonus()">CLAIM</button>
-            <div class="claimed hidden" id="youtube-status">CLAIMED!</div>
+            <a href="https://youtube.com" target="_blank" class="go-button">SUBSCRIBE</a>
         </div>
-        <!-- X Follow Task -->
-        <div class="task-box" id="x-task">
-            <div class="task-header">
-                <img class="task-logo" src="https://img.icons8.com/ios-filled/100/ffffff/twitterx--v2.png" alt="X Logo">
-                <div class="task-title">X FOLLOW</div>
+        <div class="task-box">
+            <i class="fa-brands fa-x-twitter youtube-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X FOLLOW
+                <small>FOLLOW ON ARPM X</small>
+                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
             </div>
-            <div class="task-sub">FOLLOW ON ARPM X</div>
-            <div class="token-text">TOKENS: 5.0 ARPM</div>
-            <button class="claim-button" id="x-btn" onclick="goToX()">FOLLOW</button>
-            <button class="claim-button hidden" id="x-claim-btn" onclick="claimXBonus()">CLAIM</button>
-            <div class="claimed hidden" id="x-status">CLAIMED!</div>
+            <a href="https://x.com" target="_blank" class="go-button">FOLLOW</a>
         </div>
-        <!-- Instagram Follow Task -->
-        <div class="task-box" id="instagram-task">
-            <div class="task-header">
-                <img class="task-logo" src="https://img.icons8.com/color/240/instagram-new.png" alt="Instagram Logo">
-                <div class="task-title">INSTAGRAM FOLLOW</div>
+        <div class="task-box">
+            <i class="fab fa-instagram youtube-icon" style="color:#e1306c;"></i>
+            <div class="task-text">
+                INSTAGRAM FOLLOW
+                <small>FOLLOW ARPM ON INSTAGRAM</small>
+                <span style="color:#00cc99;">TOKENS: 5.0 ARPM</span>
             </div>
-            <div class="task-sub">FOLLOW ARPM ON INSTAGRAM</div>
-            <div class="token-text">TOKENS: 5.0 ARPM</div>
-            <button class="claim-button" id="instagram-btn" onclick="goToInstagram()">FOLLOW</button>
-            <button class="claim-button hidden" id="instagram-claim-btn" onclick="claimInstagramBonus()">CLAIM</button>
-            <div class="claimed hidden" id="instagram-status">CLAIMED!</div>
-        </div>
-    </div>
-
-    <!-- Invite Page -->
-    <div id="invite-container" class="container hidden">
-        <h2>INVITE</h2>
-        <div class="balance-info">
-            <p><strong>REFERRAL LINK:</strong> <span id="referral-link-display">LOADING...</span>
-                <button class="copy-btn" onclick="copyReferralLink()">COPY LINK</button>
-            </p>
-        </div>
-        <div class="bonus-info">
-            <p>💡 How the Bonus Works</p>
-            <p>✅ If you share your referral code with someone,</p>
-            <p>✅ And your friend registers using that code,</p>
-            <p><strong>Then:</strong></p>
-            <p>You will receive: <strong>5 ARPM Tokens</strong></p>
-            <p>Your friend will receive: <strong>1.5 ARPM Tokens</strong></p>
+            <a href="https://instagram.com" target="_blank" class="go-button">FOLLOW</a>
         </div>
     </div>
 
     <!-- Bottom Navigation -->
-    <div class="navbar-bottom" id="navbar-bottom">
-        <a href="#" onclick="navigateTo('home')" class="active" aria-label="Home Page">
-            <i class="fas fa-home"></i>
-            <span class="nav-text">HOME</span>
-        </a>
-        <a href="#" onclick="navigateTo('invite')" aria-label="Invite Page">
-            <i class="fas fa-user-plus"></i>
-            <span class="nav-text">INVITE</span>
-        </a>
-        <a href="#" onclick="navigateTo('wallet')" aria-label="Wallet Page">
-            <i class="fas fa-wallet"></i>
-            <span class="nav-text">WALLET</span>
-        </a>
-        <a href="#" onclick="navigateTo('income')" aria-label="Income Page">
-            <i class="fas fa-money-bill-wave"></i>
-            <span class="nav-text">INCOME</span>
-        </a>
-        <a href="#" onclick="navigateTo('profile')" aria-label="Profile Page">
-            <i class="fas fa-user"></i>
-            <span class="nav-text">PROFILE</span>
-        </a>
+    <div class="bottom-nav" id="bottom-nav">
+        <div class="bottom-nav-item active" data-target="home">
+            <i class="fas fa-home"></i>Home
+        </div>
+        <div class="bottom-nav-item" data-target="profile">
+            <i class="fas fa-user"></i>Profile
+        </div>
+        <div class="bottom-nav-item" data-target="wallet">
+            <i class="fas fa-wallet"></i>Wallet
+        </div>
+        <div class="bottom-nav-item" data-target="invite">
+            <i class="fas fa-users"></i>Invite
+        </div>
+        <div class="bottom-nav-item" data-target="income">
+            <i class="fas fa-coins"></i>Income
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
         const firebaseConfig = {
@@ -1010,100 +596,58 @@
             login: document.getElementById('login-container'),
             signup: document.getElementById('signup-container'),
             reset: document.getElementById('reset-container'),
-            home: document.getElementById('home-container'),
-            profile: document.getElementById('profile-container'),
-            settings: document.getElementById('settings-container'),
-            income: document.getElementById('income-container'),
-            invite: document.getElementById('invite-container'),
-            navbar: document.getElementById('navbar-bottom')
+            home: document.getElementById('home'),
+            profile: document.getElementById('profile'),
+            wallet: document.getElementById('wallet'),
+            invite: document.getElementById('invite'),
+            income: document.getElementById('income')
         };
         const forms = {
             login: document.getElementById('login-form'),
             signup: document.getElementById('signup-form'),
             reset: document.getElementById('reset-form')
         };
-        const miningElements = {
-            balance: document.getElementById('balance'),
-            startBtn: document.getElementById('start-mining-btn'),
-            timer: document.getElementById('timer'),
-            ad: document.getElementById('ad-container')
-        };
-        const incomeElements = {
-            youtubeBtn: document.getElementById('youtube-btn'),
-            youtubeClaimBtn: document.getElementById('youtube-claim-btn'),
-            youtubeStatus: document.getElementById('youtube-status'),
-            xBtn: document.getElementById('x-btn'),
-            xClaimBtn: document.getElementById('x-claim-btn'),
-            xStatus: document.getElementById('x-status'),
-            instagramBtn: document.getElementById('instagram-btn'),
-            instagramClaimBtn: document.getElementById('instagram-claim-btn'),
-            instagramStatus: document.getElementById('instagram-status')
-        };
         const loadingOverlay = document.getElementById('loading-overlay');
-        let currentLanguage = 'en';
-        const languageOptions = document.getElementById('language-options');
+        const navbarTop = document.getElementById('navbar-top');
+        const bottomNav = document.getElementById('bottom-nav');
+        const startMiningBtn = document.getElementById('start-mining-btn');
+        const balanceBox = document.getElementById('balance-box');
         const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
-        const BASE_REFERRAL_URL = 'https://arpmmining.github.io/Arpmmining-/';
-        let youtubeVisited = false;
-        let xVisited = false;
-        let instagramVisited = false;
 
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('ref');
         }
 
-        async function loadAd(containerId) {
-            const adContainer = document.getElementById(containerId);
-            if (!adContainer) return false;
-            adContainer.innerHTML = '<p style="font-size: 18px; color: #fff;">AD PLACEHOLDER (5S)</p>';
-            adContainer.classList.remove('hidden');
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            adContainer.classList.add('hidden');
-            return true;
-        }
-
-        async function showLoadingScreen() {
+        async function showLoadingScreen(withDelay = false) {
             loadingOverlay.classList.add('active');
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            if (withDelay) {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+            }
             loadingOverlay.classList.remove('active');
         }
 
         async function showPage(page) {
-            if (['login', 'signup', 'reset', 'home', 'wallet'].includes(page)) {
-                await showLoadingScreen();
-            }
-
-            if (page === 'wallet') {
-                alert('WALLET FEATURE COMING SOON!');
-                page = 'home';
-            }
-
-            Object.values(containers).forEach(c => {
-                if (c.id !== 'navbar-top') c.style.display = 'none';
-            });
+            await showLoadingScreen();
+            Object.values(containers).forEach(c => c.style.display = 'none');
             containers[page].style.display = 'block';
-            containers.navbar.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'none' : 'flex';
-            document.querySelectorAll('.navbar-bottom a').forEach(link => link.classList.remove('active'));
-            document.querySelector(`.navbar-bottom a[onclick="navigateTo('${page}')"]`)?.classList.add('active');
-            if (page === 'invite') loadInviteCode();
-            if (page === 'profile') loadProfileInfo();
-            if (page === 'home') loadMiningState();
-            if (page === 'income') loadIncomeState();
-            if (page === 'settings') {
-                updateSettingsUI();
+            navbarTop.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'flex' : 'none';
+            bottomNav.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'none' : 'flex';
+            if (page === 'signup') {
+                const referralCode = getReferralCodeFromURL();
+                if (referralCode) {
+                    document.getElementById('signup-invite-code').value = referralCode;
+                }
             }
+            const navItems = document.querySelectorAll('.bottom-nav-item');
+            navItems.forEach(nav => nav.classList.remove('active'));
+            const activeNav = document.querySelector(`.bottom-nav-item[data-target="${page}"]`);
+            if (activeNav) activeNav.classList.add('active');
         }
 
         window.showLogin = async () => showPage('login');
-        window.showSignup = async () => {
-            await showPage('signup');
-            const referralCode = getReferralCodeFromURL();
-            if (referralCode) {
-                document.getElementById('signup-invite-code').value = referralCode;
-            }
-        };
+        window.showSignup = async () => showPage('signup');
         window.showReset = async () => showPage('reset');
 
         forms.login.addEventListener('submit', async (e) => {
@@ -1140,7 +684,7 @@
             }
 
             try {
-                await showLoadingScreen();
+                await showLoadingScreen(true);
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
@@ -1188,7 +732,7 @@
             e.preventDefault();
             const email = document.getElementById('reset-email').value;
             try {
-                await showLoadingScreen();
+                await showLoadingScreen(true);
                 await sendPasswordResetEmail(auth, email);
                 alert('PASSWORD RESET LINK SENT!');
                 showPage('login');
@@ -1199,365 +743,63 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                await showPage('home');
-                updateBalance();
-                loadMiningState();
-                loadProfileInfo();
-                loadSettings();
-            } else {
-                await showPage('login');
-            }
-        });
-
-        window.startMining = async () => {
-            if (!auth.currentUser) return alert('PLEASE LOG IN TO START MINING.');
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            const currentTime = Date.now();
-            if (currentTime < userData.miningEndTime) {
-                alert('MINING SESSION ALREADY IN PROGRESS.');
-                miningElements.startBtn.disabled = true;
-                return;
-            }
-
-            const adLoaded = await loadAd('ad-container');
-            if (!adLoaded) {
-                alert('FAILED TO LOAD AD. PLEASE TRY AGAIN.');
-                return;
-            }
-
-            const miningDuration = 6 * 3600 * 1000;
-            const startTime = Date.now();
-            const endTime = startTime + miningDuration;
-            await update(userRef, { miningStartTime: startTime, miningEndTime: endTime });
-            miningElements.startBtn.style.display = 'none';
-            miningElements.timer.style.display = 'flex';
-            startTimer(endTime);
-            miningElements.startBtn.disabled = true;
-        };
-
-        function startTimer(endTime) {
-            const totalDuration = 6 * 3600 * 1000;
-            const totalTokens = 3;
-            const minutesPerUpdate = 360;
-            const tokenPerMinute = totalTokens / minutesPerUpdate;
-            let lastUpdate = Date.now();
-
-            const interval = setInterval(async () => {
-                const currentTime = Date.now();
-                const timeLeft = endTime - currentTime;
-
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    miningElements.timer.textContent = '06:00:00';
-                    miningElements.timer.style.display = 'none';
-                    miningElements.startBtn.style.display = 'block';
-                    miningElements.startBtn.disabled = false;
-                    if (auth.currentUser) {
-                        const userRef = ref(db, 'users/' + auth.currentUser.uid);
-                        const snapshot = await get(userRef);
-                        const userData = snapshot.val() || {};
-                        const earnedTokens = totalTokens;
-                        await update(userRef, {
-                            tokens: (userData.tokens || 0) + earnedTokens,
-                            earnings: (userData.earnings || 0) + earnedTokens,
-                            miningStartTime: 0,
-                            miningEndTime: 0
-                        });
-                        updateBalance();
-                    }
-                    return;
-                }
-
-                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                miningElements.timer.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-                if (currentTime - lastUpdate >= 60 * 1000 && auth.currentUser) {
-                    const userRef = ref(db, 'users/' + auth.currentUser.uid);
-                    const snapshot = await get(userRef);
-                    const userData = snapshot.val() || {};
-                    const newTokens = (userData.tokens || 0) + tokenPerMinute;
-                    const newEarnings = (userData.earnings || 0) + tokenPerMinute;
-                    await update(userRef, { tokens: newTokens, earnings: newEarnings });
-                    updateBalance();
-                    lastUpdate = currentTime;
-                }
-            }, 1000);
-        }
-
-        async function loadMiningState() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            const currentTime = Date.now();
-            if (currentTime < userData.miningEndTime) {
-                miningElements.startBtn.style.display = 'none';
-                miningElements.timer.style.display = 'flex';
-                miningElements.startBtn.disabled = true;
-                startTimer(userData.miningEndTime);
-            } else {
-                miningElements.startBtn.style.display = 'block';
-                miningElements.timer.style.display = 'none';
-                miningElements.startBtn.disabled = false;
-            }
-        }
-
-        async function updateBalance() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            miningElements.balance.textContent = (userData.tokens || 0).toFixed(4);
-            document.getElementById('profile-balance').textContent = (userData.tokens || 0).toFixed(4);
-        }
-
-        async function loadProfileInfo() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            try {
+                const userRef = ref(db, 'users/' + user.uid);
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
-                    document.getElementById('profile-username').textContent = userData.username || 'N/A';
-                    document.getElementById('profile-registration-date').textContent = userData.registrationDate || 'N/A';
-                    document.getElementById('profile-email').textContent = userData.email || 'N/A';
-                    document.getElementById('profile-balance').textContent = (userData.tokens || 0).toFixed(4);
-                    document.getElementById('profile-referrals').textContent = userData.referrals || 0;
-                    updateProfilePicture();
-                } else {
-                    console.log("NO USER DATA FOUND IN DATABASE. SAVING DEFAULT DATA...");
-                    await set(ref(db, 'users/' + auth.currentUser.uid), {
-                        username: null,
-                        email: auth.currentUser.email,
-                        tokens: 0,
-                        earnings: 0,
-                        uniqueCode: Math.floor(10000000 + Math.random() * 90000000).toString(),
-                        registrationDate: new Date().toLocaleDateString('en-GB'),
-                        miningStartTime: 0,
-                        miningEndTime: 0,
-                        referrals: 0,
-                        youtubeBonusClaimed: false,
-                        xBonusClaimed: false,
-                        instagramBonusClaimed: false,
-                        profilePicture: 'boy',
-                        language: 'en'
-                    });
-                    await loadProfileInfo();
+                    balanceBox.textContent = `Balance: ${userData.tokens.toFixed(3)} ARPM`;
+
+                    // Check if mining is already in progress
+                    if (userData.miningEndTime > Date.now()) {
+                        startMiningBtn.disabled = true;
+                        let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
+                        let totalMinedTokens = Math.floor((Date.now() - userData.miningStartTime) / (60 * 1000));
+
+                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`;
+
+                        const miningInterval = setInterval(async () => {
+                            if (timeLeft <= 0) {
+                                clearInterval(miningInterval);
+                                startMiningBtn.disabled = false;
+                                startMiningBtn.innerHTML = 'START MINING';
+
+                                const snapshot = await get(userRef);
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    const newTokens = (userData.tokens || 0) + totalMinedTokens;
+                                    await update(userRef, {
+                                        tokens: newTokens,
+                                        earnings: newTokens,
+                                        miningStartTime: 0,
+                                        miningEndTime: 0
+                                    });
+                                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                                }
+                                alert(`Mining completed! You earned ${totalMinedTokens} ARPM.`);
+                                return;
+                            }
+
+                            timeLeft--;
+                            const minutes = Math.floor(timeLeft / 60);
+                            const seconds = timeLeft % 60;
+                            startMiningBtn.innerHTML = `Time Left:<br>${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                            if (timeLeft % 60 === 0) {
+                                totalMinedTokens += 1;
+                                const snapshot = await get(userRef);
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    balanceBox.textContent = `Balance: ${(userData.tokens + totalMinedTokens).toFixed(3)} ARPM`;
+                                }
+                            }
+                        }, 1000);
+                    }
                 }
-            } catch (error) {
-                console.error("ERROR LOADING PROFILE INFO:", error);
-                alert("FAILED TO LOAD PROFILE INFO. PLEASE TRY AGAIN.");
-            }
-        }
-
-        function updateProfilePicture() {
-            const profilePicture = document.getElementById('profile-picture');
-            const pictureUrl = 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.2.1&auto=format&fit=crop&w=200&q=80';
-            profilePicture.style.backgroundImage = `url('${pictureUrl}')`;
-        }
-
-        async function loadIncomeState() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-
-            if (userData.youtubeBonusClaimed) {
-                incomeElements.youtubeBtn.classList.add('hidden');
-                incomeElements.youtubeClaimBtn.classList.add('hidden');
-                incomeElements.youtubeStatus.classList.remove('hidden');
-                incomeElements.youtubeBtn.disabled = true;
-            } else if (youtubeVisited) {
-                incomeElements.youtubeBtn.classList.add('hidden');
-                incomeElements.youtubeClaimBtn.classList.remove('hidden');
-                incomeElements.youtubeStatus.classList.add('hidden');
+                showPage('home');
             } else {
-                incomeElements.youtubeBtn.classList.remove('hidden');
-                incomeElements.youtubeClaimBtn.classList.add('hidden');
-                incomeElements.youtubeStatus.classList.add('hidden');
-                incomeElements.youtubeBtn.disabled = false;
+                showPage('login');
             }
-
-            if (userData.xBonusClaimed) {
-                incomeElements.xBtn.classList.add('hidden');
-                incomeElements.xClaimBtn.classList.add('hidden');
-                incomeElements.xStatus.classList.remove('hidden');
-                incomeElements.xBtn.disabled = true;
-            } else if (xVisited) {
-                incomeElements.xBtn.classList.add('hidden');
-                incomeElements.xClaimBtn.classList.remove('hidden');
-                incomeElements.xStatus.classList.add('hidden');
-            } else {
-                incomeElements.xBtn.classList.remove('hidden');
-                incomeElements.xClaimBtn.classList.add('hidden');
-                incomeElements.xStatus.classList.add('hidden');
-                incomeElements.xBtn.disabled = false;
-            }
-
-            if (userData.instagramBonusClaimed) {
-                incomeElements.instagramBtn.classList.add('hidden');
-                incomeElements.instagramClaimBtn.classList.add('hidden');
-                incomeElements.instagramStatus.classList.remove('hidden');
-                incomeElements.instagramBtn.disabled = true;
-            } else if (instagramVisited) {
-                incomeElements.instagramBtn.classList.add('hidden');
-                incomeElements.instagramClaimBtn.classList.remove('hidden');
-                incomeElements.instagramStatus.classList.add('hidden');
-            } else {
-                incomeElements.instagramBtn.classList.remove('hidden');
-                incomeElements.instagramClaimBtn.classList.add('hidden');
-                incomeElements.instagramStatus.classList.add('hidden');
-                incomeElements.instagramBtn.disabled = false;
-            }
-
-            const youtubeTitle = document.querySelector('#youtube-task .task-title');
-            const youtubeSub = document.querySelector('#youtube-task .task-sub');
-            const youtubeToken = document.querySelector('#youtube-task .token-text');
-            const xTitle = document.querySelector('#x-task .task-title');
-            const xSub = document.querySelector('#x-task .task-sub');
-            const xToken = document.querySelector('#x-task .token-text');
-            const instagramTitle = document.querySelector('#instagram-task .task-title');
-            const instagramSub = document.querySelector('#instagram-task .task-sub');
-            const instagramToken = document.querySelector('#instagram-task .token-text');
-
-            if (youtubeTitle) youtubeTitle.textContent = translations[currentLanguage].youtubeTitle;
-            if (youtubeSub) youtubeSub.textContent = translations[currentLanguage].youtubeText;
-            if (youtubeToken) youtubeToken.textContent = translations[currentLanguage].youtubeTokenText;
-            if (xTitle) xTitle.textContent = translations[currentLanguage].xTitle;
-            if (xSub) xSub.textContent = translations[currentLanguage].xText;
-            if (xToken) xToken.textContent = translations[currentLanguage].xTokenText;
-            if (instagramTitle) instagramTitle.textContent = translations[currentLanguage].instagramTitle;
-            if (instagramSub) instagramSub.textContent = translations[currentLanguage].instagramText;
-            if (instagramToken) instagramToken.textContent = translations[currentLanguage].instagramTokenText;
-
-            if (incomeElements.youtubeBtn) incomeElements.youtubeBtn.textContent = translations[currentLanguage].subscribeBtn;
-            if (incomeElements.youtubeClaimBtn) incomeElements.youtubeClaimBtn.textContent = translations[currentLanguage].claimBtn;
-            if (incomeElements.xBtn) incomeElements.xBtn.textContent = translations[currentLanguage].followBtn;
-            if (incomeElements.xClaimBtn) incomeElements.xClaimBtn.textContent = translations[currentLanguage].claimBtn;
-            if (incomeElements.instagramBtn) incomeElements.instagramBtn.textContent = translations[currentLanguage].followBtn;
-            if (incomeElements.instagramClaimBtn) incomeElements.instagramClaimBtn.textContent = translations[currentLanguage].claimBtn;
-            if (incomeElements.youtubeStatus) incomeElements.youtubeStatus.textContent = translations[currentLanguage].claimed;
-            if (incomeElements.xStatus) incomeElements.xStatus.textContent = translations[currentLanguage].claimed;
-            if (incomeElements.instagramStatus) incomeElements.instagramStatus.textContent = translations[currentLanguage].claimed;
-        }
-
-        window.goToYouTube = () => {
-            if (!auth.currentUser) return;
-            youtubeVisited = true;
-            window.open('https://www.youtube.com/@ARPMMining-l3x7o', '_blank');
-            loadIncomeState();
-        };
-
-        window.claimYouTubeBonus = async () => {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            if (userData.youtubeBonusClaimed) {
-                alert('YOUTUBE BONUS ALREADY CLAIMED!');
-                return;
-            }
-            const bonusTokens = 5;
-            await update(userRef, {
-                tokens: (userData.tokens || 0) + bonusTokens,
-                earnings: (userData.earnings || 0) + bonusTokens,
-                youtubeBonusClaimed: true
-            });
-            updateBalance();
-            alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
-            loadIncomeState();
-        };
-
-        window.goToX = () => {
-            if (!auth.currentUser) return;
-            xVisited = true;
-            window.open('https://x.com/Arpmmining22', '_blank');
-            loadIncomeState();
-        };
-
-        window.claimXBonus = async () => {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            if (userData.xBonusClaimed) {
-                alert('X BONUS ALREADY CLAIMED!');
-                return;
-            }
-            const bonusTokens = 5;
-            await update(userRef, {
-                tokens: (userData.tokens || 0) + bonusTokens,
-                earnings: (userData.earnings || 0) + bonusTokens,
-                xBonusClaimed: true
-            });
-            updateBalance();
-            alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
-            loadIncomeState();
-        };
-
-        window.goToInstagram = () => {
-            if (!auth.currentUser) return;
-            instagramVisited = true;
-            window.open('https://www.instagram.com/ARPMMining', '_blank');
-            loadIncomeState();
-        };
-
-        window.claimInstagramBonus = async () => {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            if (userData.instagramBonusClaimed) {
-                alert('INSTAGRAM BONUS ALREADY CLAIMED!');
-                return;
-            }
-            const bonusTokens = 5;
-            await update(userRef, {
-                tokens: (userData.tokens || 0) + bonusTokens,
-                earnings: (userData.earnings || 0) + bonusTokens,
-                instagramBonusClaimed: true
-            });
-            updateBalance();
-            alert(`BONUS APPLIED! YOU EARNED ${bonusTokens.toFixed(4)} ARPM.`);
-            loadIncomeState();
-        };
-
-        async function loadInviteCode() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
-            const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            let uniqueCode = userData.uniqueCode;
-            if (!uniqueCode) {
-                uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
-                await update(userRef, { uniqueCode });
-            }
-            const referralLink = `${BASE_REFERRAL_URL}?ref=${uniqueCode}`;
-            document.getElementById('referral-link-display').textContent = referralLink;
-        }
-
-        window.copyReferralLink = () => {
-            const referralLink = document.getElementById('referral-link-display').textContent;
-            navigator.clipboard.writeText(referralLink).then(() => alert('REFERRAL LINK COPIED!')).catch(() => alert('FAILED TO COPY REFERRAL LINK.'));
-        };
-
-        window.navigateTo = async (section) => {
-            if (!auth.currentUser && section !== 'login') {
-                alert('PLEASE LOG IN TO ACCESS THIS SECTION.');
-                await showPage('login');
-                return;
-            }
-            await showPage(section);
-        };
-
-        window.signOutUser = async () => {
-            await signOut(auth);
-            await showPage('login');
-        };
+        });
 
         window.togglePasswordVisibility = (inputId, toggleId) => {
             const passwordInput = document.getElementById(inputId);
@@ -1573,176 +815,92 @@
             }
         };
 
-        window.toggleLanguageOptions = () => {
-            if (languageOptions) {
-                languageOptions.classList.toggle('active');
+        const navItems = document.querySelectorAll('.bottom-nav-item');
+        const sections = document.querySelectorAll('.page-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                const target = item.getAttribute('data-target');
+                showPage(target);
+            });
+        });
+
+        // Mining Timer Logic
+        let miningInterval = null;
+
+        startMiningBtn.addEventListener('click', async () => {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to start mining!');
+                showPage('login');
+                return;
             }
-        };
 
-        window.changeLanguage = async (lang) => {
-            currentLanguage = lang;
-            if (languageOptions) {
-                languageOptions.classList.remove('active');
-            }
-            if (auth.currentUser) {
-                const userRef = ref(db, 'users/' + auth.currentUser.uid);
-                await update(userRef, { language: lang });
-            }
-            updateLanguage();
-        };
-
-        const translations = {
-            en: {
-                login: 'LOGIN',
-                register: 'REGISTER',
-                reset: 'RESET PASSWORD',
-                welcome: 'WELCOME TO',
-                home: 'HOME',
-                invite: 'INVITE',
-                wallet: 'WALLET',
-                income: 'INCOME',
-                profile: 'PROFILE',
-                settings: 'SETTINGS',
-                language: 'Language',
-                logout: 'LOGOUT',
-                youtubeTitle: 'YOUTUBE SUBSCRIBE',
-                youtubeText: 'SUBSCRIBE ARPM YOUTUBE CHANNEL',
-                youtubeTokenText: 'TOKENS: 5.0 ARPM',
-                xTitle: 'X FOLLOW',
-                xText: 'FOLLOW ON ARPM X',
-                xTokenText: 'TOKENS: 5.0 ARPM',
-                instagramTitle: 'INSTAGRAM FOLLOW',
-                instagramText: 'FOLLOW ARPM ON INSTAGRAM',
-                instagramTokenText: 'TOKENS: 5.0 ARPM',
-                subscribeBtn: 'SUBSCRIBE',
-                followBtn: 'FOLLOW',
-                claimBtn: 'CLAIM',
-                claimed: 'CLAIMED!'
-            },
-            bn: {
-                login: 'লগইন',
-                register: 'রেজিস্টার',
-                reset: 'পাসওয়ার্ড রিসেট',
-                welcome: 'স্বাগতম',
-                home: 'হোম',
-                invite: 'আমন্ত্রণ',
-                wallet: 'ওয়ালেট',
-                income: 'আয়',
-                profile: 'প্রোফাইল',
-                settings: 'সেটিংস',
-                language: 'ভাষা',
-                logout: 'লগ আউট',
-                youtubeTitle: 'ইউটিউব সাবস্ক্রাইব',
-                youtubeText: 'এআরপিএম ইউটিউব চ্যানেলে সাবস্ক্রাইব করুন',
-                youtubeTokenText: 'টোকেন: ৫.০ এআরপিএম',
-                xTitle: 'এক্স ফলো',
-                xText: 'এআরপিএম এক্স-এ ফলো করুন',
-                xTokenText: 'টোকেন: ৫.০ এআরপিএম',
-                instagramTitle: 'ইনস্টাগ্রাম ফলো',
-                instagramText: 'এআরপিএম ইনস্টাগ্রামে ফলো করুন',
-                instagramTokenText: 'টোকেন: ৫.০ এআরপিএম',
-                subscribeBtn: 'সাবস্ক্রাইব',
-                followBtn: 'ফলো',
-                claimBtn: 'দাবি',
-                claimed: 'দাবি করা হয়েছে!'
-            },
-            hi: {
-                login: 'लॉगिन',
-                register: 'रजिस्टर',
-                reset: 'पासवर्ड रीसेट',
-                welcome: 'स्वागत है',
-                home: 'होम',
-                invite: 'आमंत्रण',
-                wallet: 'वॉलेट',
-                income: 'आय',
-                profile: 'प्रोफ़ाइल',
-                settings: 'सेटिंग्स',
-                language: 'भाषा',
-                logout: 'लॉग आउट',
-                youtubeTitle: 'यूट्यूब सब्सक्राइब',
-                youtubeText: 'एआरपीएम यूट्यूब चैनल को सब्सक्राइब करें',
-                youtubeTokenText: 'टोकन: 5.0 एआरपीएम',
-                xTitle: 'एक्स फॉलो',
-                xText: 'एआरपीएम एक्स पर फॉलो करें',
-                xTokenText: 'टोकन: 5.0 एआरपीएम',
-                instagramTitle: 'इंस्टाग्राम फॉलो',
-                instagramText: 'एआरपीएम को इंस्टाग्राम पर फॉलो करें',
-                instagramTokenText: 'टोकन: 5.0 एआरपीएम',
-                subscribeBtn: 'सब्सक्राइब',
-                followBtn: 'फॉलो',
-                claimBtn: 'दावा',
-                claimed: 'दावा किया गया!'
-            }
-        };
-
-        function updateLanguage() {
-            const t = translations[currentLanguage];
-            document.querySelector('#login-container h2').textContent = t.login;
-            document.querySelector('#signup-container h2').textContent = t.register;
-            document.querySelector('#reset-container h2').textContent = t.reset;
-            document.querySelector('#home-container h2 span:first-child').textContent = t.welcome;
-            document.querySelector('#home-container h2 span:last-child').textContent = 'ARPM MINING';
-            document.querySelector('#invite-container h2').textContent = t.invite;
-            document.querySelector('#income-container h2').textContent = t.income;
-            document.querySelector('#profile-container h2').textContent = t.profile;
-            document.querySelector('#settings-container h2').textContent = t.settings;
-
-            const youtubeTitle = document.querySelector('#youtube-task .task-title');
-            const youtubeSub = document.querySelector('#youtube-task .task-sub');
-            const youtubeToken = document.querySelector('#youtube-task .token-text');
-            const xTitle = document.querySelector('#x-task .task-title');
-            const xSub = document.querySelector('#x-task .task-sub');
-            const xToken = document.querySelector('#x-task .token-text');
-            const instagramTitle = document.querySelector('#instagram-task .task-title');
-            const instagramSub = document.querySelector('#instagram-task .task-sub');
-            const instagramToken = document.querySelector('#instagram-task .token-text');
-
-            if (youtubeTitle) youtubeTitle.textContent = t.youtubeTitle;
-            if (youtubeSub) youtubeSub.textContent = t.youtubeText;
-            if (youtubeToken) youtubeToken.textContent = t.youtubeTokenText;
-            if (xTitle) xTitle.textContent = t.xTitle;
-            if (xSub) xSub.textContent = t.xText;
-            if (xToken) xToken.textContent = t.xTokenText;
-            if (instagramTitle) instagramTitle.textContent = t.instagramTitle;
-            if (instagramSub) instagramSub.textContent = t.instagramText;
-            if (instagramToken) instagramToken.textContent = t.instagramTokenText;
-
-            if (incomeElements.youtubeBtn) incomeElements.youtubeBtn.textContent = t.subscribeBtn;
-            if (incomeElements.youtubeClaimBtn) incomeElements.youtubeClaimBtn.textContent = t.claimBtn;
-            if (incomeElements.xBtn) incomeElements.xBtn.textContent = t.followBtn;
-            if (incomeElements.xClaimBtn) incomeElements.xClaimBtn.textContent = t.claimBtn;
-            if (incomeElements.instagramBtn) incomeElements.instagramBtn.textContent = t.followBtn;
-            if (incomeElements.instagramClaimBtn) incomeElements.instagramClaimBtn.textContent = t.claimBtn;
-            if (incomeElements.youtubeStatus) incomeElements.youtubeStatus.textContent = t.claimed;
-            if (incomeElements.xStatus) incomeElements.xStatus.textContent = t.claimed;
-            if (incomeElements.instagramStatus) incomeElements.instagramStatus.textContent = t.claimed;
-
-            const navLinks = document.querySelectorAll('.navbar-bottom a');
-            navLinks[0].querySelector('.nav-text').textContent = t.home;
-            navLinks[1].querySelector('.nav-text').textContent = t.invite;
-            navLinks[2].querySelector('.nav-text').textContent = t.wallet;
-            navLinks[3].querySelector('.nav-text').textContent = t.income;
-            navLinks[4].querySelector('.nav-text').textContent = t.profile;
-
-            const languageOption = document.querySelector('.settings-option');
-            if (languageOption) languageOption.textContent = t.language;
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) logoutBtn.lastChild.textContent = ` ${t.logout}`;
-        }
-
-        async function loadSettings() {
-            if (!auth.currentUser) return;
-            const userRef = ref(db, 'users/' + auth.currentUser.uid);
+            // Check if mining is already in progress
+            const userRef = ref(db, 'users/' + user.uid);
             const snapshot = await get(userRef);
-            const userData = snapshot.val() || {};
-            currentLanguage = userData.language || 'en';
-            updateLanguage();
-        }
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (userData.miningEndTime > Date.now()) {
+                    alert('Mining is already in progress! Please wait until it completes.');
+                    return;
+                }
+            }
 
-        function updateSettingsUI() {
-        }
+            // Start mining
+            startMiningBtn.disabled = true;
+            let timeLeft = 30 * 60; // 30 minutes in seconds
+            let totalMinedTokens = 0;
 
-        showPage('login');
+            // Update Firebase with mining start time
+            await update(userRef, {
+                miningStartTime: Date.now(),
+                miningEndTime: Date.now() + 30 * 60 * 1000
+            });
+
+            startMiningBtn.innerHTML = `Time Left:<br>30:00`;
+
+            miningInterval = setInterval(async () => {
+                if (timeLeft <= 0) {
+                    clearInterval(miningInterval);
+                    startMiningBtn.disabled = false;
+                    startMiningBtn.innerHTML = 'START MINING';
+
+                    // Update tokens in Firebase
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const newTokens = (userData.tokens || 0) + totalMinedTokens;
+                        await update(userRef, {
+                            tokens: newTokens,
+                            earnings: newTokens,
+                            miningStartTime: 0,
+                            miningEndTime: 0
+                        });
+                        balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                    }
+                    alert(`Mining completed! You earned ${totalMinedTokens} ARPM.`);
+                    return;
+                }
+
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                startMiningBtn.innerHTML = `Time Left:<br>${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                // Add 1 token per minute (every 60 seconds)
+                if (timeLeft % 60 === 0) {
+                    totalMinedTokens += 1;
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        balanceBox.textContent = `Balance: ${(userData.tokens + totalMinedTokens).toFixed(3)} ARPM`;
+                    }
+                }
+            }, 1000);
+        });
     </script>
 </body>
 </html>
