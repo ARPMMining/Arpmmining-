@@ -102,6 +102,7 @@
             width: 200px;
             height: 100px;
             background: rgba(0, 0, 0, 0.9);
+            display推薦
             display: flex;
             justify-content: center;
             align-items: center;
@@ -285,7 +286,7 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 20px 0;
+            margin: 10px 0 5px 0; /* Reduced margin-bottom for closer spacing */
             color: #00cc99;
         }
         .wallet-section p {
@@ -304,7 +305,7 @@
             margin: 15px 20px;
             border-radius: 8px;
         }
-        .youtube ergo-icon {
+        .youtube-icon {
             font-size: 28px;
             margin-right: 15px;
             flex-shrink: 0;
@@ -377,12 +378,13 @@
             text-align: right;
             font-size: 20px;
             cursor: pointer;
+            padding-right: 20px;
         }
         .profile-pic {
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            margin: 20px auto;
+            margin: 5px auto 10px auto; /* Reduced top margin for closer spacing */
             background-color: #007bff;
             display: flex;
             justify-content: center;
@@ -395,11 +397,11 @@
         }
         .info-box {
             background: white;
-            margin: 10px 0;
+            margin: 10px 20px;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            width: 100%;
+            width: calc(100% - 40px);
         }
         .info-box p {
             margin: 0;
@@ -407,7 +409,7 @@
             color: #333;
         }
         .invite-link {
-            margin: 20px 0 0 0;
+            margin: 20px;
             padding: 15px;
             background: #fff;
             border-radius: 10px;
@@ -425,20 +427,25 @@
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
         .signout {
-            margin-top: 30px;
+            margin: 30px 20px;
             text-align: center;
+            padding-bottom: 80px; /* Ensure space for bottom navigation */
         }
         .signout button {
             background: #dc3545;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
         .signout button:hover {
             background: #b52a3c;
+            transform: translateY(-2px);
         }
         /* New Styles for Invite Page */
         .milestone-box {
@@ -458,8 +465,7 @@
             font-weight: 600;
             text-align: left;
         }
-        .milestone-statusoct: The icon class for YouTube has been updated to 'fa-brands fa-youtube'. Please use this class instead.
-            .milestone-status {
+        .milestone-status {
             font-size: 14px;
             font-weight: bold;
             color: #000;
@@ -481,9 +487,7 @@
                 margin-top: 180px;
             }
             .form-control {
-                font-size: 16px
-
-;
+                font-size: 16px;
                 padding: 8px;
             }
             .form-control::placeholder {
@@ -540,14 +544,32 @@
             .milestone-status {
                 font-size: 12px;
             }
-            .info-box, .invite-link, .signout button {
-                width: 100%;
-                box-sizing: border-box;
+            .info-box {
+                margin: 10px 15px;
+                padding: 12px;
+                width: calc(100% - 30px);
+            }
+            .invite-link {
+                margin: 15px;
+                padding: 12px;
+            }
+            .signout {
+                margin: 20px 15px;
+                padding-bottom: 100px; /* Extra space for mobile navigation */
+            }
+            .signout button {
+                padding: 10px 20px;
+                font-size: 14px;
+                max-width: 180px;
             }
             .profile-pic {
                 width: 120px;
                 height: 120px;
                 font-size: 14px;
+                margin: 5px auto; /* Reduced margin for mobile */
+            }
+            #profile .section-title {
+                margin: 8px 0 3px 0; /* Further reduced margin for mobile */
             }
         }
         @media (max-width: 480px) {
@@ -593,14 +615,32 @@
             .milestone-status {
                 font-size: 10px;
             }
-            .info-box, .invite-link, .signout button {
-                width: 100%;
-                box-sizing: border-box;
+            .info-box {
+                margin: 8px 12px;
+                padding: 10px;
+                width: calc(100% - 24px);
+            }
+            .invite-link {
+                margin: 12px;
+                padding: 10px;
+            }
+            .signout {
+                margin: 15px 12px;
+                padding-bottom: 120px; /* Extra space for small mobile screens */
+            }
+            .signout button {
+                padding: 8px 16px;
+                font-size: 12px;
+                max-width: 160px;
             }
             .profile-pic {
                 width: 100px;
                 height: 100px;
                 font-size: 12px;
+                margin: 3px auto; /* Further reduced margin for small screens */
+            }
+            #profile .section-title {
+                margin: 5px 0 2px 0; /* Further reduced margin for small screens */
             }
         }
     </style>
@@ -691,7 +731,7 @@
             <h2>Welcome To ARPM Mining</h2>
         </div>
         <div class="image-half">
-            <button class="start-button" id="start-mining-btn">START MINING</button5
+            <button class="start-button" id="start-mining-btn">START MINING</button>
         </div>
         <div class="home-bottom-text"></div>
     </div>
@@ -712,14 +752,12 @@
         <div class="info-box">
             <p><strong>Registration Date:</strong> <span id="date"> </span></p>
         </div>
-        <div class="invite-link">
-</div>
         <div class="referral-section">
             <p>Your Referral Link:</p>
             <div class="referral-link" id="profile-referral-link">Loading...</div>
             <button class="copy-button" onclick="copyReferralLink('profile-referral-link')">Copy</button>
             <p class="referral-count" id="profile-referral-count">Referrals: 0</p>
- </div>
+        </div>
         <div class="signout">
             <button onclick="signOut()">Sign Out</button>
         </div>
