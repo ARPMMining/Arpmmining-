@@ -304,7 +304,7 @@
             margin: 15px 20px;
             border-radius: 8px;
         }
-        .youtube-icon {
+        .youtube ergo-icon {
             font-size: 28px;
             margin-right: 15px;
             flex-shrink: 0;
@@ -372,6 +372,104 @@
             font-weight: bold;
             margin-top: 20px;
         }
+        /* Profile Section Styles */
+        .settings {
+            text-align: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 20px auto;
+            background-color: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .info-box {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        .info-box p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .invite-link {
+            margin: 20px 0 0 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+            user-select: none;
+        }
+        .placeholder-box {
+            height: 100px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .signout {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .signout button {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .signout button:hover {
+            background: #b52a3c;
+        }
+        /* New Styles for Invite Page */
+        .milestone-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f1f1;
+            padding: 15px;
+            margin: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .milestone-text {
+            flex: 1;
+            font-size: 16px;
+            color: #000;
+            font-weight: 600;
+            text-align: left;
+        }
+        .milestone-statusoct: The icon class for YouTube has been updated to 'fa-brands fa-youtube'. Please use this class instead.
+            .milestone-status {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .milestone-status.available {
+            color: #ff0000;
+        }
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
@@ -383,7 +481,9 @@
                 margin-top: 180px;
             }
             .form-control {
-                font-size: 16px;
+                font-size: 16px
+
+;
                 padding: 8px;
             }
             .form-control::placeholder {
@@ -425,10 +525,29 @@
             }
             .copy-button {
                 font-size: 14px;
-                padding: 6px 12-kitpx;
+                padding: 6px 12px;
             }
             .referral-count {
                 font-size: 16px;
+            }
+            .milestone-box {
+                padding: 12px;
+                margin: 12px 15px;
+            }
+            .milestone-text {
+                font-size: 14px;
+            }
+            .milestone-status {
+                font-size: 12px;
+            }
+            .info-box, .invite-link, .signout button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+                font-size: 14px;
             }
         }
         @media (max-width: 480px) {
@@ -463,6 +582,25 @@
             }
             .referral-count {
                 font-size: 14px;
+            }
+            .milestone-box {
+                padding: 10px;
+                margin: 10px 12px;
+            }
+            .milestone-text {
+                font-size: 12px;
+            }
+            .milestone-status {
+                font-size: 10px;
+            }
+            .info-box, .invite-link, .signout button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+                font-size: 12px;
             }
         }
     </style>
@@ -553,7 +691,7 @@
             <h2>Welcome To ARPM Mining</h2>
         </div>
         <div class="image-half">
-            <button class="start-button" id="start-mining-btn">START MINING</button>
+            <button class="start-button" id="start-mining-btn">START MINING</button5
         </div>
         <div class="home-bottom-text"></div>
     </div>
@@ -561,18 +699,54 @@
     <!-- Profile Section -->
     <div id="profile" class="page-section hidden">
         <div class="section-title">Profile</div>
-        <div class=""></div>
+        <div class="settings" onclick="openSettings()">⚙️</div>
+        <div class="profile-pic">
+            ARPM Mining
+        </div>
+        <div class="info-box">
+            <p><strong>Name:</strong> <span id="username"> </span></p>
+        </div>
+        <div class="info-box">
+            <p><strong>Email:</strong> <span id="email"> </span></p>
+        </div>
+        <div class="info-box">
+            <p><strong>Registration Date:</strong> <span id="date"> </span></p>
+        </div>
+        <div class="invite-link">
+</div>
+        <div class="referral-section">
+            <p>Your Referral Link:</p>
+            <div class="referral-link" id="profile-referral-link">Loading...</div>
+            <button class="copy-button" onclick="copyReferralLink('profile-referral-link')">Copy</button>
+            <p class="referral-count" id="profile-referral-count">Referrals: 0</p>
+ </div>
+        <div class="signout">
+            <button onclick="signOut()">Sign Out</button>
+        </div>
     </div>
 
     <!-- Invite Section -->
     <div id="invite" class="page-section hidden">
         <div class="section-title">Invite</div>
-        <div class=""></div>
-        <div class="referral-section">
-            <p>Your Referral Link:</p>
-            <div class="referral-link" id="referral-link">Loading...</div>
-            <button class="copy-button" onclick="copyReferralLink()">Copy</button>
-            <p class="referral-count" id="referral-count">Referrals: 0</p>
+        <div class="milestone-box" id="milestone-1">
+            <div class="milestone-text">Over 1 VALID REFERRAL IN TOTAL. 20.00 ARPM</div>
+            <span class="milestone-status">not available</span>
+        </div>
+        <div class="milestone-box" id="milestone-2">
+            <div class="milestone-text">Over 2 VALID REFERRALS IN TOTAL. 50.00 ARPM</div>
+            <span class="milestone-status">not available</span>
+        </div>
+        <div class="milestone-box" id="milestone-5">
+            <div class="milestone-text">Over 5 VALID REFERRALS IN TOTAL. 150.00 ARPM</div>
+            <span class="milestone-status">not available</span>
+        </div>
+        <div class="milestone-box" id="milestone-10">
+            <div class="milestone-text">Over 10 VALID REFERRALS IN TOTAL. 350.00 ARPM</div>
+            <span class="milestone-status">not available</span>
+        </div>
+        <div class="milestone-box" id="milestone-18">
+            <div class="milestone-text">Over 18 VALID REFERRALS IN TOTAL. 600.00 ARPM</div>
+            <span class="milestone-status">not available</span>
         </div>
     </div>
 
@@ -588,22 +762,22 @@
     <div id="income" class="page-section hidden">
         <div class="section-title">Income</div>
         <div class="task-box">
-            <i class="fab fa-youtube youtube-icon" style="color: #FF0000;"></i>
+            <i class="fa-brands fa-youtube youtube-icon" style="color: #FF0000;"></i>
             <div class="task-text">
-                YOUTUBE
+                YOUTUBE SUBSCRIBE
                 <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <a href="https://youtube.com" target="_blank" class="go-button">SUBSCRIBE</a>
+            <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
         <div class="task-box">
             <i class="fa-brands fa-x-twitter youtube-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
                 X FOLLOW
-                <small>FOLLOW ON ARPM X</small>
+                <small>FOLLOW ARPM ON X</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <a href="https://x.com" target="_blank" class="go-button">FOLLOW</a>
+            <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
         <div class="task-box">
             <i class="fab fa-instagram youtube-icon" style="color:#e1306c;"></i>
@@ -612,7 +786,7 @@
                 <small>FOLLOW ARPM ON INSTAGRAM</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <a href="https://instagram.com" target="_blank" class="go-button">FOLLOW</a>
+            <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
         </div>
     </div>
 
@@ -637,7 +811,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
         const firebaseConfig = {
@@ -645,7 +819,7 @@
             authDomain: "arpm-mining.firebaseapp.com",
             databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com",
             projectId: "arpm-mining",
-            storageBucket: "arpm-mining.firebasestorage.app",
+            storageBucket: "arpm-mining.appspot.com",
             messagingSenderId: "854582920631",
             appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
             measurementId: "G-8YVW5EK6N1"
@@ -675,10 +849,20 @@
         const bottomNav = document.getElementById('bottom-nav');
         const startMiningBtn = document.getElementById('start-mining-btn');
         const balanceBox = document.getElementById('balance-box');
-        const referralLinkElement = document.getElementById('referral-link');
-        const referralCountElement = document.getElementById('referral-count');
+        const profileReferralLinkElement = document.getElementById('profile-referral-link');
+        const profileReferralCountElement = document.getElementById('profile-referral-count');
         const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
+        const TASK_BONUS = 5.0;
+
+        // Referral Milestones Definition
+        const referralMilestones = [
+            { id: 'milestone-1', referrals: 1, reward: 20.00 },
+            { id: 'milestone-2', referrals: 2, reward: 50.00 },
+            { id: 'milestone-5', referrals: 5, reward: 150.00 },
+            { id: 'milestone-10', referrals: 10, reward: 350.00 },
+            { id: 'milestone-18', referrals: 18, reward: 600.00 }
+        ];
 
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -688,9 +872,82 @@
         async function showLoadingScreen(withDelay = false) {
             loadingOverlay.classList.add('active');
             if (withDelay) {
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
             loadingOverlay.classList.remove('active');
+        }
+
+        function updateMilestoneStatus(referrals) {
+            referralMilestones.forEach(milestone => {
+                const statusElement = document.getElementById(milestone.id)?.querySelector('.milestone-status');
+                if (statusElement) {
+                    if (referrals >= milestone.referrals) {
+                        statusElement.textContent = 'Available';
+                        statusElement.classList.add('available');
+                    } else {
+                        statusElement.textContent = 'not available';
+                        statusElement.classList.remove('available');
+                    }
+                }
+            });
+        }
+
+        async function updateTaskButton(taskType, userData) {
+            const button = document.getElementById(`${taskType}-task-btn`);
+            if (userData[`${taskType}BonusClaimed`]) {
+                button.textContent = 'COMPLETE';
+                button.disabled = true;
+                button.style.background = '#cccccc';
+            } else if (sessionStorage.getItem(`${taskType}Visited`)) {
+                button.textContent = 'CLAIM';
+                button.onclick = () => claimTask(taskType);
+            } else {
+                button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
+                button.onclick = () => handleTask(taskType);
+            }
+        }
+
+        async function handleTask(taskType) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to perform this task!');
+                showPage('login');
+                return;
+            }
+            const button = document.getElementById(`${taskType}-task-btn`);
+            const link = button.getAttribute('data-link');
+            sessionStorage.setItem(`${taskType}Visited`, 'true');
+            window.open(link, '_blank');
+        }
+
+        async function claimTask(taskType) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to claim this task!');
+                showPage('login');
+                return;
+            }
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (!userData[`${taskType}BonusClaimed`]) {
+                    const newTokens = (userData.tokens || 0) + TASK_BONUS;
+                    const newEarnings = (userData.earnings || 0) + TASK_BONUS;
+                    await update(userRef, {
+                        tokens: newTokens,
+                        earnings: newEarnings,
+                        [`${taskType}BonusClaimed`]: true
+                    });
+                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                    document.getElementById(`${taskType}-task-btn`).textContent = 'COMPLETE';
+                    document.getElementById(`${taskType}-task-btn`).disabled = true;
+                    document.getElementById(`${taskType}-task-btn`).style.background = '#cccccc';
+                    alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
+                } else {
+                    alert('Task already claimed!');
+                }
+            }
         }
 
         async function showPage(page) {
@@ -711,10 +968,37 @@
                     const userRef = ref(db, 'users/' + user.uid);
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        updateMilestoneStatus(data.referrals || 0);
+                    }
+                }
+            }
+            if (page === 'profile') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        document.getElementById("username").textContent = data.username || "N/A";
+                        document.getElementById("email").textContent = user.email;
+                        document.getElementById("date").textContent = data.registrationDate;
+                        const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${data.uniqueCode}`;
+                        profileReferralLinkElement.textContent = referralLink;
+                        profileReferralCountElement.textContent = `Referrals: ${data.referrals || 0}`;
+                    }
+                }
+            }
+            if (page === 'income') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
                         const userData = snapshot.val();
-                        const referralLink = `https://arpmmining.github.io/Arpmmining-/?ref=${userData.uniqueCode}`;
-                        referralLinkElement.textContent = referralLink;
-                        referralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                        updateTaskButton('youtube', userData);
+                        updateTaskButton('x', userData);
+                        updateTaskButton('instagram', userData);
                     }
                 }
             }
@@ -724,8 +1008,8 @@
             if (activeNav) activeNav.classList.add('active');
         }
 
-        window.copyReferralLink = async () => {
-            const referralLink = referralLinkElement.textContent;
+        window.copyReferralLink = async (elementId) => {
+            const referralLink = document.getElementById(elementId).textContent;
             try {
                 await navigator.clipboard.writeText(referralLink);
                 alert('Referral link copied to clipboard!');
@@ -737,6 +1021,20 @@
         window.showLogin = async () => showPage('login');
         window.showSignup = async () => showPage('signup');
         window.showReset = async () => showPage('reset');
+
+        window.openSettings = () => {
+            alert("Settings page coming soon...");
+        };
+
+        window.signOut = async () => {
+            alert("Signing out...");
+            try {
+                await signOut(auth);
+                showPage('login');
+            } catch (error) {
+                alert('Sign out failed: ' + error.message);
+            }
+        };
 
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -822,7 +1120,7 @@
             try {
                 await showLoadingScreen(true);
                 await sendPasswordResetEmail(auth, email);
-                alert('PASSWORD RESET LINK SENT!');
+                alert('PASSWORD RESET EMAIL SENT!');
                 showPage('login');
             } catch (error) {
                 alert(`PASSWORD RESET FAILED: ${error.message}`);
@@ -837,12 +1135,21 @@
                     const userData = snapshot.val();
                     balanceBox.textContent = `Balance: ${userData.tokens.toFixed(3)} ARPM`;
                     if (containers.invite.style.display === 'block') {
-                        const referralLink = `https://arpmmining.github.io/Arpmmining-/?ref=${userData.uniqueCode}`;
-                        referralLinkElement.textContent = referralLink;
-                        referralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                        updateMilestoneStatus(userData.referrals || 0);
                     }
-
-                    // Check if mining is already in progress
+                    if (containers.profile.style.display === 'block') {
+                        document.getElementById("username").textContent = userData.username || "N/A";
+                        document.getElementById("email").textContent = user.email;
+                        document.getElementById("date").textContent = userData.registrationDate;
+                        const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
+                        profileReferralLinkElement.textContent = referralLink;
+                        profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                    }
+                    if (containers.income.style.display === 'block') {
+                        updateTaskButton('youtube', userData);
+                        updateTaskButton('x', userData);
+                        updateTaskButton('instagram', userData);
+                    }
                     if (userData.miningEndTime > Date.now()) {
                         startMiningBtn.disabled = true;
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
@@ -902,7 +1209,6 @@
             });
         });
 
-        // Mining Timer Logic
         let miningInterval = null;
 
         startMiningBtn.addEventListener('click', async () => {
@@ -913,7 +1219,6 @@
                 return;
             }
 
-            // Check if mining is already in progress
             const userRef = ref(db, 'users/' + user.uid);
             const snapshot = await get(userRef);
             if (snapshot.exists()) {
@@ -924,11 +1229,9 @@
                 }
             }
 
-            // Start mining
             startMiningBtn.disabled = true;
-            let timeLeft = 6 * 60 * 60; // 6 hours in seconds
+            let timeLeft = 6 * 60 * 60;
 
-            // Add 6 tokens to the balance immediately
             const snapshotBeforeUpdate = await get(userRef);
             if (snapshotBeforeUpdate.exists()) {
                 const userData = snapshotBeforeUpdate.val();
@@ -950,7 +1253,6 @@
                     startMiningBtn.disabled = false;
                     startMiningBtn.innerHTML = 'START MINING';
 
-                    // Reset mining times in Firebase
                     await update(userRef, {
                         miningStartTime: 0,
                         miningEndTime: 0
