@@ -250,11 +250,11 @@
         }
         .home-bottom-text {
             margin: 20px 15px;
-            text-align: left; /* Updated to align text to the left */
+            text-align: left;
             font-size: 18px;
             color: #333;
             font-weight: 600;
-            padding-left: 20px; /* Added padding for better alignment */
+            padding-left: 20px;
         }
         .bottom-nav {
             position: fixed;
@@ -348,9 +348,7 @@
         .referral-section p {
             font-size: 18px;
             color: #00ffcc;
-            margin-bottom: 10px
-
-;
+            margin-bottom: 10px;
         }
         .referral-link {
             background: #f1f1f1;
@@ -358,7 +356,7 @@
             border-radius: 8px;
             font-size: 16px;
             color: #000;
-            wordı-break: break-all;
+            word-break: break-all;
             margin-bottom: 10px;
         }
         .copy-button {
@@ -379,12 +377,6 @@
             color: #00ffcc;
             font-weight: bold;
             margin-top: 20px;
-        }
-        .settings {
-            text-align: right;
-            font-size: 20px;
-            cursor: pointer;
-            padding-right: 20px;
         }
         .profile-pic {
             width: 140px;
@@ -436,6 +428,10 @@
             margin: 30px 20px;
             text-align: center;
             padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
         .signout button {
             background: #dc3545;
@@ -445,13 +441,17 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            width: 100%;
             max-width: 200px;
             transition: background 0.2s ease, transform 0.2s ease;
         }
         .signout button:hover {
             background: #b52a3c;
             transform: translateY(-2px);
+        }
+        .version-text {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
         }
         .milestone-box {
             display: flex;
@@ -485,6 +485,55 @@
         .milestone-status.complete {
             color: #cccccc;
             cursor: default;
+        }
+        .ad-placeholder {
+            margin: 20px 15px;
+            height: 100px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        .ad-placeholder::before {
+            content: 'Loading Ad...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #60a5fa;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .ad-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .close-ad {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 10;
+        }
+        .close-ad:hover {
+            background: rgba(0, 0, 0, 0.9);
         }
         @media (max-width: 768px) {
             body {
@@ -581,6 +630,18 @@
             #profile .section-title {
                 margin: 8px 0 3px 0;
             }
+            .ad-placeholder {
+                margin: 15px 12px;
+                height: 80px;
+            }
+            .ad-placeholder::before {
+                font-size: 16px;
+            }
+            .close-ad {
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+            }
         }
         @media (max-width: 480px) {
             .container {
@@ -652,6 +713,18 @@
             #profile .section-title {
                 margin: 5px 0 2px 0;
             }
+            .ad-placeholder {
+                margin: 12px 10px;
+                height: 60px;
+            }
+            .ad-placeholder::before {
+                font-size: 14px;
+            }
+            .close-ad {
+                width: 18px;
+                height: 18px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -702,7 +775,6 @@
                 <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-password" onclick="togglePasswordVisibility('signup-password', 'toggle-signup-password')"></i>
             </div>
-            Robocopy
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" onclick="togglePasswordVisibility('signup-confirm-password', 'toggle-signup-confirm-password')"></i>
@@ -745,12 +817,15 @@
             <button class="start-button" id="start-mining-btn">START MINING</button>
         </div>
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
+        <div class="ad-placeholder" id="home-ad">
+            <div class="ad-container" id="home-ad-container"></div>
+            <button class="close-ad" onclick="closeAd('home-ad-container')">X</button>
+        </div>
     </div>
 
     <!-- Profile Section -->
     <div id="profile" class="page-section hidden">
         <div class="section-title">Profile</div>
-        <div class="settings" onclick="openSettings()">⚙️</div>
         <div class="profile-pic">
             ARPM Mining
         </div>
@@ -771,6 +846,7 @@
         </div>
         <div class="signout">
             <button onclick="signOut()">Sign Out</button>
+            <span class="version-text">ARPM-Web-v1.0.0</span>
         </div>
     </div>
 
@@ -814,6 +890,10 @@
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
+        </div>
+        <div class="ad-placeholder" id="income-ad">
+            <div class="ad-container" id="income-ad-container"></div>
+            <button class="close-ad" onclick="closeAd('income-ad-container')">X</button>
         </div>
         <div class="task-box">
             <i class="fa-brands fa-x-twitter youtube-icon" style="color:#1DA1F2;"></i>
@@ -907,6 +987,73 @@
             { id: 'milestone-5', referrals: 5, reward: 150.00 },
             { id: 'milestone-18', referrals: 18, reward: 600.00 }
         ];
+
+        // Ad Configurations
+        const adConfigs = [
+            {
+                key: '63718988f07bc6d276f3c6a441757cae',
+                format: 'iframe',
+                height: 90,
+                width: 728,
+                src: '//www.highperformanceformat.com/63718988f07bc6d276f3c6a441757cae/invoke.js'
+            },
+            {
+                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                src: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
+            }
+        ];
+
+        let currentAdIndex = 0;
+        let adInterval = null;
+
+        function loadAd(containerId, adIndex) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = ''; // Clear previous content
+            container.style.display = 'block';
+
+            const adConfig = adConfigs[adIndex];
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerHTML = `
+                atOptions = {
+                    'key': '${adConfig.key}',
+                    'format': '${adConfig.format}',
+                    'height': ${adConfig.height},
+                    'width': ${adConfig.width},
+                    'params': {}
+                };
+            `;
+            container.appendChild(script);
+
+            const adScript = document.createElement('script');
+            adScript.type = 'text/javascript';
+            adScript.src = adConfig.src;
+            container.appendChild(adScript);
+
+            // Start 30-second timer
+            clearInterval(adInterval);
+            adInterval = setInterval(() => {
+                currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+                loadAd(containerId, currentAdIndex);
+            }, 30000);
+        }
+
+        window.closeAd = (containerId) => {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = '';
+                container.style.display = 'none';
+                clearInterval(adInterval);
+                // Load next ad immediately
+                currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+                loadAd(containerId, currentAdIndex);
+            }
+        };
 
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1117,6 +1264,10 @@
                     }
                 }
             }
+            if (page === 'home') {
+                currentAdIndex = 0;
+                loadAd('home-ad-container', currentAdIndex);
+            }
             if (page === 'income') {
                 const user = auth.currentUser;
                 if (user) {
@@ -1129,6 +1280,8 @@
                         updateTaskButton('instagram', userData);
                     }
                 }
+                currentAdIndex = 0;
+                loadAd('income-ad-container', currentAdIndex);
             }
             const navItems = document.querySelectorAll('.bottom-nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
