@@ -13,14 +13,17 @@
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            background: #ffffff;
+        html, body {
+            height: 100%;
+            overflow: hidden;
             font-family: 'Poppins', sans-serif;
             color: #fff;
-            min-height: 100vh;
             font-size: 18px;
             position: relative;
-            overflow-x: hidden;
+        }
+        body {
+            background: #ffffff;
+            touch-action: none;
         }
         .container {
             width: 100%;
@@ -35,6 +38,7 @@
             position: relative;
             z-index: 1;
             margin-top: 220px;
+            overflow: hidden;
         }
         .form-group {
             margin-bottom: 12px;
@@ -102,7 +106,6 @@
             width: 200px;
             height: 100px;
             background: rgba(0, 0, 0, 0.9);
-            display推薦
             display: flex;
             justify-content: center;
             align-items: center;
@@ -198,6 +201,7 @@
         }
         .page-section {
             display: none;
+            overflow: hidden;
         }
         .page-section.active {
             display: block;
@@ -246,10 +250,11 @@
         }
         .home-bottom-text {
             margin: 20px 15px;
-            text-align: center;
+            text-align: left; /* Updated to align text to the left */
             font-size: 18px;
             color: #333;
             font-weight: 600;
+            padding-left: 20px; /* Added padding for better alignment */
         }
         .bottom-nav {
             position: fixed;
@@ -286,7 +291,7 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 10px 0 5px 0; /* Reduced margin-bottom for closer spacing */
+            margin: 10px 0 5px 0;
             color: #00cc99;
         }
         .wallet-section p {
@@ -343,7 +348,9 @@
         .referral-section p {
             font-size: 18px;
             color: #00ffcc;
-            margin-bottom: 10px;
+            margin-bottom: 10px
+
+;
         }
         .referral-link {
             background: #f1f1f1;
@@ -351,7 +358,7 @@
             border-radius: 8px;
             font-size: 16px;
             color: #000;
-            word-break: break-all;
+            wordı-break: break-all;
             margin-bottom: 10px;
         }
         .copy-button {
@@ -373,7 +380,6 @@
             font-weight: bold;
             margin-top: 20px;
         }
-        /* Profile Section Styles */
         .settings {
             text-align: right;
             font-size: 20px;
@@ -384,7 +390,7 @@
             width: 140px;
             height: 140px;
             border-radius: 50%;
-            margin: 5px auto 10px auto; /* Reduced top margin for closer spacing */
+            margin: 5px auto 10px auto;
             background-color: #007bff;
             display: flex;
             justify-content: center;
@@ -429,7 +435,7 @@
         .signout {
             margin: 30px 20px;
             text-align: center;
-            padding-bottom: 80px; /* Ensure space for bottom navigation */
+            padding-bottom: 80px;
         }
         .signout button {
             background: #dc3545;
@@ -447,7 +453,6 @@
             background: #b52a3c;
             transform: translateY(-2px);
         }
-        /* New Styles for Invite Page */
         .milestone-box {
             display: flex;
             justify-content: space-between;
@@ -474,16 +479,21 @@
             margin-left: 10px;
         }
         .milestone-status.available {
-            color: #ff0000;
+            color: #00cc99;
+            cursor: pointer;
+        }
+        .milestone-status.complete {
+            color: #cccccc;
+            cursor: default;
         }
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
             }
             .container {
-                margin: 10px;
+                margin: 10px auto;
                 padding: 15px;
-                max-width: 95%;
+                max-width: 100%;
                 margin-top: 180px;
             }
             .form-control {
@@ -555,7 +565,7 @@
             }
             .signout {
                 margin: 20px 15px;
-                padding-bottom: 100px; /* Extra space for mobile navigation */
+                padding-bottom: 100px;
             }
             .signout button {
                 padding: 10px 20px;
@@ -566,15 +576,15 @@
                 width: 120px;
                 height: 120px;
                 font-size: 14px;
-                margin: 5px auto; /* Reduced margin for mobile */
+                margin: 5px auto;
             }
             #profile .section-title {
-                margin: 8px 0 3px 0; /* Further reduced margin for mobile */
+                margin: 8px 0 3px 0;
             }
         }
         @media (max-width: 480px) {
             .container {
-                margin: 8px;
+                margin: 8px auto;
                 padding: 12px;
                 margin-top: 160px;
             }
@@ -626,7 +636,7 @@
             }
             .signout {
                 margin: 15px 12px;
-                padding-bottom: 120px; /* Extra space for small mobile screens */
+                padding-bottom: 120px;
             }
             .signout button {
                 padding: 8px 16px;
@@ -637,10 +647,10 @@
                 width: 100px;
                 height: 100px;
                 font-size: 12px;
-                margin: 3px auto; /* Further reduced margin for small screens */
+                margin: 3px auto;
             }
             #profile .section-title {
-                margin: 5px 0 2px 0; /* Further reduced margin for small screens */
+                margin: 5px 0 2px 0;
             }
         }
     </style>
@@ -692,6 +702,7 @@
                 <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-password" onclick="togglePasswordVisibility('signup-password', 'toggle-signup-password')"></i>
             </div>
+            Robocopy
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" onclick="togglePasswordVisibility('signup-confirm-password', 'toggle-signup-confirm-password')"></i>
@@ -733,7 +744,7 @@
         <div class="image-half">
             <button class="start-button" id="start-mining-btn">START MINING</button>
         </div>
-        <div class="home-bottom-text"></div>
+        <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
     </div>
 
     <!-- Profile Section -->
@@ -768,23 +779,19 @@
         <div class="section-title">Invite</div>
         <div class="milestone-box" id="milestone-1">
             <div class="milestone-text">Over 1 VALID REFERRAL IN TOTAL. 20.00 ARPM</div>
-            <span class="milestone-status">not available</span>
+            <span class="milestone-status" id="status-1" onclick="claimMilestone('milestone-1')">not available</span>
         </div>
         <div class="milestone-box" id="milestone-2">
             <div class="milestone-text">Over 2 VALID REFERRALS IN TOTAL. 50.00 ARPM</div>
-            <span class="milestone-status">not available</span>
+            <span class="milestone-status" id="status-2" onclick="claimMilestone('milestone-2')">not available</span>
         </div>
         <div class="milestone-box" id="milestone-5">
             <div class="milestone-text">Over 5 VALID REFERRALS IN TOTAL. 150.00 ARPM</div>
-            <span class="milestone-status">not available</span>
-        </div>
-        <div class="milestone-box" id="milestone-10">
-            <div class="milestone-text">Over 10 VALID REFERRALS IN TOTAL. 350.00 ARPM</div>
-            <span class="milestone-status">not available</span>
+            <span class="milestone-status" id="status-5" onclick="claimMilestone('milestone-5')">not available</span>
         </div>
         <div class="milestone-box" id="milestone-18">
             <div class="milestone-text">Over 18 VALID REFERRALS IN TOTAL. 600.00 ARPM</div>
-            <span class="milestone-status">not available</span>
+            <span class="milestone-status" id="status-18" onclick="claimMilestone('milestone-18')">not available</span>
         </div>
     </div>
 
@@ -898,7 +905,6 @@
             { id: 'milestone-1', referrals: 1, reward: 20.00 },
             { id: 'milestone-2', referrals: 2, reward: 50.00 },
             { id: 'milestone-5', referrals: 5, reward: 150.00 },
-            { id: 'milestone-10', referrals: 10, reward: 350.00 },
             { id: 'milestone-18', referrals: 18, reward: 600.00 }
         ];
 
@@ -915,36 +921,98 @@
             loadingOverlay.classList.remove('active');
         }
 
-        function updateMilestoneStatus(referrals) {
+        async function updateMilestoneStatus(referrals, userData) {
             referralMilestones.forEach(milestone => {
-                const statusElement = document.getElementById(milestone.id)?.querySelector('.milestone-status');
+                const statusElement = document.getElementById(`status-${milestone.referrals}`);
                 if (statusElement) {
-                    if (referrals >= milestone.referrals) {
+                    const isClaimed = userData[`milestone${milestone.referrals}Claimed`] || false;
+                    if (isClaimed) {
+                        statusElement.textContent = 'Complete';
+                        statusElement.classList.remove('available');
+                        statusElement.classList.add('complete');
+                        statusElement.style.pointerEvents = 'none';
+                    } else if (referrals >= milestone.referrals) {
                         statusElement.textContent = 'Available';
                         statusElement.classList.add('available');
+                        statusElement.classList.remove('complete');
+                        statusElement.style.pointerEvents = 'auto';
                     } else {
                         statusElement.textContent = 'not available';
-                        statusElement.classList.remove('available');
+                        statusElement.classList.remove('available', 'complete');
+                        statusElement.style.pointerEvents = 'none';
                     }
                 }
             });
         }
 
+        async function claimMilestone(milestoneId) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to claim this milestone!');
+                showPage('login');
+                return;
+            }
+
+            const milestone = referralMilestones.find(m => m.id === milestoneId);
+            if (!milestone) return;
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                const isClaimed = userData[`milestone${milestone.referrals}Claimed`] || false;
+                if (isClaimed) {
+                    alert('Milestone already claimed!');
+                    return;
+                }
+                if (userData.referrals >= milestone.referrals) {
+                    const newTokens = (userData.tokens || 0) + milestone.reward;
+                    const newEarnings = (userData.earnings || 0) + milestone.reward;
+                    await update(userRef, {
+                        tokens: newTokens,
+                        earnings: newEarnings,
+                        [`milestone${milestone.referrals}Claimed`]: true
+                    });
+                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                    document.getElementById(`status-${milestone.referrals}`).textContent = 'Complete';
+                    document.getElementById(`status-${milestone.referrals}`).classList.remove('available');
+                    document.getElementById(`status-${milestone.referrals}`).classList.add('complete');
+                    document.getElementById(`status-${milestone.referrals}`).style.pointerEvents = 'none';
+                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals} referrals!`);
+                } else {
+                    alert('Not enough referrals to claim this milestone!');
+                }
+            }
+        }
+
+        // Update Task Button Status
         async function updateTaskButton(taskType, userData) {
             const button = document.getElementById(`${taskType}-task-btn`);
-            if (userData[`${taskType}BonusClaimed`]) {
+            if (!button) return;
+
+            const isClaimed = userData[`${taskType}BonusClaimed`] || false;
+            if (isClaimed) {
                 button.textContent = 'COMPLETE';
                 button.disabled = true;
                 button.style.background = '#cccccc';
+                button.style.cursor = 'not-allowed';
+                button.onclick = null; // Remove click event
             } else if (sessionStorage.getItem(`${taskType}Visited`)) {
                 button.textContent = 'CLAIM';
+                button.disabled = false;
+                button.style.background = '#00cc99';
+                button.style.cursor = 'pointer';
                 button.onclick = () => claimTask(taskType);
             } else {
                 button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
+                button.disabled = false;
+                button.style.background = '#00cc99';
+                button.style.cursor = 'pointer';
                 button.onclick = () => handleTask(taskType);
             }
         }
 
+        // Handle Task (Open link and mark as visited)
         async function handleTask(taskType) {
             const user = auth.currentUser;
             if (!user) {
@@ -952,12 +1020,28 @@
                 showPage('login');
                 return;
             }
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (userData[`${taskType}BonusClaimed`]) {
+                    alert('This task has already been completed!');
+                    return;
+                }
+            }
+
             const button = document.getElementById(`${taskType}-task-btn`);
             const link = button.getAttribute('data-link');
             sessionStorage.setItem(`${taskType}Visited`, 'true');
             window.open(link, '_blank');
+
+            // Update button to show "CLAIM" after returning
+            button.textContent = 'CLAIM';
+            button.onclick = () => claimTask(taskType);
         }
 
+        // Claim Task Reward
         async function claimTask(taskType) {
             const user = auth.currentUser;
             if (!user) {
@@ -965,26 +1049,32 @@
                 showPage('login');
                 return;
             }
+
             const userRef = ref(db, 'users/' + user.uid);
             const snapshot = await get(userRef);
             if (snapshot.exists()) {
                 const userData = snapshot.val();
-                if (!userData[`${taskType}BonusClaimed`]) {
-                    const newTokens = (userData.tokens || 0) + TASK_BONUS;
-                    const newEarnings = (userData.earnings || 0) + TASK_BONUS;
-                    await update(userRef, {
-                        tokens: newTokens,
-                        earnings: newEarnings,
-                        [`${taskType}BonusClaimed`]: true
-                    });
-                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                    document.getElementById(`${taskType}-task-btn`).textContent = 'COMPLETE';
-                    document.getElementById(`${taskType}-task-btn`).disabled = true;
-                    document.getElementById(`${taskType}-task-btn`).style.background = '#cccccc';
-                    alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
-                } else {
+                if (userData[`${taskType}BonusClaimed`]) {
                     alert('Task already claimed!');
+                    return;
                 }
+
+                const newTokens = (userData.tokens || 0) + TASK_BONUS;
+                const newEarnings = (userData.earnings || 0) + TASK_BONUS;
+                await update(userRef, {
+                    tokens: newTokens,
+                    earnings: newEarnings,
+                    [`${taskType}BonusClaimed`]: true
+                });
+
+                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                const button = document.getElementById(`${taskType}-task-btn`);
+                button.textContent = 'COMPLETE';
+                button.disabled = true;
+                button.style.background = '#cccccc';
+                button.style.cursor = 'not-allowed';
+                button.onclick = null; // Remove click event
+                alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
             }
         }
 
@@ -1007,7 +1097,7 @@
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
                         const data = snapshot.val();
-                        updateMilestoneStatus(data.referrals || 0);
+                        updateMilestoneStatus(data.referrals || 0, data);
                     }
                 }
             }
@@ -1074,6 +1164,8 @@
             }
         };
 
+        window.claimMilestone = claimMilestone;
+
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
@@ -1129,7 +1221,11 @@
                     xBonusClaimed: false,
                     instagramBonusClaimed: false,
                     profilePicture: 'boy',
-                    language: 'en'
+                    language: 'en',
+                    milestone1Claimed: false,
+                    milestone2Claimed: false,
+                    milestone5Claimed: false,
+                    milestone18Claimed: false
                 });
 
                 if (referrerUid && inviteCode) {
@@ -1173,7 +1269,7 @@
                     const userData = snapshot.val();
                     balanceBox.textContent = `Balance: ${userData.tokens.toFixed(3)} ARPM`;
                     if (containers.invite.style.display === 'block') {
-                        updateMilestoneStatus(userData.referrals || 0);
+                        updateMilestoneStatus(userData.referrals || 0, userData);
                     }
                     if (containers.profile.style.display === 'block') {
                         document.getElementById("username").textContent = userData.username || "N/A";
@@ -1200,10 +1296,20 @@
                                 startMiningBtn.disabled = false;
                                 startMiningBtn.innerHTML = 'START MINING';
 
-                                await update(userRef, {
-                                    miningStartTime: 0,
-                                    miningEndTime: 0
-                                });
+                                // Update tokens and earnings in Firebase after timer ends
+                                const snapshotAfterTimer = await get(userRef);
+                                if (snapshotAfterTimer.exists()) {
+                                    const userData = snapshotAfterTimer.val();
+                                    const newTokens = (userData.tokens || 0) + 6;
+                                    await update(userRef, {
+                                        tokens: newTokens,
+                                        earnings: newTokens,
+                                        miningStartTime: 0,
+                                        miningEndTime: 0
+                                    });
+                                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                                    alert('Mining completed! You earned 6 ARPM.');
+                                }
                                 return;
                             }
 
@@ -1270,18 +1376,11 @@
             startMiningBtn.disabled = true;
             let timeLeft = 6 * 60 * 60;
 
-            const snapshotBeforeUpdate = await get(userRef);
-            if (snapshotBeforeUpdate.exists()) {
-                const userData = snapshotBeforeUpdate.val();
-                const newTokens = (userData.tokens || 0) + 6;
-                await update(userRef, {
-                    tokens: newTokens,
-                    earnings: newTokens,
-                    miningStartTime: Date.now(),
-                    miningEndTime: Date.now() + 6 * 60 * 60 * 1000
-                });
-                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-            }
+            // Update only miningStartTime and miningEndTime, tokens will be updated after timer ends
+            await update(userRef, {
+                miningStartTime: Date.now(),
+                miningEndTime: Date.now() + 6 * 60 * 60 * 1000
+            });
 
             startMiningBtn.innerHTML = `Time Left:<br>6:00:00`;
 
@@ -1291,10 +1390,20 @@
                     startMiningBtn.disabled = false;
                     startMiningBtn.innerHTML = 'START MINING';
 
-                    await update(userRef, {
-                        miningStartTime: 0,
-                        miningEndTime: 0
-                    });
+                    // Update tokens and earnings in Firebase after timer ends
+                    const snapshotAfterTimer = await get(userRef);
+                    if (snapshotAfterTimer.exists()) {
+                        const userData = snapshotAfterTimer.val();
+                        const newTokens = (userData.tokens || 0) + 6;
+                        await update(userRef, {
+                            tokens: newTokens,
+                            earnings: newTokens,
+                            miningStartTime: 0,
+                            miningEndTime: 0
+                        });
+                        balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                    }
+
                     alert('Mining completed! You earned 6 ARPM.');
                     return;
                 }
