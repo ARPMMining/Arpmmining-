@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ARPM MINING</title>
+
+    <!-- External Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS -->
     <style>
+        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* Base Styles */
         html, body {
             height: 100%;
             overflow: hidden;
@@ -21,10 +29,13 @@
             font-size: 18px;
             position: relative;
         }
+
         body {
             background: #ffffff;
             touch-action: none;
         }
+
+        /* Container Styles */
         .container {
             width: 100%;
             max-width: 400px;
@@ -40,10 +51,13 @@
             margin-top: 220px;
             overflow: hidden;
         }
+
+        /* Form Styles */
         .form-group {
             margin-bottom: 12px;
             position: relative;
         }
+
         .form-control {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -53,10 +67,12 @@
             font-size: 18px;
             width: 100%;
         }
+
         .form-control::placeholder {
             color: #d1d5db;
             font-size: 18px;
         }
+
         .password-toggle {
             position: absolute;
             right: 10px;
@@ -66,6 +82,8 @@
             color: #60a5fa;
             font-size: 18px;
         }
+
+        /* Button Styles */
         .btn {
             border: none;
             border-radius: 8px;
@@ -74,30 +92,41 @@
             width: 100%;
             transition: transform 0.2s;
         }
+
         .btn-primary {
             background: linear-gradient(45deg, #2563eb, #60a5fa);
         }
+
         .btn-success {
             background: linear-gradient(45deg, #22c55e, #86efac);
         }
+
         .btn:hover {
             transform: translateY(-2px);
         }
+
+        /* Link Styles */
         .link {
             color: #60a5fa;
             text-decoration: none;
             font-size: 18px;
         }
+
         .link:hover {
             text-decoration: underline;
         }
+
         .footer-text {
             font-size: 18px;
             margin-top: 15px;
         }
+
+        /* Utility Classes */
         .hidden {
             display: none;
         }
+
+        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             top: 50%;
@@ -115,15 +144,19 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
+
         .loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
+
         .loading-text {
             font-size: 20px;
             font-weight: 700;
             color: #60a5fa;
         }
+
+        /* Navbar Styles */
         .navbar-top {
             position: fixed;
             top: 0;
@@ -137,6 +170,7 @@
             height: 200px;
             z-index: 1000;
         }
+
         .logo-circle {
             width: 200px;
             height: 200px;
@@ -148,6 +182,7 @@
             align-items: center;
             box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
         }
+
         .logo-circle h1 {
             color: white;
             font-size: 44px;
@@ -155,6 +190,7 @@
             font-weight: bold;
             text-align: center;
         }
+
         .logo-circle p {
             color: white;
             font-size: 24px;
@@ -162,6 +198,8 @@
             text-align: center;
             letter-spacing: 2px;
         }
+
+        /* Topbar Styles */
         .topbar {
             display: flex;
             justify-content: space-between;
@@ -170,14 +208,17 @@
             color: #fff;
             padding: 10px 15px;
         }
+
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
         }
+
         .title {
             font-size: 18px;
             font-weight: bold;
         }
+
         .balance-box {
             background: #000;
             color: #00ffcc;
@@ -186,6 +227,8 @@
             font-weight: bold;
             font-size: 14px;
         }
+
+        /* Black Box */
         .black-box {
             padding: 20px;
             background: #000;
@@ -199,19 +242,24 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* Page Section */
         .page-section {
             display: none;
             overflow: hidden;
         }
+
         .page-section.active {
             display: block;
         }
+
         .dashboard-header h2 {
             font-size: 24px;
             text-align: center;
             color: #00cc99;
             margin: 20px 0;
         }
+
         .welcome {
             background: #fff;
             color: #000;
@@ -221,6 +269,8 @@
             font-size: 20px;
             font-weight: bold;
         }
+
+        /* Image Half Section */
         .image-half {
             background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
@@ -229,7 +279,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
+
         .start-button {
             background: #00ffcc;
             border: none;
@@ -248,6 +300,7 @@
             line-height: 1.2;
             padding: 5px;
         }
+
         .home-bottom-text {
             margin: 20px 15px;
             text-align: left;
@@ -256,6 +309,8 @@
             font-weight: 600;
             padding-left: 20px;
         }
+
+        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -268,6 +323,7 @@
             z-index: 1000;
             border-top: 1px solid #ccc;
         }
+
         .bottom-nav-item {
             color: #000;
             font-size: 12px;
@@ -275,14 +331,18 @@
             cursor: pointer;
             user-select: none;
         }
+
         .bottom-nav-item i {
             font-size: 16px;
             display: block;
             margin-bottom: 3px;
         }
+
         .bottom-nav-item.active {
             color: #00ffcc;
         }
+
+        /* Section Titles */
         #profile .section-title,
         #invite .section-title,
         #income .section-title,
@@ -291,9 +351,10 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 10px 0 5px 0;
+            margin: 10px  ры0 5px 0;
             color: #00cc99;
         }
+
         .wallet-section p {
             text-align: center;
             font-size: 18px;
@@ -301,6 +362,8 @@
             color: #999;
             margin-top: 60px;
         }
+
+        /* ŚwięTask Box */
         .task-box {
             display: flex;
             align-items: center;
@@ -310,11 +373,13 @@
             margin: 15px 20px;
             border-radius: 8px;
         }
+
         .youtube-icon {
             font-size: 28px;
             margin-right: 15px;
             flex-shrink: 0;
         }
+
         .task-text {
             flex: 1;
             font-size: 16px;
@@ -322,6 +387,7 @@
             line-height: 1.2;
             font-weight: 600;
         }
+
         .task-text small {
             font-weight: normal;
             font-size: 13px;
@@ -329,6 +395,7 @@
             display: block;
             margin-top: 4px;
         }
+
         .go-button {
             background: #00cc99;
             color: #fff;
@@ -341,15 +408,19 @@
             white-space: nowrap;
             cursor: pointer;
         }
+
+        /* Referral Section */
         .referral-section {
             margin: 20px;
             text-align: center;
         }
+
         .referral-section p {
             font-size: 18px;
             color: #00ffcc;
             margin-bottom: 10px;
         }
+
         .referral-link {
             background: #f1f1f1;
             padding: 10px;
@@ -359,6 +430,7 @@
             word-break: break-all;
             margin-bottom: 10px;
         }
+
         .copy-button {
             background: #00cc99;
             color: #fff;
@@ -369,15 +441,19 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
+
         .copy-button:hover {
             transform: translateY(-2px);
         }
+
         .referral-count {
             font-size: 18px;
             color: #00ffcc;
             font-weight: bold;
             margin-top: 20px;
         }
+
+        /* Profile Picture */
         .profile-pic {
             width: 140px;
             height: 140px;
@@ -393,6 +469,8 @@
             box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
+
+        /* Info Box */
         .info-box {
             background: white;
             margin: 10px 20px;
@@ -401,11 +479,13 @@
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
             width: calc(100% - 40px);
         }
+
         .info-box p {
             margin: 0;
             font-size: 16px;
             color: #333;
         }
+
         .invite-link {
             margin: 20px;
             padding: 15px;
@@ -417,6 +497,7 @@
             color: #555;
             user-select: none;
         }
+
         .placeholder-box {
             height: 100px;
             margin: 20px auto;
@@ -424,6 +505,8 @@
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
+
+        /* Signout Section */
         .signout {
             margin: 30px 20px;
             text-align: center;
@@ -433,6 +516,7 @@
             align-items: center;
             gap: 10px;
         }
+
         .signout button {
             background: #dc3545;
             color: white;
@@ -444,15 +528,19 @@
             max-width: 200px;
             transition: background 0.2s ease, transform 0.2s ease;
         }
+
         .signout button:hover {
             background: #b52a3c;
             transform: translateY(-2px);
         }
+
         .version-text {
             font-size: 16px;
             color: #333;
             font-weight: bold;
         }
+
+        /* Milestone Box */
         .milestone-box {
             display: flex;
             justify-content: space-between;
@@ -463,6 +551,7 @@
             border-radius: 8px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+
         .milestone-text {
             flex: 1;
             font-size: 16px;
@@ -470,6 +559,7 @@
             font-weight: 600;
             text-align: left;
         }
+
         .milestone-status {
             font-size: 14px;
             font-weight: bold;
@@ -478,251 +568,379 @@
             flex-shrink: 0;
             margin-left: 10px;
         }
+
         .milestone-status.available {
             color: #00cc99;
             cursor: pointer;
         }
+
         .milestone-status.complete {
             color: #cccccc;
             cursor: default;
         }
+
+        /* Ad Placeholder */
         .ad-placeholder {
-            margin: 20px 15px;
-            height: 100px;
-            background: #f1f1f1;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #555;
-            font-size: 16px;
-            font-weight: 600;
+            margin: 0 15px;
+            height: 0;
+            background: transparent;
+            border: none;
+            display: block;
             position: relative;
             overflow: hidden;
+            transition: height 0.3s ease, margin 0.3s ease;
         }
-        .ad-placeholder::before {
-            content: 'Loading Ad...';
+
+        .ad-placeholder.active {
+            height: auto;
+            max-height: 250px;
+            margin: 15px 15px;
+        }
+
+        /* Roadmap Styles */
+        .roadmap-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #60a5fa;
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .ad-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        .close-ad {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
+            top: 20px;
+            right: 20px;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .close-ad:hover {
-            background: rgba(0, 0, 0, 0.9);
+
+        .roadmap-button {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00cc99, #00ffcc);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            transition: transform 0.2s;
         }
+
+        .roadmap-button:hover {
+            transform: scale(1.1);
+        }
+
+        .roadmap-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #fff;
+            color: #000;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            font-size: 14px;
+            text-align: left;
+            z-index: 11;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .roadmap-content.active {
+            display: block;
+        }
+
+        .roadmap-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .roadmap-content li {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Daily Bonus Button */
+        .daily-bonus-button {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6f61, #ffb88c);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
+            transition: transform 0.2s;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .daily-bonus-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
             }
+
             .container {
                 margin: 10px auto;
                 padding: 15px;
                 max-width: 100%;
                 margin-top: 180px;
             }
+
             .form-control {
                 font-size: 16px;
                 padding: 8px;
             }
+
             .form-control::placeholder {
                 font-size: 16px;
             }
+
             .btn {
                 font-size: 20px;
                 padding: 8px;
             }
+
             .link {
                 font-size: 14px;
             }
+
             .footer-text {
                 font-size: 16px;
             }
+
             .navbar-top {
                 padding: 15px 0;
                 height: 150px;
             }
+
             .logo-circle {
                 width: 150px;
                 height: 150px;
             }
+
             .logo-circle h1 {
                 font-size: 36px;
             }
+
             .logo-circle p {
                 font-size: 20px;
             }
+
             .loading-overlay {
                 width: 180px;
                 height: 90px;
             }
+
             .loading-text {
                 font-size: 18px;
             }
+
             .referral-link {
                 font-size: 14px;
             }
+
             .copy-button {
                 font-size: 14px;
                 padding: 6px 12px;
             }
+
             .referral-count {
                 font-size: 16px;
             }
+
             .milestone-box {
                 padding: 12px;
                 margin: 12px 15px;
             }
+
             .milestone-text {
                 font-size: 14px;
             }
+
             .milestone-status {
                 font-size: 12px;
             }
+
             .info-box {
                 margin: 10px 15px;
                 padding: 12px;
                 width: calc(100% - 30px);
             }
+
             .invite-link {
                 margin: 15px;
                 padding: 12px;
             }
+
             .signout {
                 margin: 20px 15px;
-                padding-bottom: 100px;
+                margin-bottom: 100px;
             }
+
             .signout button {
                 padding: 10px 20px;
                 font-size: 14px;
                 max-width: 180px;
             }
+
             .profile-pic {
                 width: 120px;
                 height: 120px;
                 font-size: 14px;
-                margin: 5px auto;
+                margin: 5px 0;
             }
+
             #profile .section-title {
                 margin: 8px 0 3px 0;
             }
-            .ad-placeholder {
-                margin: 15px 12px;
-                height: 80px;
+
+            .ad-placeholder.active {
+                height: auto;
+                max-height: 250px;
+                margin: 12px 12px;
             }
-            .ad-placeholder::before {
-                font-size: 16px;
+
+            .roadmap-button, .daily-bonus-button {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
             }
-            .close-ad {
-                width: 20px;
-                height: 20px;
+
+            .roadmap-content {
+                width: 180px;
+                font-size: 12px;
+                top: 50px;
+                max-height: 180px;
+            }
+
+            .start-button {
+                width: 100px;
+                height: 100px;
                 font-size: 14px;
             }
         }
+
         @media (max-width: 480px) {
             .container {
                 margin: 8px auto;
                 padding: 12px;
                 margin-top: 160px;
             }
+
             .logo-circle {
                 width: 120px;
                 height: 120px;
             }
+
             .logo-circle h1 {
                 font-size: 30px;
             }
+
             .logo-circle p {
                 font-size: 18px;
             }
+
             .loading-overlay {
                 width: 160px;
                 height: 80px;
             }
+
             .loading-text {
                 font-size: 16px;
             }
+
             .referral-link {
                 font-size: 12px;
             }
+
             .copy-button {
                 font-size: 12px;
                 padding: 5px 10px;
             }
+
             .referral-count {
                 font-size: 14px;
             }
+
             .milestone-box {
                 padding: 10px;
                 margin: 10px 12px;
             }
+
             .milestone-text {
                 font-size: 12px;
             }
+
             .milestone-status {
                 font-size: 10px;
             }
+
             .info-box {
                 margin: 8px 12px;
                 padding: 10px;
                 width: calc(100% - 24px);
             }
+
             .invite-link {
                 margin: 12px;
                 padding: 10px;
             }
+
             .signout {
                 margin: 15px 12px;
                 padding-bottom: 120px;
             }
+
             .signout button {
                 padding: 8px 16px;
                 font-size: 12px;
                 max-width: 160px;
             }
+
             .profile-pic {
                 width: 100px;
                 height: 100px;
                 font-size: 12px;
                 margin: 3px auto;
             }
+
             #profile .section-title {
                 margin: 5px 0 2px 0;
             }
-            .ad-placeholder {
-                margin: 12px 10px;
-                height: 60px;
+
+            .ad-placeholder.active {
+                height: auto;
+                max-height: 250px;
+                margin: 10px 10px;
             }
-            .ad-placeholder::before {
-                font-size: 14px;
+
+            .roadmap-button, .daily-bonus-button {
+                width: 35px;
+                height: 35px;
+                font-size: 10px;
             }
-            .close-ad {
-                width: 18px;
-                height: 18px;
+
+            .roadmap-content {
+                width: 160px;
+                font-size: 11px;
+                top: 45px;
+                max-height: 160px;
+            }
+
+            .start-button {
+                width: 80px;
+                height: 80px;
                 font-size: 12px;
             }
         }
@@ -815,11 +1033,32 @@
         </div>
         <div class="image-half">
             <button class="start-button" id="start-mining-btn">START MINING</button>
+            <div class="roadmap-container">
+                <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
+                <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
+                <div class="roadmap-content" id="roadmap-content">
+                    <ul>
+                        <li>Q2 2025: Major updates to the official website, Improved mobile experience for all users</li>
+                        <li>Q3 2025: Regular website updates to enhance user experience</li>
+                        <li>Q2 2026: Launch of the ARPM Wallet, Secure token storage, Fast and easy withdrawal system, May launch earlier depending on user demand</li>
+                        <li>Q4 2026: ARPM App will be published on Google Play Store after reaching 10,000 active users, May launch earlier depending on user demand</li>
+                        <li>Q1 2027: Publish Airdrop eligibility criteria, Stop the current token mining system, Launch a new token mining system with updated rules</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
-        <div class="ad-placeholder" id="home-ad">
-            <div class="ad-container" id="home-ad-container"></div>
-            <button class="close-ad" onclick="closeAd('home-ad-container')">X</button>
+        <div class="ad-placeholder active" id="home-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js"></script>
         </div>
     </div>
 
@@ -846,7 +1085,7 @@
         </div>
         <div class="signout">
             <button onclick="signOut()">Sign Out</button>
-            <span class="version-text">ARPM-Web-v1.0.0</span>
+            <span class="version-text">ARPM-Web-v1.5.0</span>
         </div>
     </div>
 
@@ -869,6 +1108,18 @@
             <div class="milestone-text">Over 18 VALID REFERRALS IN TOTAL. 600.00 ARPM</div>
             <span class="milestone-status" id="status-18" onclick="claimMilestone('milestone-18')">not available</span>
         </div>
+        <div class="ad-placeholder active" id="invite-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js"></script>
+        </div>
     </div>
 
     <!-- Wallet Section -->
@@ -885,15 +1136,23 @@
         <div class="task-box">
             <i class="fa-brands fa-youtube youtube-icon" style="color: #FF0000;"></i>
             <div class="task-text">
-                YOUTUBE SUBSCRIBE
+                YOUTUBE 
                 <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
-        <div class="ad-placeholder" id="income-ad">
-            <div class="ad-container" id="income-ad-container"></div>
-            <button class="close-ad" onclick="closeAd('income-ad-container')">X</button>
+        <div class="ad-placeholder active" id="income-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '5a66defd82bc227e9f6adbbabde3a707',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/5a66defd82bc227e9f6adbbabde3a707/invoke.js"></script>
         </div>
         <div class="task-box">
             <i class="fa-brands fa-x-twitter youtube-icon" style="color:#1DA1F2;"></i>
@@ -904,10 +1163,22 @@
             </div>
             <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
+        <div class="ad-placeholder active" id="x-instagram-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '9970296ce7f10d2bc088e12491052390',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/9970296ce7f10d2bc088e12491052390/invoke.js"></script>
+        </div>
         <div class="task-box">
             <i class="fab fa-instagram youtube-icon" style="color:#e1306c;"></i>
             <div class="task-text">
-                INSTAGRAM FOLLOW
+                INSTAGRAM 
                 <small>FOLLOW ARPM ON INSTAGRAM</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
@@ -934,11 +1205,14 @@
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script type="module">
+        // Firebase Imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
             authDomain: "arpm-mining.firebaseapp.com",
@@ -950,10 +1224,12 @@
             measurementId: "G-8YVW5EK6N1"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getDatabase(app);
 
+        // DOM Elements
         const containers = {
             login: document.getElementById('login-container'),
             signup: document.getElementById('signup-container'),
@@ -973,14 +1249,18 @@
         const navbarTop = document.getElementById('navbar-top');
         const bottomNav = document.getElementById('bottom-nav');
         const startMiningBtn = document.getElementById('start-mining-btn');
+        const dailyBonusBtn = document.getElementById('daily-bonus-btn');
         const balanceBox = document.getElementById('balance-box');
         const profileReferralLinkElement = document.getElementById('profile-referral-link');
         const profileReferralCountElement = document.getElementById('profile-referral-count');
+
+        // Constants
         const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
         const TASK_BONUS = 5.0;
+        const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10]; // Daily bonus tokens
 
-        // Referral Milestones Definition
+        // Referral Milestones
         const referralMilestones = [
             { id: 'milestone-1', referrals: 1, reward: 20.00 },
             { id: 'milestone-2', referrals: 2, reward: 50.00 },
@@ -988,73 +1268,7 @@
             { id: 'milestone-18', referrals: 18, reward: 600.00 }
         ];
 
-        // Ad Configurations
-        const adConfigs = [
-            {
-                key: '63718988f07bc6d276f3c6a441757cae',
-                format: 'iframe',
-                height: 90,
-                width: 728,
-                src: '//www.highperformanceformat.com/63718988f07bc6d276f3c6a441757cae/invoke.js'
-            },
-            {
-                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
-                format: 'iframe',
-                height: 50,
-                width: 320,
-                src: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
-            }
-        ];
-
-        let currentAdIndex = 0;
-        let adInterval = null;
-
-        function loadAd(containerId, adIndex) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            container.innerHTML = ''; // Clear previous content
-            container.style.display = 'block';
-
-            const adConfig = adConfigs[adIndex];
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.innerHTML = `
-                atOptions = {
-                    'key': '${adConfig.key}',
-                    'format': '${adConfig.format}',
-                    'height': ${adConfig.height},
-                    'width': ${adConfig.width},
-                    'params': {}
-                };
-            `;
-            container.appendChild(script);
-
-            const adScript = document.createElement('script');
-            adScript.type = 'text/javascript';
-            adScript.src = adConfig.src;
-            container.appendChild(adScript);
-
-            // Start 30-second timer
-            clearInterval(adInterval);
-            adInterval = setInterval(() => {
-                currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
-                loadAd(containerId, currentAdIndex);
-            }, 30000);
-        }
-
-        window.closeAd = (containerId) => {
-            const container = document.getElementById(containerId);
-            if (container) {
-                container.innerHTML = '';
-                container.style.display = 'none';
-                clearInterval(adInterval);
-                // Load next ad immediately
-                currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
-                loadAd(containerId, currentAdIndex);
-            }
-        };
-
+        // Utility Functions
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('ref');
@@ -1068,6 +1282,7 @@
             loadingOverlay.classList.remove('active');
         }
 
+        // Update Milestone Status
         async function updateMilestoneStatus(referrals, userData) {
             referralMilestones.forEach(milestone => {
                 const statusElement = document.getElementById(`status-${milestone.referrals}`);
@@ -1092,6 +1307,7 @@
             });
         }
 
+        // Claim Milestone
         async function claimMilestone(milestoneId) {
             const user = auth.currentUser;
             if (!user) {
@@ -1143,7 +1359,7 @@
                 button.disabled = true;
                 button.style.background = '#cccccc';
                 button.style.cursor = 'not-allowed';
-                button.onclick = null; // Remove click event
+                button.onclick = null;
             } else if (sessionStorage.getItem(`${taskType}Visited`)) {
                 button.textContent = 'CLAIM';
                 button.disabled = false;
@@ -1159,7 +1375,7 @@
             }
         }
 
-        // Handle Task (Open link and mark as visited)
+        // Handle Task
         async function handleTask(taskType) {
             const user = auth.currentUser;
             if (!user) {
@@ -1183,7 +1399,6 @@
             sessionStorage.setItem(`${taskType}Visited`, 'true');
             window.open(link, '_blank');
 
-            // Update button to show "CLAIM" after returning
             button.textContent = 'CLAIM';
             button.onclick = () => claimTask(taskType);
         }
@@ -1220,11 +1435,103 @@
                 button.disabled = true;
                 button.style.background = '#cccccc';
                 button.style.cursor = 'not-allowed';
-                button.onclick = null; // Remove click event
+                button.onclick = null;
                 alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
             }
         }
 
+        // Daily Bonus Logic
+        async function updateDailyBonusButton(userData) {
+            if (!dailyBonusBtn) return;
+
+            const lastClaimed = userData.lastDailyBonus || 0;
+            const currentDay = userData.dailyBonusDay || 0;
+            const now = Date.now();
+            const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+            if (lastClaimed + oneDay > now) {
+                dailyBonusBtn.disabled = true;
+                let timeLeft = Math.floor((lastClaimed + oneDay - now) / 1000);
+                dailyBonusBtn.textContent = `${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}`;
+
+                const interval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(interval);
+                        dailyBonusBtn.disabled = false;
+                        dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        dailyBonusBtn.onclick = () => claimDailyBonus();
+                        return;
+                    }
+                    timeLeft--;
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    dailyBonusBtn.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+                }, 1000);
+            } else {
+                dailyBonusBtn.disabled = false;
+                dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                dailyBonusBtn.onclick = () => claimDailyBonus();
+            }
+        }
+
+        async function claimDailyBonus() {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to claim daily bonus!');
+                showPage('login');
+                return;
+            }
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                const lastClaimed = userData.lastDailyBonus || 0;
+                const now = Date.now();
+                const oneDay = 24 * 60 * 60 * 1000;
+
+                if (lastClaimed + oneDay  > now) {
+                    alert('You can only claim the daily bonus once every 24 hours!');
+                    return;
+                }
+
+                let currentDay = userData.dailyBonusDay || 0;
+                const bonus = DAILY_BONUS_SCHEDULE[currentDay];
+                currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
+
+                const newTokens = (userData.tokens || 0) + bonus;
+                const newEarnings = (userData.earnings || 0) + bonus;
+                await update(userRef, {
+                    tokens: newTokens,
+                    earnings: newEarnings,
+                    lastDailyBonus: now,
+                    dailyBonusDay: currentDay
+                });
+
+                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                dailyBonusBtn.disabled = true;
+                let timeLeft = 24 * 60 * 60;
+                dailyBonusBtn.textContent = `24:00`;
+
+                const interval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(interval);
+                        dailyBonusBtn.disabled = false;
+                        dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        dailyBonusBtn.onclick = () => claimDailyBonus();
+                        return;
+                    }
+                    timeLeft--;
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    dailyBonusBtn.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+                }, 1000);
+
+                alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
+            }
+        }
+
+        // Show Page
         async function showPage(page) {
             await showLoadingScreen();
             Object.values(containers).forEach(c => c.style.display = 'none');
@@ -1264,10 +1571,6 @@
                     }
                 }
             }
-            if (page === 'home') {
-                currentAdIndex = 0;
-                loadAd('home-ad-container', currentAdIndex);
-            }
             if (page === 'income') {
                 const user = auth.currentUser;
                 if (user) {
@@ -1280,8 +1583,36 @@
                         updateTaskButton('instagram', userData);
                     }
                 }
-                currentAdIndex = 0;
-                loadAd('income-ad-container', currentAdIndex);
+                // Manage ad placeholders in income page
+                const adPlaceholders = document.querySelectorAll('#income .ad-placeholder');
+                adPlaceholders.forEach(ad => {
+                    if (ad.children.length > 0) {
+                        ad.classList.add('active');
+                    } else {
+                        ad.classList.remove('active');
+                    }
+                });
+            }
+            if (page === 'home' || page === 'invite') {
+                const adPlaceholders = document.querySelectorAll('#home .ad-placeholder, #invite .ad-placeholder');
+                adPlaceholders.forEach(ad => {
+                    if (ad.children.length > 0) {
+                        ad.classList.add('active');
+                    } else {
+                        ad.classList.remove('active');
+                    }
+                });
+            }
+            if (page === 'home') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        updateDailyBonusButton(userData);
+                    }
+                }
             }
             const navItems = document.querySelectorAll('.bottom-nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
@@ -1289,6 +1620,7 @@
             if (activeNav) activeNav.classList.add('active');
         }
 
+        // Global Functions
         window.copyReferralLink = async (elementId) => {
             const referralLink = document.getElementById(elementId).textContent;
             try {
@@ -1308,17 +1640,23 @@
         };
 
         window.signOut = async () => {
-            alert("Signing out...");
+            alert("Logging out...");
             try {
                 await signOut(auth);
                 showPage('login');
             } catch (error) {
-                alert('Sign out failed: ' + error.message);
+                alert('Logout failed: ' + error.message);
             }
         };
 
         window.claimMilestone = claimMilestone;
 
+        window.toggleRoadmap = () => {
+            const roadmapContent = document.getElementById('roadmap-content');
+            roadmapContent.classList.toggle('active');
+        };
+
+        // Form Event Listeners
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
@@ -1360,7 +1698,7 @@
                 const initialTokens = inviteCode ? NEW_USER_BONUS : 0;
                 const initialEarnings = inviteCode ? NEW_USER_BONUS : 0;
                 await set(ref(db, 'users/' + user.uid), {
-                    username: username || "N/A",
+                    username: username || "",
                     email: email,
                     tokens: initialTokens,
                     earnings: initialEarnings,
@@ -1373,12 +1711,14 @@
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
                     instagramBonusClaimed: false,
-                    profilePicture: 'boy',
+                    profilePicture: null,
                     language: 'en',
                     milestone1Claimed: false,
                     milestone2Claimed: false,
                     milestone5Claimed: false,
-                    milestone18Claimed: false
+                    milestone18Claimed: false,
+                    lastDailyBonus: 0,
+                    dailyBonusDay: 0
                 });
 
                 if (referrerUid && inviteCode) {
@@ -1407,13 +1747,14 @@
             try {
                 await showLoadingScreen(true);
                 await sendPasswordResetEmail(auth, email);
-                alert('PASSWORD RESET EMAIL SENT!');
+                alert('Password reset email sent!');
                 showPage('login');
             } catch (error) {
                 alert(`PASSWORD RESET FAILED: ${error.message}`);
             }
         });
 
+        // Authentication State Listener
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, 'users/' + user.uid);
@@ -1437,6 +1778,9 @@
                         updateTaskButton('x', userData);
                         updateTaskButton('instagram', userData);
                     }
+                    if (containers.home.style.display === 'block') {
+                        updateDailyBonusButton(userData);
+                    }
                     if (userData.miningEndTime > Date.now()) {
                         startMiningBtn.disabled = true;
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
@@ -1449,7 +1793,6 @@
                                 startMiningBtn.disabled = false;
                                 startMiningBtn.innerHTML = 'START MINING';
 
-                                // Update tokens and earnings in Firebase after timer ends
                                 const snapshotAfterTimer = await get(userRef);
                                 if (snapshotAfterTimer.exists()) {
                                     const userData = snapshotAfterTimer.val();
@@ -1480,32 +1823,33 @@
             }
         });
 
+        // Toggle Password Visibility
         window.togglePasswordVisibility = (inputId, toggleId) => {
-            const passwordInput = document.getElementById(inputId);
+            const input = document.getElementById(inputId);
             const toggleIcon = document.getElementById(toggleId);
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
+            if (input.type === 'password') {
+                input.type = 'text';
                 toggleIcon.classList.remove('fa-eye');
                 toggleIcon.classList.add('fa-eye-slash');
             } else {
-                passwordInput.type = 'password';
+                input.type = 'password';
                 toggleIcon.classList.remove('fa-eye-slash');
                 toggleIcon.classList.add('fa-eye');
             }
         };
 
+        // Bottom Navigation Event Listeners
         const navItems = document.querySelectorAll('.bottom-nav-item');
-        const sections = document.querySelectorAll('.page-section');
-
         navItems.forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', async () => {
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
                 const target = item.getAttribute('data-target');
-                showPage(target);
+                await showPage(target);
             });
         });
 
+        // Mining Button Logic
         let miningInterval = null;
 
         startMiningBtn.addEventListener('click', async () => {
@@ -1529,7 +1873,6 @@
             startMiningBtn.disabled = true;
             let timeLeft = 6 * 60 * 60;
 
-            // Update only miningStartTime and miningEndTime, tokens will be updated after timer ends
             await update(userRef, {
                 miningStartTime: Date.now(),
                 miningEndTime: Date.now() + 6 * 60 * 60 * 1000
@@ -1543,7 +1886,6 @@
                     startMiningBtn.disabled = false;
                     startMiningBtn.innerHTML = 'START MINING';
 
-                    // Update tokens and earnings in Firebase after timer ends
                     const snapshotAfterTimer = await get(userRef);
                     if (snapshotAfterTimer.exists()) {
                         const userData = snapshotAfterTimer.val();
