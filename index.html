@@ -351,7 +351,7 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 10px  ры0 5px 0;
+            margin: 10px 0 5px 0;
             color: #00cc99;
         }
 
@@ -363,7 +363,7 @@
             margin-top: 60px;
         }
 
-        /* ŚwięTask Box */
+        /* Task Box */
         .task-box {
             display: flex;
             align-items: center;
@@ -597,6 +597,35 @@
             margin: 15px 15px;
         }
 
+        .ad-placeholder.hidden-ad {
+            height: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .ad-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s ease;
+        }
+
+        .ad-close-btn:hover {
+            background: #cc0000;
+        }
+
         /* Roadmap Styles */
         .roadmap-container {
             position: absolute;
@@ -811,6 +840,12 @@
                 margin: 12px 12px;
             }
 
+            .ad-close-btn {
+                width: 18px;
+                height: 18px;
+                font-size: 12px;
+            }
+
             .roadmap-button, .daily-bonus-button {
                 width: 40px;
                 height: 40px;
@@ -923,6 +958,12 @@
                 height: auto;
                 max-height: 250px;
                 margin: 10px 10px;
+            }
+
+            .ad-close-btn {
+                width: 16px;
+                height: 16px;
+                font-size: 10px;
             }
 
             .roadmap-button, .daily-bonus-button {
@@ -1049,6 +1090,7 @@
         </div>
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
         <div class="ad-placeholder active" id="home-ad">
+            <span class="ad-close-btn" onclick="closeAd('home-ad')">X</span>
             <script type="text/javascript">
                 atOptions = {
                     'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
@@ -1109,6 +1151,7 @@
             <span class="milestone-status" id="status-18" onclick="claimMilestone('milestone-18')">not available</span>
         </div>
         <div class="ad-placeholder active" id="invite-ad">
+            <span class="ad-close-btn" onclick="closeAd('invite-ad')">X</span>
             <script type="text/javascript">
                 atOptions = {
                     'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
@@ -1143,6 +1186,7 @@
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
         <div class="ad-placeholder active" id="income-ad">
+            <span class="ad-close-btn" onclick="closeAd('income-ad')">X</span>
             <script type="text/javascript">
                 atOptions = {
                     'key' : '5a66defd82bc227e9f6adbbabde3a707',
@@ -1164,6 +1208,7 @@
             <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
         <div class="ad-placeholder active" id="x-instagram-ad">
+            <span class="ad-close-btn" onclick="closeAd('x-instagram-ad')">X</span>
             <script type="text/javascript">
                 atOptions = {
                     'key' : '9970296ce7f10d2bc088e12491052390',
@@ -1280,6 +1325,31 @@
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
             loadingOverlay.classList.remove('active');
+        }
+
+        // Ad Close Function
+        window.closeAd = (adId) => {
+            const adPlaceholder = document.getElementById(adId);
+            if (adPlaceholder) {
+                adPlaceholder.classList.remove('active');
+                adPlaceholder.classList.add('hidden-ad');
+                sessionStorage.setItem(`ad_${adId}_closed`, 'true');
+            }
+        };
+
+        // Check Ad Visibility on Page Load
+        function checkAdVisibility() {
+            const adPlaceholders = document.querySelectorAll('.ad-placeholder');
+            adPlaceholders.forEach(ad => {
+                const adId = ad.id;
+                if (sessionStorage.getItem(`ad_${adId}_closed`) === 'true') {
+                    ad.classList.remove('active');
+                    ad.classList.add('hidden-ad');
+                } else if (ad.children.length > 0) {
+                    ad.classList.add('active');
+                    ad.classList.remove('hidden-ad');
+                }
+            });
         }
 
         // Update Milestone Status
@@ -1463,9 +1533,7 @@
                         return;
                     }
                     timeLeft--;
-                    const hours = Math.floor(timeLeft / 3600);
-                    const minutes = Math.floor((timeLeft % 3600) / 60);
-                    dailyBonusBtn.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+                    dailyBonusBtn.textContent = `${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}`;
                 }, 1000);
             } else {
                 dailyBonusBtn.disabled = false;
@@ -1490,7 +1558,7 @@
                 const now = Date.now();
                 const oneDay = 24 * 60 * 60 * 1000;
 
-                if (lastClaimed + oneDay  > now) {
+                if (lastClaimed + oneDay > now) {
                     alert('You can only claim the daily bonus once every 24 hours!');
                     return;
                 }
@@ -1583,25 +1651,9 @@
                         updateTaskButton('instagram', userData);
                     }
                 }
-                // Manage ad placeholders in income page
-                const adPlaceholders = document.querySelectorAll('#income .ad-placeholder');
-                adPlaceholders.forEach(ad => {
-                    if (ad.children.length > 0) {
-                        ad.classList.add('active');
-                    } else {
-                        ad.classList.remove('active');
-                    }
-                });
             }
-            if (page === 'home' || page === 'invite') {
-                const adPlaceholders = document.querySelectorAll('#home .ad-placeholder, #invite .ad-placeholder');
-                adPlaceholders.forEach(ad => {
-                    if (ad.children.length > 0) {
-                        ad.classList.add('active');
-                    } else {
-                        ad.classList.remove('active');
-                    }
-                });
+            if (page === 'home' || page === 'invite' || page === 'income') {
+                checkAdVisibility();
             }
             if (page === 'home') {
                 const user = auth.currentUser;
@@ -1910,6 +1962,9 @@
                 startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
         });
+
+        // Initialize ad visibility on page load
+        window.addEventListener('load', checkAdVisibility);
     </script>
 </body>
 </html>
