@@ -355,12 +355,53 @@
             color: #00cc99;
         }
 
-        .wallet-section p {
-            text-align: center;
-            font-size: 18px;
+        /* Wallet History Styles */
+        .wallet-section {
+            margin: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        .history-circle {
+            width: 50px;
+            height: 50px;
+            background: #00cc99;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 14px;
             font-weight: bold;
-            color: #999;
-            margin-top: 60px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .history-text {
+            flex: 1;
+            margin-left: 15px;
+            font-size: 16px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .history-amount {
+            font-size: 16px;
+            color: #00cc99;
+            font-weight: bold;
+            flex-shrink: 0;
         }
 
         /* Task Box */
@@ -827,6 +868,20 @@
                 height: 100px;
                 font-size: 14px;
             }
+
+            .history-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+
+            .history-text {
+                font-size: 14px;
+            }
+
+            .history-amount {
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -938,6 +993,20 @@
             .start-button {
                 width: 80px;
                 height: 80px;
+                font-size: 12px;
+            }
+
+            .history-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 10px;
+            }
+
+            .history-text {
+                font-size: 12px;
+            }
+
+            .history-amount {
                 font-size: 12px;
             }
         }
@@ -1101,7 +1170,27 @@
     <div id="wallet" class="page-section hidden">
         <div class="section-title">Wallet</div>
         <div class="wallet-section">
-            <p>Coming Soon</p>
+            <h3>History</h3>
+            <div class="history-item" id="mining-history">
+                <div class="history-circle">Mining</div>
+                <div class="history-text">Start Mining Reward</div>
+                <div class="history-amount" id="mining-amount">0.000 ARPM</div>
+            </div>
+            <div class="history-item" id="invite-history">
+                <div class="history-circle">Invite</div>
+                <div class="history-text">Invite Bonus</div>
+                <div class="history-amount" id="invite-amount">0.000 ARPM</div>
+            </div>
+            <div class="history-item" id="tasks-history">
+                <div class="history-circle">Tasks</div>
+                <div class="history-text">Complete Tasks</div>
+                <div class="history-amount" id="tasks-amount">0.000 ARPM</div>
+            </div>
+            <div class="history-item" id="daily-history">
+                <div class="history-circle">Daily</div>
+                <div class="history-text">Daily Tasks</div>
+                <div class="history-amount" id="daily-amount">0.000 ARPM</div>
+            </div>
         </div>
     </div>
 
@@ -1284,9 +1373,11 @@
                 if (userData.referrals >= milestone.referrals) {
                     const newTokens = (userData.tokens || 0) + milestone.reward;
                     const newEarnings = (userData.earnings || 0) + milestone.reward;
+                    const newInviteEarnings = (userData.inviteEarnings || 0) + milestone.reward;
                     await update(userRef, {
                         tokens: newTokens,
                         earnings: newEarnings,
+                        inviteEarnings: newInviteEarnings,
                         [`milestone${milestone.referrals}Claimed`]: true
                     });
                     balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
@@ -1376,9 +1467,11 @@
 
                 const newTokens = (userData.tokens || 0) + TASK_BONUS;
                 const newEarnings = (userData.earnings || 0) + TASK_BONUS;
+                const newTaskEarnings = (userData.taskEarnings || 0) + TASK_BONUS;
                 await update(userRef, {
                     tokens: newTokens,
                     earnings: newEarnings,
+                    taskEarnings: newTaskEarnings,
                     [`${taskType}BonusClaimed`]: true
                 });
 
@@ -1416,9 +1509,7 @@
                         return;
                     }
                     timeLeft--;
-                    const hours = Math.floor(timeLeft / 3600);
-                    const minutes = Math.floor((timeLeft % 3600) / 60);
-                    dailyBonusBtn.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+                    dailyBonusBtn.textContent = `${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}`;
                 }, 1000);
             } else {
                 dailyBonusBtn.disabled = false;
@@ -1454,9 +1545,11 @@
 
                 const newTokens = (userData.tokens || 0) + bonus;
                 const newEarnings = (userData.earnings || 0) + bonus;
+                const newDailyEarnings = (userData.dailyEarnings || 0) + bonus;
                 await update(userRef, {
                     tokens: newTokens,
                     earnings: newEarnings,
+                    dailyEarnings: newDailyEarnings,
                     lastDailyBonus: now,
                     dailyBonusDay: currentDay
                 });
@@ -1482,6 +1575,14 @@
 
                 alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
             }
+        }
+
+        // Update Wallet History
+        async function updateWalletHistory(userData) {
+            document.getElementById('mining-amount').textContent = `${(userData.miningEarnings || 0).toFixed(3)} ARPM`;
+            document.getElementById('invite-amount').textContent = `${(userData.inviteEarnings || 0).toFixed(3)} ARPM`;
+            document.getElementById('tasks-amount').textContent = `${(userData.taskEarnings || 0).toFixed(3)} ARPM`;
+            document.getElementById('daily-amount').textContent = `${(userData.dailyEarnings || 0).toFixed(3)} ARPM`;
         }
 
         // Show Page
@@ -1545,6 +1646,17 @@
                         ad.classList.remove('active');
                     }
                 });
+            }
+            if (page === 'wallet') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        updateWalletHistory(userData);
+                    }
+                }
             }
             if (page === 'home' || page === 'invite') {
                 const adPlaceholders = document.querySelectorAll('#home .ad-placeholder, #invite .ad-placeholder');
@@ -1660,6 +1772,11 @@
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
+                    minedTokens: 0,
+                    miningEarnings: 0,
+                    inviteEarnings: 0,
+                    taskEarnings: 0,
+                    dailyEarnings: 0,
                     referrals: 0,
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
@@ -1681,10 +1798,12 @@
                     const newReferrals = (referrerData.referrals || 0) + 1;
                     const newTokens = (referrerData.tokens || 0) + REFERRAL_BONUS;
                     const newEarnings = (referrerData.earnings || 0) + REFERRAL_BONUS;
+                    const newInviteEarnings = (referrerData.inviteEarnings || 0) + REFERRAL_BONUS;
                     await update(referrerRef, {
                         referrals: newReferrals,
                         tokens: newTokens,
-                        earnings: newEarnings
+                        earnings: newEarnings,
+                        inviteEarnings: newInviteEarnings
                     });
                 }
 
@@ -1731,14 +1850,18 @@
                         updateTaskButton('x', userData);
                         updateTaskButton('instagram', userData);
                     }
+                    if (containers.wallet.style.display === 'block') {
+                        updateWalletHistory(userData);
+                    }
                     if (containers.home.style.display === 'block') {
                         updateDailyBonusButton(userData);
                     }
                     if (userData.miningEndTime > Date.now()) {
                         startMiningBtn.disabled = true;
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
+                        const minedTokens = userData.minedTokens || 0;
 
-                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`;
+                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
                         const miningInterval = setInterval(async () => {
                             if (timeLeft <= 0) {
@@ -1749,15 +1872,18 @@
                                 const snapshotAfterTimer = await get(userRef);
                                 if (snapshotAfterTimer.exists()) {
                                     const userData = snapshotAfterTimer.val();
-                                    const newTokens = (userData.tokens || 0) + 6;
+                                    const finalTokens = (userData.tokens || 0) + (userData.minedTokens || 0);
+                                    const finalMiningEarnings = (userData.miningEarnings || 0) + (userData.minedTokens || 0);
                                     await update(userRef, {
-                                        tokens: newTokens,
-                                        earnings: newTokens,
+                                        tokens: finalTokens,
+                                        earnings: finalTokens,
+                                        miningEarnings: finalMiningEarnings,
                                         miningStartTime: 0,
-                                        miningEndTime: 0
+                                        miningEndTime: 0,
+                                        minedTokens: 0
                                     });
-                                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                                    alert('Mining completed! You earned 6 ARPM.');
+                                    balanceBox.textContent = `Balance: ${finalTokens.toFixed(3)} ARPM`;
+                                    alert('Mining completed! You earned 12 ARPM.');
                                 }
                                 return;
                             }
@@ -1766,7 +1892,19 @@
                             const hours = Math.floor(timeLeft / 3600);
                             const minutes = Math.floor((timeLeft % 3600) / 60);
                             const seconds = timeLeft % 60;
-                            startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                            const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
+                            const currentMinedTokens = hoursPassed >= 12 ? 12 : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+
+                            startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}<br>Tokens: ${currentMinedTokens.toFixed(3)}`;
+                            
+                            if (timeLeft % 3600 === 0) {
+                                const snapshot = await get(userRef);
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    const newMinedTokens = (userData.minedTokens || 0) + 1;
+                                    await update(userRef, { minedTokens: newMinedTokens });
+                                }
+                            }
                         }, 1000);
                     }
                 }
@@ -1824,14 +1962,15 @@
             }
 
             startMiningBtn.disabled = true;
-            let timeLeft = 6 * 60 * 60;
+            let timeLeft = 12 * 60 * 60; // 12 hours in seconds
 
             await update(userRef, {
                 miningStartTime: Date.now(),
-                miningEndTime: Date.now() + 6 * 60 * 60 * 1000
+                miningEndTime: Date.now() + 12 * 60 * 60 * 1000,
+                minedTokens: 0
             });
 
-            startMiningBtn.innerHTML = `Time Left:<br>6:00:00`;
+            startMiningBtn.innerHTML = `Time Left:<br>12:00:00<br>Tokens: 0.000`;
 
             miningInterval = setInterval(async () => {
                 if (timeLeft <= 0) {
@@ -1842,17 +1981,19 @@
                     const snapshotAfterTimer = await get(userRef);
                     if (snapshotAfterTimer.exists()) {
                         const userData = snapshotAfterTimer.val();
-                        const newTokens = (userData.tokens || 0) + 6;
+                        const finalTokens = (userData.tokens || 0) + 12;
+                        const finalMiningEarnings = (userData.miningEarnings || 0) + 12;
                         await update(userRef, {
-                            tokens: newTokens,
-                            earnings: newTokens,
+                            tokens: finalTokens,
+                            earnings: finalTokens,
+                            miningEarnings: finalMiningEarnings,
                             miningStartTime: 0,
-                            miningEndTime: 0
+                            miningEndTime: 0,
+                            minedTokens: 0
                         });
-                        balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                        balanceBox.textContent = `Balance: ${finalTokens.toFixed(3)} ARPM`;
+                        alert('Mining completed! You earned 12 ARPM.');
                     }
-
-                    alert('Mining completed! You earned 6 ARPM.');
                     return;
                 }
 
@@ -1860,9 +2001,21 @@
                 const hours = Math.floor(timeLeft / 3600);
                 const minutes = Math.floor((timeLeft % 3600) / 60);
                 const seconds = timeLeft % 60;
-                startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
+                const currentMinedTokens = hoursPassed >= 12 ? 12 : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+
+                startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}<br>Tokens: ${currentMinedTokens.toFixed(3)}`;
+
+                if (timeLeft % 3600 === 0) {
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const newMinedTokens = (userData.minedTokens || 0) + 1;
+                        await update(userRef, { minedTokens: newMinedTokens });
+                    }
+                }
             }, 1000);
         });
     </script>
 </body>
-</html>
+</html>)
