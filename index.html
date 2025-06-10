@@ -152,7 +152,7 @@
 
         .loading-text {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: bold;
             color: #60a5fa;
         }
 
@@ -298,7 +298,7 @@
             align-items: center;
             text-align: center;
             line-height: 1.2;
-            padding: 5px;
+            padding: 12px;
         }
 
         .home-bottom-text {
@@ -324,7 +324,7 @@
             border-top: 1px solid #ccc;
         }
 
-        .bottom-nav-item {
+        .nav-item {
             color: #000;
             font-size: 12px;
             text-align: center;
@@ -332,76 +332,67 @@
             user-select: none;
         }
 
-        .bottom-nav-item i {
+        .nav-item i {
             font-size: 16px;
             display: block;
             margin-bottom: 3px;
         }
 
-        .bottom-nav-item.active {
+        .nav-item.active {
             color: #00ffcc;
         }
 
         /* Section Titles */
-        #profile .section-title,
-        #invite .section-title,
-        #income .section-title,
-        #wallet .section-title,
-        #dashboard .section-title {
+        #profileSection .section-title,
+        #inviteSection .section-title,
+        #incomeSection .section-title,
+        #walletSection .section-title,
+        #dashboardSection .section-title {
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            margin: 10px 0 5px 0;
+            margin: 10px 0 5px;
             color: #00cc99;
         }
 
-        /* Wallet History Styles */
+        /* Wallet History Section */
         .wallet-section {
+            position: relative;
             margin: 20px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        .history-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #f1f1f1;
-            border-radius: 8px;
+        .wallet-section p {
+            color: #000; /* Ensure "coming soon" text is visible */
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .history-circle {
-            width: 50px;
-            height: 50px;
-            background: #00cc99;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #00cc99, #00ffcc);
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
             color: #fff;
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            flex-shrink: 0;
+            overflow-y: auto;
+            padding: 10px;
         }
 
-        .history-text {
-            flex: 1;
-            margin-left: 15px;
-            font-size: 16px;
-            color: #000;
-            font-weight: 600;
-        }
-
-        .history-amount {
-            font-size: 16px;
-            color: #00cc99;
-            font-weight: bold;
-            flex-shrink: 0;
+        .history-circle p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #fff;
         }
 
         /* Task Box */
@@ -637,18 +628,23 @@
             margin: 15px 15px;
         }
 
-        /* Roadmap Styles */
-        .roadmap-container {
+        /* Roadmap and Rules Container */
+        .buttons-container {
             position: absolute;
             top: 20px;
-            right: 20px;
-            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .roadmap-container, .rules-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .roadmap-button {
+        .roadmap-button, .rules-button {
             width: 50px;
             height: 50px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
@@ -664,41 +660,68 @@
             transition: transform 0.2s;
         }
 
-        .roadmap-button:hover {
+        .roadmap-button:hover, .rules-button:hover {
             transform: scale(1.1);
         }
 
-        .roadmap-content {
+        .roadmap-content, .rules-content {
             display: none;
             position: absolute;
-            top: 60px;
-            right: 0;
             background: #fff;
             color: #000;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 200px;
+            width: 300px;
             font-size: 14px;
             text-align: left;
             z-index: 11;
-            max-height: 200px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
-        .roadmap-content.active {
+        .roadmap-content {
+            top: 60px;
+            right: 20px;
+        }
+
+        .rules-content {
+            top: 60px;
+            left: 20px;
+        }
+
+        .roadmap-content.active, .rules-content.active {
             display: block;
         }
 
-        .roadmap-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .rules-content h1 {
+            color: #0057ff;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
-        .roadmap-content li {
+        .rules-content h2 {
+            color: #333;
+            font-size: 16px;
+            margin-top: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .rules-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .rules-content li {
             margin-bottom: 10px;
             font-weight: 600;
+        }
+
+        .rules-content p {
+            margin: 10px 0;
+            font-size: 14px;
         }
 
         /* Daily Bonus Button */
@@ -841,26 +864,26 @@
                 margin: 5px 0;
             }
 
-            #profile .section-title {
+            .section-title {
                 margin: 8px 0 3px 0;
             }
 
-            .ad-placeholder.active {
-                margin: 12px 12px;
+            .ad-placeholder {
+                margin-top: 10px;
                 height: 80px;
             }
 
-            .roadmap-button, .daily-bonus-button {
+            .roadmap-button, .rules-button, .daily-bonus {
                 width: 40px;
                 height: 40px;
                 font-size: 12px;
             }
 
-            .roadmap-content {
-                width: 180px;
+            .roadmap-content, .rules-content {
+                width: 250px;
                 font-size: 12px;
                 top: 50px;
-                max-height: 180px;
+                max-height: 350px;
             }
 
             .start-button {
@@ -870,17 +893,9 @@
             }
 
             .history-circle {
-                width: 40px;
-                height: 40px;
+                width: 150px;
+                height: 150px;
                 font-size: 12px;
-            }
-
-            .history-text {
-                font-size: 14px;
-            }
-
-            .history-amount {
-                font-size: 14px;
             }
         }
 
@@ -952,10 +967,10 @@
 
             .signout {
                 margin: 15px 12px;
-                padding-bottom: 120px;
+                padding-bottom: 50px;
             }
 
-            .signout button {
+            .signout-button {
                 padding: 8px 16px;
                 font-size: 12px;
                 max-width: 160px;
@@ -968,26 +983,26 @@
                 margin: 3px auto;
             }
 
-            #profile .section-title {
+            .section-title {
                 margin: 5px 0 2px 0;
             }
 
-            .ad-placeholder.active {
-                margin: 10px 10px;
+            .ad-placeholder {
                 height: 60px;
+                margin: 10px 10px;
             }
 
-            .roadmap-button, .daily-bonus-button {
+            .roadmap-button, .rules-button, .daily-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
 
-            .roadmap-content {
-                width: 160px;
+            .roadmap-content, .rules-content {
+                width: 200px;
                 font-size: 11px;
                 top: 45px;
-                max-height: 160px;
+                max-height: 300px;
             }
 
             .start-button {
@@ -997,17 +1012,17 @@
             }
 
             .history-circle {
-                width: 35px;
-                height: 35px;
+                width: 120px;
+                height: 120px;
                 font-size: 10px;
             }
 
-            .history-text {
-                font-size: 12px;
+            .rules-content h1 {
+                font-size: 16px;
             }
 
-            .history-amount {
-                font-size: 12px;
+            .rules-content h2 {
+                font-size: 14px;
             }
         }
     </style>
@@ -1088,7 +1103,7 @@
     </div>
 
     <!-- Home Section -->
-    <div id="home" class="page-section hidden">
+    <div id="homeSection" class="page-section hidden">
         <div class="topbar">
             <div class="menu-icon" id="menuBtn">⋮</div>
             <div class="title">ARPM Mining</div>
@@ -1099,17 +1114,62 @@
         </div>
         <div class="image-half">
             <button class="start-button" id="start-mining-btn">START MINING</button>
-            <div class="roadmap-container">
-                <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
-                <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
-                <div class="roadmap-content" id="roadmap-content">
-                    <ul>
-                        <li>Q2 2025: Major updates to the official website, Improved mobile experience for all users</li>
-                        <li>Q3 2025: Regular website updates to enhance user experience</li>
-                        <li>Q2 2026: Launch of the ARPM Wallet, Secure token storage, Fast and easy withdrawal system, May launch earlier depending on user demand</li>
-                        <li>Q4 2026: ARPM App will be published on Google Play Store after reaching 10,000 active users, May launch earlier depending on user demand</li>
-                        <li>Q1 2027: Publish Airdrop eligibility criteria, Stop the current token mining system, Launch a new token mining system with updated rules</li>
-                    </ul>
+            <div class="buttons-container">
+                <div class="rules-container">
+                    <div class="rules-button" onclick="toggleRules()">Rules</div>
+                    <div class="rules-content" id="rules-content">
+                        <h1>ARPM Mining Network</h1>
+                        <p><strong>Rules & Terms of Use</strong></p>
+                        <p>Welcome to ARPM Mining Network! By using this app, you agree to follow the rules below. Please read carefully:</p>
+                        <h2>1. One Account Per User</h2>
+                        <ul>
+                            <li>Only one account per user is allowed.</li>
+                            <li>Multiple or fake accounts will be permanently banned.</li>
+                        </ul>
+                        <h2>2. Mining Rules</h2>
+                        <ul>
+                            <li>Mining must be started manually every 12 hours by tapping the button.</li>
+                            <li>Mining stops automatically after 12 hours until restarted.</li>
+                        </ul>
+                        <h2>3. Referral Policy</h2>
+                        <ul>
+                            <li>Refer users using your code to earn bonus tokens.</li>
+                            <li>Self-referrals or fake invites are not allowed.</li>
+                        </ul>
+                        <h2>4. Prohibited Activities</h2>
+                        <ul>
+                            <li>Use of bots, emulators, or scripts is forbidden.</li>
+                            <li>Suspicious activity may result in account ban.</li>
+                        </ul>
+                        <h2>5. KYC Requirement</h2>
+                        <ul>
+                            <li>KYC is required before token withdrawal.</li>
+                            <li>Fake/incomplete KYC will disqualify withdrawal.</li>
+                        </ul>
+                        <h2>6. Token Withdrawal</h2>
+                        <ul>
+                            <li>Withdraw only after completing KYC and reaching the minimum balance.</li>
+                            <li>We reserve the right to delay or block fraud-related withdrawals.</li>
+                        </ul>
+                        <h2>7. Rule Violation</h2>
+                        <ul>
+                            <li>Any rule violation may lead to account suspension or permanent ban without notice.</li>
+                        </ul>
+                        <p><strong>Thank you for using ARPM Mining Network. Happy Mining!</strong></p>
+                    </div>
+                </div>
+                <div class="roadmap-container">
+                    <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
+                    <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
+                    <div class="roadmap-content" id="roadmap-content">
+                        <ul>
+                            <li>Q2 2025: Major updates to the official website, Improved mobile experience for all users</li>
+                            <li>Q3 2025: Regular website updates to enhance user experience</li>
+                            <li>Q2 2026: Launch of the ARPM Wallet, Secure token storage, Fast and easy withdrawal system, May launch earlier depending on user demand</li>
+                            <li>Q4 2026: ARPM App will be published on Google Play Store after reaching 10,000 active users, May launch earlier depending on user demand</li>
+                            <li>Q1 2027: Publish Airdrop eligibility criteria, Stop the current token mining system, Launch a new token mining system with updated rules</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1118,7 +1178,7 @@
     </div>
 
     <!-- Profile Section -->
-    <div id="profile" class="page-section hidden">
+    <div id="profileSection" class="page-section hidden">
         <div class="section-title">Profile</div>
         <div class="profile-pic">
             ARPM Mining
@@ -1145,7 +1205,7 @@
     </div>
 
     <!-- Invite Section -->
-    <div id="invite" class="page-section hidden">
+    <div id="inviteSection" class="page-section hidden">
         <div class="section-title">Invite</div>
         <div class="milestone-box" id="milestone-1">
             <div class="milestone-text">Over 1 VALID REFERRAL IN TOTAL. 20.00 ARPM</div>
@@ -1167,35 +1227,15 @@
     </div>
 
     <!-- Wallet Section -->
-    <div id="wallet" class="page-section hidden">
+    <div id="walletSection" class="page-section hidden">
         <div class="section-title">Wallet</div>
         <div class="wallet-section">
-            <h3>History</h3>
-            <div class="history-item" id="mining-history">
-                <div class="history-circle">Mining</div>
-                <div class="history-text">Start Mining Reward</div>
-                <div class="history-amount" id="mining-amount">0.000 ARPM</div>
-            </div>
-            <div class="history-item" id="invite-history">
-                <div class="history-circle">Invite</div>
-                <div class="history-text">Invite Bonus</div>
-                <div class="history-amount" id="invite-amount">0.000 ARPM</div>
-            </div>
-            <div class="history-item" id="tasks-history">
-                <div class="history-circle">Tasks</div>
-                <div class="history-text">Complete Tasks</div>
-                <div class="history-amount" id="tasks-amount">0.000 ARPM</div>
-            </div>
-            <div class="history-item" id="daily-history">
-                <div class="history-circle">Daily</div>
-                <div class="history-text">Daily Tasks</div>
-                <div class="history-amount" id="daily-amount">0.000 ARPM</div>
-            </div>
+            <p>coming soon</p>
         </div>
     </div>
 
     <!-- Income Section -->
-    <div id="income" class="page-section hidden">
+    <div id="incomeSection" class="page-section hidden">
         <div class="section-title">Income</div>
         <div class="task-box">
             <i class="fa-brands fa-youtube youtube-icon" style="color: #FF0000;"></i>
@@ -1208,9 +1248,9 @@
         </div>
         <div class="ad-placeholder" id="income-ad"></div>
         <div class="task-box">
-            <i class="fa-brands fa-x-twitter youtube-icon" style="color:#1DA1F2;"></i>
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
-                X FOLLOW
+                X 
                 <small>FOLLOW ARPM ON X</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
@@ -1218,7 +1258,7 @@
         </div>
         <div class="ad-placeholder" id="x-instagram-ad"></div>
         <div class="task-box">
-            <i class="fab fa-instagram youtube-icon" style="color:#e1306c;"></i>
+            <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
             <div class="task-text">
                 INSTAGRAM 
                 <small>FOLLOW ARPM ON INSTAGRAM</small>
@@ -1230,19 +1270,19 @@
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav" id="bottom-nav">
-        <div class="bottom-nav-item active" data-target="home">
+        <div class="nav-item active" data-target="homeSection">
             <i class="fas fa-home"></i>Home
         </div>
-        <div class="bottom-nav-item" data-target="profile">
+        <div class="nav-item" data-target="profileSection">
             <i class="fas fa-user"></i>Profile
         </div>
-        <div class="bottom-nav-item" data-target="wallet">
+        <div class="nav-item" data-target="walletSection">
             <i class="fas fa-wallet"></i>Wallet
         </div>
-        <div class="bottom-nav-item" data-target="invite">
+        <div class="nav-item" data-target="inviteSection">
             <i class="fas fa-users"></i>Invite
         </div>
-        <div class="bottom-nav-item" data-target="income">
+        <div class="nav-item" data-target="incomeSection">
             <i class="fas fa-coins"></i>Income
         </div>
     </div>
@@ -1258,7 +1298,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
             authDomain: "arpm-mining.firebaseapp.com",
-            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com",
+            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com/",
             projectId: "arpm-mining",
             storageBucket: "arpm-mining.appspot.com",
             messagingSenderId: "854582920631",
@@ -1276,11 +1316,11 @@
             login: document.getElementById('login-container'),
             signup: document.getElementById('signup-container'),
             reset: document.getElementById('reset-container'),
-            home: document.getElementById('home'),
-            profile: document.getElementById('profile'),
-            wallet: document.getElementById('wallet'),
-            invite: document.getElementById('invite'),
-            income: document.getElementById('income')
+            homeSection: document.getElementById('homeSection'),
+            profileSection: document.getElementById('profileSection'),
+            walletSection: document.getElementById('walletSection'),
+            inviteSection: document.getElementById('inviteSection'),
+            incomeSection: document.getElementById('incomeSection')
         };
         const forms = {
             login: document.getElementById('login-form'),
@@ -1300,7 +1340,8 @@
         const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
         const TASK_BONUS = 5.0;
-        const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10]; // Daily bonus tokens
+        const MINING_REWARD = 12;
+        const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
 
         // Referral Milestones
         const referralMilestones = [
@@ -1309,6 +1350,10 @@
             { id: 'milestone-5', referrals: 5, reward: 150.00 },
             { id: 'milestone-18', referrals: 18, reward: 600.00 }
         ];
+
+        // Global Variables
+        let miningInterval = null;
+        let dailyBonusInterval = null;
 
         // Utility Functions
         function getReferralCodeFromURL() {
@@ -1322,6 +1367,20 @@
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
             loadingOverlay.classList.remove('active');
+        }
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Update Balance
+        async function updateBalance(user, tokens) {
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, { tokens });
+            balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
         }
 
         // Update Milestone Status
@@ -1372,27 +1431,27 @@
                 }
                 if (userData.referrals >= milestone.referrals) {
                     const newTokens = (userData.tokens || 0) + milestone.reward;
-                    const newEarnings = (userData.earnings || 0) + milestone.reward;
-                    const newInviteEarnings = (userData.inviteEarnings || 0) + milestone.reward;
+                    const history = userData.history || [];
+                    history.push({
+                        type: 'Reward',
+                        amount: milestone.reward,
+                        date: new Date().toLocaleDateString('en-GB')
+                    });
                     await update(userRef, {
                         tokens: newTokens,
-                        earnings: newEarnings,
-                        inviteEarnings: newInviteEarnings,
-                        [`milestone${milestone.referrals}Claimed`]: true
+                        [`milestone${milestone.referrals}Claimed`]: true,
+                        history
                     });
-                    balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                    document.getElementById(`status-${milestone.referrals}`).textContent = 'Complete';
-                    document.getElementById(`status-${milestone.referrals}`).classList.remove('available');
-                    document.getElementById(`status-${milestone.referrals}`).classList.add('complete');
-                    document.getElementById(`status-${milestone.referrals}`).style.pointerEvents = 'none';
-                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals} referrals!`);
+                    updateBalance(user, newTokens);
+                    updateMilestoneStatus(userData.referrals, userData);
+                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals}!`);
                 } else {
                     alert('Not enough referrals to claim this milestone!');
                 }
             }
         }
 
-        // Update Task Button Status
+        // Update Task Button
         async function updateTaskButton(taskType, userData) {
             const button = document.getElementById(`${taskType}-task-btn`);
             if (!button) return;
@@ -1401,19 +1460,19 @@
             if (isClaimed) {
                 button.textContent = 'COMPLETE';
                 button.disabled = true;
-                button.style.background = '#cccccc';
+                button.style.backgroundColor = '#cccccc';
                 button.style.cursor = 'not-allowed';
                 button.onclick = null;
             } else if (sessionStorage.getItem(`${taskType}Visited`)) {
                 button.textContent = 'CLAIM';
                 button.disabled = false;
-                button.style.background = '#00cc99';
+                button.style.backgroundColor = '#00cc99';
                 button.style.cursor = 'pointer';
                 button.onclick = () => claimTask(taskType);
             } else {
                 button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
                 button.disabled = false;
-                button.style.background = '#00cc99';
+                button.style.backgroundColor = '#00cc99';
                 button.style.cursor = 'pointer';
                 button.onclick = () => handleTask(taskType);
             }
@@ -1466,22 +1525,19 @@
                 }
 
                 const newTokens = (userData.tokens || 0) + TASK_BONUS;
-                const newEarnings = (userData.earnings || 0) + TASK_BONUS;
-                const newTaskEarnings = (userData.taskEarnings || 0) + TASK_BONUS;
+                const history = userData.history || [];
+                history.push({
+                    type: 'Complete Tasks',
+                    amount: TASK_BONUS,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
                 await update(userRef, {
                     tokens: newTokens,
-                    earnings: newEarnings,
-                    taskEarnings: newTaskEarnings,
-                    [`${taskType}BonusClaimed`]: true
+                    [`${taskType}BonusClaimed`]: true,
+                    history
                 });
-
-                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
-                const button = document.getElementById(`${taskType}-task-btn`);
-                button.textContent = 'COMPLETE';
-                button.disabled = true;
-                button.style.background = '#cccccc';
-                button.style.cursor = 'not-allowed';
-                button.onclick = null;
+                updateBalance(user, newTokens);
+                updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
                 alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
             }
         }
@@ -1493,23 +1549,25 @@
             const lastClaimed = userData.lastDailyBonus || 0;
             const currentDay = userData.dailyBonusDay || 0;
             const now = Date.now();
-            const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            const oneDay = 24 * 60 * 60 * 1000;
+
+            if (dailyBonusInterval) clearInterval(dailyBonusInterval);
 
             if (lastClaimed + oneDay > now) {
                 dailyBonusBtn.disabled = true;
                 let timeLeft = Math.floor((lastClaimed + oneDay - now) / 1000);
-                dailyBonusBtn.textContent = `${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}`;
+                dailyBonusBtn.textContent = formatTime(timeLeft);
 
-                const interval = setInterval(() => {
+                dailyBonusInterval = setInterval(() => {
+                    timeLeft--;
                     if (timeLeft <= 0) {
-                        clearInterval(interval);
+                        clearInterval(dailyBonusInterval);
                         dailyBonusBtn.disabled = false;
                         dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
                         dailyBonusBtn.onclick = () => claimDailyBonus();
                         return;
                     }
-                    timeLeft--;
-                    dailyBonusBtn.textContent = `${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}`;
+                    dailyBonusBtn.textContent = formatTime(timeLeft);
                 }, 1000);
             } else {
                 dailyBonusBtn.disabled = false;
@@ -1544,45 +1602,39 @@
                 currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
 
                 const newTokens = (userData.tokens || 0) + bonus;
-                const newEarnings = (userData.earnings || 0) + bonus;
-                const newDailyEarnings = (userData.dailyEarnings || 0) + bonus;
+                const history = userData.history || [];
+                history.push({
+                    type: 'Daily Bonus',
+                    amount: bonus,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
                 await update(userRef, {
                     tokens: newTokens,
-                    earnings: newEarnings,
-                    dailyEarnings: newDailyEarnings,
                     lastDailyBonus: now,
-                    dailyBonusDay: currentDay
+                    dailyBonusDay: currentDay,
+                    history
                 });
+                updateBalance(user, newTokens);
 
-                balanceBox.textContent = `Balance: ${newTokens.toFixed(3)} ARPM`;
+                if (dailyBonusInterval) clearInterval(dailyBonusInterval);
                 dailyBonusBtn.disabled = true;
                 let timeLeft = 24 * 60 * 60;
-                dailyBonusBtn.textContent = `24:00`;
+                dailyBonusBtn.textContent = formatTime(timeLeft);
 
-                const interval = setInterval(() => {
+                dailyBonusInterval = setInterval(() => {
+                    timeLeft--;
                     if (timeLeft <= 0) {
-                        clearInterval(interval);
+                        clearInterval(dailyBonusInterval);
                         dailyBonusBtn.disabled = false;
                         dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
                         dailyBonusBtn.onclick = () => claimDailyBonus();
                         return;
                     }
-                    timeLeft--;
-                    const hours = Math.floor(timeLeft / 3600);
-                    const minutes = Math.floor((timeLeft % 3600) / 60);
-                    dailyBonusBtn.textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+                    dailyBonusBtn.textContent = formatTime(timeLeft);
                 }, 1000);
 
                 alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
             }
-        }
-
-        // Update Wallet History
-        async function updateWalletHistory(userData) {
-            document.getElementById('mining-amount').textContent = `${(userData.miningEarnings || 0).toFixed(3)} ARPM`;
-            document.getElementById('invite-amount').textContent = `${(userData.inviteEarnings || 0).toFixed(3)} ARPM`;
-            document.getElementById('tasks-amount').textContent = `${(userData.taskEarnings || 0).toFixed(3)} ARPM`;
-            document.getElementById('daily-amount').textContent = `${(userData.dailyEarnings || 0).toFixed(3)} ARPM`;
         }
 
         // Show Page
@@ -1590,15 +1642,17 @@
             await showLoadingScreen();
             Object.values(containers).forEach(c => c.style.display = 'none');
             containers[page].style.display = 'block';
-            navbarTop.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'flex' : 'none';
-            bottomNav.style.display = page === 'login' || page === 'signup' || page === 'reset' ? 'none' : 'flex';
+            navbarTop.style.display = ['login', 'signup', 'reset'].includes(page) ? 'flex' : 'none';
+            
+            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection', 'inviteSection', 'incomeSection'].includes(page) ? 'flex' : 'none';
+
             if (page === 'signup') {
                 const referralCode = getReferralCodeFromURL();
                 if (referralCode) {
                     document.getElementById('signup-invite-code').value = referralCode;
                 }
             }
-            if (page === 'invite') {
+            if (page === 'inviteSection') {
                 const user = auth.currentUser;
                 if (user) {
                     const userRef = ref(db, 'users/' + user.uid);
@@ -1609,7 +1663,7 @@
                     }
                 }
             }
-            if (page === 'profile') {
+            if (page === 'profileSection') {
                 const user = auth.currentUser;
                 if (user) {
                     const userRef = ref(db, 'users/' + user.uid);
@@ -1625,7 +1679,7 @@
                     }
                 }
             }
-            if (page === 'income') {
+            if (page === 'incomeSection') {
                 const user = auth.currentUser;
                 if (user) {
                     const userRef = ref(db, 'users/' + user.uid);
@@ -1637,8 +1691,7 @@
                         updateTaskButton('instagram', userData);
                     }
                 }
-                // Manage ad placeholders in income page
-                const adPlaceholders = document.querySelectorAll('#income .ad-placeholder');
+                const adPlaceholders = document.querySelectorAll('#incomeSection .ad-placeholder');
                 adPlaceholders.forEach(ad => {
                     if (ad.children.length > 0) {
                         ad.classList.add('active');
@@ -1647,19 +1700,8 @@
                     }
                 });
             }
-            if (page === 'wallet') {
-                const user = auth.currentUser;
-                if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        updateWalletHistory(userData);
-                    }
-                }
-            }
-            if (page === 'home' || page === 'invite') {
-                const adPlaceholders = document.querySelectorAll('#home .ad-placeholder, #invite .ad-placeholder');
+            if (['homeSection', 'inviteSection'].includes(page)) {
+                const adPlaceholders = document.querySelectorAll('#homeSection .ad-placeholder, #inviteSection .ad-placeholder');
                 adPlaceholders.forEach(ad => {
                     if (ad.children.length > 0) {
                         ad.classList.add('active');
@@ -1668,7 +1710,7 @@
                     }
                 });
             }
-            if (page === 'home') {
+            if (page === 'homeSection') {
                 const user = auth.currentUser;
                 if (user) {
                     const userRef = ref(db, 'users/' + user.uid);
@@ -1679,9 +1721,9 @@
                     }
                 }
             }
-            const navItems = document.querySelectorAll('.bottom-nav-item');
+            const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
-            const activeNav = document.querySelector(`.bottom-nav-item[data-target="${page}"]`);
+            const activeNav = document.querySelector(`.nav-item[data-target="${page}"]`);
             if (activeNav) activeNav.classList.add('active');
         }
 
@@ -1706,6 +1748,8 @@
 
         window.signOut = async () => {
             alert("Logging out...");
+            if (miningInterval) clearInterval(miningInterval);
+            if (dailyBonusInterval) clearInterval(dailyBonusInterval);
             try {
                 await signOut(auth);
                 showPage('login');
@@ -1718,7 +1762,20 @@
 
         window.toggleRoadmap = () => {
             const roadmapContent = document.getElementById('roadmap-content');
+            const rulesContent = document.getElementById('rules-content');
             roadmapContent.classList.toggle('active');
+            if (rulesContent.classList.contains('active')) {
+                rulesContent.classList.remove('active');
+            }
+        };
+
+        window.toggleRules = () => {
+            const rulesContent = document.getElementById('rules-content');
+            const roadmapContent = document.getElementById('roadmap-content');
+            rulesContent.classList.toggle('active');
+            if (roadmapContent.classList.contains('active')) {
+                roadmapContent.classList.remove('active');
+            }
         };
 
         // Form Event Listeners
@@ -1729,7 +1786,7 @@
             try {
                 await showLoadingScreen();
                 await signInWithEmailAndPassword(auth, email, password);
-                showPage('home');
+                showPage('homeSection');
             } catch (error) {
                 alert(`LOGIN FAILED: ${error.code === 'auth/wrong-password' ? 'INCORRECT PASSWORD' : 'INVALID EMAIL OR USER NOT FOUND'}`);
             }
@@ -1761,22 +1818,17 @@
                 const user = userCredential.user;
                 const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
                 const initialTokens = inviteCode ? NEW_USER_BONUS : 0;
-                const initialEarnings = inviteCode ? NEW_USER_BONUS : 0;
+                const history = inviteCode ? [{ type: 'Invite Bonus', amount: NEW_USER_BONUS, date: new Date().toLocaleDateString('en-GB') }] : [];
                 await set(ref(db, 'users/' + user.uid), {
                     username: username || "",
                     email: email,
                     tokens: initialTokens,
-                    earnings: initialEarnings,
                     inviteCode: inviteCode || null,
                     uniqueCode: uniqueCode,
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
                     minedTokens: 0,
-                    miningEarnings: 0,
-                    inviteEarnings: 0,
-                    taskEarnings: 0,
-                    dailyEarnings: 0,
                     referrals: 0,
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
@@ -1788,7 +1840,8 @@
                     milestone5Claimed: false,
                     milestone18Claimed: false,
                     lastDailyBonus: 0,
-                    dailyBonusDay: 0
+                    dailyBonusDay: 0,
+                    history
                 });
 
                 if (referrerUid && inviteCode) {
@@ -1797,13 +1850,16 @@
                     const referrerData = referrerSnapshot.val();
                     const newReferrals = (referrerData.referrals || 0) + 1;
                     const newTokens = (referrerData.tokens || 0) + REFERRAL_BONUS;
-                    const newEarnings = (referrerData.earnings || 0) + REFERRAL_BONUS;
-                    const newInviteEarnings = (referrerData.inviteEarnings || 0) + REFERRAL_BONUS;
+                    const referrerHistory = referrerData.history || [];
+                    referrerHistory.push({
+                        type: 'Invite Bonus',
+                        amount: REFERRAL_BONUS,
+                        date: new Date().toLocaleDateString('en-GB')
+                    });
                     await update(referrerRef, {
                         referrals: newReferrals,
                         tokens: newTokens,
-                        earnings: newEarnings,
-                        inviteEarnings: newInviteEarnings
+                        history: referrerHistory
                     });
                 }
 
@@ -1833,11 +1889,11 @@
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
-                    balanceBox.textContent = `Balance: ${userData.tokens.toFixed(3)} ARPM`;
-                    if (containers.invite.style.display === 'block') {
+                    updateBalance(user, userData.tokens || 0);
+                    if (containers.inviteSection.style.display === 'block') {
                         updateMilestoneStatus(userData.referrals || 0, userData);
                     }
-                    if (containers.profile.style.display === 'block') {
+                    if (containers.profileSection.style.display === 'block') {
                         document.getElementById("username").textContent = userData.username || "N/A";
                         document.getElementById("email").textContent = user.email;
                         document.getElementById("date").textContent = userData.registrationDate;
@@ -1845,71 +1901,65 @@
                         profileReferralLinkElement.textContent = referralLink;
                         profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
                     }
-                    if (containers.income.style.display === 'block') {
+                    if (containers.incomeSection.style.display === 'block') {
                         updateTaskButton('youtube', userData);
                         updateTaskButton('x', userData);
                         updateTaskButton('instagram', userData);
                     }
-                    if (containers.wallet.style.display === 'block') {
-                        updateWalletHistory(userData);
-                    }
-                    if (containers.home.style.display === 'block') {
+                    if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
                     }
                     if (userData.miningEndTime > Date.now()) {
-                        startMiningBtn.disabled = true;
+                        if (miningInterval) clearInterval(miningInterval);
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
-                        const minedTokens = userData.minedTokens || 0;
+                        let minedTokens = userData.minedTokens || 0;
 
-                        startMiningBtn.innerHTML = `Time Left:<br>${Math.floor(timeLeft / 3600)}:${Math.floor((timeLeft % 3600) / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}<br>Tokens: ${minedTokens.toFixed(3)}`;
+                        startMiningBtn.disabled = true;
+                        startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
-                        const miningInterval = setInterval(async () => {
+                        miningInterval = setInterval(async () => {
+                            timeLeft--;
                             if (timeLeft <= 0) {
                                 clearInterval(miningInterval);
-                                startMiningBtn.disabled = false;
-                                startMiningBtn.innerHTML = 'START MINING';
-
-                                const snapshotAfterTimer = await get(userRef);
-                                if (snapshotAfterTimer.exists()) {
-                                    const userData = snapshotAfterTimer.val();
-                                    const finalTokens = (userData.tokens || 0) + (userData.minedTokens || 0);
-                                    const finalMiningEarnings = (userData.miningEarnings || 0) + (userData.minedTokens || 0);
+                                const snapshot = await get(userRef);
+                                if (snapshot.exists()) {
+                                    const userData = snapshot.val();
+                                    const newTokens = (userData.tokens || 0) + MINING_REWARD;
+                                    const history = userData.history || [];
+                                    history.push({
+                                        type: 'Start Mining',
+                                        amount: MINING_REWARD,
+                                        date: new Date().toLocaleDateString('en-GB')
+                                    });
                                     await update(userRef, {
-                                        tokens: finalTokens,
-                                        earnings: finalTokens,
-                                        miningEarnings: finalMiningEarnings,
+                                        tokens: newTokens,
                                         miningStartTime: 0,
                                         miningEndTime: 0,
-                                        minedTokens: 0
+                                        minedTokens: 0,
+                                        history
                                     });
-                                    balanceBox.textContent = `Balance: ${finalTokens.toFixed(3)} ARPM`;
+                                    updateBalance(user, newTokens);
+                                    startMiningBtn.disabled = false;
+                                    startMiningBtn.innerHTML = 'START MINING';
                                     alert('Mining completed! You earned 12 ARPM.');
                                 }
                                 return;
                             }
 
-                            timeLeft--;
-                            const hours = Math.floor(timeLeft / 3600);
-                            const minutes = Math.floor((timeLeft % 3600) / 60);
-                            const seconds = timeLeft % 60;
                             const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
-                            const currentMinedTokens = hoursPassed >= 12 ? 12 : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+                            minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+                            startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
-                            startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}<br>Tokens: ${currentMinedTokens.toFixed(3)}`;
-                            
                             if (timeLeft % 3600 === 0) {
-                                const snapshot = await get(userRef);
-                                if (snapshot.exists()) {
-                                    const userData = snapshot.val();
-                                    const newMinedTokens = (userData.minedTokens || 0) + 1;
-                                    await update(userRef, { minedTokens: newMinedTokens });
-                                }
+                                await update(userRef, { minedTokens });
                             }
                         }, 1000);
                     }
                 }
-                showPage('home');
+                showPage('homeSection');
             } else {
+                if (miningInterval) clearInterval(miningInterval);
+                if (dailyBonusInterval) clearInterval(dailyBonusInterval);
                 showPage('login');
             }
         });
@@ -1930,7 +1980,7 @@
         };
 
         // Bottom Navigation Event Listeners
-        const navItems = document.querySelectorAll('.bottom-nav-item');
+        const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', async () => {
                 navItems.forEach(nav => nav.classList.remove('active'));
@@ -1941,8 +1991,6 @@
         });
 
         // Mining Button Logic
-        let miningInterval = null;
-
         startMiningBtn.addEventListener('click', async () => {
             const user = auth.currentUser;
             if (!user) {
@@ -1961,8 +2009,11 @@
                 }
             }
 
+            if (miningInterval) clearInterval(miningInterval);
+
             startMiningBtn.disabled = true;
-            let timeLeft = 12 * 60 * 60; // 12 hours in seconds
+            let timeLeft = 12 * 60 * 60;
+            let minedTokens = 0;
 
             await update(userRef, {
                 miningStartTime: Date.now(),
@@ -1970,52 +2021,46 @@
                 minedTokens: 0
             });
 
-            startMiningBtn.innerHTML = `Time Left:<br>12:00:00<br>Tokens: 0.000`;
+            startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
             miningInterval = setInterval(async () => {
+                timeLeft--;
                 if (timeLeft <= 0) {
                     clearInterval(miningInterval);
-                    startMiningBtn.disabled = false;
-                    startMiningBtn.innerHTML = 'START MINING';
-
-                    const snapshotAfterTimer = await get(userRef);
-                    if (snapshotAfterTimer.exists()) {
-                        const userData = snapshotAfterTimer.val();
-                        const finalTokens = (userData.tokens || 0) + 12;
-                        const finalMiningEarnings = (userData.miningEarnings || 0) + 12;
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const newTokens = (userData.tokens || 0) + MINING_REWARD;
+                        const history = userData.history || [];
+                        history.push({
+                            type: 'Start Mining',
+                            amount: MINING_REWARD,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
                         await update(userRef, {
-                            tokens: finalTokens,
-                            earnings: finalTokens,
-                            miningEarnings: finalMiningEarnings,
+                            tokens: newTokens,
                             miningStartTime: 0,
                             miningEndTime: 0,
-                            minedTokens: 0
+                            minedTokens: 0,
+                            history
                         });
-                        balanceBox.textContent = `Balance: ${finalTokens.toFixed(3)} ARPM`;
+                        updateBalance(user, newTokens);
+                        startMiningBtn.disabled = false;
+                        startMiningBtn.innerHTML = 'START MINING';
                         alert('Mining completed! You earned 12 ARPM.');
                     }
                     return;
                 }
 
-                timeLeft--;
-                const hours = Math.floor(timeLeft / 3600);
-                const minutes = Math.floor((timeLeft % 3600) / 60);
-                const seconds = timeLeft % 60;
                 const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
-                const currentMinedTokens = hoursPassed >= 12 ? 12 : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-
-                startMiningBtn.innerHTML = `Time Left:<br>${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}<br>Tokens: ${currentMinedTokens.toFixed(3)}`;
+                minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+                startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
                 if (timeLeft % 3600 === 0) {
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        const newMinedTokens = (userData.minedTokens || 0) + 1;
-                        await update(userRef, { minedTokens: newMinedTokens });
-                    }
+                    await update(userRef, { minedTokens });
                 }
             }, 1000);
         });
     </script>
 </body>
-</html>)
+</html>
