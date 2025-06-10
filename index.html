@@ -363,7 +363,7 @@
         }
 
         .wallet-section p {
-            color: #000; /* Ensure "coming soon" text is visible */
+            color: #000;
             font-size: 18px;
             font-weight: 600;
         }
@@ -402,11 +402,11 @@
             justify-content: space-between;
             background: #f1f1f1;
             padding: 10px 15px;
-            margin: 15px 20px;
+            margin: 10px 20px;
             border-radius: 8px;
         }
 
-        .youtube-icon {
+        .youtube-icon, .twitter-icon, .instagram-icon {
             font-size: 28px;
             margin-right: 15px;
             flex-shrink: 0;
@@ -625,7 +625,7 @@
 
         .ad-placeholder.active {
             height: 100px;
-            margin: 15px 15px;
+            margin: 10px 15px;
         }
 
         /* Roadmap and Rules Container */
@@ -848,7 +848,7 @@
 
             .signout {
                 margin: 20px 15px;
-                margin-bottom: 100px;
+                padding-bottom: 100px;
             }
 
             .signout button {
@@ -861,19 +861,19 @@
                 width: 120px;
                 height: 120px;
                 font-size: 14px;
-                margin: 5px 0;
+                margin: 5px auto;
             }
 
             .section-title {
-                margin: 8px 0 3px 0;
+                margin: 8px 0 3px;
             }
 
-            .ad-placeholder {
-                margin-top: 10px;
+            .ad-placeholder.active {
                 height: 80px;
+                margin: 10px 10px;
             }
 
-            .roadmap-button, .rules-button, .daily-bonus {
+            .roadmap-button, .rules-button, .daily-bonus-button {
                 width: 40px;
                 height: 40px;
                 font-size: 12px;
@@ -896,6 +896,10 @@
                 width: 150px;
                 height: 150px;
                 font-size: 12px;
+            }
+
+            .task-box {
+                margin: 8px 15px;
             }
         }
 
@@ -970,7 +974,7 @@
                 padding-bottom: 50px;
             }
 
-            .signout-button {
+            .signout button {
                 padding: 8px 16px;
                 font-size: 12px;
                 max-width: 160px;
@@ -984,12 +988,12 @@
             }
 
             .section-title {
-                margin: 5px 0 2px 0;
+                margin: 5px 0 2px;
             }
 
-            .ad-placeholder {
+            .ad-placeholder.active {
                 height: 60px;
-                margin: 10px 10px;
+                margin: 8px 10px;
             }
 
             .roadmap-button, .rules-button, .daily-bonus-button {
@@ -1023,6 +1027,10 @@
 
             .rules-content h2 {
                 font-size: 14px;
+            }
+
+            .task-box {
+                margin: 5px 12px;
             }
         }
     </style>
@@ -1246,7 +1254,7 @@
             </div>
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
-        <div class="ad-placeholder" id="income-ad"></div>
+        <div class="ad-placeholder" id="youtube-ad"></div>
         <div class="task-box">
             <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
@@ -1256,7 +1264,7 @@
             </div>
             <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
-        <div class="ad-placeholder" id="x-instagram-ad"></div>
+        <div class="ad-placeholder" id="x-ad"></div>
         <div class="task-box">
             <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
             <div class="task-text">
@@ -1266,6 +1274,7 @@
             </div>
             <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
         </div>
+        <div class="ad-placeholder" id="instagram-ad"></div>
     </div>
 
     <!-- Bottom Navigation -->
@@ -1444,7 +1453,7 @@
                     });
                     updateBalance(user, newTokens);
                     updateMilestoneStatus(userData.referrals, userData);
-                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals}!`);
+                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals} referrals!`);
                 } else {
                     alert('Not enough referrals to claim this milestone!');
                 }
