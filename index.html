@@ -621,21 +621,21 @@
             position: relative;
             overflow: hidden;
             transition: height 0.3s ease, margin 0.3s ease;
-            text-align: center; /* Center the ad */
+            text-align: center;
         }
 
         .ad-placeholder.active {
-            height: auto; /* Auto height to accommodate ad */
+            height: auto;
+            min-height: 100px;
             margin: 10px 15px;
-            min-height: 50px; /* Minimum height for smaller ads */
         }
 
-        /* Ensure iframes are responsive */
-        .ad-placeholder iframe {
+        .ad-placeholder iframe,
+        .ad-placeholder div,
+        .ad-placeholder a {
             max-width: 100%;
-            height: auto;
-            display: block;
             margin: 0 auto;
+            display: block;
         }
 
         /* Roadmap and Rules Container */
@@ -880,8 +880,8 @@
 
             .ad-placeholder.active {
                 height: auto;
+                min-height: 80px;
                 margin: 10px 10px;
-                min-height: 50px;
             }
 
             .roadmap-button, .rules-button, .daily-bonus-button {
@@ -1004,8 +1004,8 @@
 
             .ad-placeholder.active {
                 height: auto;
+                min-height: 60px;
                 margin: 8px 10px;
-                min-height: 50px;
             }
 
             .roadmap-button, .rules-button, .daily-bonus-button {
@@ -1194,7 +1194,18 @@
             </div>
         </div>
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
-        <div class="ad-placeholder" id="home-ad"></div>
+        <div class="ad-placeholder" id="home-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '0e76a0edb900a6f53aa1a75d1b26bd27',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js"></script>
+        </div>
     </div>
 
     <!-- Profile Section -->
@@ -1243,6 +1254,18 @@
             <div class="milestone-text">Over 18 VALID REFERRALS IN TOTAL. 600.00 ARPM</div>
             <span class="milestone-status" id="status-18" onclick="claimMilestone('milestone-18')">not available</span>
         </div>
+        <div class="ad-placeholder" id="invite-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js"></script>
+        </div>
     </div>
 
     <!-- Wallet Section -->
@@ -1265,6 +1288,10 @@
             </div>
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
+        <div class="ad-placeholder" id="youtube-ad">
+            <script async="async" data-cfasync="false" src="//pl26881571.profitableratecpm.com/946391b8e10827404b7dd26a5817e31c/invoke.js"></script>
+            <div id="container-946391b8e10827404b7dd26a5817e31c"></div>
+        </div>
         <div class="task-box">
             <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
@@ -1274,6 +1301,9 @@
             </div>
             <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
+        <div class="ad-placeholder" id="x-ad">
+            <a href="https://www.profitableratecpm.com/czy8uk6k?key=352af86bd860aff1b2109611320beef7" target="_blank">Visit Ad</a>
+        </div>
         <div class="task-box">
             <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
             <div class="task-text">
@@ -1282,6 +1312,18 @@
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
+        </div>
+        <div class="ad-placeholder" id="instagram-ad">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'c620af328467e6de19dc04af696ee0fb',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/c620af328467e4de19dc04af696ee0fb/invoke.js"></script>
         </div>
     </div>
 
@@ -1654,74 +1696,30 @@
             }
         }
 
-        // Ad Management
-        function loadRandomAd() {
-            const homeAd = document.getElementById('home-ad');
-            if (!homeAd) return;
-
-            // Clear previous ad content
-            homeAd.innerHTML = '';
-
-            const ads = [
-                {
-                    config: {
-                        key: '0e76a0edb900a6f53aa1a75d1b26bd27',
-                        format: 'iframe',
-                        height: 250,
-                        width: 300,
-                        params: {}
-                    },
-                    src: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js'
-                },
-                {
-                    config: {
-                        key: 'eb117daf94e120e0ae0e6f682c2e34f5',
-                        format: 'iframe',
-                        height: 50,
-                        width: 320,
-                        params: {}
-                    },
-                    src: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
-                },
-                {
-                    config: {
-                        key: 'c620af328467e6de19dc04af696ee0fb',
-                        format: 'iframe',
-                        height: 250,
-                        width: 300,
-                        params: {}
-                    },
-                    src: '//www.highperformanceformat.com/c620af328467e6de19dc04af696ee0fb/invoke.js'
-                },
-                {
-                    config: {
-                        key: '78ade24182729fceea8e45203dad915b',
-                        format: 'iframe',
-                        height: 50,
-                        width: 320,
-                        params: {}
-                    },
-                    src: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js'
-                }
+        // Ad Rotation Logic
+        function showRandomAd() {
+            const adPlaceholders = [
+                'home-ad',
+                'invite-ad',
+                'youtube-ad',
+                'x-ad',
+                'instagram-ad'
             ];
 
-            // Select a random ad
-            const randomAd = ads[Math.floor(Math.random() * ads.length)];
+            // Hide all ads initially
+            adPlaceholders.forEach(adId => {
+                const adElement = document.getElementById(adId);
+                if (adElement) {
+                    adElement.classList.remove('active');
+                }
+            });
 
-            // Create script for atOptions
-            const configScript = document.createElement('script');
-            configScript.type = 'text/javascript';
-            configScript.text = `atOptions = ${JSON.stringify(randomAd.config)};`;
-            homeAd.appendChild(configScript);
-
-            // Create script for ad invocation
-            const invokeScript = document.createElement('script');
-            invokeScript.type = 'text/javascript';
-            invokeScript.src = randomAd.src;
-            homeAd.appendChild(invokeScript);
-
-            // Add active class to show ad
-            homeAd.classList.add('active');
+            // Randomly select one ad to display
+            const randomAdId = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length)];
+            const selectedAd = document.getElementById(randomAdId);
+            if (selectedAd) {
+                selectedAd.classList.add('active');
+            }
         }
 
         // Show Page
@@ -1779,18 +1777,8 @@
                     }
                 }
             }
-            if (page === 'homeSection') {
-                const user = auth.currentUser;
-                if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        updateDailyBonusButton(userData);
-                    }
-                }
-                // Load a random ad for the home section
-                loadRandomAd();
+            if (['homeSection', 'inviteSection', 'incomeSection'].includes(page)) {
+                showRandomAd();
             }
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
@@ -1979,7 +1967,6 @@
                     }
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
-                        loadRandomAd();
                     }
                     if (userData.miningEndTime > Date.now()) {
                         if (miningInterval) clearInterval(miningInterval);
@@ -2064,72 +2051,75 @@
 
         // Mining Button Logic
         startMiningBtn.addEventListener('click', async () => {
-    const user = auth.currentUser;
-    if (!user) {
-        alert('Please login to start mining!');
-        showPage('login');
-        return;
-    }
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to start mining!');
+                showPage('login');
+                return;
+            }
 
-    const userRef = ref(db, 'users/' + user.uid);
-    const snapshot = await get(userRef);
-    if (snapshot.exists()) {
-        const userData = snapshot.val();
-        if (userData.miningEndTime > Date.now()) {
-            alert('Mining is already in progress! Please wait until it completes.');
-            return;
-        }
-    }
-
-    if (miningInterval) clearInterval(miningInterval);
-
-    startMiningBtn.disabled = true;
-    let timeLeft = 12 * 60 * 60; // ১২ ঘণ্টা সেকেন্ডে
-    let minedTokens = 0;
-
-    await update(userRef, {
-        miningStartTime: Date.now(),
-        miningEndTime: Date.now() + 12 * 60 * 60 * 1000,
-        minedTokens: 0
-    });
-
-    startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
-
-    miningInterval = setInterval(async () => {
-        timeLeft--;
-        if (timeLeft <= 0) {
-            clearInterval(miningInterval);
+            const userRef = ref(db, 'users/' + user.uid);
             const snapshot = await get(userRef);
             if (snapshot.exists()) {
                 const userData = snapshot.val();
-                const newTokens = (userData.tokens || 0) + MINING_REWARD;
-                const history = userData.history || [];
-                history.push({
-                    type: 'Start Mining',
-                    amount: MINING_REWARD,
-                    date: new Date().toLocaleDateString('en-GB')
-                });
-                await update(userRef, {
-                    tokens: newTokens,
-                    miningStartTime: 0,
-                    miningEndTime: 0,
-                    minedTokens: 0,
-                    history
-                });
-                updateBalance(user, newTokens);
-                startMiningBtn.disabled = false;
-                startMiningBtn.innerHTML = 'START MINING';
-                alert('Mining completed! You earned 12 ARPM.');
+                if (userData.miningEndTime > Date.now()) {
+                    alert('Mining is already in progress! Please wait until it completes.');
+                    return;
+                }
             }
-            return;
-        }
 
-        const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
-        minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-        startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+            if (miningInterval) clearInterval(miningInterval);
 
-        if (timeLeft % 3600 === 0) {
-            await update(userRef, { minedTokens });
-        }
-    }, 1000);
-});
+            startMiningBtn.disabled = true
+            let timeLeft = 12 * 60 * 60;
+            let minedTokens = 0;
+
+            await update(userRef, {
+                miningStartTime: Date.now(),
+                miningEndTime: Date.now() + 12 * 60 * 60 * 1000,
+                minedTokens: 0
+            });
+
+            startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+            miningInterval = setInterval(async () => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(miningInterval);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        const newTokens = (userData.tokens || 0) + MINING_REWARD;
+                        const history = userData.history || [];
+                        history.push({
+                            type: 'Start Mining',
+                            amount: MINING_REWARD,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(userRef, {
+                            tokens: newTokens,
+                            miningStartTime: 0,
+                            miningEndTime: 0,
+                            minedTokens: 0,
+                            history
+                        });
+                        updateBalance(user, newTokens);
+                        startMiningBtn.disabled = false;
+                        startMiningBtn.innerHTML = 'START MINING';
+                        alert('Mining completed! You earned 12 ARPM.');
+                    }
+                    return;
+                }
+
+                const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
+                minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
+                startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+                if (timeLeft % 3600 === 0) {
+                    await update(userRef, { minedTokens });
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
