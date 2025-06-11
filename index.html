@@ -253,23 +253,6 @@
             display: block;
         }
 
-        .dashboard-header h2 {
-            font-size: 24px;
-            text-align: center;
-            color: #00cc99;
-            margin: 20px 0;
-        }
-
-        .welcome {
-            background: #fff;
-            color: #000;
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #ccc;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
         /* Image Half Section */
         .image-half {
             background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
@@ -302,12 +285,30 @@
         }
 
         .home-bottom-text {
-            margin: 20px 15px;
+            margin: 10px 15px;
             text-align: left;
             font-size: 18px;
             color: #333;
             font-weight: 600;
             padding-left: 20px;
+            border: 2px solid #000;
+            border-radius: 8px;
+        }
+
+        /* Ad Section */
+        .ad-section {
+            margin: 10px 15px;
+            text-align: center;
+            background: #f1f1f1;
+            border-radius: 8px;
+            padding: 10px;
+            border: 2px solid #000;
+        }
+
+        .ad-section p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
         }
 
         /* Bottom Navigation */
@@ -344,10 +345,8 @@
 
         /* Section Titles */
         #profileSection .section-title,
-        #inviteSection .section-title,
         #incomeSection .section-title,
-        #walletSection .section-title,
-        #dashboardSection .section-title {
+        #walletSection .section-title {
             font-size: 24px;
             font-weight: bold;
             text-align: center;
@@ -518,26 +517,6 @@
             color: #333;
         }
 
-        .invite-link {
-            margin: 20px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            text-align: center;
-            font-weight: bold;
-            color: #555;
-            user-select: none;
-        }
-
-        .placeholder-box {
-            height: 100px;
-            margin: 20px auto;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-
         /* Signout Section */
         .signout {
             margin: 30px 20px;
@@ -572,72 +551,6 @@
             font-weight: bold;
         }
 
-        /* Milestone Box */
-        .milestone-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f1f1f1;
-            padding: 15px;
-            margin: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .milestone-text {
-            flex: 1;
-            font-size: 16px;
-            color: #000;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .milestone-status {
-            font-size: 14px;
-            font-weight: bold;
-            color: #000;
-            text-align: right;
-            flex-shrink: 0;
-            margin-left: 10px;
-        }
-
-        .milestone-status.available {
-            color: #00cc99;
-            cursor: pointer;
-        }
-
-        .milestone-status.complete {
-            color: #cccccc;
-            cursor: default;
-        }
-
-        /* Ad Placeholder */
-        .ad-placeholder {
-            margin: 0 15px;
-            height: 0;
-            background: transparent;
-            border: none;
-            display: block;
-            position: relative;
-            overflow: hidden;
-            transition: height 0.3s ease, margin 0.3s ease;
-            text-align: center;
-        }
-
-        .ad-placeholder.active {
-            height: auto;
-            min-height: 100px;
-            margin: 10px 15px;
-        }
-
-        .ad-placeholder iframe,
-        .ad-placeholder div,
-        .ad-placeholder a {
-            max-width: 100%;
-            margin: 0 auto;
-            display: block;
-        }
-
         /* Roadmap and Rules Container */
         .buttons-container {
             position: absolute;
@@ -654,7 +567,7 @@
             gap: 10px;
         }
 
-        .roadmap-button, .rules-button {
+        .roadmap-button, .rules-button, .invite-button {
             width: 50px;
             height: 50px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
@@ -670,11 +583,16 @@
             transition: transform 0.2s;
         }
 
-        .roadmap-button:hover, .rules-button:hover {
+        .invite-button {
+            background: linear-gradient(45deg, #ff6f61, #ffb88c);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
+        }
+
+        .roadmap-button:hover, .rules-button:hover, .invite-button:hover {
             transform: scale(1.1);
         }
 
-        .roadmap-content, .rules-content {
+        .roadmap-content, .rules-content, .invite-content {
             display: none;
             position: absolute;
             background: #fff;
@@ -700,17 +618,22 @@
             left: 20px;
         }
 
-        .roadmap-content.active, .rules-content.active {
+        .invite-content {
+            top: 110px;
+            left: 20px;
+        }
+
+        .roadmap-content.active, .rules-content.active, .invite-content.active {
             display: block;
         }
 
-        .rules-content h1 {
+        .rules-content h1, .invite-content h1 {
             color: #0057ff;
             font-size: 20px;
             margin-bottom: 10px;
         }
 
-        .rules-content h2 {
+        .rules-content h2, .invite-content h2 {
             color: #333;
             font-size: 16px;
             margin-top: 20px;
@@ -718,18 +641,18 @@
             padding-bottom: 5px;
         }
 
-        .rules-content ul {
+        .rules-content ul, .invite-content ul {
             list-style: none;
             padding: 0;
             margin: 10px 0;
         }
 
-        .rules-content li {
+        .rules-content li, .invite-content li {
             margin-bottom: 10px;
             font-weight: 600;
         }
 
-        .rules-content p {
+        .rules-content p, .invite-content p {
             margin: 10px 0;
             font-size: 14px;
         }
@@ -832,28 +755,10 @@
                 font-size: 16px;
             }
 
-            .milestone-box {
-                padding: 12px;
-                margin: 12px 15px;
-            }
-
-            .milestone-text {
-                font-size: 14px;
-            }
-
-            .milestone-status {
-                font-size: 12px;
-            }
-
             .info-box {
                 margin: 10px 15px;
                 padding: 12px;
                 width: calc(100% - 30px);
-            }
-
-            .invite-link {
-                margin: 15px;
-                padding: 12px;
             }
 
             .signout {
@@ -878,23 +783,21 @@
                 margin: 8px 0 3px;
             }
 
-            .ad-placeholder.active {
-                height: auto;
-                min-height: 80px;
-                margin: 10px 10px;
-            }
-
-            .roadmap-button, .rules-button, .daily-bonus-button {
+            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
                 width: 40px;
                 height: 40px;
                 font-size: 12px;
             }
 
-            .roadmap-content, .rules-content {
+            .roadmap-content, .rules-content, .invite-content {
                 width: 250px;
                 font-size: 12px;
                 top: 50px;
                 max-height: 350px;
+            }
+
+            .invite-content {
+                top: 90px;
             }
 
             .start-button {
@@ -911,6 +814,20 @@
 
             .task-box {
                 margin: 8px 15px;
+            }
+
+            .home-bottom-text {
+                margin: 8px 15px;
+                font-size: 16px;
+            }
+
+            .ad-section {
+                margin: 8px 15px;
+                padding: 8px;
+            }
+
+            .ad-section p {
+                font-size: 14px;
             }
         }
 
@@ -956,28 +873,10 @@
                 font-size: 14px;
             }
 
-            .milestone-box {
-                padding: 10px;
-                margin: 10px 12px;
-            }
-
-            .milestone-text {
-                font-size: 12px;
-            }
-
-            .milestone-status {
-                font-size: 10px;
-            }
-
             .info-box {
                 margin: 8px 12px;
                 padding: 10px;
                 width: calc(100% - 24px);
-            }
-
-            .invite-link {
-                margin: 12px;
-                padding: 10px;
             }
 
             .signout {
@@ -1002,23 +901,21 @@
                 margin: 5px 0 2px;
             }
 
-            .ad-placeholder.active {
-                height: auto;
-                min-height: 60px;
-                margin: 8px 10px;
-            }
-
-            .roadmap-button, .rules-button, .daily-bonus-button {
+            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
 
-            .roadmap-content, .rules-content {
+            .roadmap-content, .rules-content, .invite-content {
                 width: 200px;
                 font-size: 11px;
                 top: 45px;
                 max-height: 300px;
+            }
+
+            .invite-content {
+                top: 80px;
             }
 
             .start-button {
@@ -1033,16 +930,30 @@
                 font-size: 10px;
             }
 
-            .rules-content h1 {
+            .rules-content h1, .invite-content h1 {
                 font-size: 16px;
             }
 
-            .rules-content h2 {
+            .rules-content h2, .invite-content h2 {
                 font-size: 14px;
             }
 
             .task-box {
                 margin: 5px 12px;
+            }
+
+            .home-bottom-text {
+                margin: 5px 12px;
+                font-size: 14px;
+            }
+
+            .ad-section {
+                margin: 5px 12px;
+                padding: 5px;
+            }
+
+            .ad-section p {
+                font-size: 12px;
             }
         }
     </style>
@@ -1099,7 +1010,7 @@
                 <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" onclick="togglePasswordVisibility('signup-confirm-password', 'toggle-signup-confirm-password')"></i>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="signup-invite-code" placeholder="Code (OPTIONAL)">
+                <input type="text" class="form-control" id="signup-invite-code" placeholder="INVITE CODE (OPTIONAL)">
             </div>
             <button type="submit" class="btn btn-success">REGISTER</button>
             <p class="footer-text">
@@ -1129,14 +1040,12 @@
             <div class="title">ARPM Mining</div>
             <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
         </div>
-        <div class="dashboard-header">
-            <h2>Welcome To ARPM Mining</h2>
-        </div>
         <div class="image-half">
             <button class="start-button" id="start-mining-btn">START MINING</button>
             <div class="buttons-container">
                 <div class="rules-container">
                     <div class="rules-button" onclick="toggleRules()">Rules</div>
+                    <div class="invite-button" onclick="toggleInvite()">Invite</div>
                     <div class="rules-content" id="rules-content">
                         <h1>ARPM Mining Network</h1>
                         <p><strong>Rules & Terms of Use</strong></p>
@@ -1153,7 +1062,7 @@
                         </ul>
                         <h2>3. Referral Policy</h2>
                         <ul>
-                            <li>Refer users using your code to earn bonus tokens.</li>
+                            <li>Invite friends using your unique referral code to earn a 5% bonus on their mining rewards.</li>
                             <li>Self-referrals or fake invites are not allowed.</li>
                         </ul>
                         <h2>4. Prohibited Activities</h2>
@@ -1177,6 +1086,14 @@
                         </ul>
                         <p><strong>Thank you for using ARPM Mining Network. Happy Mining!</strong></p>
                     </div>
+                    <div class="invite-content" id="invite-content">
+                        <h1>Invite Friends</h1>
+                        <p>Share your unique referral link to invite friends and earn a 5% bonus on their mining rewards!</p>
+                        <p><strong>Your Referral Link:</strong></p>
+                        <div class="referral-link" id="invite-referral-link">Loading...</div>
+                        <button class="copy-button" onclick="copyReferralLink('invite-referral-link')">Copy Link</button>
+                        <p class="referral-count" id="invite-referral-count">Referrals: 0</p>
+                    </div>
                 </div>
                 <div class="roadmap-container">
                     <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
@@ -1194,17 +1111,10 @@
             </div>
         </div>
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
-        <div class="ad-placeholder" id="home-ad">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '0e76a0edb900a6f53aa1a75d1b26bd27',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js"></script>
+        <div class="ad-section">
+            <p>Advertisement</p>
+            <!-- Updated: Replaced placeholder img with ad container -->
+            <div id="ad-container"></div>
         </div>
     </div>
 
@@ -1226,45 +1136,12 @@
         <div class="referral-section">
             <p>Your Referral Link:</p>
             <div class="referral-link" id="profile-referral-link">Loading...</div>
-            <button class="copy-button" onclick="copyReferralLink('profile-referral-link')">Copy</button>
+            <button class="copy-button" onclick="copyReferralLink('profile-referral-link')">Copy Link</button>
             <p class="referral-count" id="profile-referral-count">Referrals: 0</p>
         </div>
         <div class="signout">
             <button onclick="signOut()">Sign Out</button>
             <span class="version-text">ARPM-Web-v1.5.0</span>
-        </div>
-    </div>
-
-    <!-- Invite Section -->
-    <div id="inviteSection" class="page-section hidden">
-        <div class="section-title">Invite</div>
-        <div class="milestone-box" id="milestone-1">
-            <div class="milestone-text">Over 1 VALID REFERRAL IN TOTAL. 20.00 ARPM</div>
-            <span class="milestone-status" id="status-1" onclick="claimMilestone('milestone-1')">not available</span>
-        </div>
-        <div class="milestone-box" id="milestone-2">
-            <div class="milestone-text">Over 2 VALID REFERRALS IN TOTAL. 50.00 ARPM</div>
-            <span class="milestone-status" id="status-2" onclick="claimMilestone('milestone-2')">not available</span>
-        </div>
-        <div class="milestone-box" id="milestone-5">
-            <div class="milestone-text">Over 5 VALID REFERRALS IN TOTAL. 150.00 ARPM</div>
-            <span class="milestone-status" id="status-5" onclick="claimMilestone('milestone-5')">not available</span>
-        </div>
-        <div class="milestone-box" id="milestone-18">
-            <div class="milestone-text">Over 18 VALID REFERRALS IN TOTAL. 600.00 ARPM</div>
-            <span class="milestone-status" id="status-18" onclick="claimMilestone('milestone-18')">not available</span>
-        </div>
-        <div class="ad-placeholder" id="invite-ad">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'eb117daf94e120e0ae0e6f682c2e34f5',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js"></script>
         </div>
     </div>
 
@@ -1288,10 +1165,6 @@
             </div>
             <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
         </div>
-        <div class="ad-placeholder" id="youtube-ad">
-            <script async="async" data-cfasync="false" src="//pl26881571.profitableratecpm.com/946391b8e10827404b7dd26a5817e31c/invoke.js"></script>
-            <div id="container-946391b8e10827404b7dd26a5817e31c"></div>
-        </div>
         <div class="task-box">
             <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
@@ -1301,9 +1174,6 @@
             </div>
             <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
         </div>
-        <div class="ad-placeholder" id="x-ad">
-            <a href="https://www.profitableratecpm.com/czy8uk6k?key=352af86bd860aff1b2109611320beef7" target="_blank">Visit Ad</a>
-        </div>
         <div class="task-box">
             <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
             <div class="task-text">
@@ -1312,18 +1182,6 @@
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
             <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
-        </div>
-        <div class="ad-placeholder" id="instagram-ad">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'c620af328467e6de19dc04af696ee0fb',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/c620af328467e4de19dc04af696ee0fb/invoke.js"></script>
         </div>
     </div>
 
@@ -1337,9 +1195,6 @@
         </div>
         <div class="nav-item" data-target="walletSection">
             <i class="fas fa-wallet"></i>Wallet
-        </div>
-        <div class="nav-item" data-target="inviteSection">
-            <i class="fas fa-users"></i>Invite
         </div>
         <div class="nav-item" data-target="incomeSection">
             <i class="fas fa-coins"></i>Income
@@ -1378,7 +1233,6 @@
             homeSection: document.getElementById('homeSection'),
             profileSection: document.getElementById('profileSection'),
             walletSection: document.getElementById('walletSection'),
-            inviteSection: document.getElementById('inviteSection'),
             incomeSection: document.getElementById('incomeSection')
         };
         const forms = {
@@ -1392,27 +1246,87 @@
         const startMiningBtn = document.getElementById('start-mining-btn');
         const dailyBonusBtn = document.getElementById('daily-bonus-btn');
         const balanceBox = document.getElementById('balance-box');
+        const inviteReferralLink = document.getElementById('invite-referral-link');
+        const inviteReferralCount = document.getElementById('invite-referral-count');
         const profileReferralLinkElement = document.getElementById('profile-referral-link');
         const profileReferralCountElement = document.getElementById('profile-referral-count');
 
         // Constants
-        const REFERRAL_BONUS = 5;
         const NEW_USER_BONUS = 1.5;
         const TASK_BONUS = 5.0;
         const MINING_REWARD = 12;
+        const REFERRAL_BONUS_PERCENT = 0.05; // 5%
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
-
-        // Referral Milestones
-        const referralMilestones = [
-            { id: 'milestone-1', referrals: 1, reward: 20.00 },
-            { id: 'milestone-2', referrals: 2, reward: 50.00 },
-            { id: 'milestone-5', referrals: 5, reward: 150.00 },
-            { id: 'milestone-18', referrals: 18, reward: 600.00 }
-        ];
 
         // Global Variables
         let miningInterval = null;
         let dailyBonusInterval = null;
+
+        // ***** New: Ad Configuration *****
+        const adConfigs = [
+            {
+                key: '0e76a0edb900a6f53aa1a75d1b26bd27',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js'
+            },
+            {
+                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
+            },
+            {
+                key: 'c620af328467e6de19dc04af696ee0fb',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/c620af328467e6de19dc04af696ee0fb/invoke.js'
+            },
+            {
+                key: '78ade24182729fceea8e45203dad915b',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js'
+            }
+        ];
+
+        // Function to display a random ad
+        function displayRandomAd() {
+            const adContainer = document.getElementById('ad-container');
+            if (!adContainer) return;
+
+            // Select a random ad
+            const randomIndex = Math.floor(Math.random() * adConfigs.length);
+            const selectedAd = adConfigs[randomIndex];
+
+            // Set atOptions for the selected ad
+            window.atOptions = {
+                'key': selectedAd.key,
+                'format': selectedAd.format,
+                'height': selectedAd.height,
+                'width': selectedAd.width,
+                'params': selectedAd.params
+            };
+
+            // Clear previous ad content
+            adContainer.innerHTML = '';
+
+            // Create and append the ad script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = selectedAd.scriptSrc;
+            script.async = true;
+            adContainer.appendChild(script);
+        }
+        // ***** End of Ad Configuration *****
 
         // Utility Functions
         function getReferralCodeFromURL() {
@@ -1440,74 +1354,6 @@
             const userRef = ref(db, 'users/' + user.uid);
             await update(userRef, { tokens });
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
-        }
-
-        // Update Milestone Status
-        async function updateMilestoneStatus(referrals, userData) {
-            referralMilestones.forEach(milestone => {
-                const statusElement = document.getElementById(`status-${milestone.referrals}`);
-                if (statusElement) {
-                    const isClaimed = userData[`milestone${milestone.referrals}Claimed`] || false;
-                    if (isClaimed) {
-                        statusElement.textContent = 'Complete';
-                        statusElement.classList.remove('available');
-                        statusElement.classList.add('complete');
-                        statusElement.style.pointerEvents = 'none';
-                    } else if (referrals >= milestone.referrals) {
-                        statusElement.textContent = 'Available';
-                        statusElement.classList.add('available');
-                        statusElement.classList.remove('complete');
-                        statusElement.style.pointerEvents = 'auto';
-                    } else {
-                        statusElement.textContent = 'not available';
-                        statusElement.classList.remove('available', 'complete');
-                        statusElement.style.pointerEvents = 'none';
-                    }
-                }
-            });
-        }
-
-        // Claim Milestone
-        async function claimMilestone(milestoneId) {
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Please login to claim this milestone!');
-                showPage('login');
-                return;
-            }
-
-            const milestone = referralMilestones.find(m => m.id === milestoneId);
-            if (!milestone) return;
-
-            const userRef = ref(db, 'users/' + user.uid);
-            const snapshot = await get(userRef);
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                const isClaimed = userData[`milestone${milestone.referrals}Claimed`] || false;
-                if (isClaimed) {
-                    alert('Milestone already claimed!');
-                    return;
-                }
-                if (userData.referrals >= milestone.referrals) {
-                    const newTokens = (userData.tokens || 0) + milestone.reward;
-                    const history = userData.history || [];
-                    history.push({
-                        type: 'Reward',
-                        amount: milestone.reward,
-                        date: new Date().toLocaleDateString('en-GB')
-                    });
-                    await update(userRef, {
-                        tokens: newTokens,
-                        [`milestone${milestone.referrals}Claimed`]: true,
-                        history
-                    });
-                    updateBalance(user, newTokens);
-                    updateMilestoneStatus(userData.referrals, userData);
-                    alert(`Successfully claimed ${milestone.reward} ARPM for ${milestone.referrals} referrals!`);
-                } else {
-                    alert('Not enough referrals to claim this milestone!');
-                }
-            }
         }
 
         // Update Task Button
@@ -1595,6 +1441,28 @@
                     [`${taskType}BonusClaimed`]: true,
                     history
                 });
+
+                // Update referrer's bonus if applicable
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, 'users/' + userData.referredBy);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonus = TASK_BONUS * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonus;
+                        const referrerHistory = referrerData.history || [];
+                        referrerHistory.push({
+                            type: 'Referral Bonus',
+                            amount: bonus,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, {
+                            tokens: referrerTokens,
+                            history: referrerHistory
+                        });
+                    }
+                }
+
                 updateBalance(user, newTokens);
                 updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
                 alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
@@ -1673,6 +1541,28 @@
                     dailyBonusDay: currentDay,
                     history
                 });
+
+                // Update referrer's bonus if applicable
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, 'users/' + userData.referredBy);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonusAmount = bonus * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonusAmount;
+                        const referrerHistory = referrerData.history || [];
+                        referrerHistory.push({
+                            type: 'Referral Bonus',
+                            amount: bonusAmount,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, {
+                            tokens: referrerTokens,
+                            history: referrerHistory
+                        });
+                    }
+                }
+
                 updateBalance(user, newTokens);
 
                 if (dailyBonusInterval) clearInterval(dailyBonusInterval);
@@ -1696,30 +1586,13 @@
             }
         }
 
-        // Ad Rotation Logic
-        function showRandomAd() {
-            const adPlaceholders = [
-                'home-ad',
-                'invite-ad',
-                'youtube-ad',
-                'x-ad',
-                'instagram-ad'
-            ];
-
-            // Hide all ads initially
-            adPlaceholders.forEach(adId => {
-                const adElement = document.getElementById(adId);
-                if (adElement) {
-                    adElement.classList.remove('active');
-                }
-            });
-
-            // Randomly select one ad to display
-            const randomAdId = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length)];
-            const selectedAd = document.getElementById(randomAdId);
-            if (selectedAd) {
-                selectedAd.classList.add('active');
-            }
+        // Referral Logic
+        async function updateReferralInfo(user, userData) {
+            const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
+            if (inviteReferralLink) inviteReferralLink.textContent = referralLink;
+            if (inviteReferralCount) inviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
+            if (profileReferralLinkElement) profileReferralLinkElement.textContent = referralLink;
+            if (profileReferralCountElement) profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
         }
 
         // Show Page
@@ -1729,23 +1602,12 @@
             containers[page].style.display = 'block';
             navbarTop.style.display = ['login', 'signup', 'reset'].includes(page) ? 'flex' : 'none';
             
-            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection', 'inviteSection', 'incomeSection'].includes(page) ? 'flex' : 'none';
+            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection', 'incomeSection'].includes(page) ? 'flex' : 'none';
 
             if (page === 'signup') {
                 const referralCode = getReferralCodeFromURL();
                 if (referralCode) {
                     document.getElementById('signup-invite-code').value = referralCode;
-                }
-            }
-            if (page === 'inviteSection') {
-                const user = auth.currentUser;
-                if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        updateMilestoneStatus(data.referrals || 0, data);
-                    }
                 }
             }
             if (page === 'profileSection') {
@@ -1758,9 +1620,7 @@
                         document.getElementById("username").textContent = data.username || "N/A";
                         document.getElementById("email").textContent = user.email;
                         document.getElementById("date").textContent = data.registrationDate;
-                        const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${data.uniqueCode}`;
-                        profileReferralLinkElement.textContent = referralLink;
-                        profileReferralCountElement.textContent = `Referrals: ${data.referrals || 0}`;
+                        updateReferralInfo(user, data);
                     }
                 }
             }
@@ -1777,8 +1637,19 @@
                     }
                 }
             }
-            if (['homeSection', 'inviteSection', 'incomeSection'].includes(page)) {
-                showRandomAd();
+            if (page === 'homeSection') {
+                const user = auth.currentUser;
+                if (user) {
+                    const userRef = ref(db, 'users/' + user.uid);
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        updateDailyBonusButton(userData);
+                        updateReferralInfo(user, userData);
+                    }
+                }
+                // ***** New: Display a random ad when homeSection is shown *****
+                displayRandomAd();
             }
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
@@ -1817,21 +1688,40 @@
             }
         };
 
-        window.claimMilestone = claimMilestone;
-
         window.toggleRoadmap = () => {
             const roadmapContent = document.getElementById('roadmap-content');
             const rulesContent = document.getElementById('rules-content');
+            const inviteContent = document.getElementById('invite-content');
             roadmapContent.classList.toggle('active');
             if (rulesContent.classList.contains('active')) {
                 rulesContent.classList.remove('active');
+            }
+            if (inviteContent.classList.contains('active')) {
+                inviteContent.classList.remove('active');
             }
         };
 
         window.toggleRules = () => {
             const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
+            const inviteContent = document.getElementById('invite-content');
             rulesContent.classList.toggle('active');
+            if (roadmapContent.classList.contains('active')) {
+                roadmapContent.classList.remove('active');
+            }
+            if (inviteContent.classList.contains('active')) {
+                inviteContent.classList.remove('active');
+            }
+        };
+
+        window.toggleInvite = () => {
+            const inviteContent = document.getElementById('invite-content');
+            const rulesContent = document.getElementById('rules-content');
+            const roadmapContent = document.getElementById('roadmap-content');
+            inviteContent.classList.toggle('active');
+            if (rulesContent.classList.contains('active')) {
+                rulesContent.classList.remove('active');
+            }
             if (roadmapContent.classList.contains('active')) {
                 roadmapContent.classList.remove('active');
             }
@@ -1866,7 +1756,7 @@
                 const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
                 const snapshot = await get(inviteQuery);
                 if (!snapshot.exists()) return alert('INVALID INVITE CODE!');
-                snapshot.forEach((childSnapshot) => {
+                snapshot.forEach(childSnapshot => {
                     referrerUid = childSnapshot.key;
                 });
             }
@@ -1882,8 +1772,9 @@
                     username: username || "",
                     email: email,
                     tokens: initialTokens,
-                    inviteCode: inviteCode || null,
+                    inviteCode: uniqueCode,
                     uniqueCode: uniqueCode,
+                    referredBy: referrerUid || null,
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
@@ -1894,25 +1785,21 @@
                     instagramBonusClaimed: false,
                     profilePicture: null,
                     language: 'en',
-                    milestone1Claimed: false,
-                    milestone2Claimed: false,
-                    milestone5Claimed: false,
-                    milestone18Claimed: false,
                     lastDailyBonus: 0,
                     dailyBonusDay: 0,
                     history
                 });
 
-                if (referrerUid && inviteCode) {
+                if (referrerUid) {
                     const referrerRef = ref(db, 'users/' + referrerUid);
                     const referrerSnapshot = await get(referrerRef);
                     const referrerData = referrerSnapshot.val();
                     const newReferrals = (referrerData.referrals || 0) + 1;
-                    const newTokens = (referrerData.tokens || 0) + REFERRAL_BONUS;
+                    const newTokens = (referrerData.tokens || 0) + (initialTokens * REFERRAL_BONUS_PERCENT);
                     const referrerHistory = referrerData.history || [];
                     referrerHistory.push({
-                        type: 'Invite Bonus',
-                        amount: REFERRAL_BONUS,
+                        type: 'Referral Bonus',
+                        amount: initialTokens * REFERRAL_BONUS_PERCENT,
                         date: new Date().toLocaleDateString('en-GB')
                     });
                     await update(referrerRef, {
@@ -1949,16 +1836,11 @@
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     updateBalance(user, userData.tokens || 0);
-                    if (containers.inviteSection.style.display === 'block') {
-                        updateMilestoneStatus(userData.referrals || 0, userData);
-                    }
                     if (containers.profileSection.style.display === 'block') {
                         document.getElementById("username").textContent = userData.username || "N/A";
                         document.getElementById("email").textContent = user.email;
                         document.getElementById("date").textContent = userData.registrationDate;
-                        const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
-                        profileReferralLinkElement.textContent = referralLink;
-                        profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
+                        updateReferralInfo(user, userData);
                     }
                     if (containers.incomeSection.style.display === 'block') {
                         updateTaskButton('youtube', userData);
@@ -1967,6 +1849,9 @@
                     }
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
+                        updateReferralInfo(user, userData);
+                        // ***** New: Display ad on auth state change if homeSection is active *****
+                        displayRandomAd();
                     }
                     if (userData.miningEndTime > Date.now()) {
                         if (miningInterval) clearInterval(miningInterval);
@@ -1990,6 +1875,7 @@
                                         amount: MINING_REWARD,
                                         date: new Date().toLocaleDateString('en-GB')
                                     });
+
                                     await update(userRef, {
                                         tokens: newTokens,
                                         miningStartTime: 0,
@@ -1997,6 +1883,28 @@
                                         minedTokens: 0,
                                         history
                                     });
+
+                                    // Update referrer's bonus
+                                    if (userData.referredBy) {
+                                        const referrerRef = ref(db, 'users/' + userData.referredBy);
+                                        const referrerSnapshot = await get(referrerRef);
+                                        if (referrerSnapshot.exists()) {
+                                            const referrerData = referrerSnapshot.val();
+                                            const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
+                                            const referrerTokens = (referrerData.tokens || 0) + bonus;
+                                            const referrerHistory = referrerData.history || [];
+                                            referrerHistory.push({
+                                                type: 'Referral Bonus',
+                                                amount: bonus,
+                                                date: new Date().toLocaleDateString('en-GB')
+                                            });
+                                            await update(referrerRef, {
+                                                tokens: referrerTokens,
+                                                history: referrerHistory
+                                            });
+                                        }
+                                    }
+
                                     updateBalance(user, newTokens);
                                     startMiningBtn.disabled = false;
                                     startMiningBtn.innerHTML = 'START MINING';
@@ -2070,8 +1978,8 @@
 
             if (miningInterval) clearInterval(miningInterval);
 
-            startMiningBtn.disabled = true
-            let timeLeft = 12 * 60 * 60;
+            startMiningBtn.disabled = true;
+            let timeLeft = 12 * 60 * 60; // 12 hours in seconds
             let minedTokens = 0;
 
             await update(userRef, {
@@ -2096,6 +2004,7 @@
                             amount: MINING_REWARD,
                             date: new Date().toLocaleDateString('en-GB')
                         });
+
                         await update(userRef, {
                             tokens: newTokens,
                             miningStartTime: 0,
@@ -2103,6 +2012,28 @@
                             minedTokens: 0,
                             history
                         });
+
+                        // Update referrer's bonus
+                        if (userData.referredBy) {
+                            const referrerRef = ref(db, 'users/' + userData.referredBy);
+                            const referrerSnapshot = await get(referrerRef);
+                            if (referrerSnapshot.exists()) {
+                                const referrerData = referrerSnapshot.val();
+                                const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
+                                const referrerTokens = (referrerData.tokens || 0) + bonus;
+                                const referrerHistory = referrerData.history || [];
+                                referrerHistory.push({
+                                    type: 'Referral Bonus',
+                                    amount: bonus,
+                                    date: new Date().toLocaleDateString('en-GB')
+                                });
+                                await update(referrerRef, {
+                                    tokens: referrerTokens,
+                                    history: referrerHistory
+                                });
+                            }
+                        }
+
                         updateBalance(user, newTokens);
                         startMiningBtn.disabled = false;
                         startMiningBtn.innerHTML = 'START MINING';
