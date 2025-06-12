@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS (unchanged) -->
+    <!-- Internal CSS -->
     <style>
-        /* Your existing CSS remains unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -21,33 +20,34 @@
         }
         html, body {
             height: 100%;
-            overflow: hidden;
             font-family: 'Poppins', sans-serif;
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
             position: relative;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             background: #ffffff;
-            touch-action: none;
+            touch-action: manipulation;
         }
         .container {
             width: 100%;
             max-width: 400px;
-            margin: 12px auto;
-            padding: 20px;
+            margin: 10px auto;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(5px);
             text-align: center;
             position: relative;
             z-index: 1;
-            margin-top: 220px;
+            margin-top: 180px;
             overflow: hidden;
         }
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             position: relative;
         }
         .form-control {
@@ -55,30 +55,32 @@
             border: none;
             color: #fff;
             border-radius: 8px;
-            padding: 10px;
-            font-size: 18px;
+            padding: 8px;
+            font-size: 16px;
             width: 100%;
         }
         .form-control::placeholder {
             color: #d1d5db;
-            font-size: 18px;
+            font-size: 16px;
         }
         .password-toggle {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             color: #60a5fa;
-            font-size: 18px;
+            font-size: 16px;
+            touch-action: manipulation;
         }
         .btn {
             border: none;
             border-radius: 8px;
-            padding: 10px;
-            font-size: 22px;
+            padding: 8px;
+            font-size: 18px;
             width: 100%;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background 0.2s;
+            touch-action: manipulation;
         }
         .btn-primary {
             background: linear-gradient(45deg, #2563eb, #60a5fa);
@@ -86,20 +88,20 @@
         .btn-success {
             background: linear-gradient(45deg, #22c55e, #86efac);
         }
-        .btn:hover {
+        .btn:hover, .btn:active {
             transform: translateY(-2px);
         }
         .link {
             color: #60a5fa;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 14px;
         }
         .link:hover {
             text-decoration: underline;
         }
         .footer-text {
-            font-size: 18px;
-            margin-top: 15px;
+            font-size: 14px;
+            margin-top: 12px;
         }
         .hidden {
             display: none;
@@ -109,8 +111,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 100px;
+            width: 160px;
+            height: 80px;
             background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
@@ -126,7 +128,7 @@
             visibility: visible;
         }
         .loading-text {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #60a5fa;
         }
@@ -139,34 +141,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 0;
-            height: 200px;
+            padding: 15px 0;
+            height: 150px;
             z-index: 1000;
         }
         .logo-circle {
-            width: 200px;
-            height: 200px;
+            width: 120px;
+            height: 120px;
             background-color: #007BFF;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
         }
         .logo-circle h1 {
             color: white;
-            font-size: 44px;
+            font-size: 30px;
             margin: 0;
             font-weight: bold;
             text-align: center;
         }
         .logo-circle p {
             color: white;
-            font-size: 24px;
-            margin: 5px 0 0;
+            font-size: 18px;
+            margin: 3px 0 0;
             text-align: center;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         .topbar {
             display: flex;
@@ -174,36 +176,24 @@
             align-items: center;
             background: #000;
             color: #fff;
-            padding: 10px 15px;
+            padding: 8px 12px;
         }
         .menu-icon {
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
+            touch-action: manipulation;
         }
         .title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
         }
         .balance-box {
             background: #000;
             color: #00ffcc;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 14px;
-        }
-        .black-box {
-            padding: 20px;
-            background: #000;
-            color: #00ffcc;
-            border-radius: 8px;
-            margin: 20px;
-            font-size: 18px;
-            text-align: center;
-            min-height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-size: 12px;
         }
         .page-section {
             display: none;
@@ -216,7 +206,7 @@
             background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
             background-position: center;
-            height: 300px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -225,12 +215,12 @@
         .start-button {
             background: #00ffcc;
             border: none;
-            border-radius: 60px;
-            width: 120px;
-            height: 120px;
-            font-size: 16px;
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+            font-size: 14px;
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -238,30 +228,31 @@
             align-items: center;
             text-align: center;
             line-height: 1.2;
-            padding: 12px;
+            padding: 10px;
+            touch-action: manipulation;
         }
         .home-bottom-text {
-            margin: 10px 15px;
+            margin: 8px 12px;
             text-align: left;
-            font-size: 18px;
+            font-size: 14px;
             color: #333;
             font-weight: 600;
-            padding-left: 20px;
+            padding-left: 15px;
             border: 2px solid #000;
             border-radius: 8px;
         }
         .ad-section {
-            margin: 10px 15px;
+            margin: 8px 12px;
             text-align: center;
             background: #f1f1f1;
             border-radius: 8px;
-            padding: 10px;
+            padding: 8px;
             border: 2px solid #000;
         }
         .ad-section p {
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
-            margin: 5px 0;
+            margin: 3px 0;
         }
         .bottom-nav {
             position: fixed;
@@ -271,21 +262,22 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            height: 60px;
+            height: 50px;
             z-index: 1000;
             border-top: 1px solid #ccc;
         }
         .nav-item {
             color: #000;
-            font-size: 12px;
+            font-size: 10px;
             text-align: center;
             cursor: pointer;
             user-select: none;
+            touch-action: manipulation;
         }
         .nav-item i {
-            font-size: 16px;
+            font-size: 14px;
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         .nav-item.active {
             color: #00ffcc;
@@ -293,45 +285,45 @@
         #profileSection .section-title,
         #incomeSection .section-title,
         #walletSection .section-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             text-align: center;
-            margin: 10px 0 5px;
+            margin: 8px 0 3px;
             color: #00cc99;
         }
         .wallet-section {
             position: relative;
-            margin: 20px;
+            margin: 15px;
             text-align: center;
         }
         .wallet-section p {
             color: #000;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
         }
         .history-circle {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 200px;
-            height: 200px;
+            top: 15px;
+            right: 15px;
+            width: 150px;
+            height: 150px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             overflow-y: auto;
-            padding: 10px;
+            padding: 8px;
         }
         .history-circle p {
-            margin: 5px 0;
-            font-size: 14px;
+            margin: 3px 0;
+            font-size: 12px;
             color: #fff;
         }
         .task-box {
@@ -339,229 +331,155 @@
             align-items: center;
             justify-content: space-between;
             background: #f1f1f1;
-            padding: 10px 15px;
-            margin: 10px 20px;
+            padding: 8px 12px;
+            margin: 8px 15px;
             border-radius: 8px;
         }
         .youtube-icon, .twitter-icon, .instagram-icon {
-            font-size: 28px;
-            margin-right: 15px;
+            font-size: 24px;
+            margin-right: 10px;
             flex-shrink: 0;
         }
         .task-text {
             flex: 1;
-            font-size: 16px;
+            font-size: 14px;
             color: #000;
             line-height: 1.2;
             font-weight: 600;
         }
         .task-text small {
             font-weight: normal;
-            font-size: 13px;
+            font-size: 12px;
             color: #555;
             display: block;
-            margin-top: 4px;
+            margin-top: 3px;
         }
         .go-button {
             background: #00cc99;
             color: #fff;
-            padding: 6px 14px;
+            padding: 8px;
             border-radius: 5px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             flex-shrink: 0;
             white-space: nowrap;
             cursor: pointer;
+            touch-action: manipulation;
         }
         .referral-section {
-            margin: 20px;
+            margin: 15px;
             text-align: center;
         }
         .referral-section p {
-            font-size: 18px;
+            font-size: 16px;
             color: #00ffcc;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .referral-link {
             background: #f1f1f1;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             color: #000;
             word-break: break-all;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .copy-button {
             background: #00cc99;
             color: #fff;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 5px;
             border: none;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             transition: transform 0.2s;
+            touch-action: manipulation;
         }
         .copy-button:hover {
             transform: translateY(-2px);
         }
         .referral-count {
-            font-size: 18px;
+            font-size: 16px;
             color: #00ffcc;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .profile-pic {
-            width: 140px;
-            height: 140px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin: 5px auto 10px auto;
+            margin: 5px auto 8px auto;
             background-color: #007bff;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
         .info-box {
             background: white;
-            margin: 10px 20px;
-            padding: 15px;
-            border-radius: 10px;
+            margin: 8px 15px;
+            padding: 12px;
+            border-radius: 8px;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            width: calc(100% - 40px);
+            width: calc(100% - 30px);
         }
         .info-box p {
             margin: 0;
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
         }
         .signout {
-            margin: 30px 20px;
+            margin: 20px 15px;
             text-align: center;
-            padding-bottom: 80px;
+            padding-bottom: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .signout button {
             background: #dc3545;
             color: white;
-            padding: 12px 24px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            max-width: 200px;
+            max-width: 180px;
             transition: background 0.2s ease, transform 0.2s ease;
+            touch-action: manipulation;
         }
         .signout button:hover {
             background: #b52a3c;
             transform: translateY(-2px);
         }
         .version-text {
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
             font-weight: bold;
         }
         .buttons-container {
             position: absolute;
-            top: 20px;
+            top: 15px;
             display: flex;
             justify-content: space-between;
             width: 100%;
-            padding: 0 20px;
+            padding: 0 15px;
         }
         .roadmap-container, .rules-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
-        .roadmap-button, .rules-button, .invite-button {
-            width: 50px;
-            height: 50px;
+        .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
+            width: 40px;
+            height: 40px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
-            transition: transform 0.2s;
-        }
-        .invite-button {
-            background: linear-gradient(45deg, #ff6f61, #ffb88c);
-            box-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
-        }
-        .roadmap-button:hover, .rules-button:hover, .invite-button:hover {
-            transform: scale(1.1);
-        }
-        .roadmap-content, .rules-content, .invite-content {
-            display: none;
-            position: absolute;
-            background: #fff;
-            color: #000;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            font-size: 14px;
-            text-align: left;
-            z-index: 11;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .roadmap-content {
-            top: 60px;
-            right: 20px;
-        }
-        .rules-content {
-            top: 60px;
-            left: 20px;
-        }
-        .invite-content {
-            top: 110px;
-            left: 20px;
-        }
-        .roadmap-content.active, .rules-content.active, .invite-content.active {
-            display: block;
-        }
-        .rules-content h1, .invite-content h1 {
-            color: #0057ff;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .rules-content h2, .invite-content h2 {
-            color: #333;
-            font-size: 16px;
-            margin-top: 20px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-        .rules-content ul, .invite-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-        .rules-content li, .invite-content li {
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .rules-content p, .invite-content p {
-            margin: 10px 0;
-            font: 14px;
-        }
-        .daily-bonus-button {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #ff6f61, #ffb88c);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -570,169 +488,157 @@
             font-weight: bold;
             color: #fff;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
             transition: transform 0.2s;
-            text-align: center;
-            line-height: 1.2;
+            touch-action: manipulation;
         }
-        .daily-bonus-button:hover {
+        .invite-button, .daily-bonus-button {
+            background: linear-gradient(45deg, #ff6f61, #ffb88c);
+            box-shadow: 0 0 8px rgba(255, 111, 97, 0.7);
+        }
+        .roadmap-button:hover, .rules-button:hover, .invite-button:hover, .daily-bonus-button:hover {
             transform: scale(1.1);
         }
-        @media (max-width: 768px) {
-            body {
-                font-size: 16px;
-            }
-            .container {
-                margin: 10px auto;
-                padding: 15px;
-                max-width: 100%;
-                margin-top: 180px;
-            }
-            .form-control {
-                font-size: 16px;
-                padding: 8px;
-            }
-            .form-control::placeholder {
-                font-size: 16px;
-            }
-            .btn {
-                font-size: 20px;
-                padding: 8px;
-            }
-            .link {
-                font-size: 14px;
-            }
-            .footer-text {
-                font-size: 16px;
-            }
-            .navbar-top {
-                padding: 15px 0;
-                height: 150px;
-            }
-            .logo-circle {
-                width: 150px;
-                height: 150px;
-            }
-            .logo-circle h1 {
-                font-size: 36px;
-            }
-            .logo-circle p {
-                font-size: 20px;
-            }
-            .loading-overlay {
-                width: 180px;
-                height: 90px;
-            }
-            .loading-text {
-                font-size: 18px;
-            }
-            .referral-link {
-                font-size: 14px;
-            }
-            .copy-button {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-            .referral-count {
-                font-size: 16px;
-            }
-            .info-box {
-                margin: 10px 15px;
-                padding: 12px;
-                width: calc(100% - 30px);
-            }
-            .signout {
-                margin: 20px 15px;
-                padding-bottom: 100px;
-            }
-            .signout button {
-                padding: 10px 20px;
-                font-size: 14px;
-                max-width: 180px;
-            }
-            .profile-pic {
-                width: 120px;
-                height: 120px;
-                font-size: 14px;
-                margin: 5px auto;
-            }
-            .section-title {
-                margin: 8px 0 3px;
-            }
-            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
-                width: 40px;
-                height: 40px;
-                font-size: 12px;
-            }
-            .roadmap-content, .rules-content, .invite-content {
-                width: 250px;
-                font-size: 12px;
-                top: 50px;
-                max-height: 350px;
-            }
-            .invite-content {
-                top: 90px;
-            }
-            .start-button {
-                width: 100px;
-                height: 100px;
-                font-size: 14px;
-            }
-            .history-circle {
-                width: 150px;
-                height: 150px;
-                font-size: 12px;
-            }
-            .task-box {
-                margin: 8px 15px;
-            }
-            .home-bottom-text {
-                margin: 8px 15px;
-                font-size: 16px;
-            }
-            .ad-section {
-                margin: 8px 15px;
-                padding: 8px;
-            }
-            .ad-section p {
-                font-size: 14px;
-            }
+        .roadmap-content, .rules-content, .invite-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            color: #000;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            font-size: 12px;
+            text-align: left;
+            z-index: 11;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .roadmap-content {
+            top: 50px;
+            right: 15px;
+        }
+        .rules-content {
+            top: 50px;
+            left: 15px;
+        }
+        .invite-content {
+            top: 90px;
+            left: 15px;
+        }
+        .roadmap-content.active, .rules-content.active, .invite-content.active {
+            display: block;
+        }
+        .rules-content h1, .invite-content h1 {
+            color: #0057ff;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .rules-content h2, .invite-content h2 {
+            color: #333;
+            font-size: 14px;
+            margin-top: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+        }
+        .rules-content ul, .invite-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+        .rules-content li, .invite-content li {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .rules-content p, .invite-content p {
+            margin: 8px 0;
+            font-size: 12px;
         }
         @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
             .container {
                 margin: 8px auto;
                 padding: 12px;
-                margin-top: 160px;
+                margin-top: 140px;
             }
-            .logo-circle {
-                width: 120px;
-                height: 120px;
+            .form-control {
+                font-size: 14px;
+                padding: 6px;
             }
-            .logo-circle h1 {
-                font-size: 30px;
-            }
-            .logo-circle p {
-                font-size: 18px;
-            }
-            .loading-overlay {
-                width: 160px;
-                height: 80px;
-            }
-            .loading-text {
-                font-size: 16px;
-            }
-            .referral-link {
-                font-size: 12px;
-            }
-            .copy-button {
-                font-size: 12px;
-                padding: 5px 10px;
-            }
-            .referral-count {
+            .form-control::placeholder {
                 font-size: 14px;
             }
+            .btn {
+                font-size: 16px;
+                padding: 6px;
+            }
+            .link, .footer-text {
+                font-size: 12px;
+            }
+            .navbar-top {
+                height: 120px;
+            }
+            .logo-circle {
+                width: 100px;
+                height: 100px;
+            }
+            .logo-circle h1 {
+                font-size: 24px;
+            }
+            .logo-circle p {
+                font-size: 16px;
+            }
+            .image-half {
+                height: 200px;
+            }
+            .start-button {
+                width: 80px;
+                height: 80px;
+                font-size: 12px;
+            }
+            .bottom-nav {
+                height: 45px;
+            }
+            .nav-item {
+                font-size: 9px;
+            }
+            .nav-item i {
+                font-size: 12px;
+            }
+            .history-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 10px;
+            }
+            .task-box {
+                padding: 6px 10px;
+                margin: 6px 12px;
+            }
+            .youtube-icon, .twitter-icon, .instagram-icon {
+                font-size: 20px;
+            }
+            .task-text {
+                font-size: 12px;
+            }
+            .task-text small {
+                font-size: 10px;
+            }
+            .go-button {
+                padding: 6px;
+                font-size: 10px;
+            }
+            .referral-link, .copy-button, .referral-count {
+                font-size: 12px;
+            }
+            .profile-pic {
+                width: 80px;
+                height: 80px;
+                font-size: 12px;
+            }
             .info-box {
-                margin: 8px 12px;
+                margin: 6px 12px;
                 padding: 10px;
                 width: calc(100% - 24px);
             }
@@ -744,15 +650,6 @@
                 padding: 8px 16px;
                 font-size: 12px;
                 max-width: 160px;
-            }
-            .profile-pic {
-                width: 100px;
-                height: 100px;
-                font-size: 12px;
-                margin: 3px auto;
-            }
-            .section-title {
-                margin: 5px 0 2px;
             }
             .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
                 width: 35px;
@@ -768,35 +665,31 @@
             .invite-content {
                 top: 80px;
             }
+        }
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                margin-top: 160px;
+            }
+            .navbar-top {
+                height: 140px;
+            }
+            .logo-circle {
+                width: 110px;
+                height: 110px;
+            }
+            .logo-circle h1 {
+                font-size: 28px;
+            }
+            .logo-circle p {
+                font-size: 18px;
+            }
+            .image-half {
+                height: 220px;
+            }
             .start-button {
-                width: 80px;
-                height: 80px;
-                font-size: 12px;
-            }
-            .history-circle {
-                width: 120px;
-                height: 120px;
-                font-size: 10px;
-            }
-            .rules-content h1, .invite-content h1 {
-                font-size: 16px;
-            }
-            .rules-content h2, .invite-content h2 {
-                font-size: 14px;
-            }
-            .task-box {
-                margin: 5px 12px;
-            }
-            .home-bottom-text {
-                margin: 5px 12px;
-                font-size: 14px;
-            }
-            .ad-section {
-                margin: 5px 12px;
-                padding: 5px;
-            }
-            .ad-section p {
-                font-size: 12px;
+                width: 90px;
+                height: 90px;
+                font-size: 13px;
             }
         }
     </style>
@@ -824,7 +717,7 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="login-password" placeholder="PASSWORD" required>
-                <i class="fas fa-eye password-toggle" id="toggle-login-password" onclick="togglePasswordVisibility('login-password', 'toggle-login-password')"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-login-password"></i>
             </div>
             <button type="submit" class="btn btn-primary">LOGIN</button>
             <p class="footer-text">
@@ -846,11 +739,11 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
-                <i class="fas fa-eye password-toggle" id="toggle-signup-password" onclick="togglePasswordVisibility('signup-password', 'toggle-signup-password')"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-password"></i>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
-                <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" onclick="togglePasswordVisibility('signup-confirm-password', 'toggle-signup-confirm-password')"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password"></i>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="signup-invite-code" placeholder="INVITE CODE (OPTIONAL)">
@@ -901,7 +794,8 @@
                         <h2>2. Mining Rules</h2>
                         <ul>
                             <li>Mining must be started manually every 12 hours by tapping the button.</li>
-                            <li>Mining stops automatically after 12 hours until restarted.</li>
+                            <li>Mining stops automatically after 12 hours and requires clicking "Claim" to receive tokens.</li>
+                            <li>After claiming, mining can be restarted.</li>
                         </ul>
                         <h2>3. Referral Policy</h2>
                         <ul>
@@ -967,13 +861,13 @@
             ARPM Mining
         </div>
         <div class="info-box">
-            <p><strong>Name:</strong> <span id="username"> </span></p>
+            <p><strong>Name:</strong> <span id="username"></span></p>
         </div>
         <div class="info-box">
-            <p><strong>Email:</strong> <span id="email"> </span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
         </div>
         <div class="info-box">
-            <p><strong>Registration Date:</strong> <span id="date"> </span></p>
+            <p><strong>Registration Date:</strong> <span id="date"></span></p>
         </div>
         <div class="referral-section">
             <p>Your Referral Link:</p>
@@ -1045,12 +939,10 @@
 
     <!-- JavaScript -->
     <script type="module">
-        // Firebase Imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
             authDomain: "arpm-mining.firebaseapp.com",
@@ -1062,12 +954,10 @@
             measurementId: "G-8YVW5EK6N1"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getDatabase(app);
 
-        // DOM Elements
         const containers = {
             login: document.getElementById('login-container'),
             signup: document.getElementById('signup-container'),
@@ -1093,18 +983,15 @@
         const profileReferralLinkElement = document.getElementById('profile-referral-link');
         const profileReferralCountElement = document.getElementById('profile-referral-count');
 
-        // Constants
         const NEW_USER_BONUS = 1.5;
         const TASK_BONUS = 5.0;
         const MINING_REWARD = 12;
-        const REFERRAL_BONUS_PERCENT = 0.05; // 5%
+        const REFERRAL_BONUS_PERCENT = 0.05;
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
 
-        // Global Variables
         let miningInterval = null;
         let dailyBonusInterval = null;
 
-        // Ad Configuration
         const adConfigs = [
             {
                 key: '0e76a0edb900a6f53aa1a75d1b26bd27',
@@ -1140,7 +1027,6 @@
             }
         ];
 
-        // Function to display a random ad
         function displayRandomAd() {
             const adContainer = document.getElementById('ad-container');
             if (!adContainer) return;
@@ -1164,7 +1050,6 @@
             adContainer.appendChild(script);
         }
 
-        // Utility Functions
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('ref');
@@ -1185,14 +1070,12 @@
             return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Update Balance
         async function updateBalance(user, tokens) {
             const userRef = ref(db, 'users/' + user.uid);
             await update(userRef, { tokens });
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
         }
 
-        // Update Task Button
         async function updateTaskButton(taskType, userData) {
             const button = document.getElementById(`${taskType}-task-btn`);
             if (!button) return;
@@ -1219,7 +1102,6 @@
             }
         }
 
-        // Handle Task
         async function handleTask(taskType) {
             const user = auth.currentUser;
             if (!user) {
@@ -1247,7 +1129,6 @@
             button.onclick = () => claimTask(taskType);
         }
 
-        // Claim Task Reward
         async function claimTask(taskType) {
             const user = auth.currentUser;
             if (!user) {
@@ -1304,7 +1185,6 @@
             }
         }
 
-        // Daily Bonus Logic
         async function updateDailyBonusButton(userData) {
             if (!dailyBonusBtn) return;
 
@@ -1420,7 +1300,6 @@
             }
         }
 
-        // Referral Logic
         async function updateReferralInfo(user, userData) {
             const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
             if (inviteReferralLink) inviteReferralLink.textContent = referralLink;
@@ -1429,7 +1308,6 @@
             if (profileReferralCountElement) profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
         }
 
-        // Show Page
         async function showPage(page) {
             await showLoadingScreen();
             Object.values(containers).forEach(c => c.style.display = 'none');
@@ -1489,7 +1367,6 @@
             if (activeNav) activeNav.classList.add('active');
         }
 
-        // Global Functions
         window.copyReferralLink = async (elementId) => {
             const referralLink = document.getElementById(elementId).textContent;
             try {
@@ -1525,12 +1402,8 @@
             const rulesContent = document.getElementById('rules-content');
             const inviteContent = document.getElementById('invite-content');
             roadmapContent.classList.toggle('active');
-            if (rulesContent.classList.contains('active')) {
-                rulesContent.classList.remove('active');
-            }
-            if (inviteContent.classList.contains('active')) {
-                inviteContent.classList.remove('active');
-            }
+            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
+            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
         window.toggleRules = () => {
@@ -1538,12 +1411,8 @@
             const roadmapContent = document.getElementById('roadmap-content');
             const inviteContent = document.getElementById('invite-content');
             rulesContent.classList.toggle('active');
-            if (roadmapContent.classList.contains('active')) {
-                roadmapContent.classList.remove('active');
-            }
-            if (inviteContent.classList.contains('active')) {
-                inviteContent.classList.remove('active');
-            }
+            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
+            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
         window.toggleInvite = () => {
@@ -1551,15 +1420,10 @@
             const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
             inviteContent.classList.toggle('active');
-            if (rulesContent.classList.contains('active')) {
-                rulesContent.classList.remove('active');
-            }
-            if (roadmapContent.classList.contains('active')) {
-                roadmapContent.classList.remove('active');
-            }
+            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
+            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
         };
 
-        // New: Claim Mining Reward
         async function claimMiningReward(user, userRef, userData) {
             const newTokens = (userData.tokens || 0) + MINING_REWARD;
             const history = userData.history || [];
@@ -1603,7 +1467,6 @@
             alert('Mining completed! You earned 12 ARPM.');
         }
 
-        // Form Event Listeners
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
@@ -1613,7 +1476,7 @@
                 await signInWithEmailAndPassword(auth, email, password);
                 showPage('homeSection');
             } catch (error) {
-                alert(`LOGIN FAILED: ${error.code === 'auth/wrong-password' ? 'INCORRECT PASSWORD' : 'INVALID EMAIL OR USER NOT FOUND'}`);
+                alert('LOGIN FAILED: ' + (error.code === 'auth/wrong-password' ? 'INCORRECT PASSWORD' : 'INVALID EMAIL OR USER NOT FOUND'));
             }
         });
 
@@ -1687,7 +1550,7 @@
 
                 showPage('login');
             } catch (error) {
-                alert(`REGISTRATION FAILED: ${error.message}`);
+                alert('REGISTRATION FAILED: ' + error.message);
             }
         });
 
@@ -1700,11 +1563,10 @@
                 alert('Password reset email sent!');
                 showPage('login');
             } catch (error) {
-                alert(`PASSWORD RESET FAILED: ${error.message}`);
+                alert('PASSWORD RESET FAILED: ' + error.message);
             }
         });
 
-        // Authentication State Listener
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, 'users/' + user.uid);
@@ -1759,7 +1621,6 @@
                             }
                         }, 1000);
                     } else if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
-                        // Handle case where mining has ended but not claimed
                         startMiningBtn.disabled = false;
                         startMiningBtn.innerHTML = 'Claim';
                         startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
@@ -1773,22 +1634,25 @@
             }
         });
 
-        // Toggle Password Visibility
-        window.togglePasswordVisibility = (inputId, toggleId) => {
+        function togglePasswordVisibility(inputId, toggleId) {
             const input = document.getElementById(inputId);
             const toggleIcon = document.getElementById(toggleId);
             if (input.type === 'password') {
                 input.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
             } else {
                 input.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
             }
-        };
+        }
 
-        // Bottom Navigation Event Listeners
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const inputId = toggle.id.replace('toggle-', '');
+                togglePasswordVisibility(inputId, toggle.id);
+            });
+        });
+
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', async () => {
@@ -1797,9 +1661,16 @@
                 const target = item.getAttribute('data-target');
                 await showPage(target);
             });
+
+            item.addEventListener('touchstart', () => {
+                item.style.transform = 'scale(0.95)';
+            });
+
+            item.addEventListener('touchend', () => {
+                item.style.transform = 'scale(1)';
+            });
         });
 
-        // Mining Button Logic
         startMiningBtn.addEventListener('click', async () => {
             const user = auth.currentUser;
             if (!user) {
@@ -1817,7 +1688,6 @@
                     return;
                 }
                 if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
-                    // Claim pending reward
                     await claimMiningReward(user, userRef, userData);
                     return;
                 }
@@ -1826,7 +1696,7 @@
             if (miningInterval) clearInterval(miningInterval);
 
             startMiningBtn.disabled = true;
-            let timeLeft = 12 * 60 * 60; // 12 hours in seconds
+            let timeLeft = 12 * 60 * 60;
             let minedTokens = 0;
 
             await update(userRef, {
@@ -1859,6 +1729,16 @@
                     await update(userRef, { minedTokens });
                 }
             }, 1000);
+        });
+
+        startMiningBtn.addEventListener('touchstart', () => {
+            if (!startMiningBtn.disabled) {
+                startMiningBtn.style.transform = 'scale(0.95)';
+            }
+        });
+
+        startMiningBtn.addEventListener('touchend', () => {
+            startMiningBtn.style.transform = 'scale(1)';
         });
     </script>
 </body>
