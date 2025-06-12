@@ -11,16 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS -->
+    <!-- Internal CSS (unchanged) -->
     <style>
-        /* Global Reset */
+        /* Your existing CSS remains unchanged */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* Base Styles */
         html, body {
             height: 100%;
             overflow: hidden;
@@ -29,13 +27,10 @@
             font-size: 18px;
             position: relative;
         }
-
         body {
             background: #ffffff;
             touch-action: none;
         }
-
-        /* Container Styles */
         .container {
             width: 100%;
             max-width: 400px;
@@ -51,13 +46,10 @@
             margin-top: 220px;
             overflow: hidden;
         }
-
-        /* Form Styles */
         .form-group {
             margin-bottom: 12px;
             position: relative;
         }
-
         .form-control {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -67,12 +59,10 @@
             font-size: 18px;
             width: 100%;
         }
-
         .form-control::placeholder {
             color: #d1d5db;
             font-size: 18px;
         }
-
         .password-toggle {
             position: absolute;
             right: 10px;
@@ -82,8 +72,6 @@
             color: #60a5fa;
             font-size: 18px;
         }
-
-        /* Button Styles */
         .btn {
             border: none;
             border-radius: 8px;
@@ -92,41 +80,30 @@
             width: 100%;
             transition: transform 0.2s;
         }
-
         .btn-primary {
             background: linear-gradient(45deg, #2563eb, #60a5fa);
         }
-
         .btn-success {
             background: linear-gradient(45deg, #22c55e, #86efac);
         }
-
         .btn:hover {
             transform: translateY(-2px);
         }
-
-        /* Link Styles */
         .link {
             color: #60a5fa;
             text-decoration: none;
             font-size: 18px;
         }
-
         .link:hover {
             text-decoration: underline;
         }
-
         .footer-text {
             font-size: 18px;
             margin-top: 15px;
         }
-
-        /* Utility Classes */
         .hidden {
             display: none;
         }
-
-        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             top: 50%;
@@ -144,19 +121,15 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-
         .loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-
         .loading-text {
             font-size: 20px;
             font-weight: bold;
             color: #60a5fa;
         }
-
-        /* Navbar Styles */
         .navbar-top {
             position: fixed;
             top: 0;
@@ -170,7 +143,6 @@
             height: 200px;
             z-index: 1000;
         }
-
         .logo-circle {
             width: 200px;
             height: 200px;
@@ -182,7 +154,6 @@
             align-items: center;
             box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
         }
-
         .logo-circle h1 {
             color: white;
             font-size: 44px;
@@ -190,7 +161,6 @@
             font-weight: bold;
             text-align: center;
         }
-
         .logo-circle p {
             color: white;
             font-size: 24px;
@@ -198,8 +168,6 @@
             text-align: center;
             letter-spacing: 2px;
         }
-
-        /* Topbar Styles */
         .topbar {
             display: flex;
             justify-content: space-between;
@@ -208,17 +176,14 @@
             color: #fff;
             padding: 10px 15px;
         }
-
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
         }
-
         .title {
             font-size: 18px;
             font-weight: bold;
         }
-
         .balance-box {
             background: #000;
             color: #00ffcc;
@@ -227,8 +192,6 @@
             font-weight: bold;
             font-size: 14px;
         }
-
-        /* Black Box */
         .black-box {
             padding: 20px;
             background: #000;
@@ -242,18 +205,13 @@
             justify-content: center;
             align-items: center;
         }
-
-        /* Page Section */
         .page-section {
             display: none;
             overflow: hidden;
         }
-
         .page-section.active {
             display: block;
         }
-
-        /* Image Half Section */
         .image-half {
             background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
@@ -264,7 +222,6 @@
             justify-content: center;
             position: relative;
         }
-
         .start-button {
             background: #00ffcc;
             border: none;
@@ -283,7 +240,6 @@
             line-height: 1.2;
             padding: 12px;
         }
-
         .home-bottom-text {
             margin: 10px 15px;
             text-align: left;
@@ -294,8 +250,6 @@
             border: 2px solid #000;
             border-radius: 8px;
         }
-
-        /* Ad Section */
         .ad-section {
             margin: 10px 15px;
             text-align: center;
@@ -304,14 +258,11 @@
             padding: 10px;
             border: 2px solid #000;
         }
-
         .ad-section p {
             font-size: 16px;
             color: #333;
             margin: 5px 0;
         }
-
-        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -324,7 +275,6 @@
             z-index: 1000;
             border-top: 1px solid #ccc;
         }
-
         .nav-item {
             color: #000;
             font-size: 12px;
@@ -332,18 +282,14 @@
             cursor: pointer;
             user-select: none;
         }
-
         .nav-item i {
             font-size: 16px;
             display: block;
             margin-bottom: 3px;
         }
-
         .nav-item.active {
             color: #00ffcc;
         }
-
-        /* Section Titles */
         #profileSection .section-title,
         #incomeSection .section-title,
         #walletSection .section-title {
@@ -353,20 +299,16 @@
             margin: 10px 0 5px;
             color: #00cc99;
         }
-
-        /* Wallet History Section */
         .wallet-section {
             position: relative;
             margin: 20px;
             text-align: center;
         }
-
         .wallet-section p {
             color: #000;
             font-size: 18px;
             font-weight: 600;
         }
-
         .history-circle {
             position: absolute;
             top: 20px;
@@ -387,14 +329,11 @@
             overflow-y: auto;
             padding: 10px;
         }
-
         .history-circle p {
             margin: 5px 0;
             font-size: 14px;
             color: #fff;
         }
-
-        /* Task Box */
         .task-box {
             display: flex;
             align-items: center;
@@ -404,13 +343,11 @@
             margin: 10px 20px;
             border-radius: 8px;
         }
-
         .youtube-icon, .twitter-icon, .instagram-icon {
             font-size: 28px;
             margin-right: 15px;
             flex-shrink: 0;
         }
-
         .task-text {
             flex: 1;
             font-size: 16px;
@@ -418,7 +355,6 @@
             line-height: 1.2;
             font-weight: 600;
         }
-
         .task-text small {
             font-weight: normal;
             font-size: 13px;
@@ -426,7 +362,6 @@
             display: block;
             margin-top: 4px;
         }
-
         .go-button {
             background: #00cc99;
             color: #fff;
@@ -439,19 +374,15 @@
             white-space: nowrap;
             cursor: pointer;
         }
-
-        /* Referral Section */
         .referral-section {
             margin: 20px;
             text-align: center;
         }
-
         .referral-section p {
             font-size: 18px;
             color: #00ffcc;
             margin-bottom: 10px;
         }
-
         .referral-link {
             background: #f1f1f1;
             padding: 10px;
@@ -461,7 +392,6 @@
             word-break: break-all;
             margin-bottom: 10px;
         }
-
         .copy-button {
             background: #00cc99;
             color: #fff;
@@ -472,19 +402,15 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-
         .copy-button:hover {
             transform: translateY(-2px);
         }
-
         .referral-count {
             font-size: 18px;
             color: #00ffcc;
             font-weight: bold;
             margin-top: 20px;
         }
-
-        /* Profile Picture */
         .profile-pic {
             width: 140px;
             height: 140px;
@@ -500,8 +426,6 @@
             box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
-
-        /* Info Box */
         .info-box {
             background: white;
             margin: 10px 20px;
@@ -510,14 +434,11 @@
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
             width: calc(100% - 40px);
         }
-
         .info-box p {
             margin: 0;
             font-size: 16px;
             color: #333;
         }
-
-        /* Signout Section */
         .signout {
             margin: 30px 20px;
             text-align: center;
@@ -527,7 +448,6 @@
             align-items: center;
             gap: 10px;
         }
-
         .signout button {
             background: #dc3545;
             color: white;
@@ -539,19 +459,15 @@
             max-width: 200px;
             transition: background 0.2s ease, transform 0.2s ease;
         }
-
         .signout button:hover {
             background: #b52a3c;
             transform: translateY(-2px);
         }
-
         .version-text {
             font-size: 16px;
             color: #333;
             font-weight: bold;
         }
-
-        /* Roadmap and Rules Container */
         .buttons-container {
             position: absolute;
             top: 20px;
@@ -560,13 +476,11 @@
             width: 100%;
             padding: 0 20px;
         }
-
         .roadmap-container, .rules-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
         .roadmap-button, .rules-button, .invite-button {
             width: 50px;
             height: 50px;
@@ -582,16 +496,13 @@
             box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
             transition: transform 0.2s;
         }
-
         .invite-button {
             background: linear-gradient(45deg, #ff6f61, #ffb88c);
             box-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
         }
-
         .roadmap-button:hover, .rules-button:hover, .invite-button:hover {
             transform: scale(1.1);
         }
-
         .roadmap-content, .rules-content, .invite-content {
             display: none;
             position: absolute;
@@ -607,32 +518,26 @@
             max-height: 400px;
             overflow-y: auto;
         }
-
         .roadmap-content {
             top: 60px;
             right: 20px;
         }
-
         .rules-content {
             top: 60px;
             left: 20px;
         }
-
         .invite-content {
             top: 110px;
             left: 20px;
         }
-
         .roadmap-content.active, .rules-content.active, .invite-content.active {
             display: block;
         }
-
         .rules-content h1, .invite-content h1 {
             color: #0057ff;
             font-size: 20px;
             margin-bottom: 10px;
         }
-
         .rules-content h2, .invite-content h2 {
             color: #333;
             font-size: 16px;
@@ -640,24 +545,19 @@
             border-bottom: 1px solid #ddd;
             padding-bottom: 5px;
         }
-
         .rules-content ul, .invite-content ul {
             list-style: none;
             padding: 0;
             margin: 10px 0;
         }
-
         .rules-content li, .invite-content li {
             margin-bottom: 10px;
             font-weight: 600;
         }
-
         .rules-content p, .invite-content p {
             margin: 10px 0;
-            font-size: 14px;
+            font: 14px;
         }
-
-        /* Daily Bonus Button */
         .daily-bonus-button {
             width: 50px;
             height: 50px;
@@ -675,283 +575,226 @@
             text-align: center;
             line-height: 1.2;
         }
-
         .daily-bonus-button:hover {
             transform: scale(1.1);
         }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
             }
-
             .container {
                 margin: 10px auto;
                 padding: 15px;
                 max-width: 100%;
                 margin-top: 180px;
             }
-
             .form-control {
                 font-size: 16px;
                 padding: 8px;
             }
-
             .form-control::placeholder {
                 font-size: 16px;
             }
-
             .btn {
                 font-size: 20px;
                 padding: 8px;
             }
-
             .link {
                 font-size: 14px;
             }
-
             .footer-text {
                 font-size: 16px;
             }
-
             .navbar-top {
                 padding: 15px 0;
                 height: 150px;
             }
-
             .logo-circle {
                 width: 150px;
                 height: 150px;
             }
-
             .logo-circle h1 {
                 font-size: 36px;
             }
-
             .logo-circle p {
                 font-size: 20px;
             }
-
             .loading-overlay {
                 width: 180px;
                 height: 90px;
             }
-
             .loading-text {
                 font-size: 18px;
             }
-
             .referral-link {
                 font-size: 14px;
             }
-
             .copy-button {
-                font-size: 14px;
                 padding: 6px 12px;
+                font-size: 14px;
             }
-
             .referral-count {
                 font-size: 16px;
             }
-
             .info-box {
                 margin: 10px 15px;
                 padding: 12px;
                 width: calc(100% - 30px);
             }
-
             .signout {
                 margin: 20px 15px;
                 padding-bottom: 100px;
             }
-
             .signout button {
                 padding: 10px 20px;
                 font-size: 14px;
                 max-width: 180px;
             }
-
             .profile-pic {
                 width: 120px;
                 height: 120px;
                 font-size: 14px;
                 margin: 5px auto;
             }
-
             .section-title {
                 margin: 8px 0 3px;
             }
-
             .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
                 width: 40px;
                 height: 40px;
                 font-size: 12px;
             }
-
             .roadmap-content, .rules-content, .invite-content {
                 width: 250px;
                 font-size: 12px;
                 top: 50px;
                 max-height: 350px;
             }
-
             .invite-content {
                 top: 90px;
             }
-
             .start-button {
                 width: 100px;
                 height: 100px;
                 font-size: 14px;
             }
-
             .history-circle {
                 width: 150px;
                 height: 150px;
                 font-size: 12px;
             }
-
             .task-box {
                 margin: 8px 15px;
             }
-
             .home-bottom-text {
                 margin: 8px 15px;
                 font-size: 16px;
             }
-
             .ad-section {
                 margin: 8px 15px;
                 padding: 8px;
             }
-
             .ad-section p {
                 font-size: 14px;
             }
         }
-
         @media (max-width: 480px) {
             .container {
                 margin: 8px auto;
                 padding: 12px;
                 margin-top: 160px;
             }
-
             .logo-circle {
                 width: 120px;
                 height: 120px;
             }
-
             .logo-circle h1 {
                 font-size: 30px;
             }
-
             .logo-circle p {
                 font-size: 18px;
             }
-
             .loading-overlay {
                 width: 160px;
                 height: 80px;
             }
-
             .loading-text {
                 font-size: 16px;
             }
-
             .referral-link {
                 font-size: 12px;
             }
-
             .copy-button {
                 font-size: 12px;
                 padding: 5px 10px;
             }
-
             .referral-count {
                 font-size: 14px;
             }
-
             .info-box {
                 margin: 8px 12px;
                 padding: 10px;
                 width: calc(100% - 24px);
             }
-
             .signout {
                 margin: 15px 12px;
                 padding-bottom: 50px;
             }
-
             .signout button {
                 padding: 8px 16px;
                 font-size: 12px;
                 max-width: 160px;
             }
-
             .profile-pic {
                 width: 100px;
                 height: 100px;
                 font-size: 12px;
                 margin: 3px auto;
             }
-
             .section-title {
                 margin: 5px 0 2px;
             }
-
             .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
-
             .roadmap-content, .rules-content, .invite-content {
                 width: 200px;
                 font-size: 11px;
                 top: 45px;
                 max-height: 300px;
             }
-
             .invite-content {
                 top: 80px;
             }
-
             .start-button {
                 width: 80px;
                 height: 80px;
                 font-size: 12px;
             }
-
             .history-circle {
                 width: 120px;
                 height: 120px;
                 font-size: 10px;
             }
-
             .rules-content h1, .invite-content h1 {
                 font-size: 16px;
             }
-
             .rules-content h2, .invite-content h2 {
                 font-size: 14px;
             }
-
             .task-box {
                 margin: 5px 12px;
             }
-
             .home-bottom-text {
                 margin: 5px 12px;
                 font-size: 14px;
             }
-
             .ad-section {
                 margin: 5px 12px;
                 padding: 5px;
             }
-
             .ad-section p {
                 font-size: 12px;
             }
@@ -1113,7 +956,6 @@
         <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
         <div class="ad-section">
             <p>Advertisement</p>
-            <!-- Updated: Replaced placeholder img with ad container -->
             <div id="ad-container"></div>
         </div>
     </div>
@@ -1262,7 +1104,7 @@
         let miningInterval = null;
         let dailyBonusInterval = null;
 
-        // ***** New: Ad Configuration *****
+        // Ad Configuration
         const adConfigs = [
             {
                 key: '0e76a0edb900a6f53aa1a75d1b26bd27',
@@ -1303,11 +1145,9 @@
             const adContainer = document.getElementById('ad-container');
             if (!adContainer) return;
 
-            // Select a random ad
             const randomIndex = Math.floor(Math.random() * adConfigs.length);
             const selectedAd = adConfigs[randomIndex];
 
-            // Set atOptions for the selected ad
             window.atOptions = {
                 'key': selectedAd.key,
                 'format': selectedAd.format,
@@ -1316,17 +1156,13 @@
                 'params': selectedAd.params
             };
 
-            // Clear previous ad content
             adContainer.innerHTML = '';
-
-            // Create and append the ad script
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = selectedAd.scriptSrc;
             script.async = true;
             adContainer.appendChild(script);
         }
-        // ***** End of Ad Configuration *****
 
         // Utility Functions
         function getReferralCodeFromURL() {
@@ -1442,7 +1278,6 @@
                     history
                 });
 
-                // Update referrer's bonus if applicable
                 if (userData.referredBy) {
                     const referrerRef = ref(db, 'users/' + userData.referredBy);
                     const referrerSnapshot = await get(referrerRef);
@@ -1542,7 +1377,6 @@
                     history
                 });
 
-                // Update referrer's bonus if applicable
                 if (userData.referredBy) {
                     const referrerRef = ref(db, 'users/' + userData.referredBy);
                     const referrerSnapshot = await get(referrerRef);
@@ -1601,7 +1435,6 @@
             Object.values(containers).forEach(c => c.style.display = 'none');
             containers[page].style.display = 'block';
             navbarTop.style.display = ['login', 'signup', 'reset'].includes(page) ? 'flex' : 'none';
-            
             bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection', 'incomeSection'].includes(page) ? 'flex' : 'none';
 
             if (page === 'signup') {
@@ -1648,7 +1481,6 @@
                         updateReferralInfo(user, userData);
                     }
                 }
-                // ***** New: Display a random ad when homeSection is shown *****
                 displayRandomAd();
             }
             const navItems = document.querySelectorAll('.nav-item');
@@ -1726,6 +1558,50 @@
                 roadmapContent.classList.remove('active');
             }
         };
+
+        // New: Claim Mining Reward
+        async function claimMiningReward(user, userRef, userData) {
+            const newTokens = (userData.tokens || 0) + MINING_REWARD;
+            const history = userData.history || [];
+            history.push({
+                type: 'Start Mining',
+                amount: MINING_REWARD,
+                date: new Date().toLocaleDateString('en-GB')
+            });
+
+            await update(userRef, {
+                tokens: newTokens,
+                miningStartTime: 0,
+                miningEndTime: 0,
+                minedTokens: 0,
+                history
+            });
+
+            if (userData.referredBy) {
+                const referrerRef = ref(db, 'users/' + userData.referredBy);
+                const referrerSnapshot = await get(referrerRef);
+                if (referrerSnapshot.exists()) {
+                    const referrerData = referrerSnapshot.val();
+                    const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
+                    const referrerTokens = (referrerData.tokens || 0) + bonus;
+                    const referrerHistory = referrerData.history || [];
+                    referrerHistory.push({
+                        type: 'Referral Bonus',
+                        amount: bonus,
+                        date: new Date().toLocaleDateString('en-GB')
+                    });
+                    await update(referrerRef, {
+                        tokens: referrerTokens,
+                        history: referrerHistory
+                    });
+                }
+            }
+
+            updateBalance(user, newTokens);
+            startMiningBtn.disabled = false;
+            startMiningBtn.innerHTML = 'START MINING';
+            alert('Mining completed! You earned 12 ARPM.');
+        }
 
         // Form Event Listeners
         forms.login.addEventListener('submit', async (e) => {
@@ -1850,7 +1726,6 @@
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
                         updateReferralInfo(user, userData);
-                        // ***** New: Display ad on auth state change if homeSection is active *****
                         displayRandomAd();
                     }
                     if (userData.miningEndTime > Date.now()) {
@@ -1868,47 +1743,9 @@
                                 const snapshot = await get(userRef);
                                 if (snapshot.exists()) {
                                     const userData = snapshot.val();
-                                    const newTokens = (userData.tokens || 0) + MINING_REWARD;
-                                    const history = userData.history || [];
-                                    history.push({
-                                        type: 'Start Mining',
-                                        amount: MINING_REWARD,
-                                        date: new Date().toLocaleDateString('en-GB')
-                                    });
-
-                                    await update(userRef, {
-                                        tokens: newTokens,
-                                        miningStartTime: 0,
-                                        miningEndTime: 0,
-                                        minedTokens: 0,
-                                        history
-                                    });
-
-                                    // Update referrer's bonus
-                                    if (userData.referredBy) {
-                                        const referrerRef = ref(db, 'users/' + userData.referredBy);
-                                        const referrerSnapshot = await get(referrerRef);
-                                        if (referrerSnapshot.exists()) {
-                                            const referrerData = referrerSnapshot.val();
-                                            const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
-                                            const referrerTokens = (referrerData.tokens || 0) + bonus;
-                                            const referrerHistory = referrerData.history || [];
-                                            referrerHistory.push({
-                                                type: 'Referral Bonus',
-                                                amount: bonus,
-                                                date: new Date().toLocaleDateString('en-GB')
-                                            });
-                                            await update(referrerRef, {
-                                                tokens: referrerTokens,
-                                                history: referrerHistory
-                                            });
-                                        }
-                                    }
-
-                                    updateBalance(user, newTokens);
                                     startMiningBtn.disabled = false;
-                                    startMiningBtn.innerHTML = 'START MINING';
-                                    alert('Mining completed! You earned 12 ARPM.');
+                                    startMiningBtn.innerHTML = 'Claim';
+                                    startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                                 }
                                 return;
                             }
@@ -1921,6 +1758,11 @@
                                 await update(userRef, { minedTokens });
                             }
                         }, 1000);
+                    } else if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
+                        // Handle case where mining has ended but not claimed
+                        startMiningBtn.disabled = false;
+                        startMiningBtn.innerHTML = 'Claim';
+                        startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                     }
                 }
                 showPage('homeSection');
@@ -1974,6 +1816,11 @@
                     alert('Mining is already in progress! Please wait until it completes.');
                     return;
                 }
+                if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
+                    // Claim pending reward
+                    await claimMiningReward(user, userRef, userData);
+                    return;
+                }
             }
 
             if (miningInterval) clearInterval(miningInterval);
@@ -1997,47 +1844,9 @@
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
-                        const newTokens = (userData.tokens || 0) + MINING_REWARD;
-                        const history = userData.history || [];
-                        history.push({
-                            type: 'Start Mining',
-                            amount: MINING_REWARD,
-                            date: new Date().toLocaleDateString('en-GB')
-                        });
-
-                        await update(userRef, {
-                            tokens: newTokens,
-                            miningStartTime: 0,
-                            miningEndTime: 0,
-                            minedTokens: 0,
-                            history
-                        });
-
-                        // Update referrer's bonus
-                        if (userData.referredBy) {
-                            const referrerRef = ref(db, 'users/' + userData.referredBy);
-                            const referrerSnapshot = await get(referrerRef);
-                            if (referrerSnapshot.exists()) {
-                                const referrerData = referrerSnapshot.val();
-                                const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
-                                const referrerTokens = (referrerData.tokens || 0) + bonus;
-                                const referrerHistory = referrerData.history || [];
-                                referrerHistory.push({
-                                    type: 'Referral Bonus',
-                                    amount: bonus,
-                                    date: new Date().toLocaleDateString('en-GB')
-                                });
-                                await update(referrerRef, {
-                                    tokens: referrerTokens,
-                                    history: referrerHistory
-                                });
-                            }
-                        }
-
-                        updateBalance(user, newTokens);
                         startMiningBtn.disabled = false;
-                        startMiningBtn.innerHTML = 'START MINING';
-                        alert('Mining completed! You earned 12 ARPM.');
+                        startMiningBtn.innerHTML = 'Claim';
+                        startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                     }
                     return;
                 }
