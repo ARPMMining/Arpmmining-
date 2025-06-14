@@ -477,7 +477,7 @@
             flex-direction: column;
             gap: 8px;
         }
-        .roadmap-button, .rules-button, .invite-button, .daily-bonus-button, .login-bonus-button {
+        .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
             width: 40px;
             height: 40px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
@@ -497,10 +497,10 @@
             background: linear-gradient(45deg, #ff6f61, #ffb88c);
             box-shadow: 0 0 8px rgba(255, 111, 97, 0.7);
         }
-        .roadmap-button:hover, .rules-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+        .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
             transform: scale(1.1);
         }
-        .roadmap-content, .rules-content, .invite-content, .login-bonus-content {
+        .roadmap-content, .invite-content, .login-bonus-content {
             display: none;
             position: absolute;
             background: #fff;
@@ -519,43 +519,39 @@
             top: 50px;
             right: 15px;
         }
-        .rules-content {
+        .invite-content {
             top: 50px;
             left: 15px;
         }
-        .invite-content {
+        .login-bonus-content {
             top: 90px;
             left: 15px;
         }
-        .login-bonus-content {
-            top: 130px;
-            left: 15px;
-        }
-        .roadmap-content.active, .rules-content.active, .invite-content.active, .login-bonus-content.active {
+        .roadmap-content.active, .invite-content.active, .login-bonus-content.active {
             display: block;
         }
-        .rules-content h1, .invite-content h1, .login-bonus-content h1 {
+        .invite-content h1, .login-bonus-content h1 {
             color: #0057ff;
             font-size: 16px;
             margin-bottom: 8px;
         }
-        .rules-content h2, .invite-content h2, .login-bonus-content h2 {
+        .invite-content h2, .login-bonus-content h2 {
             color: #333;
             font-size: 14px;
             margin-top: 15px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 3px;
         }
-        .rules-content ul, .invite-content ul, .login-bonus-content ul {
+        .invite-content ul, .login-bonus-content ul {
             list-style: none;
             padding: 0;
             margin: 8px 0;
         }
-        .rules-content li, .invite-content li, .login-bonus-content li {
+        .invite-content li, .login-bonus-content li {
             margin-bottom: 8px;
             font-weight: 600;
         }
-        .rules-content p, .invite-content p, .login-bonus-content p {
+        .invite-content p, .login-bonus-content p {
             margin: 8px 0;
             font-size: 12px;
         }
@@ -656,22 +652,22 @@
                 font-size: 12px;
                 max-width: 160px;
             }
-            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button, .login-bonus-button {
+            .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
-            .roadmap-content, .rules-content, .invite-content, .login-bonus-content {
+            .roadmap-content, .invite-content, .login-bonus-content {
                 width: 200px;
                 font-size: 11px;
                 top: 45px;
                 max-height: 300px;
             }
             .invite-content {
-                top: 80px;
+                top: 45px;
             }
             .login-bonus-content {
-                top: 120px;
+                top: 80px;
             }
         }
         @media (min-width: 481px) and (max-width: 768px) {
@@ -788,50 +784,8 @@
             <button class="start-button" id="start-mining-btn">START MINING</button>
             <div class="buttons-container">
                 <div class="rules-container">
-                    <div class="rules-button" onclick="toggleRules()">Rules</div>
                     <div class="invite-button" onclick="toggleInvite()">Invite</div>
                     <div class="login-bonus-button" id="login-bonus-btn" onclick="toggleLoginBonus()">Bonus</div>
-                    <div class="rules-content" id="rules-content">
-                        <h1>ARPM Mining Network</h1>
-                        <p><strong>Rules & Terms of Use</strong></p>
-                        <p>Welcome to ARPM Mining Network! By using this app, you agree to follow the rules below. Please read carefully:</p>
-                        <h2>1. One Account Per User</h2>
-                        <ul>
-                            <li>Only one account per user is allowed.</li>
-                            <li>Multiple or fake accounts will be permanently banned.</li>
-                        </ul>
-                        <h2>2. Mining Rules</h2>
-                        <ul>
-                            <li>Mining must be started manually every 12 hours by tapping the button.</li>
-                            <li>Mining stops automatically after 12 hours and requires clicking "Claim" to receive tokens.</li>
-                            <li>After claiming, mining can be restarted.</li>
-                        </ul>
-                        <h2>3. Referral Policy</h2>
-                        <ul>
-                            <li>Invite friends using your unique referral code to earn a 5% bonus on their mining rewards.</li>
-                            <li>Self-referrals or fake invites are not allowed.</li>
-                        </ul>
-                        <h2>4. Prohibited Activities</h2>
-                        <ul>
-                            <li>Use of bots, emulators, or scripts is forbidden.</li>
-                            <li>Suspicious activity may result in account ban.</li>
-                        </ul>
-                        <h2>5. KYC Requirement</h2>
-                        <ul>
-                            <li>KYC is required before token withdrawal.</li>
-                            <li>Fake/incomplete KYC will disqualify withdrawal.</li>
-                        </ul>
-                        <h2>6. Token Withdrawal</h2>
-                        <ul>
-                            <li>Withdraw only after completing KYC and reaching the minimum balance.</li>
-                            <li>We reserve the right to delay or block fraud-related withdrawals.</li>
-                        </ul>
-                        <h2>7. Rule Violation</h2>
-                        <ul>
-                            <li>Any rule violation may lead to account suspension or permanent ban without notice.</li>
-                        </ul>
-                        <p><strong>Thank you for using ARPM Mining Network. Happy Mining!</strong></p>
-                    </div>
                     <div class="invite-content" id="invite-content">
                         <h1>Invite Friends</h1>
                         <p>Share your unique referral link to invite friends and earn a 5% bonus on their mining rewards!</p>
@@ -851,11 +805,11 @@
                     <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
                     <div class="roadmap-content" id="roadmap-content">
                         <ul>
-                            <li>Q2 2025: Major updates to the official website, Improved mobile experience for all users</li>
-                            <li>Q3 2025: Regular website updates to enhance user experience</li>
-                            <li>Q2 2026: Launch of the ARPM Wallet, Secure token storage, Fast and easy withdrawal system, May launch earlier depending on user demand</li>
-                            <li>Q4 2026: ARPM App will be published on Google Play Store after reaching 10,000 active users, May launch earlier depending on user demand</li>
-                            <li>Q1 2027: Publish Airdrop eligibility criteria, Stop the current token mining system, Launch a new token mining system with updated rules</li>
+                            <li>Q4 2025: Website verification and review completed</li>
+                            <li>Q1 2026: App launch on Google Play Store</li>
+                            <li>Q3 2026: ARPM Wallet launch</li>
+                            <li>Q1 2027: Preparation for launching own network</li>
+                            <li>Q3 2027: Token distribution begins</li>
                         </ul>
                     </div>
                 </div>
@@ -1498,44 +1452,27 @@
 
         window.toggleRoadmap = () => {
             const roadmapContent = document.getElementById('roadmap-content');
-            const rulesContent = document.getElementById('rules-content');
             const inviteContent = document.getElementById('invite-content');
             const loginBonusContent = document.getElementById('login-bonus-content');
             roadmapContent.classList.toggle('active');
-            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
-            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
-            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
-        };
-
-        window.toggleRules = () => {
-            const rulesContent = document.getElementById('rules-content');
-            const roadmapContent = document.getElementById('roadmap-content');
-            const inviteContent = document.getElementById('invite-content');
-            const loginBonusContent = document.getElementById('login-bonus-content');
-            rulesContent.classList.toggle('active');
-            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
             if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
         window.toggleInvite = () => {
             const inviteContent = document.getElementById('invite-content');
-            const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
             const loginBonusContent = document.getElementById('login-bonus-content');
             inviteContent.classList.toggle('active');
-            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
             if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
         window.toggleLoginBonus = () => {
             const loginBonusContent = document.getElementById('login-bonus-content');
-            const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
             const inviteContent = document.getElementById('invite-content');
             loginBonusContent.classList.toggle('active');
-            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
             if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
