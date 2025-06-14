@@ -419,6 +419,7 @@
             font-size: 14px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             text-align: center;
+            line-height: 1.2;
         }
         .info-box {
             background: white;
@@ -476,7 +477,7 @@
             flex-direction: column;
             gap: 8px;
         }
-        .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
+        .roadmap-button, .rules-button, .invite-button, .daily-bonus-button, .login-bonus-button {
             width: 40px;
             height: 40px;
             background: linear-gradient(45deg, #00cc99, #00ffcc);
@@ -492,14 +493,14 @@
             transition: transform 0.2s;
             touch-action: manipulation;
         }
-        .invite-button, .daily-bonus-button {
+        .invite-button, .daily-bonus-button, .login-bonus-button {
             background: linear-gradient(45deg, #ff6f61, #ffb88c);
             box-shadow: 0 0 8px rgba(255, 111, 97, 0.7);
         }
-        .roadmap-button:hover, .rules-button:hover, .invite-button:hover, .daily-bonus-button:hover {
+        .roadmap-button:hover, .rules-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
             transform: scale(1.1);
         }
-        .roadmap-content, .rules-content, .invite-content {
+        .roadmap-content, .rules-content, .invite-content, .login-bonus-content {
             display: none;
             position: absolute;
             background: #fff;
@@ -526,31 +527,35 @@
             top: 90px;
             left: 15px;
         }
-        .roadmap-content.active, .rules-content.active, .invite-content.active {
+        .login-bonus-content {
+            top: 130px;
+            left: 15px;
+        }
+        .roadmap-content.active, .rules-content.active, .invite-content.active, .login-bonus-content.active {
             display: block;
         }
-        .rules-content h1, .invite-content h1 {
+        .rules-content h1, .invite-content h1, .login-bonus-content h1 {
             color: #0057ff;
             font-size: 16px;
             margin-bottom: 8px;
         }
-        .rules-content h2, .invite-content h2 {
+        .rules-content h2, .invite-content h2, .login-bonus-content h2 {
             color: #333;
             font-size: 14px;
             margin-top: 15px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 3px;
         }
-        .rules-content ul, .invite-content ul {
+        .rules-content ul, .invite-content ul, .login-bonus-content ul {
             list-style: none;
             padding: 0;
             margin: 8px 0;
         }
-        .rules-content li, .invite-content li {
+        .rules-content li, .invite-content li, .login-bonus-content li {
             margin-bottom: 8px;
             font-weight: 600;
         }
-        .rules-content p, .invite-content p {
+        .rules-content p, .invite-content p, .login-bonus-content p {
             margin: 8px 0;
             font-size: 12px;
         }
@@ -651,12 +656,12 @@
                 font-size: 12px;
                 max-width: 160px;
             }
-            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button {
+            .roadmap-button, .rules-button, .invite-button, .daily-bonus-button, .login-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
-            .roadmap-content, .rules-content, .invite-content {
+            .roadmap-content, .rules-content, .invite-content, .login-bonus-content {
                 width: 200px;
                 font-size: 11px;
                 top: 45px;
@@ -664,6 +669,9 @@
             }
             .invite-content {
                 top: 80px;
+            }
+            .login-bonus-content {
+                top: 120px;
             }
         }
         @media (min-width: 481px) and (max-width: 768px) {
@@ -782,6 +790,7 @@
                 <div class="rules-container">
                     <div class="rules-button" onclick="toggleRules()">Rules</div>
                     <div class="invite-button" onclick="toggleInvite()">Invite</div>
+                    <div class="login-bonus-button" id="login-bonus-btn" onclick="toggleLoginBonus()">Bonus</div>
                     <div class="rules-content" id="rules-content">
                         <h1>ARPM Mining Network</h1>
                         <p><strong>Rules & Terms of Use</strong></p>
@@ -830,6 +839,11 @@
                         <div class="referral-link" id="invite-referral-link">Loading...</div>
                         <button class="copy-button" onclick="copyReferralLink('invite-referral-link')">Copy Link</button>
                         <p class="referral-count" id="invite-referral-count">Referrals: 0</p>
+                    </div>
+                    <div class="login-bonus-content" id="login-bonus-content">
+                        <h1>Login Bonus</h1>
+                        <p>Claim a one-time login bonus of 50 ARPM tokens!</p>
+                        <button class="copy-button" id="claim-login-bonus-btn" onclick="claimLoginBonus()">Claim Bonus</button>
                     </div>
                 </div>
                 <div class="roadmap-container">
@@ -977,6 +991,7 @@
         const bottomNav = document.getElementById('bottom-nav');
         const startMiningBtn = document.getElementById('start-mining-btn');
         const dailyBonusBtn = document.getElementById('daily-bonus-btn');
+        const loginBonusBtn = document.getElementById('login-bonus-btn');
         const balanceBox = document.getElementById('balance-box');
         const inviteReferralLink = document.getElementById('invite-referral-link');
         const inviteReferralCount = document.getElementById('invite-referral-count');
@@ -988,6 +1003,7 @@
         const MINING_REWARD = 12;
         const REFERRAL_BONUS_PERCENT = 0.05;
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
+        const LOGIN_BONUS = 50;
 
         let miningInterval = null;
         let dailyBonusInterval = null;
@@ -1300,6 +1316,88 @@
             }
         }
 
+        async function updateLoginBonusButton(userData) {
+            if (!loginBonusBtn) return;
+
+            const isClaimed = userData.loginBonusClaimed || false;
+            const claimButton = document.getElementById('claim-login-bonus-btn');
+            const loginBonusContent = document.getElementById('login-bonus-content');
+            
+            if (isClaimed) {
+                loginBonusBtn.style.display = 'none'; // Hide the login bonus button
+                loginBonusContent.style.display = 'none'; // Hide the login bonus content
+            } else {
+                loginBonusBtn.style.display = 'flex'; // Show the login bonus button
+                loginBonusBtn.disabled = false;
+                loginBonusBtn.textContent = 'Bonus';
+                loginBonusBtn.style.backgroundColor = '';
+                loginBonusBtn.style.cursor = 'pointer';
+                loginBonusBtn.onclick = () => toggleLoginBonus();
+                claimButton.textContent = 'Claim Bonus';
+                claimButton.disabled = false;
+                claimButton.style.backgroundColor = '';
+                claimButton.style.cursor = 'pointer';
+                claimButton.onclick = () => claimLoginBonus();
+            }
+        }
+
+        async function claimLoginBonus() {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to claim login bonus!');
+                showPage('login');
+                return;
+            }
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (userData.loginBonusClaimed) {
+                    alert('Login bonus already claimed!');
+                    return;
+                }
+
+                const newTokens = (userData.tokens || 0) + LOGIN_BONUS;
+                const history = userData.history || [];
+                history.push({
+                    type: 'Login Bonus',
+                    amount: LOGIN_BONUS,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
+                await update(userRef, {
+                    tokens: newTokens,
+                    loginBonusClaimed: true,
+                    history
+                });
+
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, 'users/' + userData.referredBy);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonus = LOGIN_BONUS * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonus;
+                        const referrerHistory = referrerData.history || [];
+                        referrerHistory.push({
+                            type: 'Referral Bonus',
+                            amount: bonus,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, {
+                            tokens: referrerTokens,
+                            history: referrerHistory
+                        });
+                    }
+                }
+
+                updateBalance(user, newTokens);
+                loginBonusBtn.style.display = 'none'; // Hide the login bonus button after claiming
+                document.getElementById('login-bonus-content').style.display = 'none'; // Hide the login bonus content
+                alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
+            }
+        }
+
         async function updateReferralInfo(user, userData) {
             const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
             if (inviteReferralLink) inviteReferralLink.textContent = referralLink;
@@ -1356,6 +1454,7 @@
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
                         updateDailyBonusButton(userData);
+                        updateLoginBonusButton(userData);
                         updateReferralInfo(user, userData);
                     }
                 }
@@ -1401,27 +1500,44 @@
             const roadmapContent = document.getElementById('roadmap-content');
             const rulesContent = document.getElementById('rules-content');
             const inviteContent = document.getElementById('invite-content');
+            const loginBonusContent = document.getElementById('login-bonus-content');
             roadmapContent.classList.toggle('active');
             if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
+            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
         window.toggleRules = () => {
             const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
             const inviteContent = document.getElementById('invite-content');
+            const loginBonusContent = document.getElementById('login-bonus-content');
             rulesContent.classList.toggle('active');
             if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
+            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
         window.toggleInvite = () => {
             const inviteContent = document.getElementById('invite-content');
             const rulesContent = document.getElementById('rules-content');
             const roadmapContent = document.getElementById('roadmap-content');
+            const loginBonusContent = document.getElementById('login-bonus-content');
             inviteContent.classList.toggle('active');
             if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
             if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
+            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
+        };
+
+        window.toggleLoginBonus = () => {
+            const loginBonusContent = document.getElementById('login-bonus-content');
+            const rulesContent = document.getElementById('rules-content');
+            const roadmapContent = document.getElementById('roadmap-content');
+            const inviteContent = document.getElementById('invite-content');
+            loginBonusContent.classList.toggle('active');
+            if (rulesContent.classList.contains('active')) rulesContent.classList.remove('active');
+            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
+            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
         async function claimMiningReward(user, userRef, userData) {
@@ -1522,6 +1638,7 @@
                     youtubeBonusClaimed: false,
                     xBonusClaimed: false,
                     instagramBonusClaimed: false,
+                    loginBonusClaimed: false,
                     profilePicture: null,
                     language: 'en',
                     lastDailyBonus: 0,
@@ -1587,6 +1704,7 @@
                     }
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
+                        updateLoginBonusButton(userData);
                         updateReferralInfo(user, userData);
                         displayRandomAd();
                     }
