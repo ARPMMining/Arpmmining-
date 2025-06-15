@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARPM MINING - Income</title>
+
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Internal CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: #ffffff;
+            touch-action: manipulation;
+        }
+        .page-section {
+            display: block;
+            overflow: hidden;
+            margin-top: 20px; /* Removed logo, so reduced margin */
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0 3px;
+            color: #00cc99;
+        }
+        .task-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f1f1;
+            padding: 8px 12px;
+            margin: 8px 15px;
+            border-radius: 8px;
+        }
+        .youtube-icon, .twitter-icon, .instagram-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .task-text {
+            flex: 1;
+            font-size: 14px;
+            color: #000;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        .task-text small {
+            font-weight: normal;
+            font-size: 12px;
+            color: #555;
+            display: block;
+            margin-top: 3px;
+        }
+        .go-button {
+            background: #00cc99;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+            white-space: nowrap;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 50px;
+            z-index: 1000;
+            border-top: 1px solid #ccc;
+        }
+        .nav-item {
+            color: #000;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        .nav-item i {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .nav-item.active {
+            color: #00ffcc;
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            .page-section {
+                margin-top: 15px;
+            }
+            .task-box {
+                padding: 6px 10px;
+                margin: 6px 12px;
+            }
+            .youtube-icon, .twitter-icon, .instagram-icon {
+                font-size: 20px;
+            }
+            .task-text {
+                font-size: 12px;
+            }
+            .task-text small {
+                font-size: 10px;
+            }
+            .go-button {
+                padding: 6px;
+                font-size: 10px;
+            }
+            .bottom-nav {
+                height: 45px;
+            }
+            .nav-item {
+                font-size: 9px;
+            }
+            .nav-item i {
+                font-size: 12px;
+            }
+        }
+        @media (min-width: 481px) and (max-width: 768px) {
+            .page-section {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Income Section -->
+    <div id="incomeSection" class="page-section">
+        <div class="section-title">Income</div>
+        <div class="task-box">
+            <i class="fa-brands fa-youtube youtube-icon" style="color: #FF0000;"></i>
+            <div class="task-text">
+                YOUTUBE 
+                <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X 
+                <small>FOLLOW ARPM ON X</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
+        </div>
+        <div class="task-box">
+            <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
+            <div class="task-text">
+                INSTAGRAM 
+                <small>FOLLOW ARPM ON INSTAGRAM</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav" id="bottom-nav">
+        <div class="nav-item" data-target="homeSection">
+            <i class="fas fa-home"></i>Home
+        </div>
+        <div class="nav-item" data-target="profileSection">
+            <i class="fas fa-user"></i>Profile
+        </div>
+        <div class="nav-item" data-target="walletSection">
+            <i class="fas fa-wallet"></i>Wallet
+        </div>
+        <div class="nav-item active" data-target="incomeSection">
+            <i class="fas fa-coins"></i>Income
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
+            authDomain: "arpm-mining.firebaseapp.com",
+            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com/",
+            projectId: "arpm-mining",
+            storageBucket: "arpm-mining.appspot.com",
+            messagingSenderId: "854582920631",
+            appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
+            measurementId: "G-8YVW5EK6N1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const TASK_BONUS = 5.0;
+        const REFERRAL_BONUS_PERCENT = 0.05;
+
+        async function updateTaskButton(taskType, userData) {
+            const button = document.getElementById(`${taskType}-task-btn`);
+            if (!button) return;
+
+            const isClaimed = userData[`${taskType}BonusClaimed`] || false;
+            if (isClaimed) {
+                button.textContent = 'COMPLETE';
+                button.disabled = true;
+                button.style.backgroundColor = '#cccccc';
+                button.style.cursor = 'not-allowed';
+                button.onclick = null;
+            } else if (sessionStorage.getItem(`${taskType}Visited`)) {
+                button.textContent = 'CLAIM';
+                button.disabled = false;
+                button.style.backgroundColor = '#00cc99';
+                button.style.cursor = 'pointer';
+                button.onclick = () => claimTask(taskType);
+            } else {
+                button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
+                button.disabled = false;
+                button.style.backgroundColor = '#00cc99';
+                button.style.cursor = 'pointer';
+                button.onclick = () => handleTask(taskType);
+            }
+        }
+
+        async function handleTask(taskType) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to perform this task!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (userData[`${taskType}BonusClaimed`]) {
+                    alert('This task has already been completed!');
+                    return;
+                }
+            }
+
+            const button = document.getElementById(`${taskType}-task-btn`);
+            const link = button.getAttribute('data-link');
+            sessionStorage.setItem(`${taskType}Visited`, 'true');
+            window.open(link, '_blank');
+
+            button.textContent = 'CLAIM';
+            button.onclick = () => claimTask(taskType);
+        }
+
+        async function claimTask(taskType) {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to claim this task!');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const userRef = ref(db, 'users/' + user.uid);
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                if (userData[`${taskType}BonusClaimed`]) {
+                    alert('Task already claimed!');
+                    return;
+                }
+
+                const newTokens = (userData.tokens || 0) + TASK_BONUS;
+                const history = userData.history || [];
+                history.push({
+                    type: 'Complete Tasks',
+                    amount: TASK_BONUS,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
+                await update(userRef, {
+                    tokens: newTokens,
+                    [`${taskType}BonusClaimed`]: true,
+                    history
+                });
+
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, 'users/' + userData.referredBy);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonus = TASK_BONUS * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonus;
+                        const referrerHistory = referrerData.history || [];
+                        referrerHistory.push({
+                            type: 'Referral Bonus',
+                            amount: bonus,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, {
+                            tokens: referrerTokens,
+                            history: referrerHistory
+                        });
+                    }
+                }
+
+                updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
+                alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
+            }
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userRef = ref(db, 'users/' + user.uid);
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    updateTaskButton('youtube', userData);
+                    updateTaskButton('x', userData);
+                    updateTaskButton('instagram', userData);
+                }
+            } else {
+                alert('Please login to access this page!');
+                window.location.href = 'index.html';
+            }
+        });
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                const target = item.getAttribute('data-target');
+                if (target !== 'incomeSection') {
+                    window.location.href = 'index.html';
+                }
+            });
+
+            item.addEventListener('touchstart', () => {
+                item.style.transform = 'scale(0.95)';
+            });
+
+            item.addEventListener('touchend', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
