@@ -282,7 +282,6 @@
         .nav-item.active {
             color: #00ffcc;
         }
-        #profileSection .section-title,
         #walletSection .section-title {
             font-size: 20px;
             font-weight: bold;
@@ -299,103 +298,6 @@
             color: #000;
             font-size: 16px;
             font-weight: 600;
-        }
-        .referral-section {
-            margin: 15px;
-            text-align: center;
-        }
-        .referral-section p {
-            font-size: 16px;
-            color: #00ffcc;
-            margin-bottom: 8px;
-        }
-        .referral-link {
-            background: #f1f1f1;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #000;
-            word-break: break-all;
-            margin-bottom: 8px;
-        }
-        .copy-button {
-            background: #00cc99;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 5px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            touch-action: manipulation;
-        }
-        .copy-button:hover {
-            transform: translateY(-2px);
-        }
-        .referral-count {
-            font-size: 16px;
-            color: #00ffcc;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-        .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 5px auto 8px auto;
-            background-color: #007bff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            line-height: 1.2;
-        }
-        .info-box {
-            background: white;
-            margin: 8px 15px;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            width: calc(100% - 30px);
-        }
-        .info-box p {
-            margin: 0;
-            font-size: 14px;
-            color: #333;
-        }
-        .signout {
-            margin: 20px 15px;
-            text-align: center;
-            padding-bottom: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .signout button {
-            background: #dc3545;
-            color: white;
-            padding: 10px 20px;
-            font-size: 14px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            max-width: 180px;
-            transition: background 0.2s ease, transform 0.2s ease;
-            touch-action: manipulation;
-        }
-        .signout button:hover {
-            background: #b52a3c;
-            transform: translateY(-2px);
-        }
-        .version-text {
-            font-size: 14px;
-            color: #333;
-            font-weight: bold;
         }
         .buttons-container {
             position: absolute;
@@ -540,28 +442,6 @@
             }
             .nav-item i {
                 font-size: 12px;
-            }
-            .referral-link, .copy-button, .referral-count {
-                font-size: 12px;
-            }
-            .profile-pic {
-                width: 80px;
-                height: 80px;
-                font-size: 12px;
-            }
-            .info-box {
-                margin: 6px 12px;
-                padding: 10px;
-                width: calc(100% - 24px);
-            }
-            .signout {
-                margin: 15px 12px;
-                padding-bottom: 50px;
-            }
-            .signout button {
-                padding: 8px 16px;
-                font-size: 12px;
-                max-width: 160px;
             }
             .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
                 width: 35px;
@@ -733,33 +613,6 @@
         </div>
     </div>
 
-    <!-- Profile Section -->
-    <div id="profileSection" class="page-section hidden">
-        <div class="section-title">Profile</div>
-        <div class="profile-pic">
-            ARPM Mining
-        </div>
-        <div class="info-box">
-            <p><strong>Name:</strong> <span id="username"></span></p>
-        </div>
-        <div class="info-box">
-            <p><strong>Email:</strong> <span id="email"></span></p>
-        </div>
-        <div class="info-box">
-            <p><strong>Registration Date:</strong> <span id="date"></span></p>
-        </div>
-        <div class="referral-section">
-            <p>Your Referral Link:</p>
-            <div class="referral-link" id="profile-referral-link">Loading...</div>
-            <button class="copy-button" onclick="copyReferralLink('profile-referral-link')">Copy Link</button>
-            <p class="referral-count" id="profile-referral-count">Referrals: 0</p>
-        </div>
-        <div class="signout">
-            <button onclick="signOut()">Sign Out</button>
-            <span class="version-text">ARPM-Web-v1.5.0</span>
-        </div>
-    </div>
-
     <!-- Wallet Section -->
     <div id="walletSection" class="page-section hidden">
         <div class="section-title">Wallet</div>
@@ -810,7 +663,6 @@
             signup: document.getElementById('signup-container'),
             reset: document.getElementById('reset-container'),
             homeSection: document.getElementById('homeSection'),
-            profileSection: document.getElementById('profileSection'),
             walletSection: document.getElementById('walletSection')
         };
         const forms = {
@@ -827,8 +679,6 @@
         const balanceBox = document.getElementById('balance-box');
         const inviteReferralLink = document.getElementById('invite-referral-link');
         const inviteReferralCount = document.getElementById('invite-referral-count');
-        const profileReferralLinkElement = document.getElementById('profile-referral-link');
-        const profileReferralCountElement = document.getElementById('profile-referral-count');
 
         const NEW_USER_BONUS = 1.5;
         const MINING_REWARD = 12;
@@ -1124,8 +974,6 @@
             const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
             if (inviteReferralLink) inviteReferralLink.textContent = referralLink;
             if (inviteReferralCount) inviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
-            if (profileReferralLinkElement) profileReferralLinkElement.textContent = referralLink;
-            if (profileReferralCountElement) profileReferralCountElement.textContent = `Referrals: ${userData.referrals || 0}`;
         }
 
         async function showPage(page) {
@@ -1133,26 +981,12 @@
             Object.values(containers).forEach(c => c.style.display = 'none');
             containers[page].style.display = 'block';
             navbarTop.style.display = ['login', 'signup', 'reset'].includes(page) ? 'flex' : 'none';
-            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection'].includes(page) ? 'flex' : 'none';
+            bottomNav.style.display = ['homeSection', 'walletSection'].includes(page) ? 'flex' : 'none';
 
             if (page === 'signup') {
                 const referralCode = getReferralCodeFromURL();
                 if (referralCode) {
                     document.getElementById('signup-invite-code').value = referralCode;
-                }
-            }
-            if (page === 'profileSection') {
-                const user = auth.currentUser;
-                if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        document.getElementById("username").textContent = data.username || "N/A";
-                        document.getElementById("email").textContent = user.email;
-                        document.getElementById("date").textContent = data.registrationDate;
-                        updateReferralInfo(user, data);
-                    }
                 }
             }
             if (page === 'homeSection') {
@@ -1383,12 +1217,6 @@
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     updateBalance(user, userData.tokens || 0);
-                    if (containers.profileSection.style.display === 'block') {
-                        document.getElementById("username").textContent = userData.username || "N/A";
-                        document.getElementById("email").textContent = user.email;
-                        document.getElementById("date").textContent = userData.registrationDate;
-                        updateReferralInfo(user, userData);
-                    }
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
                         updateLoginBonusButton(userData);
@@ -1466,6 +1294,8 @@
                 const target = item.getAttribute('data-target');
                 if (target === 'incomeSection') {
                     window.location.href = 'income.html';
+                } else if (target === 'profileSection') {
+                    window.location.href = 'profile.html';
                 } else {
                     await showPage(target);
                 }
