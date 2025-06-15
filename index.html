@@ -283,7 +283,6 @@
             color: #00ffcc;
         }
         #profileSection .section-title,
-        #incomeSection .section-title,
         #walletSection .section-title {
             font-size: 20px;
             font-weight: bold;
@@ -300,72 +299,6 @@
             color: #000;
             font-size: 16px;
             font-weight: 600;
-        }
-        .history-circle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, #00cc99, #00ffcc);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            overflow-y: auto;
-            padding: 8px;
-        }
-        .history-circle p {
-            margin: 3px 0;
-            font-size: 12px;
-            color: #fff;
-        }
-        .task-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f1f1f1;
-            padding: 8px 12px;
-            margin: 8px 15px;
-            border-radius: 8px;
-        }
-        .youtube-icon, .twitter-icon, .instagram-icon {
-            font-size: 24px;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
-        .task-text {
-            flex: 1;
-            font-size: 14px;
-            color: #000;
-            line-height: 1.2;
-            font-weight: 600;
-        }
-        .task-text small {
-            font-weight: normal;
-            font-size: 12px;
-            color: #555;
-            display: block;
-            margin-top: 3px;
-        }
-        .go-button {
-            background: #00cc99;
-            color: #fff;
-            padding: 8px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            flex-shrink: 0;
-            white-space: nowrap;
-            cursor: pointer;
-            touch-action: manipulation;
         }
         .referral-section {
             margin: 15px;
@@ -608,28 +541,6 @@
             .nav-item i {
                 font-size: 12px;
             }
-            .history-circle {
-                width: 120px;
-                height: 120px;
-                font-size: 10px;
-            }
-            .task-box {
-                padding: 6px 10px;
-                margin: 6px 12px;
-            }
-            .youtube-icon, .twitter-icon, .instagram-icon {
-                font-size: 20px;
-            }
-            .task-text {
-                font-size: 12px;
-            }
-            .task-text small {
-                font-size: 10px;
-            }
-            .go-button {
-                padding: 6px;
-                font-size: 10px;
-            }
             .referral-link, .copy-button, .referral-count {
                 font-size: 12px;
             }
@@ -857,38 +768,6 @@
         </div>
     </div>
 
-    <!-- Income Section -->
-    <div id="incomeSection" class="page-section hidden">
-        <div class="section-title">Income</div>
-        <div class="task-box">
-            <i class="fa-brands fa-youtube youtube-icon" style="color: #FF0000;"></i>
-            <div class="task-text">
-                YOUTUBE 
-                <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
-                <span style="color:#00cc99;">5.0 ARPM</span>
-            </div>
-            <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
-        </div>
-        <div class="task-box">
-            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
-            <div class="task-text">
-                X 
-                <small>FOLLOW ARPM ON X</small>
-                <span style="color:#00cc99;">5.0 ARPM</span>
-            </div>
-            <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
-        </div>
-        <div class="task-box">
-            <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
-            <div class="task-text">
-                INSTAGRAM 
-                <small>FOLLOW ARPM ON INSTAGRAM</small>
-                <span style="color:#00cc99;">5.0 ARPM</span>
-            </div>
-            <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
-        </div>
-    </div>
-
     <!-- Bottom Navigation -->
     <div class="bottom-nav" id="bottom-nav">
         <div class="nav-item active" data-target="homeSection">
@@ -932,8 +811,7 @@
             reset: document.getElementById('reset-container'),
             homeSection: document.getElementById('homeSection'),
             profileSection: document.getElementById('profileSection'),
-            walletSection: document.getElementById('walletSection'),
-            incomeSection: document.getElementById('incomeSection')
+            walletSection: document.getElementById('walletSection')
         };
         const forms = {
             login: document.getElementById('login-form'),
@@ -953,7 +831,6 @@
         const profileReferralCountElement = document.getElementById('profile-referral-count');
 
         const NEW_USER_BONUS = 1.5;
-        const TASK_BONUS = 5.0;
         const MINING_REWARD = 12;
         const REFERRAL_BONUS_PERCENT = 0.05;
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
@@ -1044,115 +921,6 @@
             const userRef = ref(db, 'users/' + user.uid);
             await update(userRef, { tokens });
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
-        }
-
-        async function updateTaskButton(taskType, userData) {
-            const button = document.getElementById(`${taskType}-task-btn`);
-            if (!button) return;
-
-            const isClaimed = userData[`${taskType}BonusClaimed`] || false;
-            if (isClaimed) {
-                button.textContent = 'COMPLETE';
-                button.disabled = true;
-                button.style.backgroundColor = '#cccccc';
-                button.style.cursor = 'not-allowed';
-                button.onclick = null;
-            } else if (sessionStorage.getItem(`${taskType}Visited`)) {
-                button.textContent = 'CLAIM';
-                button.disabled = false;
-                button.style.backgroundColor = '#00cc99';
-                button.style.cursor = 'pointer';
-                button.onclick = () => claimTask(taskType);
-            } else {
-                button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
-                button.disabled = false;
-                button.style.backgroundColor = '#00cc99';
-                button.style.cursor = 'pointer';
-                button.onclick = () => handleTask(taskType);
-            }
-        }
-
-        async function handleTask(taskType) {
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Please login to perform this task!');
-                showPage('login');
-                return;
-            }
-
-            const userRef = ref(db, 'users/' + user.uid);
-            const snapshot = await get(userRef);
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                if (userData[`${taskType}BonusClaimed`]) {
-                    alert('This task has already been completed!');
-                    return;
-                }
-            }
-
-            const button = document.getElementById(`${taskType}-task-btn`);
-            const link = button.getAttribute('data-link');
-            sessionStorage.setItem(`${taskType}Visited`, 'true');
-            window.open(link, '_blank');
-
-            button.textContent = 'CLAIM';
-            button.onclick = () => claimTask(taskType);
-        }
-
-        async function claimTask(taskType) {
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Please login to claim this task!');
-                showPage('login');
-                return;
-            }
-
-            const userRef = ref(db, 'users/' + user.uid);
-            const snapshot = await get(userRef);
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                if (userData[`${taskType}BonusClaimed`]) {
-                    alert('Task already claimed!');
-                    return;
-                }
-
-                const newTokens = (userData.tokens || 0) + TASK_BONUS;
-                const history = userData.history || [];
-                history.push({
-                    type: 'Complete Tasks',
-                    amount: TASK_BONUS,
-                    date: new Date().toLocaleDateString('en-GB')
-                });
-                await update(userRef, {
-                    tokens: newTokens,
-                    [`${taskType}BonusClaimed`]: true,
-                    history
-                });
-
-                if (userData.referredBy) {
-                    const referrerRef = ref(db, 'users/' + userData.referredBy);
-                    const referrerSnapshot = await get(referrerRef);
-                    if (referrerSnapshot.exists()) {
-                        const referrerData = referrerSnapshot.val();
-                        const bonus = TASK_BONUS * REFERRAL_BONUS_PERCENT;
-                        const referrerTokens = (referrerData.tokens || 0) + bonus;
-                        const referrerHistory = referrerData.history || [];
-                        referrerHistory.push({
-                            type: 'Referral Bonus',
-                            amount: bonus,
-                            date: new Date().toLocaleDateString('en-GB')
-                        });
-                        await update(referrerRef, {
-                            tokens: referrerTokens,
-                            history: referrerHistory
-                        });
-                    }
-                }
-
-                updateBalance(user, newTokens);
-                updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
-                alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
-            }
         }
 
         async function updateDailyBonusButton(userData) {
@@ -1276,12 +1044,12 @@
             const isClaimed = userData.loginBonusClaimed || false;
             const claimButton = document.getElementById('claim-login-bonus-btn');
             const loginBonusContent = document.getElementById('login-bonus-content');
-            
+
             if (isClaimed) {
-                loginBonusBtn.style.display = 'none'; // Hide the login bonus button
-                loginBonusContent.style.display = 'none'; // Hide the login bonus content
+                loginBonusBtn.style.display = 'none';
+                loginBonusContent.style.display = 'none';
             } else {
-                loginBonusBtn.style.display = 'flex'; // Show the login bonus button
+                loginBonusBtn.style.display = 'flex';
                 loginBonusBtn.disabled = false;
                 loginBonusBtn.textContent = 'Bonus';
                 loginBonusBtn.style.backgroundColor = '';
@@ -1346,8 +1114,8 @@
                 }
 
                 updateBalance(user, newTokens);
-                loginBonusBtn.style.display = 'none'; // Hide the login bonus button after claiming
-                document.getElementById('login-bonus-content').style.display = 'none'; // Hide the login bonus content
+                loginBonusBtn.style.display = 'none';
+                document.getElementById('login-bonus-content').style.display = 'none';
                 alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
             }
         }
@@ -1365,7 +1133,7 @@
             Object.values(containers).forEach(c => c.style.display = 'none');
             containers[page].style.display = 'block';
             navbarTop.style.display = ['login', 'signup', 'reset'].includes(page) ? 'flex' : 'none';
-            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection', 'incomeSection'].includes(page) ? 'flex' : 'none';
+            bottomNav.style.display = ['homeSection', 'profileSection', 'walletSection'].includes(page) ? 'flex' : 'none';
 
             if (page === 'signup') {
                 const referralCode = getReferralCodeFromURL();
@@ -1384,19 +1152,6 @@
                         document.getElementById("email").textContent = user.email;
                         document.getElementById("date").textContent = data.registrationDate;
                         updateReferralInfo(user, data);
-                    }
-                }
-            }
-            if (page === 'incomeSection') {
-                const user = auth.currentUser;
-                if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        updateTaskButton('youtube', userData);
-                        updateTaskButton('x', userData);
-                        updateTaskButton('instagram', userData);
                     }
                 }
             }
@@ -1634,11 +1389,6 @@
                         document.getElementById("date").textContent = userData.registrationDate;
                         updateReferralInfo(user, userData);
                     }
-                    if (containers.incomeSection.style.display === 'block') {
-                        updateTaskButton('youtube', userData);
-                        updateTaskButton('x', userData);
-                        updateTaskButton('instagram', userData);
-                    }
                     if (containers.homeSection.style.display === 'block') {
                         updateDailyBonusButton(userData);
                         updateLoginBonusButton(userData);
@@ -1714,7 +1464,11 @@
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
                 const target = item.getAttribute('data-target');
-                await showPage(target);
+                if (target === 'incomeSection') {
+                    window.location.href = 'income.html';
+                } else {
+                    await showPage(target);
+                }
             });
 
             item.addEventListener('touchstart', () => {
