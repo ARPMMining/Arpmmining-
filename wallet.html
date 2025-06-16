@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARPM MINING - Wallet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: #ffffff;
+            touch-action: manipulation;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+        }
+        .menu-icon {
+            font-size: 20px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .balance-box {
+            background: #000;
+            color: #00ffcc;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 50px;
+            z-index: 1000;
+            border-top: 1px solid #ccc;
+        }
+        .nav-item {
+            color: #000;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        .nav-item i {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .nav-item.active {
+            color: #00ffcc;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0 3px;
+            color: #00cc99;
+        }
+        .wallet-section {
+            position: relative;
+            margin: 15px;
+            text-align: center;
+        }
+        .wallet-section p {
+            color: #000;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            .bottom-nav {
+                height: 45px;
+            }
+            .nav-item {
+                font-size: 9px;
+            }
+            .nav-item i {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-text">Loading...</div>
+    </div>
+    <div class="topbar">
+        <div class="menu-icon" id="menuBtn">⋮</div>
+        <div class="title">ARPM Mining</div>
+        <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
+    </div>
+    <div id="walletSection" class="wallet-section">
+        <div class="section-title">Wallet</div>
+        <p>coming soon</p>
+    </div>
+    <div class="bottom-nav" id="bottom-nav">
+        <div class="nav-item" data-target="homeSection">
+            <i class="fas fa-home"></i>Home
+        </div>
+        <div class="nav-item" data-target="profileSection">
+            <i class="fas fa-user"></i>Profile
+        </div>
+        <div class="nav-item active" data-target="walletSection">
+            <i class="fas fa-wallet"></i>Wallet
+        </div>
+        <div class="nav-item" data-target="incomeSection">
+            <i class="fas fa-coins"></i>Income
+        </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
+            authDomain: "arpm-mining.firebaseapp.com",
+            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com/",
+            projectId: "arpm-mining",
+            storageBucket: "arpm-mining.appspot.com",
+            messagingSenderId: "854582920631",
+            appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
+            measurementId: "G-8YVW5EK6N1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const balanceBox = document.getElementById('balance-box');
+
+        async function showLoadingScreen(withDelay = false) {
+            loadingOverlay.classList.add('active');
+            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
+            loadingOverlay.classList.remove('active');
+        }
+
+        async function updateBalance(user, tokens) {
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, { tokens });
+            balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userRef = ref(db, 'users/' + user.uid);
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    updateBalance(user, userData.tokens || 0);
+                }
+                await showLoadingScreen();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                const target = item.getAttribute('data-target');
+                if (target === 'homeSection') {
+                    window.location.href = 'index.html';
+                } else if (target === 'profileSection') {
+                    window.location.href = 'profile.html';
+                } else if (target === 'incomeSection') {
+                    window.location.href = 'income.html';
+                }
+            });
+
+            item.addEventListener('touchstart', () => {
+                item.style.transform = 'scale(0.95)';
+            });
+
+            item.addEventListener('touchend', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+
+        window.signOut = async () => {
+            alert("Logging out...");
+            try {
+                await signOut(auth);
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Logout failed: ' + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
