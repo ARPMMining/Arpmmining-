@@ -117,10 +117,79 @@
             margin: 15px;
             text-align: center;
         }
-        .wallet-section p {
+        .icon-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .icon-box {
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+            width: 100px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .icon-box:hover {
+            transform: scale(1.05);
+        }
+        .icon-box i {
+            font-size: 24px;
+            color: #00cc99;
+            margin-bottom: 5px;
+        }
+        .icon-box p {
             color: #000;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 12px;
+            margin: 0;
+        }
+        .icon-box.disabled {
+            filter: blur(1px); /* Reduced blur from 2px to 1px */
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .history-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            width: 90%;
+            max-width: 400px;
+        }
+        .history-modal.active {
+            display: block;
+        }
+        .history-modal h3 {
+            color: #00cc99;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .history-modal ul {
+            list-style: none;
+            padding: 0;
+            color: #000;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .history-modal li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #000;
         }
         @media (max-width: 480px) {
             body {
@@ -134,6 +203,19 @@
             }
             .nav-item i {
                 font-size: 12px;
+            }
+            .icon-box {
+                width: 80px;
+                padding: 10px;
+            }
+            .icon-box i {
+                font-size: 20px;
+            }
+            .icon-box p {
+                font-size: 10px;
+            }
+            .history-modal ul {
+                max-height: 150px;
             }
         }
     </style>
@@ -149,7 +231,27 @@
     </div>
     <div id="walletSection" class="wallet-section">
         <div class="section-title">Wallet</div>
-        <p>coming soon</p>
+        <div class="icon-container">
+            <div class="icon-box" id="historyBtn">
+                <i class="fas fa-history"></i>
+                <p>History</p>
+            </div>
+            <div class="icon-box" id="superArpmAceBtn">
+                <i class="fas fa-gamepad"></i> <!-- Changed to gamepad icon -->
+                <p>Super Arpm Ace</p>
+            </div>
+            <div class="icon-box disabled" id="withdrawBtn">
+                <i class="fas fa-money-bill-wave"></i>
+                <p>Withdraw</p>
+            </div>
+        </div>
+    </div>
+    <div class="history-modal" id="historyModal">
+        <span class="close-btn" id="closeHistory">×</span>
+        <h3>Transaction History</h3>
+        <ul id="historyList">
+            <!-- Dynamic history will be populated here -->
+        </ul>
     </div>
     <div class="bottom-nav" id="bottom-nav">
         <div class="nav-item" data-target="homeSection">
@@ -187,6 +289,10 @@
 
         const loadingOverlay = document.getElementById('loading-overlay');
         const balanceBox = document.getElementById('balance-box');
+        const historyBtn = document.getElementById('historyBtn');
+        const historyModal = document.getElementById('historyModal');
+        const closeHistory = document.getElementById('closeHistory');
+        const superArpmAceBtn = document.getElementById('superArpmAceBtn');
 
         async function showLoadingScreen(withDelay = false) {
             loadingOverlay.classList.add('active');
@@ -200,6 +306,22 @@
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
         }
 
+        async function loadHistory(user) {
+            const historyRef = ref(db, 'users/' + user.uid + '/history');
+            const snapshot = await get(historyRef);
+            historyList.innerHTML = ''; // Clear previous history
+            if (snapshot.exists()) {
+                const historyData = snapshot.val();
+                Object.entries(historyData).forEach(([key, value]) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${value.type}: ${value.amount.toFixed(3)} ARPM (${new Date(value.timestamp).toLocaleString()})`;
+                    historyList.appendChild(li);
+                });
+            } else {
+                historyList.innerHTML = '<li>No history available</li>';
+            }
+        }
+
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, 'users/' + user.uid);
@@ -207,11 +329,24 @@
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     updateBalance(user, userData.tokens || 0);
+                    await loadHistory(user); // Load history on auth
                 }
                 await showLoadingScreen();
             } else {
                 window.location.href = 'login.html';
             }
+        });
+
+        historyBtn.addEventListener('click', () => {
+            historyModal.classList.add('active');
+        });
+
+        closeHistory.addEventListener('click', () => {
+            historyModal.classList.remove('active');
+        });
+
+        superArpmAceBtn.addEventListener('click', () => {
+            alert('Super Arpm Ace feature will be updated later.');
         });
 
         const navItems = document.querySelectorAll('.nav-item');
