@@ -34,14 +34,41 @@
         .page-section {
             display: block;
             overflow: hidden;
-            margin-top: 20px;
+            margin-top: 0;
         }
         .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            padding: 10px 15px;
             font-size: 20px;
             font-weight: bold;
+            margin: 0 0 3px;
+            color: #fff;
+            width: 100%;
+        }
+        .section-title span {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .section-title i {
+            font-size: 22px; /* Increased from 18px to 22px for larger icon */
+            cursor: pointer;
+            color: #fff;
+        }
+        .info-content {
+            display: none; /* Hidden by default */
+            background: #f1f1f1;
+            margin: 8px 15px;
+            padding: 12px;
+            border-radius: 8px;
+            color: #333;
+            font-size: 14px;
             text-align: center;
-            margin: 8px 0 3px;
-            color: #00cc99;
+        }
+        .info-content.active {
+            display: block; /* Shown when active */
         }
         .referral-section {
             margin: 15px;
@@ -115,7 +142,7 @@
             text-align: center;
             padding-bottom: 60px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             gap: 8px;
         }
@@ -139,6 +166,7 @@
             font-size: 14px;
             color: #333;
             font-weight: bold;
+            order: -1;
         }
         .bottom-nav {
             position: fixed;
@@ -173,7 +201,20 @@
                 font-size: 14px;
             }
             .page-section {
-                margin-top: 15px;
+                margin-top: 0;
+            }
+            .section-title {
+                font-size: 18px;
+                padding: 8px 12px;
+                margin: 0 0 3px;
+            }
+            .section-title i {
+                font-size: 20px; /* Increased from 16px to 20px for mobile */
+            }
+            .info-content {
+                margin: 6px 12px;
+                padding: 10px;
+                font-size: 12px;
             }
             .referral-link, .copy-button, .referral-count {
                 font-size: 12px;
@@ -209,7 +250,10 @@
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .page-section {
-                margin-top: 20px;
+                margin-top: 0;
+            }
+            .section-title {
+                margin: 0 0 3px;
             }
         }
     </style>
@@ -217,7 +261,16 @@
 <body>
     <!-- Profile Section -->
     <div id="profileSection" class="page-section">
-        <div class="section-title">Profile</div>
+        <div class="section-title">
+            <span>Arpm Profile</span>
+            <i class="fas fa-cog" onclick="toggleInfo()"></i>
+        </div>
+        <div id="infoContent" class="info-content">
+            <p>ARPM Mining Info</p>
+            <div id="additionalInfo">
+                <!-- Additional content can be added here -->
+            </div>
+        </div>
         <div class="profile-pic">
             ARPM Mining
         </div>
@@ -237,8 +290,8 @@
             <p class="referral-count" id="profile-referral-count">Referrals: 0</p>
         </div>
         <div class="signout">
-            <button onclick="signOut()">Sign Out</button>
             <span class="version-text">ARPM-Web-v1.5.0</span>
+            <button onclick="signOut()">Sign Out</button>
         </div>
     </div>
 
@@ -307,11 +360,16 @@
             }
         };
 
+        window.toggleInfo = () => {
+            const infoContent = document.getElementById('infoContent');
+            infoContent.classList.toggle('active');
+        };
+
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, 'users/' + user.uid);
                 const snapshot = await get(userRef);
-                if (snapshot.exists()) {
+        if (snapshot.exists()) {
                     const userData = snapshot.val();
                     document.getElementById("username").textContent = userData.username || "N/A";
                     document.getElementById("email").textContent = user.email;
