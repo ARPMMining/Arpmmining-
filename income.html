@@ -31,6 +31,57 @@
             background: #ffffff;
             touch-action: manipulation;
         }
+        .loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+        }
+        .menu-icon {
+            font-size: 20px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .balance-box {
+            background: #000;
+            color: #00ffcc;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
         .page-section {
             display: block;
             overflow: hidden;
@@ -154,6 +205,18 @@
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="menu-icon" id="menuBtn" onclick="signOut()">⋮</div>
+        <div class="title">ARPM Mining</div>
+        <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
+    </div>
+
     <!-- Income Section -->
     <div id="incomeSection" class="page-section">
         <div class="section-title">Income</div>
@@ -164,7 +227,7 @@
                 <small>SUBSCRIBE ARPM YOUTUBE CHANNEL</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <button class="go-button" id="youtube-task-btn" data-link="https://www.youtube.com/@ARPMMining" onclick="handleTask('youtube')">SUBSCRIBE</button>
+            <button class="go-button" id="youtube-task-btn" data-task="youtube" data-link="https://www.youtube.com/@ARPMMining">SUBSCRIBE</button>
         </div>
         <div class="task-box">
             <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
@@ -173,16 +236,61 @@
                 <small>FOLLOW ARPM ON X</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <button class="go-button" id="x-task-btn" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09" onclick="handleTask('x')">FOLLOW</button>
+            <button class="go-button" id="x-task-btn" data-task="x" data-link="https://x.com/Arpmmining22?t=yRUc_u_3alT7WpCRRdKjog&s=09">FOLLOW</button>
         </div>
         <div class="task-box">
-            <i class="fab fa-instagram instagram-icon" style="color:#e1306c;"></i>
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X - Number 1
+                <small>Arpm x Post Like and Comment</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x1-task-btn" data-task="x1" data-link="https://x.com/Arpmmining22/status/1933875014748749897?t=B_jvIpUMrJyZqw5pKNt2BQ&s=19">Go</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X - Number 2
+                <small>Arpm x Post Like and Comment</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x2-task-btn" data-task="x2" data-link="https://x.com/Arpmmining22/status/1933737025901113465?t=PPI2X_epPiGV94cVqkEG_Q&s=19">Go</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X - Number 3
+                <small>Arpm x Post Like and Comment</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x3-task-btn" data-task="x3" data-link="https://x.com/Arpmmining22/status/1933734639967039609?t=oOc8jam9hSA74290rg2gmw&s=19">Go</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X - Number 4
+                <small>Arpm x Post Like and Comment</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x4-task-btn" data-task="x4" data-link="https://x.com/Arpmmining22/status/1933478038324363462?t=ZVmAUlzJl5o0GJENlIfiyA&s=19">Go</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
+            <div class="task-text">
+                X - Number 5
+                <small>Arpm x Post Like and Comment</small>
+                <span style="color:#00cc99;">5.0 ARPM</span>
+            </div>
+            <button class="go-button" id="x5-task-btn" data-task="x5" data-link="https://x.com/Arpmmining22/status/1933362539649450247?t=5e_j8R9T2LlGPNeTXT-qxw&s=19">Go</button>
+        </div>
+        <div class="task-box">
+            <i class="fa-brands fa-instagram instagram-icon" style="color:#e1306c;"></i>
             <div class="task-text">
                 INSTAGRAM 
                 <small>FOLLOW ARPM ON INSTAGRAM</small>
                 <span style="color:#00cc99;">5.0 ARPM</span>
             </div>
-            <button class="go-button" id="instagram-task-btn" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==" onclick="handleTask('instagram')">FOLLOW</button>
+            <button class="go-button" id="instagram-task-btn" data-task="instagram" data-link="https://www.instagram.com/arpmmining?igsh=YzljYTk1ODg3Zg==">FOLLOW</button>
         </div>
     </div>
 
@@ -205,7 +313,7 @@
     <!-- JavaScript -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
         const firebaseConfig = {
@@ -232,19 +340,19 @@
 
             const isClaimed = userData[`${taskType}BonusClaimed`] || false;
             if (isClaimed) {
-                button.textContent = 'COMPLETE';
+                button.textContent = 'Complete';
                 button.disabled = true;
                 button.style.backgroundColor = '#cccccc';
                 button.style.cursor = 'not-allowed';
                 button.onclick = null;
             } else if (sessionStorage.getItem(`${taskType}Visited`)) {
-                button.textContent = 'CLAIM';
+                button.textContent = 'Claim';
                 button.disabled = false;
                 button.style.backgroundColor = '#00cc99';
                 button.style.cursor = 'pointer';
                 button.onclick = () => claimTask(taskType);
             } else {
-                button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : 'FOLLOW';
+                button.textContent = taskType === 'youtube' ? 'SUBSCRIBE' : taskType.startsWith('x') && taskType !== 'x' ? 'Go' : 'FOLLOW';
                 button.disabled = false;
                 button.style.backgroundColor = '#00cc99';
                 button.style.cursor = 'pointer';
@@ -275,8 +383,7 @@
             sessionStorage.setItem(`${taskType}Visited`, 'true');
             window.open(link, '_blank');
 
-            button.textContent = 'CLAIM';
-            button.onclick = () => claimTask(taskType);
+            updateTaskButton(taskType, { [`${taskType}BonusClaimed`]: false });
         }
 
         async function claimTask(taskType) {
@@ -329,9 +436,24 @@
                     }
                 }
 
+                sessionStorage.removeItem(`${taskType}Visited`);
                 updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
+                updateBalance(user, newTokens);
                 alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
             }
+        }
+
+        async function updateBalance(user, tokens) {
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, { tokens });
+            document.getElementById('balance-box').textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+        }
+
+        async function showLoadingScreen(withDelay = false) {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.add('active');
+            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
+            loadingOverlay.classList.remove('active');
         }
 
         onAuthStateChanged(auth, async (user) => {
@@ -340,14 +462,35 @@
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
+                    updateBalance(user, userData.tokens || 0);
                     updateTaskButton('youtube', userData);
                     updateTaskButton('x', userData);
+                    updateTaskButton('x1', userData);
+                    updateTaskButton('x2', userData);
+                    updateTaskButton('x3', userData);
+                    updateTaskButton('x4', userData);
+                    updateTaskButton('x5', userData);
                     updateTaskButton('instagram', userData);
                 }
+                await showLoadingScreen();
             } else {
                 alert('Please login to access this page!');
                 window.location.href = 'index.html';
             }
+
+            // Add event listeners for all task buttons
+            const taskButtons = document.querySelectorAll('.go-button');
+            taskButtons.forEach(button => {
+                const taskType = button.getAttribute('data-task');
+                button.addEventListener('click', () => {
+                    const userRef = ref(db, 'users/' + auth.currentUser?.uid);
+                    get(userRef).then(snapshot => {
+                        if (snapshot.exists()) {
+                            updateTaskButton(taskType, snapshot.val());
+                        }
+                    });
+                });
+            });
         });
 
         const navItems = document.querySelectorAll('.nav-item');
@@ -356,8 +499,12 @@
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
                 const target = item.getAttribute('data-target');
-                if (target !== 'incomeSection') {
+                if (target === 'homeSection') {
                     window.location.href = 'index.html';
+                } else if (target === 'profileSection') {
+                    window.location.href = 'profile.html';
+                } else if (target === 'walletSection') {
+                    window.location.href = 'wallet.html';
                 }
             });
 
@@ -369,6 +516,16 @@
                 item.style.transform = 'scale(1)';
             });
         });
+
+        window.signOut = async () => {
+            alert("Logging out...");
+            try {
+                await signOut(auth);
+                window.location.href = 'index.html';
+            } catch (error) {
+                alert('Logout failed: ' + error.message);
+            }
+        };
     </script>
 </body>
 </html>
