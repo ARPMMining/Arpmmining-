@@ -28,8 +28,16 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            background: #ffffff;
+            /* Attractive animated gradient background */
+            background: linear-gradient(45deg, #2563eb, #22c55e, #60a5fa, #86efac);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
             touch-action: manipulation;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .container {
             width: 100%;
@@ -102,6 +110,19 @@
         .footer-text {
             font-size: 14px;
             margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .privacy-policy-link {
+            font-size: 18px; /* Larger font size for Privacy Policy */
+            font-weight: bold;
+            margin-top: 10px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .privacy-policy-link:hover {
+            text-decoration: underline;
         }
         .hidden {
             display: none;
@@ -170,6 +191,27 @@
             text-align: center;
             letter-spacing: 1px;
         }
+        /* Enhanced error message styling */
+        .error-message {
+            display: none;
+            color: #ffffff;
+            font-size: 12px;
+            margin-top: 6px;
+            text-align: left;
+            padding: 6px 10px;
+            background: linear-gradient(45deg, #ff4d4d, #ff6b6b);
+            border-radius: 6px;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .error-message.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
@@ -193,6 +235,9 @@
             .link, .footer-text {
                 font-size: 12px;
             }
+            .privacy-policy-link {
+                font-size: 16px; /* Slightly smaller on mobile */
+            }
             .navbar-top {
                 height: 120px;
             }
@@ -205,6 +250,10 @@
             }
             .logo-circle p {
                 font-size: 16px;
+            }
+            .error-message {
+                font-size: 10px;
+                padding: 4px 8px;
             }
         }
         @media (min-width: 481px) and (max-width: 768px) {
@@ -247,15 +296,18 @@
         <form id="login-form">
             <div class="form-group">
                 <input type="email" class="form-control" id="login-email" placeholder="EMAIL" required>
+                <div class="error-message" id="login-email-error"></div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="login-password" placeholder="PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-login-password"></i>
+                <div class="error-message" id="login-password-error"></div>
             </div>
             <button type="submit" class="btn btn-primary">LOGIN</button>
             <p class="footer-text">
-                <a href="#" class="link" onclick="showReset()">FORGOT PASSWORD?</a><br>
-                DON'T HAVE AN ACCOUNT? <a href="#" class="link" onclick="showSignup()">REGISTER</a>
+                <a href="#" class="link" id="forgot-password-link">FORGOT PASSWORD?</a><br>
+                DON'T HAVE AN ACCOUNT? <a href="#" class="link" id="register-link">REGISTER</a><br>
+                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
             </p>
         </form>
     </div>
@@ -266,24 +318,30 @@
         <form id="signup-form">
             <div class="form-group">
                 <input type="text" class="form-control" id="signup-username" placeholder="USERNAME" required>
+                <div class="error-message" id="signup-username-error"></div>
             </div>
             <div class="form-group">
                 <input type="email" class="form-control" id="signup-email" placeholder="EMAIL" required>
+                <div class="error-message" id="signup-email-error"></div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-password"></i>
+                <div class="error-message" id="signup-password-error"></div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required>
                 <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password"></i>
+                <div class="error-message" id="signup-confirm-password-error"></div>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="signup-invite-code" placeholder="INVITE CODE (OPTIONAL)">
+                <div class="error-message" id="signup-invite-code-error"></div>
             </div>
             <button type="submit" class="btn btn-success">REGISTER</button>
             <p class="footer-text">
-                BACK TO LOGIN? <a href="#" class="link" onclick="showLogin()">LOGIN</a>
+                BACK TO LOGIN? <a href="#" class="link" id="login-link">LOGIN</a><br>
+                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
             </p>
         </form>
     </div>
@@ -294,10 +352,12 @@
         <form id="reset-form">
             <div class="form-group">
                 <input type="email" class="form-control" id="reset-email" placeholder="EMAIL" required>
+                <div class="error-message" id="reset-email-error"></div>
             </div>
             <button type="submit" class="btn btn-success">SUBMIT</button>
             <p class="footer-text">
-                BACK TO LOGIN? <a href="#" class="link" onclick="showLogin()">LOGIN</a>
+                BACK TO LOGIN? <a href="#" class="link" id="login-link-reset">LOGIN</a><br>
+                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
             </p>
         </form>
     </div>
@@ -339,6 +399,42 @@
         const NEW_USER_BONUS = 1.5;
         const REFERRAL_BONUS_PERCENT = 0.05;
 
+        // Email validation function
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Password validation function
+        function isValidPassword(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
+        }
+
+        // Function to show error message
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.add('active');
+            setTimeout(() => {
+                errorElement.classList.remove('active');
+                errorElement.textContent = '';
+            }, 5000);
+        }
+
+        // Function to clear errors
+        function clearErrors(formId) {
+            const errorElements = document.querySelectorAll(`#${formId} .error-message`);
+            errorElements.forEach(element => {
+                element.classList.remove('active');
+                element.textContent = '';
+            });
+        }
+
         function getReferralCodeFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('ref');
@@ -362,40 +458,118 @@
                     document.getElementById('signup-invite-code').value = referralCode;
                 }
             }
+            // Clear errors when switching pages
+            clearErrors('login-form');
+            clearErrors('signup-form');
+            clearErrors('reset-form');
         }
 
-        window.showLogin = async () => showPage('login');
-        window.showSignup = async () => showPage('signup');
-        window.showReset = async () => showPage('reset');
+        // Define page switching functions
+        const showLogin = async () => showPage('login');
+        const showSignup = async () => showPage('signup');
+        const showReset = async () => showPage('reset');
+
+        // Attach event listeners to links
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showReset();
+        });
+        document.getElementById('register-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showSignup();
+        });
+        document.getElementById('login-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showLogin();
+        });
+        document.getElementById('login-link-reset').addEventListener('click', (e) => {
+            e.preventDefault();
+            showLogin();
+        });
 
         forms.login.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
+            clearErrors('login-form');
+            const email = document.getElementById('login-email').value.trim();
             const password = document.getElementById('login-password').value;
+
+            // Validate email
+            if (!isValidEmail(email)) {
+                showError('login-email-error', 'Please enter a valid email address!');
+                return;
+            }
+
             try {
                 await showLoadingScreen();
                 await signInWithEmailAndPassword(auth, email, password);
                 window.location.href = 'index.html';
             } catch (error) {
-                alert('LOGIN FAILED: ' + (error.code === 'auth/wrong-password' ? 'INCORRECT PASSWORD' : 'INVALID EMAIL OR USER NOT FOUND'));
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/wrong-password':
+                        errorMessage = 'Incorrect password! Try again.';
+                        showError('login-password-error', errorMessage);
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = 'No account found with this email!';
+                        showError('login-email-error', errorMessage);
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Invalid email format!';
+                        showError('login-email-error', errorMessage);
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Too many attempts! Try later.';
+                        showError('login-email-error', errorMessage);
+                        break;
+                    default:
+                        errorMessage = 'Unable to login. Please try again!';
+                        showError('login-email-error', errorMessage);
+                }
             }
         });
 
         forms.signup.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const username = document.getElementById('signup-username').value;
-            const email = document.getElementById('signup-email').value;
+            clearErrors('signup-form');
+            const username = document.getElementById('signup-username').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
             const password = document.getElementById('signup-password').value;
             const confirmPassword = document.getElementById('signup-confirm-password').value;
-            const inviteCode = document.getElementById('signup-invite-code').value;
+            const inviteCode = document.getElementById('signup-invite-code').value.trim();
 
-            if (password !== confirmPassword) return alert('PASSWORDS DO NOT MATCH!');
+            // Validate username
+            if (!username) {
+                showError('signup-username-error', 'Please enter a username!');
+                return;
+            }
+
+            // Validate email
+            if (!isValidEmail(email)) {
+                showError('signup-email-error', 'Please enter a valid email!');
+                return;
+            }
+
+            // Validate password
+            if (!isValidPassword(password)) {
+                showError('signup-password-error', 'Password needs 8+ characters, including uppercase, lowercase, number, and special character!');
+                return;
+            }
+
+            // Confirm password match
+            if (password !== confirmPassword) {
+                showError('signup-confirm-password-error', 'Passwords don’t match!');
+                return;
+            }
 
             let referrerUid = null;
             if (inviteCode) {
                 const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
                 const snapshot = await get(inviteQuery);
-                if (!snapshot.exists()) return alert('INVALID INVITE CODE!');
+                if (!snapshot.exists()) {
+                    showError('signup-invite-code-error', 'Invalid invite code!');
+                    return;
+                }
                 snapshot.forEach(childSnapshot => {
                     referrerUid = childSnapshot.key;
                 });
@@ -450,23 +624,61 @@
                     });
                 }
 
-                alert('Registration successful! Please login.');
+                alert('Welcome aboard! Registration successful. Please login.');
                 showPage('login');
             } catch (error) {
-                alert('REGISTRATION FAILED: ' + error.message);
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'This email is already registered!';
+                        showError('signup-email-error', errorMessage);
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Invalid email format!';
+                        showError('signup-email-error', errorMessage);
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Password is too weak!';
+                        showError('signup-password-error', errorMessage);
+                        break;
+                    default:
+                        errorMessage = 'Unable to register. Please try again!';
+                        showError('signup-email-error', errorMessage);
+                }
             }
         });
 
         forms.reset.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('reset-email').value;
+            clearErrors('reset-form');
+            const email = document.getElementById('reset-email').value.trim();
+
+            // Validate email
+            if (!isValidEmail(email)) {
+                showError('reset-email-error', 'Please enter a valid email!');
+                return;
+            }
+
             try {
                 await showLoadingScreen(true);
                 await sendPasswordResetEmail(auth, email);
-                alert('Password reset email sent!');
+                alert('Password reset email sent! Check your inbox.');
                 showPage('login');
             } catch (error) {
-                alert('PASSWORD RESET FAILED: ' + error.message);
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'No account found with this email!';
+                        showError('reset-email-error', errorMessage);
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Invalid email format!';
+                        showError('reset-email-error', errorMessage);
+                        break;
+                    default:
+                        errorMessage = 'Unable to reset password. Try again!';
+                        showError('reset-email-error', errorMessage);
+                }
             }
         });
 
