@@ -401,7 +401,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+        import { getDatabase, ref, get, update, push } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
@@ -546,8 +546,10 @@
             currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
 
             const newTokens = (userData.tokens || 0) + bonus;
-            const history = userData.history || [];
-            history.push({
+
+            // Add history entry to Firebase
+            const historyRef = ref(db, `users/${user.uid}/history`);
+            await push(historyRef, {
                 type: 'Daily Bonus',
                 amount: bonus,
                 date: new Date().toLocaleDateString('en-GB')
@@ -556,8 +558,7 @@
             await update(userRef, {
                 tokens: newTokens,
                 lastDailyBonus: now,
-                dailyBonusDay: currentDay,
-                history
+                dailyBonusDay: currentDay
             });
 
             if (userData.referredBy) {
@@ -567,15 +568,15 @@
                     const referrerData = referrerSnapshot.val();
                     const bonusAmount = bonus * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonusAmount;
-                    const referrerHistory = referrerData.history || [];
-                    referrerHistory.push({
+                    // Add referrer history entry to Firebase
+                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                    await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonusAmount,
                         date: new Date().toLocaleDateString('en-GB')
                     });
                     await update(referrerRef, {
-                        tokens: referrerTokens,
-                        history: referrerHistory
+                        tokens: referrerTokens
                     });
                 }
             }
@@ -643,8 +644,10 @@
             }
 
             const newTokens = (userData.tokens || 0) + LOGIN_BONUS;
-            const history = userData.history || [];
-            history.push({
+
+            // Add history entry to Firebase
+            const historyRef = ref(db, `users/${user.uid}/history`);
+            await push(historyRef, {
                 type: 'Login Bonus',
                 amount: LOGIN_BONUS,
                 date: new Date().toLocaleDateString('en-GB')
@@ -652,8 +655,7 @@
 
             await update(userRef, {
                 tokens: newTokens,
-                loginBonusClaimed: true,
-                history
+                loginBonusClaimed: true
             });
 
             if (userData.referredBy) {
@@ -663,15 +665,15 @@
                     const referrerData = referrerSnapshot.val();
                     const bonus = LOGIN_BONUS * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    const referrerHistory = referrerData.history || [];
-                    referrerHistory.push({
+                    // Add referrer history entry to Firebase
+                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                    await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonus,
                         date: new Date().toLocaleDateString('en-GB')
                     });
                     await update(referrerRef, {
-                        tokens: referrerTokens,
-                        history: referrerHistory
+                        tokens: referrerTokens
                     });
                 }
             }
@@ -751,8 +753,10 @@
 
         async function claimMiningReward(user, userRef, userData) {
             const newTokens = (userData.tokens || 0) + MINING_REWARD;
-            const history = userData.history || [];
-            history.push({
+
+            // Add history entry to Firebase
+            const historyRef = ref(db, `users/${user.uid}/history`);
+            await push(historyRef, {
                 type: 'Start Mining',
                 amount: MINING_REWARD,
                 date: new Date().toLocaleDateString('en-GB')
@@ -762,8 +766,7 @@
                 tokens: newTokens,
                 miningStartTime: 0,
                 miningEndTime: 0,
-                minedTokens: 0,
-                history
+                minedTokens: 0
             });
 
             if (userData.referredBy) {
@@ -773,15 +776,15 @@
                     const referrerData = referrerSnapshot.val();
                     const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    const referrerHistory = referrerData.history || [];
-                    referrerHistory.push({
+                    // Add referrer history entry to Firebase
+                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                    await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonus,
                         date: new Date().toLocaleDateString('en-GB')
                     });
                     await update(referrerRef, {
-                        tokens: referrerTokens,
-                        history: referrerHistory
+                        tokens: referrerTokens
                     });
                 }
             }
