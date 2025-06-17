@@ -150,47 +150,6 @@
             pointer-events: none;
             opacity: 0.7;
         }
-        .history-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 2000;
-            width: 90%;
-            max-width: 400px;
-        }
-        .history-modal.active {
-            display: block;
-        }
-        .history-modal h3 {
-            color: #00cc99;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        .history-modal ul {
-            list-style: none;
-            padding: 0;
-            color: #000;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .history-modal li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #000;
-        }
         /* Slot Game Styles */
         .slot-section {
             display: none;
@@ -403,9 +362,6 @@
             .icon-box p {
                 font-size: 10px;
             }
-            .history-modal ul {
-                max-height: 150px;
-            }
             .reel {
                 height: 50px;
                 font-size: 20px;
@@ -443,10 +399,6 @@
     <div id="walletSection" class="wallet-section">
         <div class="section-title">Wallet</div>
         <div class="icon-container">
-            <div class="icon-box" id="historyBtn">
-                <i class="fas fa-history"></i>
-                <p>History</p>
-            </div>
             <div class="icon-box" id="superArpmAceBtn">
                 <i class="fas fa-gamepad"></i>
                 <p>Super Arpm Ace</p>
@@ -456,11 +408,6 @@
                 <p>Withdraw</p>
             </div>
         </div>
-    </div>
-    <div class="history-modal" id="historyModal">
-        <span class="close-btn" id="closeHistory">×</span>
-        <h3>Transaction History</h3>
-        <ul id="historyList"></ul>
     </div>
     <div id="slotSection" class="slot-section">
         <button id="back-btn">Back</button>
@@ -519,9 +466,6 @@
 
         const loadingOverlay = document.getElementById('loading-overlay');
         const balanceBox = document.getElementById('balance-box');
-        const historyBtn = document.getElementById('historyBtn');
-        const historyModal = document.getElementById('historyModal');
-        const closeHistory = document.getElementById('closeHistory');
         const superArpmAceBtn = document.getElementById('superArpmAceBtn');
         const walletSection = document.getElementById('walletSection');
         const slotSection = document.getElementById('slotSection');
@@ -567,23 +511,6 @@
             balance = tokens;
         }
 
-        async function loadHistory(user) {
-            console.log('Loading history for user:', user.uid);
-            const historyRef = database.ref('users/' + user.uid + '/history');
-            const snapshot = await historyRef.get();
-            historyList.innerHTML = '';
-            if (snapshot.exists()) {
-                const historyData = snapshot.val();
-                Object.entries(historyData).forEach(([key, value]) => {
-                    const li = document.createElement('li');
-                    li.textContent = `${value.type}: ${value.amount.toFixed(3)} ARPM (${new Date(value.timestamp).toLocaleString()})`;
-                    historyList.appendChild(li);
-                });
-            } else {
-                historyList.innerHTML = '<li>No history available</li>';
-            }
-        }
-
         auth.onAuthStateChanged(async (user) => {
             console.log('Checking auth state');
             if (user) {
@@ -594,7 +521,6 @@
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     await updateBalance(user, userData.tokens || 0);
-                    await loadHistory(user);
                 } else {
                     await updateBalance(user, 1000);
                 }
@@ -603,15 +529,6 @@
                 console.log('No user, redirecting to login');
                 window.location.href = './login.html';
             }
-        });
-
-        historyBtn.addEventListener('click', () => {
-            console.log('History button clicked');
-            historyModal.classList.add('active');
-        });
-
-        closeHistory.addEventListener('click', () => {
-            historyModal.classList.remove('active');
         });
 
         superArpmAceBtn.addEventListener('click', () => {
@@ -843,17 +760,6 @@
             database.ref(`users/${userId}/tokens`).set(balance).catch(error => {
                 console.error("Error updating balance:", error);
                 messageBar.textContent = "⚠️ Failed to update balance!";
-                messageBar.classList.add("active");
-            });
-
-            const profitLossRef = database.ref(`users/${userId}/history`).push();
-            profitLossRef.set({
-                type: win > 0 ? "Slot Win" : "Slot Loss",
-                amount: win > 0 ? win : -loss,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            }).catch(error => {
-                console.error("Error updating history:", error);
-                messageBar.textContent = "⚠️ Failed to update history!";
                 messageBar.classList.add("active");
             });
         }
