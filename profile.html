@@ -52,24 +52,6 @@
             flex-grow: 1;
             text-align: left;
         }
-        .section-title i {
-            font-size: 22px; /* Increased from 18px to 22px for larger icon */
-            cursor: pointer;
-            color: #fff;
-        }
-        .info-content {
-            display: none; /* Hidden by default */
-            background: #f1f1f1;
-            margin: 8px 15px;
-            padding: 12px;
-            border-radius: 8px;
-            color: #333;
-            font-size: 14px;
-            text-align: center;
-        }
-        .info-content.active {
-            display: block; /* Shown when active */
-        }
         .referral-section {
             margin: 15px;
             text-align: center;
@@ -196,6 +178,25 @@
         .nav-item.active {
             color: #00ffcc;
         }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 15px auto;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
@@ -207,14 +208,6 @@
                 font-size: 18px;
                 padding: 8px 12px;
                 margin: 0 0 3px;
-            }
-            .section-title i {
-                font-size: 20px; /* Increased from 16px to 20px for mobile */
-            }
-            .info-content {
-                margin: 6px 12px;
-                padding: 10px;
-                font-size: 12px;
             }
             .referral-link, .copy-button, .referral-count {
                 font-size: 12px;
@@ -247,6 +240,11 @@
             .nav-item i {
                 font-size: 12px;
             }
+            .box {
+                margin: 10px 12px;
+                padding: 15px;
+                max-width: 100%;
+            }
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .page-section {
@@ -263,13 +261,6 @@
     <div id="profileSection" class="page-section">
         <div class="section-title">
             <span>Arpm Profile</span>
-            <i class="fas fa-cog" onclick="toggleInfo()"></i>
-        </div>
-        <div id="infoContent" class="info-content">
-            <p>ARPM Mining Info</p>
-            <div id="additionalInfo">
-                <!-- Additional content can be added here -->
-            </div>
         </div>
         <div class="profile-pic">
             ARPM Mining
@@ -282,6 +273,20 @@
         </div>
         <div class="info-box">
             <p><strong>Registration Date:</strong> <span id="date"></span></p>
+        </div>
+        <!-- Professional Information Section -->
+        <div class="box">
+            <button onclick="toggle()">🔍 Professional Information</button>
+            <div id="infoBox" style="display:none">
+                <label>Your Name</label>
+                <input type="text" id="usernameInput" placeholder="Enter your name">
+                <button onclick="saveName()">Save Name</button>
+                <label>Email Address</label>
+                <input type="email" id="emailInput" placeholder="Enter your email">
+                <button onclick="saveEmail()">Save Email</button>
+                <br><br>
+                <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">📜 Privacy Policy</a>
+            </div>
         </div>
         <div class="referral-section">
             <p>Your Referral Link:</p>
@@ -315,7 +320,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
@@ -360,20 +365,52 @@
             }
         };
 
-        window.toggleInfo = () => {
-            const infoContent = document.getElementById('infoContent');
-            infoContent.classList.toggle('active');
+        window.toggle = () => {
+            const infoBox = document.getElementById('infoBox');
+            infoBox.style.display = infoBox.style.display === 'none' ? 'block' : 'none';
+        };
+
+        window.saveName = async () => {
+            const username = document.getElementById('usernameInput').value;
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    await update(ref(db, 'users/' + user.uid), { username });
+                    document.getElementById('username').textContent = username || 'N/A';
+                    alert('✅ Name saved!');
+                } catch (error) {
+                    alert('Failed to save name: ' + error.message);
+                }
+            } else {
+                alert('Please login to save name!');
+            }
+        };
+
+        window.saveEmail = async () => {
+            const email = document.getElementById('emailInput').value;
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    await update(ref(db, 'users/' + user.uid), { email });
+                    document.getElementById('email').textContent = email;
+                    alert('✅ Email saved!');
+                } catch (error) {
+                    alert('Failed to save email: ' + error.message);
+                }
+            } else {
+                alert('Please login to save email!');
+            }
         };
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, 'users/' + user.uid);
                 const snapshot = await get(userRef);
-        if (snapshot.exists()) {
+                if (snapshot.exists()) {
                     const userData = snapshot.val();
-                    document.getElementById("username").textContent = userData.username || "N/A";
-                    document.getElementById("email").textContent = user.email;
-                    document.getElementById("date").textContent = userData.registrationDate;
+                    document.getElementById('username').textContent = userData.username || 'N/A';
+                    document.getElementById('email').textContent = userData.email || user.email;
+                    document.getElementById('date').textContent = userData.registrationDate;
                     updateReferralInfo(user, userData);
                 }
             } else {
