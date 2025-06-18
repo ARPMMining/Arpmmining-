@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact Us | ARPM Mining Network</title>
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("xXY4-X6Yck0j0UQ35"); // EmailJS Public Key
+    })();
+  </script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -91,7 +98,7 @@
 <body>
   <div class="contact-container">
     <h2>Contact Us</h2>
-    <form action="mailto:ainetworkmining22@gmail.com" method="post" enctype="text/plain">
+    <form id="contactForm">
       <label for="name">Your Name</label>
       <input type="text" id="name" name="name" required>
       <label for="email">Your Email</label>
@@ -108,5 +115,27 @@
       <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">Privacy Policy</a>
     </div>
   </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Collect form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+      };
+
+      // Send email using EmailJS
+      emailjs.send('service_ogacydi', 'template_8b8s4u9', formData)
+        .then(function(response) {
+          alert('Message sent successfully!');
+          document.getElementById('contactForm').reset(); // Reset form
+        }, function(error) {
+          alert('Failed to send message: ' + JSON.stringify(error));
+        });
+    });
+  </script>
 </body>
 </html>
