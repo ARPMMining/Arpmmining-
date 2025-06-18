@@ -367,13 +367,7 @@
                     <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
                     <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
                     <div class="roadmap-content" id="roadmap-content">
-                        <ul>
-                            <li>Q4 2025: Website verification and review completed</li>
-                            <li>Q1 2026: App launch on Google Play Store</li>
-                            <li>Q3 2026: ARPM Wallet launch</li>
-                            <li>Q1 2027: Preparation for launching own network</li>
-                            <li>Q3 2027: Token distribution begins</li>
-                        </ul>
+                        <p>Coming Soon</p>
                     </div>
                 </div>
             </div>
@@ -469,7 +463,7 @@
 
         async function showLoadingScreen(withDelay = false) {
             loadingOverlay.classList.add('active');
-            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
+            if (withDelay) await new Promise(resolve => setTimeout(resolve, 2000)); // Updated to 2 seconds
             loadingOverlay.classList.remove('active');
         }
 
@@ -691,7 +685,7 @@
         }
 
         async function showPage(page) {
-            await showLoadingScreen();
+            await showLoadingScreen(true); // Always show 2-second loading for page transitions
             Object.values(containers).forEach(c => c.classList.remove('active'));
             containers[page].classList.add('active');
             if (page === 'homeSection') {
@@ -959,6 +953,11 @@
                 alert('Logout failed: ' + error.message);
             }
         };
+
+        // Show 2-second loading screen on initial page load
+        window.addEventListener('load', async () => {
+            await showLoadingScreen(true);
+        });
     </script>
 </body>
 </html>
