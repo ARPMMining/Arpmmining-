@@ -197,6 +197,19 @@
             margin-top: 10px;
             display: block;
         }
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .links-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .links-container a:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
@@ -245,6 +258,10 @@
                 padding: 15px;
                 max-width: 100%;
             }
+            .links-container {
+                flex-direction: column;
+                gap: 5px;
+            }
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .page-section {
@@ -284,8 +301,10 @@
                 <label>Email Address</label>
                 <input type="email" id="emailInput" placeholder="Enter your email">
                 <button onclick="saveEmail()">Save Email</button>
-                <br><br>
-                <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">📜 Privacy Policy</a>
+                <div class="links-container">
+                    <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">📜 Privacy Policy</a>
+                    <a href="https://arpmmining.github.io/Arpmmining-/contact.html" target="_blank">📞 Contact</a>
+                </div>
             </div>
         </div>
         <div class="referral-section">
@@ -359,7 +378,7 @@
             alert("Logging out...");
             try {
                 await signOut(auth);
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
             } catch (error) {
                 alert('Logout failed: ' + error.message);
             }
@@ -415,7 +434,7 @@
                 }
             } else {
                 alert('Please login to access this page!');
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
             }
         });
 
