@@ -4,6 +4,8 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>ARPM MINING - Income</title>
 
     <!-- External Libraries -->
@@ -26,10 +28,11 @@
             position: relative;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         body {
             background: #ffffff;
-            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
         }
         .loading-overlay {
             position: fixed;
@@ -64,6 +67,7 @@
             background: #000;
             color: #fff;
             padding: 8px 12px;
+            width: 100%;
         }
         .menu-icon {
             font-size: 20px;
@@ -73,6 +77,8 @@
         .title {
             font-size: 16px;
             font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
         }
         .balance-box {
             background: #000;
@@ -81,11 +87,13 @@
             border-radius: 5px;
             font-weight: bold;
             font-size: 12px;
+            white-space: nowrap;
         }
         .page-section {
             display: block;
             overflow: hidden;
-            margin-top: 20px; /* Removed logo, so reduced margin */
+            margin-top: 20px;
+            padding: 0 10px;
         }
         .section-title {
             font-size: 20px;
@@ -100,8 +108,10 @@
             justify-content: space-between;
             background: #f1f1f1;
             padding: 8px 12px;
-            margin: 8px 15px;
+            margin: 8px 0;
             border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .youtube-icon, .twitter-icon, .instagram-icon {
             font-size: 24px;
@@ -114,6 +124,7 @@
             color: #000;
             line-height: 1.2;
             font-weight: 600;
+            word-wrap: break-word;
         }
         .task-text small {
             font-weight: normal;
@@ -134,6 +145,8 @@
             white-space: nowrap;
             cursor: pointer;
             touch-action: manipulation;
+            min-width: 70px;
+            text-align: center;
         }
         .bottom-nav {
             position: fixed;
@@ -146,6 +159,7 @@
             height: 50px;
             z-index: 1000;
             border-top: 1px solid #ccc;
+            padding: 0 5px;
         }
         .nav-item {
             color: #000;
@@ -154,6 +168,10 @@
             cursor: pointer;
             user-select: none;
             touch-action: manipulation;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
         }
         .nav-item i {
             font-size: 14px;
@@ -169,10 +187,11 @@
             }
             .page-section {
                 margin-top: 15px;
+                padding: 0 5px;
             }
             .task-box {
                 padding: 6px 10px;
-                margin: 6px 12px;
+                margin: 6px 0;
             }
             .youtube-icon, .twitter-icon, .instagram-icon {
                 font-size: 20px;
@@ -186,6 +205,7 @@
             .go-button {
                 padding: 6px;
                 font-size: 10px;
+                min-width: 60px;
             }
             .bottom-nav {
                 height: 45px;
@@ -200,6 +220,10 @@
         @media (min-width: 481px) and (max-width: 768px) {
             .page-section {
                 margin-top: 20px;
+                padding: 0 15px;
+            }
+            .task-box {
+                margin: 8px 0;
             }
         }
     </style>
@@ -383,7 +407,7 @@
             sessionStorage.setItem(`${taskType}Visited`, 'true');
             window.open(link, '_blank');
 
-            updateTaskButton(taskType, { [`${taskType}BonusClaimed`]: false });
+            await updateTaskButton(taskType, { [`${taskType}BonusClaimed`]: false });
         }
 
         async function claimTask(taskType) {
@@ -410,6 +434,7 @@
                     amount: TASK_BONUS,
                     date: new Date().toLocaleDateString('en-GB')
                 });
+
                 await update(userRef, {
                     tokens: newTokens,
                     [`${taskType}BonusClaimed`]: true,
@@ -437,8 +462,8 @@
                 }
 
                 sessionStorage.removeItem(`${taskType}Visited`);
-                updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
-                updateBalance(user, newTokens);
+                await updateTaskButton(taskType, { ...userData, [`${taskType}BonusClaimed`]: true });
+                await updateBalance(user, newTokens);
                 alert(`Successfully claimed ${TASK_BONUS} ARPM for ${taskType.toUpperCase()} task!`);
             }
         }
@@ -452,7 +477,9 @@
         async function showLoadingScreen(withDelay = false) {
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.classList.add('active');
-            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
+            if (withDelay) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
             loadingOverlay.classList.remove('active');
         }
 
@@ -462,15 +489,15 @@
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
-                    updateBalance(user, userData.tokens || 0);
-                    updateTaskButton('youtube', userData);
-                    updateTaskButton('x', userData);
-                    updateTaskButton('x1', userData);
-                    updateTaskButton('x2', userData);
-                    updateTaskButton('x3', userData);
-                    updateTaskButton('x4', userData);
-                    updateTaskButton('x5', userData);
-                    updateTaskButton('instagram', userData);
+                    await updateBalance(user, userData.tokens || 0);
+                    await updateTaskButton('youtube', userData);
+                    await updateTaskButton('x', userData);
+                    await updateTaskButton('x1', userData);
+                    await updateTaskButton('x2', userData);
+                    await updateTaskButton('x3', userData);
+                    await updateTaskButton('x4', userData);
+                    await updateTaskButton('x5', userData);
+                    await updateTaskButton('instagram', userData);
                 }
                 await showLoadingScreen();
             } else {
@@ -478,17 +505,15 @@
                 window.location.href = 'index.html';
             }
 
-            // Add event listeners for all task buttons
             const taskButtons = document.querySelectorAll('.go-button');
             taskButtons.forEach(button => {
                 const taskType = button.getAttribute('data-task');
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const userRef = ref(db, 'users/' + auth.currentUser?.uid);
-                    get(userRef).then(snapshot => {
-                        if (snapshot.exists()) {
-                            updateTaskButton(taskType, snapshot.val());
-                        }
-                    });
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        await updateTaskButton(taskType, snapshot.val());
+                    }
                 });
             });
         });
