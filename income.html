@@ -33,6 +33,8 @@
         body {
             background: #ffffff;
             -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
         }
         .loading-overlay {
             position: fixed;
@@ -68,6 +70,9 @@
             color: #fff;
             padding: 8px 12px;
             width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
         .menu-icon {
             font-size: 20px;
@@ -90,10 +95,10 @@
             white-space: nowrap;
         }
         .page-section {
-            display: block;
-            overflow: hidden;
-            margin-top: 20px;
+            margin: 60px 0 60px 0; /* Adjusted for fixed topbar and bottom-nav */
             padding: 0 10px;
+            overflow-y: auto;
+            flex: 1;
         }
         .section-title {
             font-size: 20px;
@@ -148,6 +153,28 @@
             min-width: 70px;
             text-align: center;
         }
+        .ad-placeholder {
+            display: none;
+            background: #f1f1f1;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .ad-placeholder.active {
+            display: block;
+        }
+        .ad-placeholder iframe {
+            max-width: 100%;
+            height: auto;
+            border: none;
+            border-radius: 5px;
+        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -186,7 +213,7 @@
                 font-size: 14px;
             }
             .page-section {
-                margin-top: 15px;
+                margin: 50px 0 50px 0;
                 padding: 0 5px;
             }
             .task-box {
@@ -207,6 +234,11 @@
                 font-size: 10px;
                 min-width: 60px;
             }
+            .ad-placeholder {
+                padding: 8px;
+                margin: 6px 0;
+                font-size: 12px;
+            }
             .bottom-nav {
                 height: 45px;
             }
@@ -219,10 +251,13 @@
         }
         @media (min-width: 481px) and (max-width: 768px) {
             .page-section {
-                margin-top: 20px;
+                margin: 60px 0 60px 0;
                 padding: 0 15px;
             }
             .task-box {
+                margin: 8px 0;
+            }
+            .ad-placeholder {
                 margin: 8px 0;
             }
         }
@@ -253,6 +288,8 @@
             </div>
             <button class="go-button" id="youtube-task-btn" data-task="youtube" data-link="https://www.youtube.com/@ARPMMining">SUBSCRIBE</button>
         </div>
+        <!-- Ad Placeholder -->
+        <div class="ad-placeholder" id="ad-placeholder"></div>
         <div class="task-box">
             <i class="fa-brands fa-x twitter-icon" style="color:#1DA1F2;"></i>
             <div class="task-text">
@@ -357,6 +394,74 @@
 
         const TASK_BONUS = 5.0;
         const REFERRAL_BONUS_PERCENT = 0.05;
+
+        // Ad configurations
+        const adConfigs = [
+            {
+                key: '0e76a0edb900a6f53aa1a75d1b26bd27',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js'
+            },
+            {
+                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
+            },
+            {
+                key: 'c620af328467e6de19dc04af696ee0fb',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/c620af328467e6de19dc04af696ee0fb/invoke.js'
+            },
+            {
+                key: '78ade24182729fceea8e45203dad915b',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js'
+            }
+        ];
+
+        let currentAdIndex = 0;
+
+        function loadAd() {
+            const adPlaceholder = document.getElementById('ad-placeholder');
+            adPlaceholder.innerHTML = ''; // Clear previous ad
+            adPlaceholder.classList.add('active');
+
+            const adConfig = adConfigs[currentAdIndex];
+            window.atOptions = adConfig;
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = adConfig.scriptSrc;
+            script.async = true;
+            script.onerror = () => {
+                // If ad fails to load, move to next ad
+                nextAd();
+            };
+            adPlaceholder.appendChild(script);
+
+            // Move to next ad for the next load
+            currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+
+            // Refresh ad after 30 seconds
+            setTimeout(loadAd, 30000);
+        }
+
+        function nextAd() {
+            currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+            loadAd();
+        }
 
         async function updateTaskButton(taskType, userData) {
             const button = document.getElementById(`${taskType}-task-btn`);
@@ -500,6 +605,7 @@
                     await updateTaskButton('instagram', userData);
                 }
                 await showLoadingScreen();
+                loadAd(); // Start loading ads after authentication
             } else {
                 alert('Please login to access this page!');
                 window.location.href = 'index.html';
