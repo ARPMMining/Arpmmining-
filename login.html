@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" async>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- Google Sign-In Meta -->
+    <meta name="google-signin-client_id" content="854582920631-5ocm9u03pb5ll5u0rlonhk4gh86a67d4.apps.googleusercontent.com">
+
     <!-- Internal CSS -->
     <style>
         :root {
@@ -100,7 +103,9 @@
             border-radius: 8px;
             padding: 8px;
             font-size: 18px;
-            width: 100%;
+            width
+
+: 100%;
             transition: transform 0.2s, background 0.2s;
             touch-action: manipulation;
         }
@@ -393,7 +398,7 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-        // Firebase configuration (should be moved to server-side for security)
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
             authDomain: "arpm-mining.firebaseapp.com",
@@ -454,7 +459,7 @@
             return emailRegex.test(email);
         }
 
-        // Password validation (stricter: 12+ characters)
+        // Password validation
         function isValidPassword(password) {
             const minLength = 12;
             const hasUpperCase = /[A-Z]/.test(password);
