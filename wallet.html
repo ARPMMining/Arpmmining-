@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>ARPM MINING - Wallet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,10 +23,13 @@
             position: relative;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         body {
             background: #ffffff;
-            touch-action: manipulation;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
         }
         .loading-overlay {
             position: fixed;
@@ -59,6 +64,10 @@
             background: #000;
             color: #fff;
             padding: 8px 12px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
         .menu-icon {
             font-size: 20px;
@@ -68,6 +77,8 @@
         .title {
             font-size: 16px;
             font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
         }
         .balance-box {
             background: #000;
@@ -76,6 +87,7 @@
             border-radius: 5px;
             font-weight: bold;
             font-size: 12px;
+            white-space: nowrap;
         }
         .bottom-nav {
             position: fixed;
@@ -88,6 +100,7 @@
             height: 50px;
             z-index: 1000;
             border-top: 1px solid #ccc;
+            padding: 0 5px;
         }
         .nav-item {
             color: #000;
@@ -96,6 +109,10 @@
             cursor: pointer;
             user-select: none;
             touch-action: manipulation;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
         }
         .nav-item i {
             font-size: 14px;
@@ -113,9 +130,11 @@
             color: #00cc99;
         }
         .wallet-section {
-            position: relative;
-            margin: 15px;
+            margin: 60px 15px 60px 15px;
             text-align: center;
+            overflow-y: auto;
+            flex: 1;
+            padding-bottom: 20px;
         }
         .icon-container {
             display: flex;
@@ -150,7 +169,28 @@
             pointer-events: none;
             opacity: 0.7;
         }
-        /* Slot Game Styles */
+        .ad-placeholder {
+            display: none;
+            background: #f0f0f0;
+            padding: 12px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .ad-placeholder.active {
+            display: block;
+        }
+        .ad-placeholder iframe {
+            max-width: 100%;
+            height: auto;
+            border: none;
+            border-radius: 5px;
+        }
         .slot-section {
             display: none;
             background: linear-gradient(135deg, #1a0b2e, #3c1b5c, #0b0d2e);
@@ -357,6 +397,9 @@
             body {
                 font-size: 14px;
             }
+            .wallet-section {
+                margin: 50px 10px 50px 10px;
+            }
             .bottom-nav {
                 height: 45px;
             }
@@ -375,6 +418,12 @@
             }
             .icon-box p {
                 font-size: 10px;
+            }
+            .ad-placeholder {
+                padding: 8px;
+                margin: 15px auto;
+                max-width: 260px;
+                font-size: 12px;
             }
             .reel {
                 height: 50px;
@@ -400,6 +449,17 @@
                 padding: 8px;
             }
         }
+        @media (min-width: 481px) and (max-width: 768px) {
+            .wallet-section {
+                margin: 60px 15px 60px 15px;
+            }
+            .icon-box {
+                margin: 8px 0;
+            }
+            .ad-placeholder {
+                margin: 20px auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -407,7 +467,7 @@
         <div class="loading-text">Loading...</div>
     </div>
     <div class="topbar">
-        <div class="menu-icon" id="menuBtn">⋮</div>
+        <div class="menu-icon" id="menuBtn" onclick="signOut()">⋮</div>
         <div class="title">ARPM Mining</div>
         <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
     </div>
@@ -423,6 +483,7 @@
                 <p>Withdraw</p>
             </div>
         </div>
+        <div class="ad-placeholder" id="ad-placeholder"></div>
     </div>
     <div id="slotSection" class="slot-section">
         <button id="back-btn">Back</button>
@@ -460,24 +521,8 @@
         </div>
     </div>
     <audio id="spinSound" src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" preload="auto"></audio>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
-            authDomain: "arpm-mining.firebaseapp.com",
-            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com/",
-            projectId: "arpm-mining",
-            storageBucket: "arpm-mining.appspot.com",
-            messagingSenderId: "854582920631",
-            appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
-            measurementId: "G-8YVW5EK6N1"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const database = firebase.database();
+    <script type="module">
+        import { auth, db, onAuthStateChanged, signOut, ref, get, update } from './firebase-config.js';
 
         const loadingOverlay = document.getElementById('loading-overlay');
         const balanceBox = document.getElementById('balance-box');
@@ -505,12 +550,68 @@
         let hasReceivedBigBonus = false;
         let totalSpins = 0;
 
-        const ads = [
-            { key: "0e76a0edb900a6f53aa1a75d1b26bd27", height: 250, width: 300 },
-            { key: "eb117daf94e120e0ae0e6f682c2e34f5", height: 50, width: 320 },
-            { key: "c620af328467e6de19dc04af696ee0fb", height: 250, width: 300 },
-            { key: "78ade24182729fceea8e45203dad915b", height: 50, width: 320 }
+        const adConfigs = [
+            {
+                key: '0e76a0edb900a6f53aa1a75d1b26bd27',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js'
+            },
+            {
+                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
+            },
+            {
+                key: 'c620af328467e6de19dc04af696ee0fb',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/c620af328467e6de19dc04af696ee0fb/invoke.js'
+            },
+            {
+                key: '78ade24182729fceea8e45203dad915b',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js'
+            }
         ];
+
+        let currentAdIndex = 0;
+
+        function loadAd(containerId = 'ad-placeholder') {
+            const adPlaceholder = document.getElementById(containerId);
+            adPlaceholder.innerHTML = '';
+            adPlaceholder.classList.add('active');
+
+            const adConfig = adConfigs[currentAdIndex];
+            window.atOptions = adConfig;
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = adConfig.scriptSrc;
+            script.async = true;
+            script.onerror = () => {
+                nextAd(containerId);
+            };
+            adPlaceholder.appendChild(script);
+
+            currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+            setTimeout(() => loadAd(containerId), 30000);
+        }
+
+        function nextAd(containerId = 'ad-placeholder') {
+            currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+            loadAd(containerId);
+        }
 
         async function showLoadingScreen(show = true) {
             console.log('Toggling loading screen:', show);
@@ -519,20 +620,20 @@
 
         async function updateBalance(user, tokens) {
             console.log('Updating balance:', tokens);
-            const userRef = database.ref('users/' + user.uid);
-            await userRef.update({ tokens });
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, { tokens });
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
             balanceEl.textContent = tokens.toFixed(2);
             balance = tokens;
         }
 
-        auth.onAuthStateChanged(async (user) => {
+        onAuthStateChanged(auth, async (user) => {
             console.log('Checking auth state');
             if (user) {
                 console.log('User authenticated:', user.uid);
                 showLoadingScreen(true);
-                const userRef = database.ref('users/' + user.uid);
-                const snapshot = await userRef.get();
+                const userRef = ref(db, 'users/' + user.uid);
+                const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     await updateBalance(user, userData.tokens || 0);
@@ -540,6 +641,8 @@
                     await updateBalance(user, 1000);
                 }
                 showLoadingScreen(false);
+                loadAd('ad-placeholder');
+                loadAd('ad-container');
             } else {
                 console.log('No user, redirecting to login');
                 window.location.href = './login.html';
@@ -588,7 +691,7 @@
             console.log('Sign out initiated');
             alert("Logging out...");
             try {
-                await auth.signOut();
+                await signOut(auth);
                 window.location.href = './login.html';
             } catch (error) {
                 console.error('Logout failed:', error);
@@ -605,23 +708,8 @@
                 div.innerText = "❓";
                 slot.appendChild(div);
             }
-            updateAd();
             updateUI();
             spinButton.addEventListener('click', spin);
-        }
-
-        function updateAd() {
-            console.log('Updating ad');
-            adContainer.innerHTML = '';
-            const ad = ads[Math.floor(Math.random() * ads.length)];
-            const script1 = document.createElement('script');
-            script1.type = 'text/javascript';
-            script1.text = `atOptions = { 'key': '${ad.key}', 'format': 'iframe', 'height': ${ad.height}, 'width': ${ad.width}, 'params': {} };`;
-            adContainer.appendChild(script1);
-            const script2 = document.createElement('script');
-            script2.type = 'text/javascript';
-            script2.src = `//www.highperformanceformat.com/${ad.key}/invoke.js`;
-            adContainer.appendChild(script2);
         }
 
         function updateUI() {
@@ -736,7 +824,7 @@
                 messageBar.textContent = `🎉 SCATTER x${scatters} → +10 Free Spins!`;
                 messageBar.classList.add("active");
                 updateUI();
-                updateAd();
+                loadAd('ad-container');
                 return;
             }
 
@@ -762,17 +850,18 @@
                 messageBar.textContent = bonusMessage || `🎉 You win ${win} ARPM tokens!`;
                 messageBar.classList.add("active");
                 updateBalanceAndProfitLoss(userId, win, 0);
+                loadAd('ad-container');
             } else {
                 messageBar.textContent = "";
             }
 
             updateUI();
-            updateAd();
         }
 
         function updateBalanceAndProfitLoss(userId, win, loss) {
             console.log('Updating balance:', balance, 'Win:', win, 'Loss:', loss);
-            database.ref(`users/${userId}/tokens`).set(balance).catch(error => {
+            const userRef = ref(db, `users/${userId}`);
+            update(userRef, { tokens: balance }).catch(error => {
                 console.error("Error updating balance:", error);
                 messageBar.textContent = "⚠️ Failed to update balance!";
                 messageBar.classList.add("active");
