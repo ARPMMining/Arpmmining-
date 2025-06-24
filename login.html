@@ -99,13 +99,11 @@
             touch-action: manipulation;
         }
         .btn {
-            border: none;
+            bordering: none;
             border-radius: 8px;
             padding: 8px;
             font-size: 18px;
-            width
-
-: 100%;
+            width: 100%;
             transition: transform 0.2s, background 0.2s;
             touch-action: manipulation;
         }
@@ -394,26 +392,8 @@
 
     <!-- JavaScript -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getDatabase, ref, get, set, update, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB7YhDmQa4MtSzutSwJGGU2F7XR9ubcoqQ",
-            authDomain: "arpm-mining.firebaseapp.com",
-            databaseURL: "https://arpm-mining-default-rtdb.firebaseio.com/",
-            projectId: "arpm-mining",
-            storageBucket: "arpm-mining.appspot.com",
-            messagingSenderId: "854582920631",
-            appId: "1:854582920631:web:8ce5d5141c70d068a3d432",
-            measurementId: "G-8YVW5EK6N1"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getDatabase(app);
-        const provider = new GoogleAuthProvider();
+        // Import Firebase functions from external file
+        import { auth, db, provider, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signInWithPopup, ref, get, set, update, query, orderByChild, equalTo } from './firebase-config.js';
 
         const containers = {
             login: document.getElementById('login-container'),
