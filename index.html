@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARPM MINING - Home</title>
+    <title>ARPM Mining - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         html, body {
             height: 100%;
             font-family: 'Poppins', sans-serif;
@@ -22,10 +24,13 @@
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
             background: #ffffff;
             touch-action: manipulation;
         }
+
+        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             top: 50%;
@@ -43,15 +48,19 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
+
         .loading-overlay.active {
             opacity: 1;
             visibility: visible;
         }
+
         .loading-text {
             font-size: 18px;
             font-weight: bold;
             color: #60a5fa;
         }
+
+        /* Top Bar */
         .topbar {
             display: flex;
             justify-content: space-between;
@@ -60,15 +69,18 @@
             color: #fff;
             padding: 8px 12px;
         }
+
         .menu-icon {
             font-size: 20px;
             cursor: pointer;
             touch-action: manipulation;
         }
+
         .title {
             font-size: 16px;
             font-weight: bold;
         }
+
         .balance-box {
             background: #000;
             color: #00ffcc;
@@ -77,13 +89,18 @@
             font-weight: bold;
             font-size: 12px;
         }
+
+        /* Page Sections */
         .page-section {
             display: none;
             overflow: hidden;
         }
+
         .page-section.active {
             display: block;
         }
+
+        /* Image Section */
         .image-half {
             background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
@@ -94,6 +111,7 @@
             justify-content: center;
             position: relative;
         }
+
         .start-button {
             background: #00ffcc;
             border: none;
@@ -113,6 +131,8 @@
             padding: 10px;
             touch-action: manipulation;
         }
+
+        /* Home Bottom Text */
         .home-bottom-text {
             margin: 8px 12px;
             text-align: left;
@@ -123,6 +143,8 @@
             border: 2px solid #000;
             border-radius: 8px;
         }
+
+        /* Advertisement Section */
         .ad-section {
             margin: 8px 12px;
             text-align: center;
@@ -131,11 +153,14 @@
             padding: 8px;
             border: 2px solid #000;
         }
+
         .ad-section p {
             font-size: 14px;
             color: #333;
             margin: 3px 0;
         }
+
+        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -148,6 +173,7 @@
             z-index: 1000;
             border-top: 1px solid #ccc;
         }
+
         .nav-item {
             color: #000;
             font-size: 10px;
@@ -156,14 +182,18 @@
             user-select: none;
             touch-action: manipulation;
         }
+
         .nav-item i {
             font-size: 14px;
             display: block;
             margin-bottom: 2px;
         }
+
         .nav-item.active {
             color: #00ffcc;
         }
+
+        /* Buttons Container */
         .buttons-container {
             position: absolute;
             top: 15px;
@@ -172,11 +202,13 @@
             width: 100%;
             padding: 0 15px;
         }
+
         .roadmap-container, .rules-container {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
+
         .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
             width: 40px;
             height: 40px;
@@ -193,13 +225,17 @@
             transition: transform 0.2s;
             touch-action: manipulation;
         }
+
         .invite-button, .daily-bonus-button, .login-bonus-button {
             background: linear-gradient(45deg, #ff6f61, #ffb88c);
             box-shadow: 0 0 8px rgba(255, 111, 97, 0.7);
         }
+
         .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
             transform: scale(1.1);
         }
+
+        /* Content Popups */
         .roadmap-content, .invite-content, .login-bonus-content {
             display: none;
             position: absolute;
@@ -215,45 +251,57 @@
             max-height: 350px;
             overflow-y: auto;
         }
+
         .roadmap-content {
             top: 50px;
             right: 15px;
         }
+
         .invite-content {
             top: 50px;
             left: 15px;
         }
+
         .login-bonus-content {
             top: 90px;
             left: 15px;
         }
+
         .roadmap-content.active, .invite-content.active, .login-bonus-content.active {
             display: block;
         }
+
         .invite-content h1, .login-bonus-content h1 {
             color: #0057ff;
             font-size: 16px;
             margin-bottom: 8px;
         }
+
         .invite-content h2, .login-bonus-content h2 {
             color: #333;
             font-size: 14px;
             margin-top: 8px;
             padding-bottom: 3px;
         }
+
         .invite-content ul, .login-bonus-content ul {
             list-style: none;
             padding: 0;
             margin: 8px 0;
         }
+
         .invite-content li, .login-bonus-content li {
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 600
+
+;
         }
+
         .invite-content p, .login-bonus-content p {
             margin: 8px 0;
             font-size: 12px;
         }
+
         .copy-button {
             background: #00cc99;
             color: #fff;
@@ -265,9 +313,11 @@
             transition: transform 0.2s;
             touch-action: manipulation;
         }
+
         .copy-button:hover {
             transform: translateY(-2px);
         }
+
         .referral-link {
             background: #f0f0f0;
             color: #333;
@@ -277,54 +327,68 @@
             word-break: break-all;
             margin-bottom: 8px;
         }
+
         .referral-count {
             font-size: 12px;
             color: #00ffcc;
             font-weight: bold;
         }
+
+        /* Responsive Design */
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
             }
+
             .image-half {
                 height: 200px;
             }
+
             .start-button {
                 width: 80px;
                 height: 80px;
                 font-size: 12px;
             }
+
             .bottom-nav {
                 height: 45px;
             }
+
             .nav-item {
                 font-size: 9px;
             }
+
             .nav-item i {
                 font-size: 12px;
             }
+
             .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
                 width: 35px;
                 height: 35px;
                 font-size: 10px;
             }
+
             .roadmap-content, .invite-content, .login-bonus-content {
                 width: 200px;
                 font-size: 11px;
                 top: 45px;
                 max-height: 300px;
             }
+
             .invite-content {
                 top: 45px;
             }
+
             .login-bonus-content {
                 top: 80px;
             }
         }
+
         @media (min-width: 481px) and (max-width: 768px) {
             .image-half {
                 height: 220px;
             }
+
             .start-button {
                 width: 90px;
                 height: 90px;
@@ -334,9 +398,12 @@
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-text">Loading...</div>
     </div>
+
+    <!-- Home Section -->
     <div id="homeSection" class="page-section active">
         <div class="topbar">
             <div class="menu-icon" id="menuBtn">⋮</div>
@@ -378,6 +445,8 @@
             <div id="ad-container"></div>
         </div>
     </div>
+
+    <!-- Bottom Navigation -->
     <div class="bottom-nav" id="bottom-nav">
         <div class="nav-item active" data-target="homeSection">
             <i class="fas fa-home"></i>Home
@@ -392,29 +461,30 @@
             <i class="fas fa-coins"></i>Income
         </div>
     </div>
+
     <script type="module">
-        // Import Firebase functions from external file
+        // Import Firebase functions
         import { auth, db, onAuthStateChanged, signOut, ref, get, update, push } from './firebase-config.js';
 
-        const containers = {
-            homeSection: document.getElementById('homeSection')
+        // DOM Elements
+        const elements = {
+            homeSection: document.getElementById('homeSection'),
+            loadingOverlay: document.getElementById('loading-overlay'),
+            startMiningBtn: document.getElementById('start-mining-btn'),
+            dailyBonusBtn: document.getElementById('daily-bonus-btn'),
+            loginBonusBtn: document.getElementById('login-bonus-btn'),
+            balanceBox: document.getElementById('balance-box'),
+            inviteReferralLink: document.getElementById('invite-referral-link'),
+            inviteReferralCount: document.getElementById('invite-referral-count')
         };
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const startMiningBtn = document.getElementById('start-mining-btn');
-        const dailyBonusBtn = document.getElementById('daily-bonus-btn');
-        const loginBonusBtn = document.getElementById('login-bonus-btn');
-        const balanceBox = document.getElementById('balance-box');
-        const inviteReferralLink = document.getElementById('invite-referral-link');
-        const inviteReferralCount = document.getElementById('invite-referral-count');
 
+        // Constants
         const MINING_REWARD = 12;
         const REFERRAL_BONUS_PERCENT = 0.05;
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
         const LOGIN_BONUS = 50;
 
-        let miningInterval = null;
-        let dailyBonusInterval = null;
-
+        // Advertisement Configurations
         const adConfigs = [
             { key: '0e76a0edb900a6f53aa1a75d1b26bd27', format: 'iframe', height: 250, width: 300, params: {}, scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js' },
             { key: 'eb117daf94e120e0ae0e6f682c2e34f5', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js' },
@@ -422,6 +492,12 @@
             { key: '78ade24182729fceea8e45203dad915b', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js' }
         ];
 
+        let miningInterval = null;
+        let dailyBonusInterval = null;
+
+        /**
+         * Displays a random advertisement in the ad container.
+         */
         function displayRandomAd() {
             const adContainer = document.getElementById('ad-container');
             if (!adContainer) return;
@@ -445,12 +521,21 @@
             adContainer.appendChild(script);
         }
 
+        /**
+         * Shows the loading overlay, optionally with a delay.
+         * @param {boolean} withDelay - Whether to include a delay before hiding.
+         */
         async function showLoadingScreen(withDelay = false) {
-            loadingOverlay.classList.add('active');
-            if (withDelay) await new Promise(resolve => setTimeout(resolve, 2000)); // Updated to 2 seconds
-            loadingOverlay.classList.remove('active');
+            elements.loadingOverlay.classList.add('active');
+            if (withDelay) await new Promise(resolve => setTimeout(resolve, 2000));
+            elements.loadingOverlay.classList.remove('active');
         }
 
+        /**
+         * Formats seconds into a HH:MM:SS string.
+         * @param {number} seconds - The time in seconds.
+         * @returns {string} Formatted time string.
+         */
         function formatTime(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
@@ -458,14 +543,23 @@
             return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
+        /**
+         * Updates the user's balance in Firebase and UI.
+         * @param {Object} user - The authenticated user.
+         * @param {number} tokens - The new token balance.
+         */
         async function updateBalance(user, tokens) {
-            const userRef = ref(db, 'users/' + user.uid);
+            const userRef = ref(db, `users/${user.uid}`);
             await update(userRef, { tokens });
-            balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+            elements.balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
         }
 
+        /**
+         * Updates the daily bonus button based on user data.
+         * @param {Object} userData - The user's data from Firebase.
+         */
         async function updateDailyBonusButton(userData) {
-            if (!dailyBonusBtn) return;
+            if (!elements.dailyBonusBtn) return;
 
             const lastClaimed = userData.lastDailyBonus || 0;
             const currentDay = userData.dailyBonusDay || 0;
@@ -475,28 +569,31 @@
             if (dailyBonusInterval) clearInterval(dailyBonusInterval);
 
             if (lastClaimed + oneDay > now) {
-                dailyBonusBtn.disabled = true;
+                elements.dailyBonusBtn.disabled = true;
                 let timeLeft = Math.floor((lastClaimed + oneDay - now) / 1000);
-                dailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.dailyBonusBtn.textContent = formatTime(timeLeft);
 
                 dailyBonusInterval = setInterval(() => {
                     timeLeft--;
                     if (timeLeft <= 0) {
                         clearInterval(dailyBonusInterval);
-                        dailyBonusBtn.disabled = false;
-                        dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
-                        dailyBonusBtn.onclick = claimDailyBonus;
+                        elements.dailyBonusBtn.disabled = false;
+                        elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        elements.dailyBonusBtn.onclick = claimDailyBonus;
                         return;
                     }
-                    dailyBonusBtn.textContent = formatTime(timeLeft);
+                    elements.dailyBonusBtn.textContent = formatTime(timeLeft);
                 }, 1000);
             } else {
-                dailyBonusBtn.disabled = false;
-                dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
-                dailyBonusBtn.onclick = claimDailyBonus;
+                elements.dailyBonusBtn.disabled = false;
+                elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                elements.dailyBonusBtn.onclick = claimDailyBonus;
             }
         }
 
+        /**
+         * Claims the daily bonus and updates user data.
+         */
         async function claimDailyBonus() {
             const user = auth.currentUser;
             if (!user) {
@@ -505,7 +602,7 @@
                 return;
             }
 
-            const userRef = ref(db, 'users/' + user.uid);
+            const userRef = ref(db, `users/${user.uid}`);
             const snapshot = await get(userRef);
             if (!snapshot.exists()) return;
 
@@ -522,10 +619,9 @@
             let currentDay = userData.dailyBonusDay || 0;
             const bonus = DAILY_BONUS_SCHEDULE[currentDay];
             currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
-
             const newTokens = (userData.tokens || 0) + bonus;
 
-            // Add history entry to Firebase
+            // Add history entry
             const historyRef = ref(db, `users/${user.uid}/history`);
             await push(historyRef, {
                 type: 'Daily Bonus',
@@ -539,63 +635,65 @@
                 dailyBonusDay: currentDay
             });
 
+            // Handle referrer bonus
             if (userData.referredBy) {
-                const referrerRef = ref(db, 'users/' + userData.referredBy);
+                const referrerRef = ref(db, `users/${userData.referredBy}`);
                 const referrerSnapshot = await get(referrerRef);
                 if (referrerSnapshot.exists()) {
                     const referrerData = referrerSnapshot.val();
                     const bonusAmount = bonus * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonusAmount;
-                    // Add referrer history entry to Firebase
                     const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
                     await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonusAmount,
                         date: new Date().toLocaleDateString('en-GB')
                     });
-                    await update(referrerRef, {
-                        tokens: referrerTokens
-                    });
+                    await update(referrerRef, { tokens: referrerTokens });
                 }
             }
 
             updateBalance(user, newTokens);
 
             if (dailyBonusInterval) clearInterval(dailyBonusInterval);
-            dailyBonusBtn.disabled = true;
+            elements.dailyBonusBtn.disabled = true;
             let timeLeft = 24 * 60 * 60;
-            dailyBonusBtn.textContent = formatTime(timeLeft);
+            elements.dailyBonusBtn.textContent = formatTime(timeLeft);
 
             dailyBonusInterval = setInterval(() => {
                 timeLeft--;
                 if (timeLeft <= 0) {
                     clearInterval(dailyBonusInterval);
-                    dailyBonusBtn.disabled = false;
-                    dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
-                    dailyBonusBtn.onclick = claimDailyBonus;
+                    elements.dailyBonusBtn.disabled = false;
+                    elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                    elements.dailyBonusBtn.onclick = claimDailyBonus;
                     return;
                 }
-                dailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.dailyBonusBtn.textContent = formatTime(timeLeft);
             }, 1000);
 
             alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
         }
 
+        /**
+         * Updates the login bonus button based on user data.
+         * @param {Object} userData - The user's data from Firebase.
+         */
         async function updateLoginBonusButton(userData) {
-            if (!loginBonusBtn) return;
+            if (!elements.loginBonusBtn) return;
 
             const isClaimed = userData.loginBonusClaimed || false;
             const claimButton = document.getElementById('claim-login-bonus-btn');
             const loginBonusContent = document.getElementById('login-bonus-content');
 
             if (isClaimed) {
-                loginBonusBtn.style.display = 'none';
+                elements.loginBonusBtn.style.display = 'none';
                 loginBonusContent.style.display = 'none';
             } else {
-                loginBonusBtn.style.display = 'flex';
-                loginBonusBtn.disabled = false;
-                loginBonusBtn.textContent = 'Bonus';
-                loginBonusBtn.style.cursor = 'pointer';
+                elements.loginBonusBtn.style.display = 'flex';
+                elements.loginBonusBtn.disabled = false;
+                elements.loginBonusBtn.textContent = 'Bonus';
+                elements.loginBonusBtn.style.cursor = 'pointer';
                 claimButton.textContent = 'Claim Bonus';
                 claimButton.disabled = false;
                 claimButton.style.cursor = 'pointer';
@@ -603,6 +701,9 @@
             }
         }
 
+        /**
+         * Claims the login bonus and updates user data.
+         */
         async function claimLoginBonus() {
             const user = auth.currentUser;
             if (!user) {
@@ -611,7 +712,7 @@
                 return;
             }
 
-            const userRef = ref(db, 'users/' + user.uid);
+            const userRef = ref(db, `users/${user.uid}`);
             const snapshot = await get(userRef);
             if (!snapshot.exists()) return;
 
@@ -623,7 +724,7 @@
 
             const newTokens = (userData.tokens || 0) + LOGIN_BONUS;
 
-            // Add history entry to Firebase
+            // Add history entry
             const historyRef = ref(db, `users/${user.uid}/history`);
             await push(historyRef, {
                 type: 'Login Bonus',
@@ -636,46 +737,56 @@
                 loginBonusClaimed: true
             });
 
+            // Handle referrer bonus
             if (userData.referredBy) {
-                const referrerRef = ref(db, 'users/' + userData.referredBy);
+                const referrerRef = ref(db, `users/${userData.referredBy}`);
                 const referrerSnapshot = await get(referrerRef);
                 if (referrerSnapshot.exists()) {
                     const referrerData = referrerSnapshot.val();
                     const bonus = LOGIN_BONUS * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    // Add referrer history entry to Firebase
                     const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
                     await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonus,
                         date: new Date().toLocaleDateString('en-GB')
                     });
-                    await update(referrerRef, {
-                        tokens: referrerTokens
-                    });
+                    await update(referrerRef, { tokens: referrerTokens });
                 }
             }
 
             updateBalance(user, newTokens);
-            loginBonusBtn.style.display = 'none';
+            elements.loginBonusBtn.style.display = 'none';
             document.getElementById('login-bonus-content').style.display = 'none';
             alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
         }
 
+        /**
+         * Updates the referral information in the UI.
+         * @param {Object} user - The authenticated user.
+         * @param {Object} userData - The user's data from Firebase.
+         */
         async function updateReferralInfo(user, userData) {
             const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
-            if (inviteReferralLink) inviteReferralLink.textContent = referralLink;
-            if (inviteReferralCount) inviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
+            if (elements.inviteReferralLink) elements.inviteReferralLink.textContent = referralLink;
+            if (elements.inviteReferralCount) elements.inviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
         }
 
+        /**
+         * Displays a specific page and updates the UI.
+         * @param {string} page - The ID of the page to display.
+         */
         async function showPage(page) {
-            await showLoadingScreen(true); // Always show 2-second loading for page transitions
-            Object.values(containers).forEach(c => c.classList.remove('active'));
-            containers[page].classList.add('active');
+            await showLoadingScreen(true);
+            Object.values(elements).forEach(c => {
+                if (c.classList) c.classList.remove('active');
+            });
+            elements[page].classList.add('active');
+
             if (page === 'homeSection') {
                 const user = auth.currentUser;
                 if (user) {
-                    const userRef = ref(db, 'users/' + user.uid);
+                    const userRef = ref(db, `users/${user.uid}`);
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
@@ -684,15 +795,19 @@
                         updateReferralInfo(user, userData);
                         displayRandomAd();
                     }
-                    displayRandomAd();
                 }
             }
+
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(nav => nav.classList.remove('active'));
             const activeNav = document.querySelector(`.nav-item[data-target="${page}"]`);
             if (activeNav) activeNav.classList.add('active');
         }
 
+        /**
+         * Copies the referral link to the clipboard.
+         * @param {string} elementId - The ID of the element containing the referral link.
+         */
         window.copyReferralLink = async (elementId) => {
             const referralLink = document.getElementById(elementId).textContent;
             try {
@@ -703,6 +818,9 @@
             }
         };
 
+        /**
+         * Toggles the roadmap content visibility.
+         */
         window.toggleRoadmap = () => {
             const roadmapContent = document.getElementById('roadmap-content');
             const inviteContent = document.getElementById('invite-content');
@@ -712,6 +830,9 @@
             if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
+        /**
+         * Toggles the invite content visibility.
+         */
         window.toggleInvite = () => {
             const inviteContent = document.getElementById('invite-content');
             const roadmapContent = document.getElementById('roadmap-content');
@@ -721,6 +842,9 @@
             if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
+        /**
+         * Toggles the login bonus content visibility.
+         */
         window.toggleLoginBonus = () => {
             const loginBonusContent = document.getElementById('login-bonus-content');
             const roadmapContent = document.getElementById('roadmap-content');
@@ -730,10 +854,16 @@
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
+        /**
+         * Claims the mining reward and updates user data.
+         * @param {Object} user - The authenticated user.
+         * @param {Object} userRef - The Firebase reference to the user.
+         * @param {Object} userData - The user's data from Firebase.
+         */
         async function claimMiningReward(user, userRef, userData) {
             const newTokens = (userData.tokens || 0) + MINING_REWARD;
 
-            // Add history entry to Firebase
+            // Add history entry
             const historyRef = ref(db, `users/${user.uid}/history`);
             await push(historyRef, {
                 type: 'Start Mining',
@@ -748,52 +878,54 @@
                 minedTokens: 0
             });
 
+            // Handle referrer bonus
             if (userData.referredBy) {
-                const referrerRef = ref(db, 'users/' + userData.referredBy);
+                const referrerRef = ref(db, `users/${userData.referredBy}`);
                 const referrerSnapshot = await get(referrerRef);
                 if (referrerSnapshot.exists()) {
                     const referrerData = referrerSnapshot.val();
                     const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
                     const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    // Add referrer history entry to Firebase
                     const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
                     await push(referrerHistoryRef, {
                         type: 'Referral Bonus',
                         amount: bonus,
                         date: new Date().toLocaleDateString('en-GB')
                     });
-                    await update(referrerRef, {
-                        tokens: referrerTokens
-                    });
+                    await update(referrerRef, { tokens: referrerTokens });
                 }
             }
 
             updateBalance(user, newTokens);
-            startMiningBtn.disabled = false;
-            startMiningBtn.innerHTML = 'START MINING';
+            elements.startMiningBtn.disabled = false;
+            elements.startMiningBtn.innerHTML = 'START MINING';
             alert('Mining completed! You earned 12 ARPM.');
         }
 
+        /**
+         * Handles authentication state changes and initializes the UI.
+         */
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const userRef = ref(db, 'users/' + user.uid);
+                const userRef = ref(db, `users/${user.uid}`);
                 const snapshot = await get(userRef);
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
                     updateBalance(user, userData.tokens || 0);
-                    if (containers.homeSection.classList.contains('active')) {
+                    if (elements.homeSection.classList.contains('active')) {
                         updateDailyBonusButton(userData);
                         updateLoginBonusButton(userData);
                         updateReferralInfo(user, userData);
                         displayRandomAd();
                     }
+
                     if (userData.miningEndTime > Date.now()) {
                         if (miningInterval) clearInterval(miningInterval);
                         let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
                         let minedTokens = userData.minedTokens || 0;
 
-                        startMiningBtn.disabled = true;
-                        startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+                        elements.startMiningBtn.disabled = true;
+                        elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
                         miningInterval = setInterval(async () => {
                             timeLeft--;
@@ -802,25 +934,25 @@
                                 const snapshot = await get(userRef);
                                 if (snapshot.exists()) {
                                     const userData = snapshot.val();
-                                    startMiningBtn.disabled = false;
-                                    startMiningBtn.innerHTML = 'Claim';
-                                    startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
+                                    elements.startMiningBtn.disabled = false;
+                                    elements.startMiningBtn.innerHTML = 'Claim';
+                                    elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                                 }
                                 return;
                             }
 
                             const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
                             minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-                            startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+                            elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
                             if (timeLeft % 3600 === 0) {
                                 await update(userRef, { minedTokens });
                             }
                         }, 1000);
                     } else if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
-                        startMiningBtn.disabled = false;
-                        startMiningBtn.innerHTML = 'Claim';
-                        startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
+                        elements.startMiningBtn.disabled = false;
+                        elements.startMiningBtn.innerHTML = 'Claim';
+                        elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                     }
                 }
                 showPage('homeSection');
@@ -831,6 +963,9 @@
             }
         });
 
+        /**
+         * Initializes navigation event listeners.
+         */
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', async () => {
@@ -857,7 +992,10 @@
             });
         });
 
-        startMiningBtn.addEventListener('click', async () => {
+        /**
+         * Handles the start mining button click event.
+         */
+        elements.startMiningBtn.addEventListener('click', async () => {
             const user = auth.currentUser;
             if (!user) {
                 alert('Please login to start mining!');
@@ -865,7 +1003,7 @@
                 return;
             }
 
-            const userRef = ref(db, 'users/' + user.uid);
+            const userRef = ref(db, `users/${user.uid}`);
             const snapshot = await get(userRef);
             if (!snapshot.exists()) return;
 
@@ -881,7 +1019,7 @@
 
             if (miningInterval) clearInterval(miningInterval);
 
-            startMiningBtn.disabled = true;
+            elements.startMiningBtn.disabled = true;
             let timeLeft = 12 * 60 * 60;
             let minedTokens = 0;
 
@@ -891,7 +1029,7 @@
                 minedTokens: 0
             });
 
-            startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+            elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
             miningInterval = setInterval(async () => {
                 timeLeft--;
@@ -900,16 +1038,16 @@
                     const snapshot = await get(userRef);
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
-                        startMiningBtn.disabled = false;
-                        startMiningBtn.innerHTML = 'Claim';
-                        startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
+                        elements.startMiningBtn.disabled = false;
+                        elements.startMiningBtn.innerHTML = 'Claim';
+                        elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
                     }
                     return;
                 }
 
                 const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
                 minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-                startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+                elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
 
                 if (timeLeft % 3600 === 0) {
                     await update(userRef, { minedTokens });
@@ -917,18 +1055,24 @@
             }, 1000);
         });
 
-        startMiningBtn.addEventListener('touchstart', () => {
-            if (!startMiningBtn.disabled) {
-                startMiningBtn.style.transform = 'scale(0.95)';
+        /**
+         * Adds touch feedback for the start mining button.
+         */
+        elements.startMiningBtn.addEventListener('touchstart', () => {
+            if (!elements.startMiningBtn.disabled) {
+                elements.startMiningBtn.style.transform = 'scale(0.95)';
             }
         });
 
-        startMiningBtn.addEventListener('touchend', () => {
-            startMiningBtn.style.transform = 'scale(1)';
+        elements.startMiningBtn.addEventListener('touchend', () => {
+            elements.startMiningBtn.style.transform = 'scale(1)';
         });
 
+        /**
+         * Signs out the user and redirects to the login page.
+         */
         window.signOut = async () => {
-            alert("Logging out...");
+            alert('Logging out...');
             if (miningInterval) clearInterval(miningInterval);
             if (dailyBonusInterval) clearInterval(dailyBonusInterval);
             try {
@@ -939,7 +1083,9 @@
             }
         };
 
-        // Show 2-second loading screen on initial page load
+        /**
+         * Initializes the page with a loading screen.
+         */
         window.addEventListener('load', async () => {
             await showLoadingScreen(true);
         });
