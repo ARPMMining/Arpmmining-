@@ -363,6 +363,7 @@
             <button type="submit" class="btn btn-primary mb-3">Login</button>
             <p class="footer-text">
                 <span>Don't have an account? <a href="#" class="link" id="register-link">register</a></span>
+                <span>Invite code can only be used during registration.</span>
             </p>
         </form>
     </div>
@@ -468,12 +469,16 @@
 
         // Password validation
         function isValidPassword(password) {
-            const minLength = 12;
+            const minLength = 6;
+            const maxLength = 20;
             const hasUpperCase = /[A-Z]/.test(password);
             const hasLowerCase = /[a-z]/.test(password);
-            const hasNumbers = /\d/.test(password);
-            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-            return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
+            const hasSpecialChar = /[@#&\-+\/?!:'"]/.test(password);
+            return password.length >= minLength && 
+                   password.length <= maxLength && 
+                   hasUpperCase && 
+                   hasLowerCase && 
+                   hasSpecialChar;
         }
 
         // Password strength indicator
@@ -483,8 +488,14 @@
                 strengthElement.textContent = '';
                 return;
             }
-            const strength = password.length >= 12 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)
-                ? 'strong' : password.length >= 8 ? 'medium' : 'weak';
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasSpecialChar = /[@#&\-+\/?!:'"]/.test(password);
+            const strength = (password.length >= 6 && password.length <= 20 && hasUpperCase && hasLowerCase && hasSpecialChar)
+                ? 'strong'
+                : (password.length >= 6 && (hasUpperCase || hasLowerCase))
+                ? 'medium'
+                : 'weak';
             strengthElement.textContent = `Password strength: ${strength.charAt(0).toUpperCase() + strength.slice(1)}`;
             strengthElement.className = `password-strength ${strength}`;
         }
@@ -664,7 +675,7 @@
                 return;
             }
             if (!isValidPassword(password)) {
-                showError('signup-password-error', 'Password needs 12+ characters, including uppercase, lowercase, number, and special character!');
+                showError('signup-password-error', 'Password must be 6-20 characters, include uppercase, lowercase, and one of @#&-+/?!:\'"*!');
                 return;
             }
             if (password !== confirmPassword) {
@@ -674,15 +685,20 @@
 
             let referrerUid = null;
             if (inviteCode) {
-                const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
-                const snapshot = await get(inviteQuery);
-                if (!snapshot.exists()) {
-                    showError('signup-invite-code-error', 'Invalid invite code!');
+                try {
+                    const inviteQuery = query(ref(db, 'users'), orderByChild('uniqueCode'), equalTo(inviteCode));
+                    const snapshot = await get(inviteQuery);
+                    if (!snapshot.exists()) {
+                        showError('signup-invite-code-error', 'Invalid invite code! Please check and try again.');
+                        return;
+                    }
+                    snapshot.forEach(childSnapshot => {
+                        referrerUid = childSnapshot.key;
+                    });
+                } catch (error) {
+                    showError('signup-invite-code-error', 'Error validating invite code: ' + error.message);
                     return;
                 }
-                snapshot.forEach(childSnapshot => {
-                    referrerUid = childSnapshot.key;
-                });
             }
 
             try {
@@ -698,7 +714,7 @@
                     tokens: initialTokens,
                     inviteCode: uniqueCode,
                     uniqueCode: uniqueCode,
-                    referredBy: inviteCode || '', // Store inviteCode directly
+                    referredBy: inviteCode || '',
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
@@ -751,8 +767,12 @@
                         errorMessage = 'Password is too weak!';
                         showError('signup-password-error', errorMessage);
                         break;
+                    case 'database/permission-denied':
+                        errorMessage = 'Permission denied. Please check your invite code or contact support.';
+                        showError('signup-email-error', errorMessage);
+                        break;
                     default:
-                        errorMessage = 'Unable to register. Please try again!';
+                        errorMessage = 'Unable to register. Please try again! Error: ' + error.message;
                         showError('signup-email-error', errorMessage);
                 }
             }
