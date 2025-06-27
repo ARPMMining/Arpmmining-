@@ -18,7 +18,7 @@
         html, body {
             height: 100%;
             font-family: 'Poppins', sans-serif;
-            color: #fff;
+            color: #e0e0e0;
             font-size: 16px;
             position: relative;
             overflow-x: hidden;
@@ -26,7 +26,7 @@
         }
 
         body {
-            background: #ffffff;
+            background: linear-gradient(135deg, #1e1e3b, #2a2a4e);
             touch-action: manipulation;
         }
 
@@ -43,7 +43,7 @@
             justify-content: center;
             align-items: center;
             border-radius: 10px;
-            z-index: 2000;
+            z-index: 3000;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -57,7 +57,7 @@
         .loading-text {
             font-size: 18px;
             font-weight: bold;
-            color: #60a5fa;
+            color: #4DD0E1;
         }
 
         /* Top Bar */
@@ -65,15 +65,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #000;
-            color: #fff;
+            background: linear-gradient(90deg, #1c2526, #2a3d45);
+            color: #e0e0e0;
             padding: 8px 12px;
+            height: 40px;
+            z-index: 2000;
+            position: fixed;
+            width: 100%;
+            top: 0;
         }
 
         .menu-icon {
             font-size: 20px;
             cursor: pointer;
             touch-action: manipulation;
+            transition: transform 0.2s;
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.1);
         }
 
         .title {
@@ -82,18 +92,159 @@
         }
 
         .balance-box {
-            background: #000;
-            color: #00ffcc;
+            background: transparent;
+            color: #4DD0E1;
             padding: 3px 8px;
             border-radius: 5px;
             font-weight: bold;
             font-size: 12px;
+            border: 1px solid #4DD0E1;
+        }
+
+        /* Menu Panel */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100%;
+            background: linear-gradient(45deg, #2a2a4e, #3b3b66);
+            box-shadow: -5px 0 10px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s ease-in-out;
+        }
+
+        .menu-panel.active {
+            right: 0;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #4DD0E1;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .close-menu:hover {
+            transform: scale(1.2);
+        }
+
+        .menu-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 16px;
+            color: #4DD0E1;
+        }
+
+        .menu-item-content {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .menu-item-content.active {
+            display: block;
+        }
+
+        .menu-item-content h1 {
+            font-size: 16px;
+            color: #64B5F6;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-content h2 {
+            font-size: 14px;
+            color: #e0e0e0;
+            margin-top: 8px;
+            padding-bottom: 3px;
+        }
+
+        .menu-item-content p {
+            margin: 8px 0;
+            font-size: 12px;
+        }
+
+        .menu-item-content .copy-button {
+            background: linear-gradient(45deg, #2E7D32, #66BB6A);
+            color: #e0e0e0;
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .menu-item-content .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
+        }
+
+        .menu-item-content .referral-link {
+            background: #3a3a50;
+            color: #e0e0e0;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            word-break: break-all;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-content .referral-count {
+            font-size: 12px;
+            color: #4DD0E1;
+            font-weight: bold;
         }
 
         /* Page Sections */
         .page-section {
             display: none;
             overflow: hidden;
+            margin-top: 40px; /* Adjusted for fixed topbar */
         }
 
         .page-section.active {
@@ -113,14 +264,14 @@
         }
 
         .start-button {
-            background: #00ffcc;
+            background: linear-gradient(45deg, #2E7D32, #66BB6A);
             border: none;
             border-radius: 50px;
             width: 100px;
             height: 100px;
             font-size: 14px;
             font-weight: bold;
-            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -130,34 +281,51 @@
             line-height: 1.2;
             padding: 10px;
             touch-action: manipulation;
+            color: #e0e0e0;
+            animation: pulse-start 2s infinite;
         }
 
-        /* Home Bottom Text */
-        .home-bottom-text {
-            margin: 8px 12px;
-            text-align: left;
-            font-size: 14px;
-            color: #333;
-            font-weight: 600;
-            padding-left: 15px;
-            border: 2px solid #000;
-            border-radius: 8px;
+        @keyframes pulse-start {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 12px rgba(76, 175, 80, 0.9);
+            }
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 1);
         }
 
         /* Advertisement Section */
         .ad-section {
+            display: none;
             margin: 8px 12px;
             text-align: center;
-            background: #f1f1f1;
+            background: linear-gradient(45deg, #2a2a4e, #3b3b66);
             border-radius: 8px;
             padding: 8px;
-            border: 2px solid #000;
+            border: 2px solid #3a3a50;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .ad-section.active {
+            display: block;
         }
 
         .ad-section p {
             font-size: 14px;
-            color: #333;
+            color: #e0e0e0;
             margin: 3px 0;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Bottom Navigation */
@@ -165,17 +333,17 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #fff;
+            background: linear-gradient(90deg, #1e1e3b, #2a2a4e);
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: 50px;
             z-index: 1000;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #3a3a50;
         }
 
         .nav-item {
-            color: #000;
+            color: #e0e0e0;
             font-size: 10px;
             text-align: center;
             cursor: pointer;
@@ -190,80 +358,143 @@
         }
 
         .nav-item.active {
-            color: #00ffcc;
+            color: #4DD0E1;
         }
 
         /* Buttons Container */
         .buttons-container {
             position: absolute;
-            top: 15px;
-            display: flex;
-            justify-content: space-between;
+            bottom: 10px;
             width: 100%;
-            padding: 0 15px;
-        }
-
-        .roadmap-container, .rules-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #00cc99, #00ffcc);
-            border-radius: 50%;
+            padding: 0 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
+            width: calc(25% - 7.5px);
+            height: 50px;
+            background: linear-gradient(45deg, #2E7D32, #66BB6A);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
             font-weight: bold;
-            color: #fff;
+            color: #e0e0e0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            box-shadow: 0 0 8px rgba(0, 255, 204, 0.7);
-            transition: transform 0.2s;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.7), 0 0 5px rgba(76, 175, 80, 0.5);
+            transition: transform 0.2s, box-shadow 0.3s, background 0.5s;
             touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
         }
 
         .invite-button, .daily-bonus-button, .login-bonus-button {
-            background: linear-gradient(45deg, #ff6f61, #ffb88c);
-            box-shadow: 0 0 8px rgba(255, 111, 97, 0.7);
+            background: linear-gradient(45deg, #D81B60, #F06292);
+            box-shadow: 0 0 15px rgba(216, 27, 96, 0.7), 0 0 5px rgba(216, 27, 96, 0.5);
+        }
+
+        /* Button Icons */
+        .roadmap-button::before {
+            content: '\f14e';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        .invite-button::before {
+            content: '\f0c0';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        .daily-bonus-button::before {
+            content: '\f06b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        .login-bonus-button::before {
+            content: '\f091';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        /* Gradient animation for buttons */
+        .roadmap-button::after, .invite-button::after, .daily-bonus-button::after, .login-bonus-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .roadmap-button:hover::after, .invite-button:hover::after, .daily-bonus-button:hover::after, .login-bonus-button:hover::after {
+            left: 100%;
         }
 
         .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(76, 175, 80, 0.9), 0 0 10px rgba(76, 175, 80, 0.7);
+            animation: pulse-button 1s infinite;
+        }
+
+        .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+            box-shadow: 0 0 25px rgba(216, 27, 96, 0.9), 0 0 10px rgba(216, 27, 96, 0.7);
+        }
+
+        @keyframes pulse-button {
+            0%, 100% {
+                transform: scale(1.05);
+                box-shadow: 0 0 25px rgba(76, 175, 80, 0.9), 0 0 10px rgba(76, 175, 80, 0.7);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 30px rgba(76, 175, 80, 1), 0 0 15px rgba(76, 175, 80, 0.8);
+            }
         }
 
         /* Content Popups */
         .roadmap-content, .invite-content, .login-bonus-content {
             display: none;
             position: absolute;
-            background: #fff;
-            color: #000;
+            bottom: 65px;
+            background: linear-gradient(45deg, #2a2a4e, #3b3b66);
+            color: #e0e0e0;
             padding: 12px;
             border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
             width: 250px;
             font-size: 12px;
             text-align: left;
-            z-index: 11;
+            z-index: 10000;
             max-height: 350px;
             overflow-y: auto;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .roadmap-content {
-            top: 50px;
             right: 15px;
         }
 
-        .invite-content {
-            top: 50px;
-            left: 15px;
-        }
-
-        .login-bonus-content {
-            top: 90px;
+        .invite-content, .login-bonus-content {
             left: 15px;
         }
 
@@ -272,13 +503,13 @@
         }
 
         .invite-content h1, .login-bonus-content h1 {
-            color: #0057ff;
+            color: #64B5F6;
             font-size: 16px;
             margin-bottom: 8px;
         }
 
         .invite-content h2, .login-bonus-content h2 {
-            color: #333;
+            color: #e0e0e0;
             font-size: 14px;
             margin-top: 8px;
             padding-bottom: 3px;
@@ -301,24 +532,25 @@
         }
 
         .copy-button {
-            background: #00cc99;
-            color: #fff;
+            background: linear-gradient(45deg, #2E7D32, #66BB6A);
+            color: #e0e0e0;
             padding: 6px 12px;
             border-radius: 5px;
             border: none;
             font-size: 14px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.3s;
             touch-action: manipulation;
         }
 
         .copy-button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
         }
 
         .referral-link {
-            background: #f0f0f0;
-            color: #333;
+            background: #3a3a50;
+            color: #e0e0e0;
             padding: 8px;
             border-radius: 5px;
             font-size: 12px;
@@ -328,11 +560,150 @@
 
         .referral-count {
             font-size: 12px;
-            color: #00ffcc;
+            color: #4DD0E1;
             font-weight: bold;
         }
 
+        /* Update Banner Styles */
+        #update-banner {
+            position: relative;
+            margin: 8px 12px;
+            width: calc(100% - 24px);
+            height: 36px;
+            background: linear-gradient(90deg, #4527A0, #7E57C2);
+            color: #e0e0e0;
+            overflow: hidden;
+            border-radius: 6px;
+            border: 1px solid #9575CD;
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(123, 81, 157, 0.3);
+            z-index: 999;
+            user-select: none;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #update-banner.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #marquee-text {
+            white-space: nowrap;
+            display: inline-block;
+            position: absolute;
+            left: 100%;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            color: #e0e0e0;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            transform: translateX(0);
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        #marquee-text.active {
+            animation: marquee 20s linear forwards;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #marquee-text::before {
+            content: '📢';
+            margin-right: 6px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        #close-banner {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            cursor: pointer;
+            color: #e0e0e0;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+            z-index: 10000;
+        }
+
+        #close-banner:hover {
+            color: #4DD0E1;
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - 100vw));
+            }
+        }
+
         /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .image-half {
+                height: 220px;
+            }
+
+            .start-button {
+                width: 90px;
+                height: 90px;
+                font-size: 13px;
+            }
+
+            #update-banner {
+                height: 32px;
+                width: calc(100% - 24px);
+                margin: 8px 12px;
+            }
+
+            #marquee-text {
+                font-size: 12px;
+            }
+
+            #close-banner {
+                font-size: 13px;
+                right: 8px;
+            }
+
+            .roadmap-content, .invite-content, .login-bonus-content {
+                bottom: 60px;
+            }
+
+            .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
+                height: 45px;
+                font-size: 12px;
+            }
+
+            .menu-panel {
+                width: 80%;
+            }
+        }
+
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
@@ -361,36 +732,52 @@
             }
 
             .roadmap-button, .invite-button, .daily-bonus-button, .login-bonus-button {
-                width: 35px;
-                height: 35px;
-                font-size: 10px;
+                width: calc(25% - 5px);
+                height: 40px;
+                font-size: 11px;
+                border-radius: 8px;
+                box-shadow: 0 0 12px rgba(76, 175, 80, 0.6), 0 0 4px rgba(76, 175, 80, 0.4);
+            }
+
+            .invite-button, .daily-bonus-button, .login-bonus-button {
+                box-shadow: 0 0 12px rgba(216, 27, 96, 0.6), 0 0 4px rgba(216, 27, 96, 0.4);
+            }
+
+            .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 8px rgba(76, 175, 80, 0.6);
+            }
+
+            .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+                box-shadow: 0 0 20px rgba(216, 27, 96, 0.8), 0 0 8px rgba(216, 27, 96, 0.6);
             }
 
             .roadmap-content, .invite-content, .login-bonus-content {
                 width: 200px;
-                font-size: 11px;
-                top: 45px;
                 max-height: 300px;
+                bottom: 50px;
             }
 
-            .invite-content {
-                top: 45px;
+            .button-group {
+                gap: 6px;
             }
 
-            .login-bonus-content {
-                top: 80px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            .image-half {
-                height: 220px;
+            #update-banner {
+                height: 28px;
+                width: calc(100% - 24px);
+                margin: 8px 12px;
             }
 
-            .start-button {
-                width: 90px;
-                height: 90px;
-                font-size: 13px;
+            #marquee-text {
+                font-size: 11px;
+            }
+
+            #close-banner {
+                font-size: 12px;
+                right: 6px;
+            }
+
+            .menu-panel {
+                width: 90%;
             }
         }
     </style>
@@ -399,6 +786,67 @@
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- Menu Panel -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="menu-panel" id="menu-panel">
+        <span class="close-menu" id="close-menu">×</span>
+        <div class="menu-item" onclick="window.location.href='profile.html'">
+            <i class="fas fa-user"></i>Profile
+        </div>
+        <div class="menu-item" onclick="window.location.href='wallet.html'">
+            <i class="fas fa-wallet"></i>Wallet
+        </div>
+        <div class="menu-item" onclick="window.location.href='income.html'">
+            <i class="fas fa-coins"></i>Income
+        </div>
+        <div class="menu-item" onclick="toggleMenuItem('menu-invite-content')">
+            <i class="fas fa-user-friends"></i>Invite
+        </div>
+        <div class="menu-item-content" id="menu-invite-content">
+            <h1>Invite Friends</h1>
+            <p>Share your unique referral link to invite friends and earn a 5% bonus on their mining rewards!</p>
+            <h2>Your Referral Link:</h2>
+            <div class="referral-link" id="menu-invite-referral-link">Loading...</div>
+            <button class="copy-button" onclick="copyReferralLink('menu-invite-referral-link')">Copy Link</button>
+            <p class="referral-count" id="menu-invite-referral-count">Referrals: 0</p>
+        </div>
+        <div class="menu-item" onclick="toggleMenuItem('menu-login-bonus-content')">
+            <i class="fas fa-gift"></i>Login Bonus
+        </div>
+        <div class="menu-item-content" id="menu-login-bonus-content">
+            <h1>Login Bonus</h1>
+            <p>Claim a one-time login bonus of 50 ARPM tokens!</p>
+            <button class="copy-button" id="menu-claim-login-bonus-btn" onclick="claimLoginBonus()">Claim Bonus</button>
+        </div>
+        <div class="menu-item" onclick="toggleMenuItem('menu-roadmap-content')">
+            <i class="fas fa-map"></i>Roadmap
+        </div>
+        <div class="menu-item-content" id="menu-roadmap-content">
+            <h1>Roadmap</h1>
+            <p>Coming Soon</p>
+        </div>
+        <div class="menu-item" onclick="toggleMenuItem('menu-daily-bonus-content')">
+            <i class="fas fa-coins"></i>Daily Bonus
+        </div>
+        <div class="menu-item-content" id="menu-daily-bonus-content">
+            <h1>Daily Bonus</h1>
+            <p id="menu-daily-bonus-text">Claim your daily bonus!</p>
+            <button class="copy-button" id="menu-daily-bonus-btn">Day 1</button>
+        </div>
+        <div class="menu-item" onclick="window.location.href='https://arpmmining.github.io/Arpmmining-/privacy-policy.html'">
+            <i class="fas fa-shield-alt"></i>Privacy Policy
+        </div>
+        <div class="menu-item" onclick="window.location.href='https://arpmmining.github.io/Arpmmining-/contact.html'">
+            <i class="fas fa-envelope"></i>Contact
+        </div>
+        <div class="menu-item">
+            <i class="fas fa-wallet"></i>Balance: <span id="menu-balance">0.000 ARPM</span>
+        </div>
+        <div class="menu-item" onclick="signOut()">
+            <i class="fas fa-sign-out-alt"></i>Sign Out
+        </div>
     </div>
 
     <!-- Home Section -->
@@ -411,9 +859,11 @@
         <div class="image-half">
             <button class="start-button" id="start-mining-btn">START MINING</button>
             <div class="buttons-container">
-                <div class="rules-container">
+                <div class="button-group">
                     <div class="invite-button" onclick="toggleInvite()">Invite</div>
                     <div class="login-bonus-button" id="login-bonus-btn" onclick="toggleLoginBonus()">Bonus</div>
+                    <div class="roadmap-button" onclick="toggleRoadmap()">Roadmap</div>
+                    <div class="daily-bonus-button" id="daily-bonus-btn">Daily Bonus</div>
                     <div class="invite-content" id="invite-content">
                         <h1>Invite Friends</h1>
                         <p>Share your unique referral link to invite friends and earn a 5% bonus on their mining rewards!</p>
@@ -427,18 +877,17 @@
                         <p>Claim a one-time login bonus of 50 ARPM tokens!</p>
                         <button class="copy-button" id="claim-login-bonus-btn" onclick="claimLoginBonus()">Claim Bonus</button>
                     </div>
-                </div>
-                <div class="roadmap-container">
-                    <div class="roadmap-button" onclick="toggleRoadmap()">Map</div>
-                    <div class="daily-bonus-button" id="daily-bonus-btn">Bonus</div>
                     <div class="roadmap-content" id="roadmap-content">
                         <p>Coming Soon</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="home-bottom-text">Follow us on X @Arpmmining22 to get our latest updates.</div>
-        <div class="ad-section">
+        <div id="update-banner" class="active">
+            <span id="close-banner">×</span>
+            <div id="marquee-text"></div>
+        </div>
+        <div class="ad-section" id="ad-section">
             <p>Advertisement</p>
             <div id="ad-container"></div>
         </div>
@@ -473,7 +922,19 @@
             loginBonusBtn: document.getElementById('login-bonus-btn'),
             balanceBox: document.getElementById('balance-box'),
             inviteReferralLink: document.getElementById('invite-referral-link'),
-            inviteReferralCount: document.getElementById('invite-referral-count')
+            inviteReferralCount: document.getElementById('invite-referral-count'),
+            adSection: document.getElementById('ad-section'),
+            menuBtn: document.getElementById('menuBtn'),
+            menuPanel: document.getElementById('menu-panel'),
+            menuOverlay: document.getElementById('menu-overlay'),
+            closeMenu: document.getElementById('close-menu'),
+            menuInviteReferralLink: document.getElementById('menu-invite-referral-link'),
+            menuInviteReferralCount: document.getElementById('menu-invite-referral-count'),
+            menuBalance: document.getElementById('menu-balance'),
+            menuDailyBonusBtn: document.getElementById('menu-daily-bonus-btn'),
+            menuDailyBonusText: document.getElementById('menu-daily-bonus-text'),
+            menuLoginBonusBtn: document.getElementById('menu-claim-login-bonus-btn'),
+            updateBanner: document.getElementById('update-banner')
         };
 
         // Constants
@@ -481,17 +942,94 @@
         const REFERRAL_BONUS_PERCENT = 0.05;
         const DAILY_BONUS_SCHEDULE = [1, 2, 3, 4, 5, 6, 10];
         const LOGIN_BONUS = 50;
+        const MINING_DURATION = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+
+        // Update Banner Script
+        const banner = document.getElementById('update-banner');
+        const marqueeText = document.getElementById('marquee-text');
+        const closeBtn = document.getElementById('close-banner');
+
+        const message = 'Update Notice – ARPM Mining: Website upgrade in progress. Some features may be unavailable. Follow us on X for updates: <span id="x-link" onclick="window.open(\'https://x.com/Arpmmining22\', \'_blank\')">@Arpmmining22</span>';
+
+        function updateMarquee() {
+            if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
+                marqueeText.innerHTML = message;
+                const textWidth = marqueeText.offsetWidth;
+                const viewportWidth = window.innerWidth;
+                const duration = (textWidth / viewportWidth) * 30 + 5;
+
+                marqueeText.classList.remove('active');
+                marqueeText.style.transform = 'translateX(0)';
+                marqueeText.offsetHeight; // Trigger reflow
+                marqueeText.classList.add('active');
+
+                const timeToFullExit = duration * 1000;
+                setTimeout(() => {
+                    if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
+                        updateMarquee();
+                    }
+                }, timeToFullExit);
+            }
+        }
+
+        setTimeout(() => {
+            if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
+                updateMarquee();
+            }
+        }, 1000);
+
+        closeBtn.addEventListener('click', () => {
+            banner.classList.add('hidden');
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 300);
+        });
 
         // Advertisement Configurations
         const adConfigs = [
             { key: '0e76a0edb900a6f53aa1a75d1b26bd27', format: 'iframe', height: 250, width: 300, params: {}, scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js' },
             { key: 'eb117daf94e120e0ae0e6f682c2e34f5', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js' },
             { key: 'c620af328467e6de19dc04af696ee0fb', format: 'iframe', height: 250, width: 300, params: {}, scriptSrc: '//www.highperformanceformat.com/c620af328467e6de19dc04af696ee0fb/invoke.js' },
-            { key: '78ade24182729fceea8e45203dad915b', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js' }
+            { key: '78ade24182729fceea8e45203dad915b', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/78ade24182729fceea8e45203dad915b/invoke.js' },
+            { key: 'update-banner', format: 'iframe', height: 36, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/update-banner/invoke.js' }
         ];
 
         let miningInterval = null;
         let dailyBonusInterval = null;
+
+        /**
+         * Toggles the menu panel visibility and controls update banner visibility.
+         */
+        function toggleMenu() {
+            elements.menuPanel.classList.toggle('active');
+            elements.menuOverlay.classList.toggle('active');
+            if (elements.menuPanel.classList.contains('active')) {
+                elements.updateBanner.classList.add('hidden');
+            } else {
+                if (elements.homeSection.classList.contains('active') && !elements.updateBanner.style.display) {
+                    elements.updateBanner.classList.remove('hidden');
+                    setTimeout(updateMarquee, 1000);
+                }
+                document.querySelectorAll('.menu-item-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+        }
+
+        /**
+         * Toggles the visibility of a menu item content.
+         * @param {string} contentId - The ID of the content to toggle.
+         */
+        window.toggleMenuItem = (contentId) => {
+            const content = document.getElementById(contentId);
+            const isActive = content.classList.contains('active');
+            document.querySelectorAll('.menu-item-content').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        };
 
         /**
          * Displays a random advertisement in the ad container asynchronously.
@@ -516,6 +1054,12 @@
             script.type = 'text/javascript';
             script.src = selectedAd.scriptSrc;
             script.async = true;
+            script.onload = () => {
+                elements.adSection.classList.add('active');
+            };
+            script.onerror = () => {
+                elements.adSection.classList.remove('active');
+            };
             adContainer.appendChild(script);
         }
 
@@ -525,7 +1069,7 @@
          */
         async function showLoadingScreen(withDelay = false) {
             elements.loadingOverlay.classList.add('active');
-            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000)); // Reduced to 1 second
+            if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
             elements.loadingOverlay.classList.remove('active');
         }
 
@@ -547,9 +1091,15 @@
          * @param {number} tokens - The new token balance.
          */
         async function updateBalance(user, tokens) {
-            const userRef = ref(db, `users/${user.uid}`);
-            await update(userRef, { tokens });
-            elements.balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+            try {
+                const userRef = ref(db, `users/${user.uid}`);
+                await update(userRef, { tokens });
+                elements.balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+                elements.menuBalance.textContent = `${tokens.toFixed(3)} ARPM`;
+            } catch (error) {
+                console.error('Error updating balance:', error);
+                alert('Failed to update balance. Please try again.');
+            }
         }
 
         /**
@@ -557,7 +1107,7 @@
          * @param {Object} userData - The user's data from Firebase.
          */
         async function updateDailyBonusButton(userData) {
-            if (!elements.dailyBonusBtn) return;
+            if (!elements.dailyBonusBtn || !elements.menuDailyBonusBtn) return;
 
             const lastClaimed = userData.lastDailyBonus || 0;
             const currentDay = userData.dailyBonusDay || 0;
@@ -568,24 +1118,37 @@
 
             if (lastClaimed + oneDay > now) {
                 elements.dailyBonusBtn.disabled = true;
+                elements.menuDailyBonusBtn.disabled = true;
                 let timeLeft = Math.floor((lastClaimed + oneDay - now) / 1000);
                 elements.dailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.menuDailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.menuDailyBonusText.textContent = `Come back in ${formatTime(timeLeft)} to claim your next bonus!`;
 
                 dailyBonusInterval = setInterval(() => {
                     timeLeft--;
                     if (timeLeft <= 0) {
                         clearInterval(dailyBonusInterval);
                         elements.dailyBonusBtn.disabled = false;
+                        elements.menuDailyBonusBtn.disabled = false;
                         elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        elements.menuDailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        elements.menuDailyBonusText.textContent = `Claim your Day ${currentDay + 1} bonus!`;
                         elements.dailyBonusBtn.onclick = claimDailyBonus;
+                        elements.menuDailyBonusBtn.onclick = claimDailyBonus;
                         return;
                     }
                     elements.dailyBonusBtn.textContent = formatTime(timeLeft);
+                    elements.menuDailyBonusBtn.textContent = formatTime(timeLeft);
+                    elements.menuDailyBonusText.textContent = `Come back in ${formatTime(timeLeft)} to claim your next bonus!`;
                 }, 1000);
             } else {
                 elements.dailyBonusBtn.disabled = false;
+                elements.menuDailyBonusBtn.disabled = false;
                 elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                elements.menuDailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                elements.menuDailyBonusText.textContent = `Claim your Day ${currentDay + 1} bonus!`;
                 elements.dailyBonusBtn.onclick = claimDailyBonus;
+                elements.menuDailyBonusBtn.onclick = claimDailyBonus;
             }
         }
 
@@ -601,76 +1164,93 @@
             }
 
             const userRef = ref(db, `users/${user.uid}`);
-            const snapshot = await get(userRef);
-            if (!snapshot.exists()) return;
-
-            const userData = snapshot.val();
-            const lastClaimed = userData.lastDailyBonus || 0;
-            const now = Date.now();
-            const oneDay = 24 * 60 * 60 * 1000;
-
-            if (lastClaimed + oneDay > now) {
-                alert('You can only claim the daily bonus once every 24 hours!');
-                return;
-            }
-
-            let currentDay = userData.dailyBonusDay || 0;
-            const bonus = DAILY_BONUS_SCHEDULE[currentDay];
-            currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
-            const newTokens = (userData.tokens || 0) + bonus;
-
-            // Add history entry
-            const historyRef = ref(db, `users/${user.uid}/history`);
-            await push(historyRef, {
-                type: 'Daily Bonus',
-                amount: bonus,
-                date: new Date().toLocaleDateString('en-GB')
-            });
-
-            await update(userRef, {
-                tokens: newTokens,
-                lastDailyBonus: now,
-                dailyBonusDay: currentDay
-            });
-
-            // Handle referrer bonus
-            if (userData.referredBy) {
-                const referrerRef = ref(db, `users/${userData.referredBy}`);
-                const referrerSnapshot = await get(referrerRef);
-                if (referrerSnapshot.exists()) {
-                    const referrerData = referrerSnapshot.val();
-                    const bonusAmount = bonus * REFERRAL_BONUS_PERCENT;
-                    const referrerTokens = (referrerData.tokens || 0) + bonusAmount;
-                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
-                    await push(referrerHistoryRef, {
-                        type: 'Referral Bonus',
-                        amount: bonusAmount,
-                        date: new Date().toLocaleDateString('en-GB')
-                    });
-                    await update(referrerRef, { tokens: referrerTokens });
-                }
-            }
-
-            updateBalance(user, newTokens);
-
-            if (dailyBonusInterval) clearInterval(dailyBonusInterval);
-            elements.dailyBonusBtn.disabled = true;
-            let timeLeft = 24 * 60 * 60;
-            elements.dailyBonusBtn.textContent = formatTime(timeLeft);
-
-            dailyBonusInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft <= 0) {
-                    clearInterval(dailyBonusInterval);
-                    elements.dailyBonusBtn.disabled = false;
-                    elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
-                    elements.dailyBonusBtn.onclick = claimDailyBonus;
+            try {
+                const snapshot = await get(userRef);
+                if (!snapshot.exists()) {
+                    alert('User data not found.');
                     return;
                 }
-                elements.dailyBonusBtn.textContent = formatTime(timeLeft);
-            }, 1000);
 
-            alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
+                const userData = snapshot.val();
+                const lastClaimed = userData.lastDailyBonus || 0;
+                const now = Date.now();
+                const oneDay = 24 * 60 * 60 * 1000;
+
+                if (lastClaimed + oneDay > now) {
+                    alert('You can only claim the daily bonus once every 24 hours!');
+                    return;
+                }
+
+                let currentDay = userData.dailyBonusDay || 0;
+                const bonus = DAILY_BONUS_SCHEDULE[currentDay];
+                currentDay = (currentDay + 1) % DAILY_BONUS_SCHEDULE.length;
+                const newTokens = (userData.tokens || 0) + bonus;
+
+                // Add history entry
+                const historyRef = ref(db, `users/${user.uid}/history`);
+                await push(historyRef, {
+                    type: 'Daily Bonus',
+                    amount: bonus,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
+
+                await update(userRef, {
+                    tokens: newTokens,
+                    lastDailyBonus: now,
+                    dailyBonusDay: currentDay
+                });
+
+                // Handle referrer bonus
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, `users/${userData.referredBy}`);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonusAmount = bonus * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonusAmount;
+                        const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                        await push(referrerHistoryRef, {
+                            type: 'Referral Bonus',
+                            amount: bonusAmount,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, { tokens: referrerTokens });
+                    }
+                }
+
+                updateBalance(user, newTokens);
+
+                if (dailyBonusInterval) clearInterval(dailyBonusInterval);
+                elements.dailyBonusBtn.disabled = true;
+                elements.menuDailyBonusBtn.disabled = true;
+                let timeLeft = 24 * 60 * 60;
+                elements.dailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.menuDailyBonusBtn.textContent = formatTime(timeLeft);
+                elements.menuDailyBonusText.textContent = `Come back in ${formatTime(timeLeft)} to claim your next bonus!`;
+
+                dailyBonusInterval = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft <= 0) {
+                        clearInterval(dailyBonusInterval);
+                        elements.dailyBonusBtn.disabled = false;
+                        elements.menuDailyBonusBtn.disabled = false;
+                        elements.dailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        elements.menuDailyBonusBtn.textContent = `Day ${currentDay + 1}`;
+                        elements.menuDailyBonusText.textContent = `Claim your Day ${currentDay + 1} bonus!`;
+                        elements.dailyBonusBtn.onclick = claimDailyBonus;
+                        elements.menuDailyBonusBtn.onclick = claimDailyBonus;
+                        return;
+                    }
+                    elements.dailyBonusBtn.textContent = formatTime(timeLeft);
+                    elements.menuDailyBonusBtn.textContent = formatTime(timeLeft);
+                    elements.menuDailyBonusText.textContent = `Come back in ${formatTime(timeLeft)} to claim your next bonus!`;
+                }, 1000);
+
+                alert(`Successfully claimed ${bonus} ARPM for Day ${currentDay === 0 ? 7 : currentDay}!`);
+            } catch (error) {
+                console.error('Error claiming daily bonus:', error);
+                alert('Failed to claim daily bonus. Please try again.');
+            }
         }
 
         /**
@@ -678,24 +1258,32 @@
          * @param {Object} userData - The user's data from Firebase.
          */
         async function updateLoginBonusButton(userData) {
-            if (!elements.loginBonusBtn) return;
+            if (!elements.loginBonusBtn || !elements.menuLoginBonusBtn) return;
 
             const isClaimed = userData.loginBonusClaimed || false;
             const claimButton = document.getElementById('claim-login-bonus-btn');
             const loginBonusContent = document.getElementById('login-bonus-content');
+            const menuLoginBonusContent = document.getElementById('menu-login-bonus-content');
 
             if (isClaimed) {
                 elements.loginBonusBtn.style.display = 'none';
                 loginBonusContent.style.display = 'none';
+                elements.menuLoginBonusBtn.parentElement.style.display = 'none';
+                menuLoginBonusContent.style.display = 'none';
             } else {
                 elements.loginBonusBtn.style.display = 'flex';
+                elements.menuLoginBonusBtn.parentElement.style.display = 'flex';
                 elements.loginBonusBtn.disabled = false;
+                elements.menuLoginBonusBtn.disabled = false;
                 elements.loginBonusBtn.textContent = 'Bonus';
+                elements.menuLoginBonusBtn.textContent = 'Claim Bonus';
                 elements.loginBonusBtn.style.cursor = 'pointer';
+                elements.menuLoginBonusBtn.style.cursor = 'pointer';
                 claimButton.textContent = 'Claim Bonus';
                 claimButton.disabled = false;
                 claimButton.style.cursor = 'pointer';
                 claimButton.onclick = claimLoginBonus;
+                elements.menuLoginBonusBtn.onclick = claimLoginBonus;
             }
         }
 
@@ -711,52 +1299,62 @@
             }
 
             const userRef = ref(db, `users/${user.uid}`);
-            const snapshot = await get(userRef);
-            if (!snapshot.exists()) return;
-
-            const userData = snapshot.val();
-            if (userData.loginBonusClaimed) {
-                alert('Login bonus already claimed!');
-                return;
-            }
-
-            const newTokens = (userData.tokens || 0) + LOGIN_BONUS;
-
-            // Add history entry
-            const historyRef = ref(db, `users/${user.uid}/history`);
-            await push(historyRef, {
-                type: 'Login Bonus',
-                amount: LOGIN_BONUS,
-                date: new Date().toLocaleDateString('en-GB')
-            });
-
-            await update(userRef, {
-                tokens: newTokens,
-                loginBonusClaimed: true
-            });
-
-            // Handle referrer bonus
-            if (userData.referredBy) {
-                const referrerRef = ref(db, `users/${userData.referredBy}`);
-                const referrerSnapshot = await get(referrerRef);
-                if (referrerSnapshot.exists()) {
-                    const referrerData = referrerSnapshot.val();
-                    const bonus = LOGIN_BONUS * REFERRAL_BONUS_PERCENT;
-                    const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
-                    await push(referrerHistoryRef, {
-                        type: 'Referral Bonus',
-                        amount: bonus,
-                        date: new Date().toLocaleDateString('en-GB')
-                    });
-                    await update(referrerRef, { tokens: referrerTokens });
+            try {
+                const snapshot = await get(userRef);
+                if (!snapshot.exists()) {
+                    alert('User data not found.');
+                    return;
                 }
-            }
 
-            updateBalance(user, newTokens);
-            elements.loginBonusBtn.style.display = 'none';
-            document.getElementById('login-bonus-content').style.display = 'none';
-            alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
+                const userData = snapshot.val();
+                if (userData.loginBonusClaimed) {
+                    alert('Login bonus already claimed!');
+                    return;
+                }
+
+                const newTokens = (userData.tokens || 0) + LOGIN_BONUS;
+
+                // Add history entry
+                const historyRef = ref(db, `users/${user.uid}/history`);
+                await push(historyRef, {
+                    type: 'Login Bonus',
+                    amount: LOGIN_BONUS,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
+
+                await update(userRef, {
+                    tokens: newTokens,
+                    loginBonusClaimed: true
+                });
+
+                // Handle referrer bonus
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, `users/${userData.referredBy}`);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonus = LOGIN_BONUS * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonus;
+                        const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                        await push(referrerHistoryRef, {
+                            type: 'Referral Bonus',
+                            amount: bonus,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, { tokens: referrerTokens });
+                    }
+                }
+
+                updateBalance(user, newTokens);
+                elements.loginBonusBtn.style.display = 'none';
+                document.getElementById('login-bonus-content').style.display = 'none';
+                elements.menuLoginBonusBtn.parentElement.style.display = 'none';
+                document.getElementById('menu-login-bonus-content').style.display = 'none';
+                alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
+            } catch (error) {
+                console.error('Error claiming login bonus:', error);
+                alert('Failed to claim login bonus. Please try again.');
+            }
         }
 
         /**
@@ -768,18 +1366,99 @@
             const referralLink = `https://arpmmining.github.io/Arpmmining/?ref=${userData.uniqueCode}`;
             if (elements.inviteReferralLink) elements.inviteReferralLink.textContent = referralLink;
             if (elements.inviteReferralCount) elements.inviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
+            if (elements.menuInviteReferralLink) elements.menuInviteReferralLink.textContent = referralLink;
+            if (elements.menuInviteReferralCount) elements.menuInviteReferralCount.textContent = `Referrals: ${userData.referrals || 0}`;
         }
 
         /**
-         * Displays a specific page and updates the UI.
+         * Updates the mining button based on user data.
+         * @param {Object} user - The authenticated user.
+         * @param {Object} userData - The user's data from Firebase.
+         */
+        async function updateMiningButton(user, userData) {
+            if (!elements.startMiningBtn) return;
+
+            const now = Date.now();
+            const miningEndTime = userData.miningEndTime || 0;
+            const miningStartTime = userData.miningStartTime || 0;
+            let minedTokens = userData.minedTokens || 0;
+
+            if (miningInterval) clearInterval(miningInterval);
+
+            if (miningEndTime > now && miningStartTime !== 0) {
+                // Mining is in progress
+                elements.startMiningBtn.disabled = true;
+                let timeLeft = Math.floor((miningEndTime - now) / 1000);
+
+                // Calculate tokens based on elapsed time
+                const elapsedTime = (now - miningStartTime) / 1000;
+                minedTokens = (MINING_REWARD / (MINING_DURATION / 1000)) * elapsedTime;
+                minedTokens = Math.min(minedTokens, MINING_REWARD); // Cap at MINING_REWARD
+
+                elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+                miningInterval = setInterval(async () => {
+                    timeLeft--;
+                    const currentTime = Date.now();
+                    minedTokens = (MINING_REWARD / (MINING_DURATION / 1000)) * ((currentTime - miningStartTime) / 1000);
+                    minedTokens = Math.min(minedTokens, MINING_REWARD);
+
+                    if (timeLeft <= 0) {
+                        clearInterval(miningInterval);
+                        const userRef = ref(db, `users/${user.uid}`);
+                        const snapshot = await get(userRef);
+                        if (snapshot.exists()) {
+                            const updatedData = snapshot.val();
+                            elements.startMiningBtn.disabled = false;
+                            elements.startMiningBtn.innerHTML = 'Claim';
+                            elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, updatedData);
+                        }
+                        return;
+                    }
+
+                    elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+                    // Update minedTokens in Firebase every minute
+                    if (timeLeft % 60 === 0) {
+                        try {
+                            await update(ref(db, `users/${user.uid}`), { minedTokens });
+                        } catch (error) {
+                            console.error('Error updating mined tokens:', error);
+                        }
+                    }
+                }, 1000);
+            } else if (miningEndTime !== 0 && miningStartTime !== 0) {
+                // Mining completed but not claimed
+                elements.startMiningBtn.disabled = false;
+                elements.startMiningBtn.innerHTML = 'Claim';
+                elements.startMiningBtn.onclick = () => claimMiningReward(user, ref(db, `users/${user.uid}`), userData);
+            } else {
+                // No mining in progress
+                elements.startMiningBtn.disabled = false;
+                elements.startMiningBtn.innerHTML = 'START MINING';
+                elements.startMiningBtn.onclick = startMining;
+            }
+        }
+
+        /**
+         * Displays a specific page and updates the UI, including update banner visibility.
          * @param {string} page - The ID of the page to display.
          */
         async function showPage(page) {
             await showLoadingScreen(true);
             Object.values(elements).forEach(c => {
-                if (c.classList) c.classList.remove('active');
+                if (c.classList && c !== elements.menuPanel && c !== elements.menuOverlay && c !== elements.updateBanner) {
+                    c.classList.remove('active');
+                }
             });
             elements[page].classList.add('active');
+
+            if (page === 'homeSection' && !elements.menuPanel.classList.contains('active') && !elements.updateBanner.style.display) {
+                elements.updateBanner.classList.remove('hidden');
+                setTimeout(updateMarquee, 1000);
+            } else {
+                elements.updateBanner.classList.add('hidden');
+            }
 
             if (page === 'homeSection') {
                 const user = auth.currentUser;
@@ -790,8 +1469,9 @@
                         const userData = snapshot.val();
                         updateDailyBonusButton(userData);
                         updateLoginBonusButton(userData);
+                        updateMiningButton(user, userData);
                         updateReferralInfo(user, userData);
-                        setTimeout(displayRandomAd, 0); // Load ads asynchronously
+                        setTimeout(displayRandomAd, 500);
                     }
                 }
             }
@@ -853,51 +1533,136 @@
         };
 
         /**
+         * Starts the mining process.
+         */
+        async function startMining() {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Please login to start mining!');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const userRef = ref(db, `users/${user.uid}`);
+            try {
+                const snapshot = await get(userRef);
+                if (!snapshot.exists()) {
+                    alert('User data not found.');
+                    return;
+                }
+
+                const userData = snapshot.val();
+                if (userData.miningEndTime > Date.now()) {
+                    alert('Mining is already in progress! Please wait until it completes.');
+                    return;
+                }
+                if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
+                    await claimMiningReward(user, userRef, userData);
+                    return;
+                }
+
+                if (miningInterval) clearInterval(miningInterval);
+
+                const now = Date.now();
+                await update(userRef, {
+                    miningStartTime: now,
+                    miningEndTime: now + MINING_DURATION,
+                    minedTokens: 0
+                });
+
+                elements.startMiningBtn.disabled = true;
+                let timeLeft = MINING_DURATION / 1000;
+                let minedTokens = 0;
+
+                elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+                miningInterval = setInterval(async () => {
+                    timeLeft--;
+                    const currentTime = Date.now();
+                    minedTokens = (MINING_REWARD / (MINING_DURATION / 1000)) * ((currentTime - now) / 1000);
+                    minedTokens = Math.min(minedTokens, MINING_REWARD);
+
+                    if (timeLeft <= 0) {
+                        clearInterval(miningInterval);
+                        const snapshot = await get(userRef);
+                        if (snapshot.exists()) {
+                            const updatedData = snapshot.val();
+                            elements.startMiningBtn.disabled = false;
+                            elements.startMiningBtn.innerHTML = 'Claim';
+                            elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, updatedData);
+                        }
+                        return;
+                    }
+
+                    elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
+
+                    // Update minedTokens in Firebase every minute
+                    if (timeLeft % 60 === 0) {
+                        try {
+                            await update(userRef, { minedTokens });
+                        } catch (error) {
+                            console.error('Error updating mined tokens:', error);
+                        }
+                    }
+                }, 1000);
+            } catch (error) {
+                console.error('Error starting mining:', error);
+                alert('Failed to start mining. Please try again.');
+            }
+        }
+
+        /**
          * Claims the mining reward and updates user data.
          * @param {Object} user - The authenticated user.
          * @param {Object} userRef - The Firebase reference to the user.
-         * @param {Object} userData - The user's data from Firebase.
+         * @param {Object} userData - The user's data.
          */
         async function claimMiningReward(user, userRef, userData) {
-            const newTokens = (userData.tokens || 0) + MINING_REWARD;
+            try {
+                const newTokens = (userData.tokens || 0) + MINING_REWARD;
 
-            // Add history entry
-            const historyRef = ref(db, `users/${user.uid}/history`);
-            await push(historyRef, {
-                type: 'Start Mining',
-                amount: MINING_REWARD,
-                date: new Date().toLocaleDateString('en-GB')
-            });
+                // Add history entry
+                const historyRef = ref(db, `users/${user.uid}/history`);
+                await push(historyRef, {
+                    type: 'Start Mining',
+                    amount: MINING_REWARD,
+                    date: new Date().toLocaleDateString('en-GB')
+                });
 
-            await update(userRef, {
-                tokens: newTokens,
-                miningStartTime: 0,
-                miningEndTime: 0,
-                minedTokens: 0
-            });
+                await update(userRef, {
+                    tokens: newTokens,
+                    miningStartTime: 0,
+                    miningEndTime: 0,
+                    minedTokens: 0
+                });
 
-            // Handle referrer bonus
-            if (userData.referredBy) {
-                const referrerRef = ref(db, `users/${userData.referredBy}`);
-                const referrerSnapshot = await get(referrerRef);
-                if (referrerSnapshot.exists()) {
-                    const referrerData = referrerSnapshot.val();
-                    const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
-                    const referrerTokens = (referrerData.tokens || 0) + bonus;
-                    const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
-                    await push(referrerHistoryRef, {
-                        type: 'Referral Bonus',
-                        amount: bonus,
-                        date: new Date().toLocaleDateString('en-GB')
-                    });
-                    await update(referrerRef, { tokens: referrerTokens });
+                // Handle referrer bonus
+                if (userData.referredBy) {
+                    const referrerRef = ref(db, `users/${userData.referredBy}`);
+                    const referrerSnapshot = await get(referrerRef);
+                    if (referrerSnapshot.exists()) {
+                        const referrerData = referrerSnapshot.val();
+                        const bonus = MINING_REWARD * REFERRAL_BONUS_PERCENT;
+                        const referrerTokens = (referrerData.tokens || 0) + bonus;
+                        const referrerHistoryRef = ref(db, `users/${userData.referredBy}/history`);
+                        await push(referrerHistoryRef, {
+                            type: 'Referral Bonus',
+                            amount: bonus,
+                            date: new Date().toLocaleDateString('en-GB')
+                        });
+                        await update(referrerRef, { tokens: referrerTokens });
+                    }
                 }
-            }
 
-            updateBalance(user, newTokens);
-            elements.startMiningBtn.disabled = false;
-            elements.startMiningBtn.innerHTML = 'START MINING';
-            alert('Mining completed! You earned 12 ARPM.');
+                updateBalance(user, newTokens);
+                elements.startMiningBtn.disabled = false;
+                elements.startMiningBtn.innerHTML = 'START MINING';
+                elements.startMiningBtn.onclick = startMining;
+                alert('Mining completed! You earned 12 ARPM.');
+            } catch (error) {
+                console.error('Error claiming mining reward:', error);
+                alert('Failed to claim mining reward. Please try again.');
+            }
         }
 
         /**
@@ -906,54 +1671,28 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userRef = ref(db, `users/${user.uid}`);
-                const snapshot = await get(userRef);
-                if (snapshot.exists()) {
-                    const userData = snapshot.val();
-                    updateBalance(user, userData.tokens || 0);
-                    if (elements.homeSection.classList.contains('active')) {
-                        updateDailyBonusButton(userData);
-                        updateLoginBonusButton(userData);
-                        updateReferralInfo(user, userData);
-                        setTimeout(displayRandomAd, 0); // Load ads asynchronously
-                    }
-
-                    if (userData.miningEndTime > Date.now()) {
-                        if (miningInterval) clearInterval(miningInterval);
-                        let timeLeft = Math.floor((userData.miningEndTime - Date.now()) / 1000);
-                        let minedTokens = userData.minedTokens || 0;
-
-                        elements.startMiningBtn.disabled = true;
-                        elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
-
-                        miningInterval = setInterval(async () => {
-                            timeLeft--;
-                            if (timeLeft <= 0) {
-                                clearInterval(miningInterval);
-                                const snapshot = await get(userRef);
-                                if (snapshot.exists()) {
-                                    const userData = snapshot.val();
-                                    elements.startMiningBtn.disabled = false;
-                                    elements.startMiningBtn.innerHTML = 'Claim';
-                                    elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
-                                }
-                                return;
+                try {
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val();
+                        updateBalance(user, userData.tokens || 0);
+                        if (elements.homeSection.classList.contains('active')) {
+                            updateDailyBonusButton(userData);
+                            updateLoginBonusButton(userData);
+                            updateMiningButton(user, userData);
+                            updateReferralInfo(user, userData);
+                            setTimeout(displayRandomAd, 500);
+                            if (!elements.menuPanel.classList.contains('active') && !elements.updateBanner.style.display) {
+                                elements.updateBanner.classList.remove('hidden');
+                                setTimeout(updateMarquee, 1000);
                             }
-
-                            const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
-                            minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-                            elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
-
-                            if (timeLeft % 3600 === 0) {
-                                await update(userRef, { minedTokens });
-                            }
-                        }, 1000);
-                    } else if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
-                        elements.startMiningBtn.disabled = false;
-                        elements.startMiningBtn.innerHTML = 'Claim';
-                        elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
+                        }
                     }
+                    showPage('homeSection');
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                    alert('Failed to load user data. Please try again.');
                 }
-                showPage('homeSection');
             } else {
                 if (miningInterval) clearInterval(miningInterval);
                 if (dailyBonusInterval) clearInterval(dailyBonusInterval);
@@ -979,6 +1718,7 @@
                 } else {
                     await showPage(target);
                 }
+                toggleMenu();
             });
 
             item.addEventListener('touchstart', () => {
@@ -988,69 +1728,6 @@
             item.addEventListener('touchend', () => {
                 item.style.transform = 'scale(1)';
             });
-        });
-
-        /**
-         * Handles the start mining button click event.
-         */
-        elements.startMiningBtn.addEventListener('click', async () => {
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Please login to start mining!');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            const userRef = ref(db, `users/${user.uid}`);
-            const snapshot = await get(userRef);
-            if (!snapshot.exists()) return;
-
-            const userData = snapshot.val();
-            if (userData.miningEndTime > Date.now()) {
-                alert('Mining is already in progress! Please wait until it completes.');
-                return;
-            }
-            if (userData.miningEndTime !== 0 && userData.miningStartTime !== 0) {
-                await claimMiningReward(user, userRef, userData);
-                return;
-            }
-
-            if (miningInterval) clearInterval(miningInterval);
-
-            elements.startMiningBtn.disabled = true;
-            let timeLeft = 12 * 60 * 60;
-            let minedTokens = 0;
-
-            await update(userRef, {
-                miningStartTime: Date.now(),
-                miningEndTime: Date.now() + 12 * 60 * 60 * 1000,
-                minedTokens: 0
-            });
-
-            elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
-
-            miningInterval = setInterval(async () => {
-                timeLeft--;
-                if (timeLeft <= 0) {
-                    clearInterval(miningInterval);
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        elements.startMiningBtn.disabled = false;
-                        elements.startMiningBtn.innerHTML = 'Claim';
-                        elements.startMiningBtn.onclick = () => claimMiningReward(user, userRef, userData);
-                    }
-                    return;
-                }
-
-                const hoursPassed = Math.floor((12 * 3600 - timeLeft) / 3600);
-                minedTokens = hoursPassed >= 12 ? MINING_REWARD : hoursPassed + (timeLeft % 3600 === 0 ? 1 : 0);
-                elements.startMiningBtn.innerHTML = `Time Left:<br>${formatTime(timeLeft)}<br>Tokens: ${minedTokens.toFixed(3)}`;
-
-                if (timeLeft % 3600 === 0) {
-                    await update(userRef, { minedTokens });
-                }
-            }, 1000);
         });
 
         /**
@@ -1085,8 +1762,24 @@
          * Initializes the page with a loading screen.
          */
         window.addEventListener('load', async () => {
+            elements.menuPanel.classList.remove('active');
+            elements.menuOverlay.classList.remove('active');
+            if (elements.homeSection.classList.contains('active') && !elements.updateBanner.style.display) {
+                elements.updateBanner.classList.remove('hidden');
+                setTimeout(updateMarquee, 1000);
+            }
             await showLoadingScreen(true);
         });
+
+        /**
+         * Menu event listeners
+         */
+        elements.menuBtn.addEventListener('click', toggleMenu);
+        elements.closeMenu.addEventListener('click', toggleMenu);
+        elements.menuOverlay.addEventListener('click', toggleMenu);
+
+        // Initialize startMining button event listener
+        elements.startMiningBtn.addEventListener('click', startMining);
     </script>
 </body>
 </html>
