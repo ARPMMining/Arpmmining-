@@ -11,13 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" async>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Google Sign-In Meta -->
-    <meta name="google-signin-client_id" content="854582920631-5ocm9u03pb5ll5u0rlonhk4gh86a67d4.apps.googleusercontent.com">
-
     <!-- Internal CSS -->
     <style>
         :root {
-            --primary-color: #2563eb;
+            --primary-color: #6b7280;
             --success-color: #22c55e;
             --text-color: #fff;
             --bg-opacity: 0.5;
@@ -41,9 +38,9 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            background: linear-gradient(45deg, #2563eb, #22c55e, #60a5fa, #86efac);
+            background: linear-gradient(45deg, #4b6584, #a3bffa, #dfe4ea, #f7f7f7);
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+            animation: gradientAnimation 20s ease infinite;
             touch-action: manipulation;
         }
         @keyframes gradientAnimation {
@@ -63,11 +60,11 @@
             text-align: center;
             position: relative;
             z-index: 1;
-            margin-top: 180px;
+            margin-top: 240px;
             overflow: hidden;
         }
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             position: relative;
         }
         .form-control {
@@ -76,7 +73,7 @@
             color: var(--text-color);
             border-radius: 8px;
             padding: 8px;
-            font-size: 16px;
+            font-size: 14px;
             width: 100%;
             transition: border 0.2s ease;
         }
@@ -86,65 +83,68 @@
         }
         .form-control::placeholder {
             color: #d1d5db;
-            font-size: 16px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
         .password-toggle {
             position: absolute;
-            right: 8px;
             top: 50%;
+            right: 8px;
             transform: translateY(-50%);
             cursor: pointer;
             color: #60a5fa;
-            font-size: 16px;
+            font-size: 14px;
             touch-action: manipulation;
         }
         .btn {
-            bordering: none;
+            border: none;
             border-radius: 8px;
             padding: 8px;
-            font-size: 18px;
+            font-size: 16px;
             width: 100%;
-            transition: transform 0.2s, background 0.2s;
+            transition: transform 0.2s, background 0.2s, color 0.2s;
             touch-action: manipulation;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffffff;
         }
         .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #60a5fa);
+            background: #6b7280;
         }
         .btn-success {
             background: linear-gradient(45deg, var(--success-color), #86efac);
         }
-        .btn-google {
-            background: #fff;
-            color: #333;
-            border: 1px solid #ccc;
-        }
         .btn:hover, .btn:active {
             transform: translateY(-2px);
+            background: #9ca3af;
+            color: #d1d5db;
         }
         .link {
             color: #60a5fa;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            letter-spacing: 0.5px;
         }
         .link:hover {
             text-decoration: underline;
+            color: #93c5fd;
         }
         .footer-text {
-            font-size: 14px;
+            font-size: 12px;
             margin-top: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 6px;
         }
-        .privacy-policy-link {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #60a5fa;
-            text-decoration: none;
-        }
-        .privacy-policy-link:hover {
-            text-decoration: underline;
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0;
         }
         .hidden {
             display: none;
@@ -154,9 +154,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 160px;
-            height: 80px;
-            background: rgba(0, 0, 0, 0.9);
+            width: 140px;
+            height: 70px;
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -171,11 +171,11 @@
             visibility: visible;
         }
         .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #60a5fa;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #fff;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
@@ -184,60 +184,49 @@
         }
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
             color: var(--text-color);
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             z-index: 1000;
         }
-        .navbar-top {
+        .header-box {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px 0;
-            height: 150px;
+            top: 15px;
+            left: 10px;
+            transform: none;
+            width: 600px;
+            height: 180px;
+            background: linear-gradient(45deg, #2563eb, #60a5fa);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
             z-index: 1000;
-        }
-        .logo-circle {
-            width: 120px;
-            height: 120px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
+            align-items: flex-end;
             justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+            padding-bottom: 10px;
         }
-        .logo-circle h1 {
-            color: white;
-            font-size: 30px;
-            margin: 0;
-            font-weight: bold;
+        .welcome-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #fff;
             text-align: center;
-        }
-        .logo-circle p {
-            color: white;
-            font-size: 18px;
-            margin: 3px 0 0;
-            text-align: center;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            margin: 0;
         }
         .error-message {
             display: none;
             color: #ffffff;
-            font-size: 12px;
-            margin-top: 6px;
+            font-size: 10px;
+            margin-top: 4px;
             text-align: left;
-            padding: 6px 10px;
+            padding: 4px 8px;
             background: linear-gradient(45deg, #ff4d4d, #ff6b6b);
             border-radius: 6px;
             width: 100%;
@@ -252,8 +241,8 @@
             transform: translateY(0);
         }
         .password-strength {
-            font-size: 12px;
-            margin-top: 6px;
+            font-size: 10px;
+            margin-top: 4px;
             text-align: left;
             color: #d1d5db;
         }
@@ -263,31 +252,75 @@
         .remember-me {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 10px 0;
-            font-size: 14px;
+            justify-content: flex-start;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+        .remember-me input {
+            margin-right: 6px;
         }
         @media (max-width: 480px) {
             body { font-size: 14px; }
-            .container { margin: 8px auto; padding: 12px; margin-top: 140px; }
-            .form-control { font-size: 14px; padding: 6px; }
-            .form-control::placeholder { font-size: 14px; }
-            .btn { font-size: 16px; padding: 6px; }
-            .link, .footer-text { font-size: 12px; }
-            .privacy-policy-link { font-size: 16px; }
-            .navbar-top { height: 120px; }
-            .logo-circle { width: 100px; height: 100px; }
-            .logo-circle h1 { font-size: 24px; }
-            .logo-circle p { font-size: 16px; }
-            .error-message { font-size: 10px; padding: 4px 8px; }
-            .theme-toggle { font-size: 18px; }
+            .container { 
+                margin: 8px auto; 
+                padding: 12px;
+                margin-top: 180px;
+                max-width: 90%;
+            }
+            .form-control { 
+                font-size: 12px;
+                padding: 6px;
+            }
+            .form-control::placeholder { font-size: 12px; }
+            .btn { 
+                font-size: 14px;
+                padding: 6px;
+            }
+            .link, .footer-text { font-size: 10px; }
+            .header-box {
+                width: calc(100% - 20px);
+                height: 120px;
+                left: 10px;
+                margin: 0;
+            }
+            .welcome-text {
+                font-size: 16px;
+            }
+            .error-message { font-size: 8px; padding: 3px 6px; }
+            .theme-toggle { font-size: 16px; top: 10px; right: 10px; }
+            .remember-me { font-size: 10px; }
+            .flex-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin: 10px 0;
+            }
+            .password-toggle { font-size: 12px; right: 6px; }
         }
         @media (min-width: 481px) and (max-width: 768px) {
-            .container { margin-top: 160px; }
-            .navbar-top { height: 140px; }
-            .logo-circle { width: 110px; height: 110px; }
-            .logo-circle h1 { font-size: 28px; }
-            .logo-circle p { font-size: 18px; }
+            .container { margin-top: 200px; }
+            .header-box {
+                width: 500px;
+                height: 140px;
+                left: 10px;
+            }
+            .welcome-text {
+                font-size: 20px;
+            }
+            .flex-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        @media (max-width: 320px) {
+            .container { padding: 10px; max-width: 95%; }
+            .form-control { font-size: 11px; padding: 5px; }
+            .btn { font-size: 12px; padding: 5px; }
+            .link, .footer-text { font-size: 9px; }
+            .remember-me { font-size: 9px; }
+            .flex-container { margin: 8px 0; }
         }
     </style>
 </head>
@@ -302,90 +335,84 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Top Navigation Bar with Logo -->
-    <div class="navbar-top" id="navbar-top" aria-label="ARPM MINING LOGO">
-        <div class="logo-circle">
-            <h1>ARPM</h1>
-            <p>MINING</p>
-        </div>
+    <!-- Header Box with Text -->
+    <div class="header-box" aria-label="Header Box">
+        <p class="welcome-text">Welcome to ARPM Mining</p>
     </div>
 
     <!-- Login Page -->
     <div id="login-container" class="container" role="region" aria-label="Login Form">
-        <h2>LOGIN</h2>
+        <h2 class="fw-bold mb-4">Login</h2>
         <form id="login-form">
             <div class="form-group">
-                <input type="email" class="form-control" id="login-email" placeholder="EMAIL" required aria-describedby="login-email-error">
+                <input type="email" class="form-control" id="login-email" placeholder="Email" required aria-describedby="login-email-error">
                 <div class="error-message" id="login-email-error"></div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="login-password" placeholder="PASSWORD" required aria-describedby="login-password-error">
+                <input type="password" class="form-control" id="login-password" placeholder="Password" required aria-describedby="login-password-error">
                 <i class="fas fa-eye password-toggle" id="toggle-login-password" aria-label="Toggle password visibility"></i>
                 <div class="error-message" id="login-password-error"></div>
             </div>
-            <div class="remember-me">
-                <input type="checkbox" id="remember-me" aria-label="Remember me">
-                <label for="remember-me">Remember Me</label>
+            <div class="flex-container">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" aria-label="Remember me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <a href="#" class="link" id="forgot-password-link">Forgot password?</a>
             </div>
-            <button type="submit" class="btn btn-primary">LOGIN</button>
-            <button type="button" class="btn btn-google mt-2">
-                <i class="fab fa-google"></i> Sign in with Google
-            </button>
+            <button type="submit" class="btn btn-primary mb-3">Login</button>
             <p class="footer-text">
-                <a href="#" class="link" id="forgot-password-link">FORGOT PASSWORD?</a><br>
-                DON'T HAVE AN ACCOUNT? <a href="#" class="link" id="register-link">REGISTER</a><br>
-                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
+                <span>Don't have an account? <a href="#" class="link" id="register-link">register</a></span>
             </p>
         </form>
     </div>
 
     <!-- Registration Page -->
     <div id="signup-container" class="container hidden" role="region" aria-label="Registration Form">
-        <h2>REGISTER</h2>
+        <h2 class="fw-bold mb-4">Register</h2>
         <form id="signup-form">
             <div class="form-group">
-                <input type="text" class="form-control" id="signup-username" placeholder="USERNAME" required aria-describedby="signup-username-error">
+                <input type="text" class="form-control" id="signup-username" placeholder="Username" required aria-describedby="signup-username-error">
                 <div class="error-message" id="signup-username-error"></div>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control" id="signup-email" placeholder="EMAIL" required aria-describedby="signup-email-error">
+                <input type="email" class="form-control" id="signup-email" placeholder="Email" required aria-describedby="signup-email-error">
                 <div class="error-message" id="signup-email-error"></div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="signup-password" placeholder="PASSWORD" required aria-describedby="signup-password-error password-strength">
+                <input type="password" class="form-control" id="signup-password" placeholder="Password" required aria-describedby="signup-password-error password-strength">
                 <i class="fas fa-eye password-toggle" id="toggle-signup-password" aria-label="Toggle password visibility"></i>
                 <div class="error-message" id="signup-password-error"></div>
                 <div class="password-strength" id="password-strength"></div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="signup-confirm-password" placeholder="CONFIRM PASSWORD" required aria-describedby="signup-confirm-password-error">
+                <input type="password" class="form-control" id="signup-confirm-password" placeholder="Confirm password" required aria-describedby="signup-confirm-password-error">
                 <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" aria-label="Toggle password visibility"></i>
                 <div class="error-message" id="signup-confirm-password-error"></div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="signup-invite-code" placeholder="INVITE CODE (OPTIONAL)" aria-describedby="signup-invite-code-error">
+                <input type="text" class="form-control" id="signup-invite-code" placeholder="Invite code (optional)" aria-describedby="signup-invite-code-error">
                 <div class="error-message" id="signup-invite-code-error"></div>
             </div>
-            <button type="submit" class="btn btn-success">REGISTER</button>
+            <button type="submit" class="btn btn-success mb-3">Register</button>
             <p class="footer-text">
-                BACK TO LOGIN? <a href="#" class="link" id="login-link">LOGIN</a><br>
-                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
+                <span>Back to login? <a href="#" class="link" id="login-link">Login</a></span>
             </p>
         </form>
     </div>
 
     <!-- Password Reset Page -->
     <div id="reset-container" class="container hidden" role="region" aria-label="Password Reset Form">
-        <h2>RESET PASSWORD</h2>
+        <h2 class="fw-bold mb-4">Reset password</h2>
         <form id="reset-form">
             <div class="form-group">
-                <input type="email" class="form-control" id="reset-email" placeholder="EMAIL" required aria-describedby="reset-email-error">
+                <input type="email" class="form-control" id="reset-email" placeholder="Email" required aria-describedby="reset-email-error">
                 <div class="error-message" id="reset-email-error"></div>
             </div>
-            <button type="submit" class="btn btn-success">SUBMIT</button>
+            <button type="submit" class="btn btn-success mb-3">Submit</button>
             <p class="footer-text">
-                BACK TO LOGIN? <a href="#" class="link" id="login-link-reset">LOGIN</a><br>
-                <a href="privacy-policy.html" class="privacy-policy-link" target="_blank">PRIVACY POLICY</a>
+                <span>Back to login? <a href="#" class="link" id="login-link-reset">Login</a></span>
+                <span>Don't have an account? <a href="#" class="link" id="register-link-reset">register</a></span>
             </p>
         </form>
     </div>
@@ -393,7 +420,7 @@
     <!-- JavaScript -->
     <script type="module">
         // Import Firebase functions from external file
-        import { auth, db, provider, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signInWithPopup, ref, get, set, update, query, orderByChild, equalTo } from './firebase-config.js';
+        import { auth, db, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, ref, get, set, update, query, orderByChild, equalTo } from './firebase-config.js';
 
         const containers = {
             login: document.getElementById('login-container'),
@@ -458,7 +485,7 @@
             }
             const strength = password.length >= 12 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password) && /[!@#$%^&*(),.?":{}|<>]/.test(password)
                 ? 'strong' : password.length >= 8 ? 'medium' : 'weak';
-            strengthElement.textContent = `Password Strength: ${strength.charAt(0).toUpperCase() + strength.slice(1)}`;
+            strengthElement.textContent = `Password strength: ${strength.charAt(0).toUpperCase() + strength.slice(1)}`;
             strengthElement.className = `password-strength ${strength}`;
         }
 
@@ -546,9 +573,9 @@
             e.preventDefault();
             showPage('login');
         });
-        document.getElementById('login-link-reset').addEventListener('click', (e) => {
+        document.getElementById('register-link-reset').addEventListener('click', (e) => {
             e.preventDefault();
-            showPage('login');
+            showPage('signup');
         });
 
         // Password strength listener
@@ -614,45 +641,6 @@
             }
         });
 
-        // Google Sign-In
-        document.querySelector('.btn-google').addEventListener('click', async () => {
-            try {
-                await showLoadingScreen();
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-                const userRef = ref(db, 'users/' + user.uid);
-                const snapshot = await get(userRef);
-                if (!snapshot.exists()) {
-                    const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
-                    await set(userRef, {
-                        username: user.displayName || 'User' + uniqueCode,
-                        email: user.email,
-                        tokens: NEW_USER_BONUS,
-                        inviteCode: uniqueCode,
-                        uniqueCode: uniqueCode,
-                        referredBy: null,
-                        registrationDate: new Date().toLocaleDateString('en-GB'),
-                        miningStartTime: 0,
-                        miningEndTime: 0,
-                        minedTokens: 0,
-                        referrals: 0,
-                        youtubeBonusClaimed: false,
-                        xBonusClaimed: false,
-                        instagramBonusClaimed: false,
-                        loginBonusClaimed: false,
-                        profilePicture: user.photoURL || null,
-                        language: 'en',
-                        lastDailyBonus: 0,
-                        dailyBonusDay: 0,
-                        history: [{ type: 'Sign-Up Bonus', amount: NEW_USER_BONUS, date: new Date().toLocaleDateString('en-GB') }]
-                    });
-                }
-                window.location.href = 'index.html';
-            } catch (error) {
-                showError('login-email-error', 'Google Sign-In failed. Please try again!');
-            }
-        });
-
         // Signup form submission
         forms.signup.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -703,14 +691,14 @@
                 const user = userCredential.user;
                 const uniqueCode = Math.floor(10000000 + Math.random() * 90000000).toString();
                 const initialTokens = inviteCode ? NEW_USER_BONUS : 0;
-                const history = inviteCode ? [{ type: 'Invite Bonus', amount: NEW_USER_BONUS, date: new Date().toLocaleDateString('en-GB') }] : [];
+                const history = inviteCode ? [{ type: 'Invite bonus', amount: NEW_USER_BONUS, date: new Date().toLocaleDateString('en-GB') }] : [];
                 await set(ref(db, 'users/' + user.uid), {
                     username: username || "",
                     email: email,
                     tokens: initialTokens,
                     inviteCode: uniqueCode,
                     uniqueCode: uniqueCode,
-                    referredBy: referrerUid || null,
+                    referredBy: inviteCode || '', // Store inviteCode directly
                     registrationDate: new Date().toLocaleDateString('en-GB'),
                     miningStartTime: 0,
                     miningEndTime: 0,
@@ -735,7 +723,7 @@
                     const newTokens = (referrerData.tokens || 0) + (initialTokens * REFERRAL_BONUS_PERCENT);
                     const referrerHistory = referrerData.history || [];
                     referrerHistory.push({
-                        type: 'Referral Bonus',
+                        type: 'Referral bonus',
                         amount: initialTokens * REFERRAL_BONUS_PERCENT,
                         date: new Date().toLocaleDateString('en-GB')
                     });
