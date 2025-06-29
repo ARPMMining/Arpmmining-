@@ -26,7 +26,7 @@
             touch-action: manipulation;
         }
         body {
-            background: #ffffff;
+            background: linear-gradient(135deg, #1e1e3b, #2a2a4e);
             -webkit-overflow-scrolling: touch;
             display: flex;
             flex-direction: column;
@@ -69,15 +69,11 @@
             top: 0;
             z-index: 1000;
         }
-        .menu-icon {
-            font-size: 20px;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
         .title {
             font-size: 16px;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
+            margin-left: 10px;
             flex-grow: 1;
         }
         .balance-box {
@@ -93,17 +89,17 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #fff;
+            background: linear-gradient(135deg, #1e1e3b, #2a2a4e);
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: 50px;
             z-index: 1000;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #3a3a50;
             padding: 0 5px;
         }
         .nav-item {
-            color: #000;
+            color: #fff;
             font-size: 10px;
             text-align: center;
             cursor: pointer;
@@ -143,7 +139,7 @@
             margin-top: 20px;
         }
         .icon-box {
-            background: #f0f0f0;
+            background: linear-gradient(135deg, #0e0e2b, #1e1e3b);
             border-radius: 10px;
             padding: 15px;
             width: 100px;
@@ -160,7 +156,7 @@
             margin-bottom: 5px;
         }
         .icon-box p {
-            color: #000;
+            color: #fff;
             font-size: 12px;
             margin: 0;
         }
@@ -171,7 +167,7 @@
         }
         .ad-placeholder {
             display: none;
-            background: #f0f0f0;
+            background: #2a2a4e;
             padding: 12px;
             margin: 20px auto;
             border-radius: 10px;
@@ -179,8 +175,8 @@
             width: 100%;
             text-align: center;
             font-size: 14px;
-            color: #333;
-            border: 1px solid #ddd;
+            color: #fff;
+            border: 1px solid #3a3a50;
         }
         .ad-placeholder.active {
             display: block;
@@ -191,214 +187,23 @@
             border: none;
             border-radius: 5px;
         }
-        .slot-section {
-            display: none;
-            background: linear-gradient(135deg, #1a0b2e, #3c1b5c, #0b0d2e);
-            color: #fff;
-            padding: 20px;
-            min-height: 100vh;
-            position: relative;
-        }
-        .slot-section.active {
-            display: block;
-        }
-        .slot-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="10" cy="10" r="2" fill="white" filter="url(#glow)"/></svg>') repeat;
-            opacity: 0.2;
-            animation: starry 50s linear infinite;
-            z-index: -1;
-        }
-        @keyframes starry {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
-        #free-spins-bar {
-            height: 40px;
-            line-height: 40px;
-            margin: 10px auto 5px auto;
-            max-width: 300px;
-            border-radius: 20px;
-            background: transparent;
-            color: transparent;
-            font-weight: bold;
-            font-size: 20px;
-            user-select: none;
-            transition: background 0.5s, color 0.5s;
-            box-shadow: none;
-            display: none;
-        }
-        #free-spins-bar.active {
-            background: gold;
-            color: black;
-            box-shadow: 0 0 10px 3px gold;
-            display: block;
-        }
-        #message-bar {
-            height: 40px;
-            line-height: 40px;
-            margin: 0 auto 10px auto;
-            max-width: 300px;
-            border-radius: 20px;
-            background: #222;
-            color: gold;
-            font-weight: bold;
-            font-size: 20px;
-            user-select: none;
-            box-shadow: 0 0 8px 2px gold;
-            min-height: 40px;
-            overflow-wrap: break-word;
-            padding: 0 15px;
-            display: none;
-        }
-        #message-bar.active {
-            display: block;
-        }
-        #slot {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            max-width: 350px;
-            margin: 0 auto;
-        }
-        .reel {
-            background: #222;
-            font-size: 24px;
-            color: gold;
-            height: 60px;
-            line-height: 60px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px #fff;
-            transition: all 0.3s;
-            user-select: none;
-            animation: drop 0.5s ease-out;
-        }
-        @keyframes drop {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .scatter-style {
-            border-radius: 50%;
-            background: radial-gradient(circle, gold, #ff0);
-            color: #000;
-            font-weight: bold;
-            font-size: 20px;
-            line-height: 60px;
-            box-shadow: 0 0 15px 4px gold;
-            transform: scale(1.0);
-            border: 3px solid #fff;
-        }
-        .extra-scatter {
-            animation: sparkle 1s infinite;
-        }
-        @keyframes sparkle {
-            0% { box-shadow: 0 0 15px 4px gold; }
-            50% { box-shadow: 0 0 25px 8px rgba(255, 215, 0, 0.9); }
-            100% { box-shadow: 0 0 15px 4px gold; }
-        }
-        #info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 30px;
-            font-size: 18px;
-            flex-wrap: wrap;
-        }
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: gold;
-            font-weight: bold;
-            user-select: none;
-        }
-        .balance-label {
-            color: #ccc;
-            font-weight: normal;
-            margin-right: 6px;
-            user-select: text;
-        }
-        .bet-controls {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .bet-value {
-            min-width: 80px;
-            text-align: center;
-            font-size: 20px;
-            color: #ffd700;
-            font-weight: bold;
-            user-select: text;
-        }
-        button {
-            padding: 6px 12px;
-            font-size: 18px;
-            background: gold;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #ffea00;
-        }
-        #spin-button {
-            margin-top: 20px;
-            padding: 12px 25px;
-            font-size: 22px;
-            font-weight: bold;
-            border-radius: 10px;
-            width: 180px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-        }
-        #ad-container {
-            margin: 20px auto;
-            max-width: 320px;
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #ad-container iframe {
-            border: none;
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
-        }
-        #back-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            font-size: 18px;
-            padding: 8px 15px;
-            background: #ff4444;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
             }
             .wallet-section {
                 margin: 50px 10px 50px 10px;
+            }
+            .topbar {
+                padding: 6px 10px;
+            }
+            .title {
+                font-size: 14px;
+                margin-left: 8px;
+            }
+            .balance-box {
+                font-size: 10px;
+                padding: 2px 6px;
             }
             .bottom-nav {
                 height: 45px;
@@ -408,6 +213,9 @@
             }
             .nav-item i {
                 font-size: 12px;
+            }
+            .icon-container {
+                gap: 10px;
             }
             .icon-box {
                 width: 80px;
@@ -424,29 +232,6 @@
                 margin: 15px auto;
                 max-width: 260px;
                 font-size: 12px;
-            }
-            .reel {
-                height: 50px;
-                font-size: 20px;
-                line-height: 50px;
-            }
-            #free-spins-bar, #message-bar {
-                font-size: 18px;
-                height: 35px;
-                line-height: 35px;
-                max-width: 260px;
-            }
-            .scatter-style {
-                font-size: 18px;
-                line-height: 50px;
-            }
-            #spin-button {
-                width: 140px;
-                font-size: 18px;
-            }
-            #ad-container {
-                max-width: 260px;
-                padding: 8px;
             }
         }
         @media (min-width: 481px) and (max-width: 768px) {
@@ -467,7 +252,6 @@
         <div class="loading-text">Loading...</div>
     </div>
     <div class="topbar">
-        <div class="menu-icon" id="menuBtn" onclick="signOut()">⋮</div>
         <div class="title">ARPM Mining</div>
         <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
     </div>
@@ -485,27 +269,6 @@
         </div>
         <div class="ad-placeholder" id="ad-placeholder"></div>
     </div>
-    <div id="slotSection" class="slot-section">
-        <button id="back-btn">Back</button>
-        <h1>🎰 Super ARPM Ace</h1>
-        <div id="free-spins-bar">Free Spins: <span id="freespins">0</span></div>
-        <div id="message-bar"></div>
-        <div id="slot"></div>
-        <div id="info">
-            <div class="info-item">
-                <span class="balance-label">Balance:</span>
-                <span id="balance">0.00</span> ARPM
-            </div>
-            <div class="info-item bet-controls">
-                <button id="bet-minus" aria-label="Decrease Bet">-</button>
-                <span id="bet" class="bet-value">100</span> ARPM
-                <button id="bet-plus" aria-label="Increase Bet">+</button>
-            </div>
-        </div>
-        <button id="spin-button">🎲 Spin Now</button>
-        <div id="ad-container"></div>
-        <p id="result" style="display:none;"></p>
-    </div>
     <div class="bottom-nav" id="bottom-nav">
         <div class="nav-item" data-target="homeSection">
             <i class="fas fa-home"></i>Home
@@ -520,7 +283,6 @@
             <i class="fas fa-coins"></i>Income
         </div>
     </div>
-    <audio id="spinSound" src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" preload="auto"></audio>
     <script type="module">
         import { auth, db, onAuthStateChanged, signOut, ref, get, update } from './firebase-config.js';
 
@@ -528,27 +290,6 @@
         const balanceBox = document.getElementById('balance-box');
         const superArpmAceBtn = document.getElementById('superArpmAceBtn');
         const walletSection = document.getElementById('walletSection');
-        const slotSection = document.getElementById('slotSection');
-        const backBtn = document.getElementById('back-btn');
-        const slot = document.getElementById('slot');
-        const balanceEl = document.getElementById('balance');
-        const betEl = document.getElementById('bet');
-        const freeSpinsEl = document.getElementById('freespins');
-        const freeSpinsBar = document.getElementById('free-spins-bar');
-        const messageBar = document.getElementById('message-bar');
-        const spinSound = document.getElementById('spinSound');
-        const adContainer = document.getElementById('ad-container');
-        const betMinusBtn = document.getElementById('bet-minus');
-        const betPlusBtn = document.getElementById('bet-plus');
-        const spinButton = document.getElementById('spin-button');
-
-        const symbols = ["🍒", "🍋", "🍉", "🍇", "⭐", "💎", "🔔", "🎲", "🪙", "💰", "🔥", "SCATTER"];
-        const bonusEligibleSymbols = ["🍒", "🍋", "🍉", "🍇", "⭐"];
-        let balance = 0;
-        let bet = 100;
-        let freeSpins = 0;
-        let hasReceivedBigBonus = false;
-        let totalSpins = 0;
 
         const adConfigs = [
             {
@@ -623,8 +364,6 @@
             const userRef = ref(db, 'users/' + user.uid);
             await update(userRef, { tokens });
             balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
-            balanceEl.textContent = tokens.toFixed(2);
-            balance = tokens;
         }
 
         onAuthStateChanged(auth, async (user) => {
@@ -642,7 +381,6 @@
                 }
                 showLoadingScreen(false);
                 loadAd('ad-placeholder');
-                loadAd('ad-container');
             } else {
                 console.log('No user, redirecting to login');
                 window.location.href = './login.html';
@@ -651,15 +389,7 @@
 
         superArpmAceBtn.addEventListener('click', () => {
             console.log('Super Arpm Ace button clicked');
-            walletSection.style.display = 'none';
-            slotSection.classList.add('active');
-            initializeSlotGame();
-        });
-
-        backBtn.addEventListener('click', () => {
-            console.log('Back button clicked');
-            slotSection.classList.remove('active');
-            walletSection.style.display = 'block';
+            window.location.href = './super_arpm_ace.html';
         });
 
         const navItems = document.querySelectorAll('.nav-item');
@@ -675,6 +405,8 @@
                     window.location.href = './profile.html';
                 } else if (target === 'incomeSection') {
                     window.location.href = './income.html';
+                } else if (target === 'walletSection') {
+                    loadAd('ad-placeholder');
                 }
             });
 
@@ -698,175 +430,6 @@
                 alert('Logout failed: ' + error.message);
             }
         };
-
-        function initializeSlotGame() {
-            console.log('Initializing slot game');
-            slot.innerHTML = '';
-            for (let i = 0; i < 20; i++) {
-                const div = document.createElement("div");
-                div.className = "reel";
-                div.innerText = "❓";
-                slot.appendChild(div);
-            }
-            updateUI();
-            spinButton.addEventListener('click', spin);
-        }
-
-        function updateUI() {
-            balanceEl.textContent = balance.toFixed(2);
-            betEl.textContent = bet;
-            freeSpinsEl.textContent = freeSpins;
-            if (freeSpins > 0 || messageBar.textContent) {
-                freeSpinsBar.classList.add("active");
-                messageBar.classList.add("active");
-            } else {
-                freeSpinsBar.classList.remove("active");
-                messageBar.classList.remove("active");
-            }
-        }
-
-        betMinusBtn.addEventListener("click", () => {
-            if (bet > 10) {
-                bet -= 10;
-                updateUI();
-            }
-        });
-
-        betPlusBtn.addEventListener("click", () => {
-            if (bet + 10 <= balance) {
-                bet += 10;
-                updateUI();
-            }
-        });
-
-        async function spin() {
-            const userId = auth.currentUser?.uid;
-            console.log('Spin initiated, user:', userId);
-            if (!userId) {
-                console.log('No user during spin, redirecting to login');
-                window.location.href = './login.html';
-                return;
-            }
-
-            messageBar.textContent = "";
-            totalSpins++;
-
-            if (freeSpins <= 0 && balance < bet) {
-                messageBar.textContent = "❌ Not enough token!";
-                messageBar.classList.add("active");
-                updateUI();
-                return;
-            }
-
-            try {
-                spinSound.currentTime = 0;
-                await spinSound.play();
-            } catch (err) {
-                console.warn("Audio play failed:", err);
-            }
-
-            let loss = 0;
-            if (freeSpins > 0) {
-                freeSpins--;
-            } else {
-                balance -= bet;
-                loss = bet;
-            }
-
-            updateUI();
-            updateBalanceAndProfitLoss(userId, 0, loss);
-
-            let scatters = 0;
-            let result = [];
-
-            for (let i = 0; i < 20; i++) {
-                let sym;
-                const isLastColumn = i >= 16;
-                if (scatters === 2 && isLastColumn && freeSpins === 0) {
-                    const chance = Math.random();
-                    if (chance < 0.15) {
-                        sym = "SCATTER";
-                    } else {
-                        sym = symbols[Math.floor(Math.random() * symbols.length)];
-                    }
-                } else {
-                    sym = symbols[Math.floor(Math.random() * symbols.length)];
-                }
-
-                const cell = slot.children[i];
-                cell.innerText = sym;
-                cell.classList.remove("scatter-style", "extra-scatter");
-
-                if (sym === "SCATTER") {
-                    scatters++;
-                    cell.classList.add("scatter-style");
-                    if (scatters === 3 && isLastColumn) {
-                        cell.classList.add("extra-scatter");
-                    }
-                }
-
-                result.push(sym);
-                await new Promise(resolve => setTimeout(resolve, 150));
-            }
-
-            let win = 0;
-            let bonusMessage = "";
-
-            if (!hasReceivedBigBonus && bet >= 100 && Math.random() < 0.01 && totalSpins % 1000 <= 900) {
-                win += 2000;
-                hasReceivedBigBonus = true;
-                bonusMessage = `🎉 Mega Bonus! You won 2000 ARPM!`;
-            }
-
-            if (scatters >= 3 && freeSpins === 0) {
-                freeSpins += 10;
-                freeSpinsEl.textContent = freeSpins;
-                messageBar.textContent = `🎉 SCATTER x${scatters} → +10 Free Spins!`;
-                messageBar.classList.add("active");
-                updateUI();
-                loadAd('ad-container');
-                return;
-            }
-
-            const count = {};
-            for (let s of result) {
-                count[s] = (count[s] || 0) + 1;
-            }
-
-            for (let key in count) {
-                if (key !== "SCATTER" && bonusEligibleSymbols.includes(key)) {
-                    if (count[key] === 3) {
-                        const smallBonus = Math.floor(Math.random() * 5) + 1;
-                        win += Math.min(smallBonus, 500);
-                    } else if (count[key] >= 4) {
-                        const higherBonus = Math.floor(Math.random() * 11) + 5;
-                        win += Math.min(higherBonus, 500);
-                    }
-                }
-            }
-
-            if (win > 0) {
-                balance += win;
-                messageBar.textContent = bonusMessage || `🎉 You win ${win} ARPM tokens!`;
-                messageBar.classList.add("active");
-                updateBalanceAndProfitLoss(userId, win, 0);
-                loadAd('ad-container');
-            } else {
-                messageBar.textContent = "";
-            }
-
-            updateUI();
-        }
-
-        function updateBalanceAndProfitLoss(userId, win, loss) {
-            console.log('Updating balance:', balance, 'Win:', win, 'Loss:', loss);
-            const userRef = ref(db, `users/${userId}`);
-            update(userRef, { tokens: balance }).catch(error => {
-                console.error("Error updating balance:", error);
-                messageBar.textContent = "⚠️ Failed to update balance!";
-                messageBar.classList.add("active");
-            });
-        }
     </script>
 </body>
 </html>
