@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Super ARPM Ace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        body {
+            background: linear-gradient(135deg, #1e1e3b, #2a2a4e);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .back-icon {
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            background: #ff4444;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 2000;
+        }
+        .back-icon:hover {
+            background: #e63939;
+            transform: scale(1.1);
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 5px #00ffcc;
+        }
+        .balance-box {
+            background: #00ffcc;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .slot-section {
+            margin-top: 60px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+        }
+        .slot-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="10" cy="10" r="2" fill="white" filter="url(#glow)"/></svg>') repeat;
+            opacity: 0.2;
+            animation: starry 50s linear infinite;
+            z-index: -1;
+        }
+        @keyframes starry {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+        #slot {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .reel {
+            background: #222;
+            color: gold;
+            font-size: 24px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .reel span {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            line-height: 60px;
+        }
+        .reel.spin span {
+            animation: fall 0.8s ease-out forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-200%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .reel:nth-child(-n+5).spin span { animation-delay: 0.1s; }
+        .reel:nth-child(n+6):nth-child(-n+10).spin span { animation-delay: 0.3s; }
+        .reel:nth-child(n+11):nth-child(-n+15).spin span { animation-delay: 0.5s; }
+        .reel:nth-child(n+16).spin span { animation-delay: 0.7s; }
+        .scatter {
+            background: radial-gradient(circle, gold, #ff0);
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 15px gold;
+            animation: sparkle 1s infinite alternate;
+        }
+        @keyframes sparkle {
+            0% { box-shadow: 0 0 15px gold; }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+        #bonus-message, #win-message {
+            margin: 10px auto;
+            max-width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            display: none;
+            text-align: center;
+        }
+        #bonus-message {
+            background: #222;
+            color: gold;
+            box-shadow: 0 0 8px gold;
+        }
+        #bonus-message.active {
+            display: block;
+        }
+        #win-message {
+            background: #00cc99;
+            color: #fff;
+            box-shadow: 0 0 8px #00cc99;
+        }
+        #win-message.active {
+            display: block;
+        }
+        #info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: gold;
+        }
+        .bet-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .bet-controls button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background: #00cc99;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .bet-controls button:hover {
+            background: #00b386;
+        }
+        .bet-value {
+            min-width: 70px;
+            text-align: center;
+            font-size: 16px;
+            color: #ffd700;
+        }
+        #spin-button {
+            margin: 10px auto;
+            padding: 10px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #00cc99;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 204, 153, 0.6);
+            transition: transform 0.2s;
+        }
+        #spin-button:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+        #spin-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        #ad-container {
+            margin: 15px auto;
+            max-width: 300px;
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            border-radius: 10px;
+            background: #2a2a4e;
+            border: 1px solid #3a3a50;
+        }
+        #ad-container iframe {
+            border: none;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 480px) {
+            .topbar {
+                padding: 8px;
+            }
+            .title {
+                font-size: 16px;
+            }
+            .balance-box {
+                font-size: 12px;
+            }
+            .back-icon {
+                font-size: 16px;
+                padding: 6px;
+            }
+            #slot {
+                max-width: 250px;
+            }
+            .reel {
+                height: 50px;
+                font-size: 20px;
+                line-height: 50px;
+            }
+            .reel span {
+                line-height: 50px;
+            }
+            #bonus-message, #win-message {
+                font-size: 14px;
+                max-width: 250px;
+            }
+            #spin-button {
+                font-size: 16px;
+                padding: 8px 20px;
+            }
+            .info-item {
+                font-size: 14px;
+            }
+            .bet-controls button {
+                font-size: 14px;
+                padding: 4px 8px;
+            }
+            .bet-value {
+                font-size: 14px;
+            }
+            #ad-container {
+                max-width: 240px;
+            }
+        }
+        @media (max-width: 360px) {
+            #slot {
+                max-width: 220px;
+            }
+            .reel {
+                height: 40px;
+                font-size: 16px;
+                line-height: 40px;
+            }
+            #bonus-message, #win-message {
+                max-width: 200px;
+                font-size: 12px;
+            }
+            #spin-button {
+                font-size: 14px;
+                padding: 6px 15px;
+            }
+            .back-icon {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-text">Loading...</div>
+    </div>
+    <div class="topbar">
+        <div class="topbar-left">
+            <i class="fas fa-arrow-left back-icon" id="back-icon"></i>
+            <div class="title">Super ARPM Ace</div>
+        </div>
+        <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
+    </div>
+    <div class="slot-section">
+        <h1>🎰 Super ARPM Ace</h1>
+        <div id="bonus-message"></div>
+        <div id="slot"></div>
+        <div id="win-message"></div>
+        <div id="info">
+            <div class="info-item">
+                <span>Balance:</span>
+                <span id="balance">0.00</span> ARPM
+            </div>
+            <div class="info-item bet-controls">
+                <span>Bet:</span>
+                <button id="bet-minus" aria-label="Decrease Bet">-</button>
+                <span id="bet" class="bet-value">50</span> ARPM
+                <button id="bet-plus" aria-label="Increase Bet">+</button>
+            </div>
+        </div>
+        <button id="spin-button">🎲 Spin Now</button>
+        <div id="ad-container"></div>
+    </div>
+    <audio id="spinSound" src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" preload="auto"></audio>
+    <audio id="bonusSound" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" loop></audio>
+    <script type="module">
+        import { auth, db, onAuthStateChanged, ref, get, update } from './firebase-config.js';
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const balanceBox = document.getElementById('balance-box');
+        const slot = document.getElementById('slot');
+        const balanceEl = document.getElementById('balance');
+        const betEl = document.getElementById('bet');
+        const bonusMessage = document.getElementById('bonus-message');
+        const winMessage = document.getElementById('win-message');
+        const spinSound = document.getElementById('spinSound');
+        const bonusSound = document.getElementById('bonusSound');
+        const spinButton = document.getElementById('spin-button');
+        const betMinusBtn = document.getElementById('bet-minus');
+        const betPlusBtn = document.getElementById('bet-plus');
+        const adContainer = document.getElementById('ad-container');
+        const backIcon = document.getElementById('back-icon');
+
+        const symbols = ["A", "K", "Q", "J", "10", "9", "👑", "🦁", "💎", "SCATTER"];
+        const bonusEligibleSymbols = ["A", "K", "Q", "J", "10", "9", "👑"];
+        let balance = 0;
+        let bet = 50;
+        let freeSpins = 0;
+        let totalSpins = 0;
+        let hasReceivedBigBonus = false;
+
+        const adConfigs = [
+            {
+                key: '0e76a0edb900a6f53aa1a75d1b26bd27',
+                format: 'iframe',
+                height: 250,
+                width: 300,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js'
+            },
+            {
+                key: 'eb117daf94e120e0ae0e6f682c2e34f5',
+                format: 'iframe',
+                height: 50,
+                width: 320,
+                params: {},
+                scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js'
+            }
+        ];
+
+        let currentAdIndex = 0;
+
+        function loadAd(containerId = 'ad-container') {
+            const adPlaceholder = document.getElementById(containerId);
+            adPlaceholder.innerHTML = '';
+            const adConfig = adConfigs[currentAdIndex];
+            window.atOptions = adConfig;
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = adConfig.scriptSrc;
+            script.async = true;
+            script.onerror = () => {
+                currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+                loadAd(containerId);
+            };
+            adPlaceholder.appendChild(script);
+            currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
+            setTimeout(() => loadAd(containerId), 30000);
+        }
+
+        async function updateBalance(user, tokens) {
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, { tokens });
+            balanceBox.textContent = `Balance: ${tokens.toFixed(3)} ARPM`;
+            balanceEl.textContent = tokens.toFixed(2);
+            balance = tokens;
+        }
+
+        function showLoadingScreen(show = true) {
+            loadingOverlay.classList.toggle('active', show);
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                showLoadingScreen(true);
+                const userRef = ref(db, 'users/' + user.uid);
+                const snapshot = await get(userRef);
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    await updateBalance(user, userData.tokens || 1000);
+                } else {
+                    await updateBalance(user, 1000);
+                }
+                showLoadingScreen(false);
+                loadAd('ad-container');
+                initializeSlotGame();
+            } else {
+                window.location.href = './login.html';
+            }
+        });
+
+        backIcon.addEventListener('click', () => {
+            window.location.href = './index.html';
+        });
+
+        function initializeSlotGame() {
+            if (!slot) {
+                console.error("Slot element not found!");
+                return;
+            }
+            slot.innerHTML = '';
+            for (let i = 0; i < 20; i++) {
+                const div = document.createElement("div");
+                div.className = "reel";
+                div.innerHTML = "<span>❓</span>";
+                slot.appendChild(div);
+            }
+            updateUI();
+            spinButton.addEventListener('click', spin);
+            spinButton.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') spin();
+            });
+            betMinusBtn.addEventListener('click', () => {
+                if (bet > 10) {
+                    bet -= 10;
+                    updateUI();
+                }
+            });
+            betPlusBtn.addEventListener('click', () => {
+                if (bet + 10 <= balance) {
+                    bet += 10;
+                    updateUI();
+                }
+            });
+        }
+
+        function updateUI() {
+            balanceEl.textContent = balance.toFixed(2);
+            betEl.textContent = bet;
+            if (freeSpins > 0) {
+                bonusMessage.textContent = `Free Spins: ${freeSpins}`;
+                bonusMessage.classList.add('active');
+                try {
+                    spinSound.pause();
+                    bonusSound.play();
+                } catch (err) {
+                    console.warn("Bonus audio play failed:", err);
+                }
+            } else {
+                bonusMessage.classList.remove('active');
+                try {
+                    bonusSound.pause();
+                    bonusSound.currentTime = 0;
+                } catch (err) {
+                    console.warn("Bonus audio pause failed:", err);
+                }
+            }
+        }
+
+        async function spin() {
+            const userId = auth.currentUser?.uid;
+            if (!userId) {
+                window.location.href = './login.html';
+                return;
+            }
+
+            bonusMessage.textContent = "";
+            winMessage.textContent = "";
+            if (freeSpins <= 0 && balance < bet) {
+                winMessage.textContent = "❌ Not enough tokens!";
+                winMessage.classList.add("active");
+                return;
+            }
+
+            spinButton.disabled = true;
+            try {
+                if (freeSpins > 0) {
+                    bonusSound.play();
+                } else {
+                    spinSound.currentTime = 0;
+                    await spinSound.play();
+                }
+            } catch (err) {
+                console.warn("Audio play failed:", err);
+            }
+
+            let loss = 0;
+            if (freeSpins > 0) {
+                freeSpins--;
+            } else {
+                balance -= bet;
+                loss = bet;
+            }
+            totalSpins++;
+            await updateBalance(auth.currentUser, balance);
+            updateUI();
+
+            let scatters = 0;
+            let result = [];
+
+            for (let i = 0; i < 20; i++) {
+                slot.children[i].classList.add("spin");
+            }
+
+            for (let i = 0; i < 20; i++) {
+                let sym;
+                const isLastColumn = i >= 16;
+                if (scatters === 2 && isLastColumn && freeSpins === 0) {
+                    sym = Math.random() < 0.15 ? "SCATTER" : symbols[Math.floor(Math.random() * symbols.length)];
+                } else {
+                    sym = symbols[Math.floor(Math.random() * symbols.length)];
+                }
+                const cell = slot.children[i];
+                cell.innerHTML = `<span>${sym}</span>`;
+                cell.classList.remove("scatter");
+                if (sym === "SCATTER") {
+                    scatters++;
+                    cell.classList.add("scatter");
+                }
+                result.push(sym);
+                await new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 100)));
+            }
+
+            for (let i = 0; i < 20; i++) {
+                slot.children[i].classList.remove("spin");
+            }
+
+            let win = 0;
+            let bonusMessageText = "";
+
+            if (!hasReceivedBigBonus && bet >= 100 && Math.random() < 0.005 && totalSpins % 1000 <= 900) {
+                win += 2000;
+                hasReceivedBigBonus = true;
+                bonusMessageText = `🎉 Mega Bonus! You won 2000 ARPM!`;
+            }
+
+            if (scatters >= 3 && freeSpins === 0) {
+                freeSpins += 10;
+                bonusMessageText = `🎉 SCATTER x${scatters} → +10 Free Spins!`;
+                bonusMessage.classList.add("active");
+            }
+
+            const firstThreeRows = result.slice(0, 15);
+            const count = {};
+            for (let s of firstThreeRows) {
+                count[s] = (count[s] || 0) + 1;
+            }
+            for (let key in count) {
+                if (key !== "SCATTER" && bonusEligibleSymbols.includes(key)) {
+                    if (count[key] >= 3) {
+                        const multiplier = key === "👑" ? 1.5 : 0.5; // Higher multiplier for Golden Crown
+                        win += bet * count[key] * multiplier;
+                    }
+                }
+            }
+
+            if (win > 0) {
+                balance += win;
+                winMessage.textContent = bonusMessageText || `🎉 You win ${win.toFixed(2)} ARPM!`;
+                winMessage.classList.add("active");
+                await updateBalance(auth.currentUser, balance);
+                loadAd('ad-container');
+            }
+
+            updateUI();
+            spinButton.disabled = false;
+        }
+    </script>
+</body>
+</html>
