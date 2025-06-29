@@ -79,6 +79,9 @@
     .footer-links a:hover {
       text-decoration: underline;
     }
+    .developer-only {
+      display: none; /* Hide email for regular users */
+    }
     @media (max-width: 600px) {
       .contact-container {
         padding: 20px;
@@ -108,8 +111,10 @@
       <button type="submit">Send Message</button>
     </form>
     <div class="info">
-      Or email us directly at: <br>
-      <strong>ainetworkmining22@gmail.com</strong>
+      <!-- Email hidden for regular users -->
+      <!-- Developer can access email via developer tools or code -->
+      <span class="developer-only" data-email="ainetworkmining22@gmail.com"></span>
+      Use the form above to send us a message.
     </div>
     <div class="footer-links">
       <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">Privacy Policy</a>
@@ -136,6 +141,9 @@
           alert('Failed to send message: ' + JSON.stringify(error));
         });
     });
+
+    // For developers: Access email via console (for debugging or developer use)
+    console.log("Developer Email: " + document.querySelector('.developer-only').getAttribute('data-email'));
   </script>
 </body>
 </html>
