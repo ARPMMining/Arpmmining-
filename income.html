@@ -138,7 +138,22 @@
             display: block;
             margin-top: 3px;
         }
-CTA, .go-button {
+        .CTA {
+            background: #00cc99;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+            white-space: nowrap;
+            cursor: pointer;
+            touch-action: manipulation;
+            min-width: 70px;
+            text-align: center;
+        }
+        .go-button {
             background: #00cc99;
             color: #fff;
             padding: 8px;
@@ -435,8 +450,8 @@ CTA, .go-button {
 
         function loadAd() {
             const adPlaceholder = document.getElementById('ad-placeholder');
-            if (!adPlaceholder) return; // Ensure ad-placeholder exists
-            adPlaceholder.innerHTML = ''; // Clear previous ad
+            if (!adPlaceholder) return;
+            adPlaceholder.innerHTML = '';
             adPlaceholder.classList.add('active');
 
             const adConfig = adConfigs[currentAdIndex];
@@ -446,16 +461,10 @@ CTA, .go-button {
             script.type = 'text/javascript';
             script.src = adConfig.scriptSrc;
             script.async = true;
-            script.onerror = () => {
-                // If ad fails to load, move to next ad
-                nextAd();
-            };
+            script.onerror = () => nextAd();
             adPlaceholder.appendChild(script);
 
-            // Move to next ad for the next load
             currentAdIndex = (currentAdIndex + 1) % adConfigs.length;
-
-            // Refresh ad after 30 seconds
             setTimeout(loadAd, 30000);
         }
 
@@ -464,35 +473,31 @@ CTA, .go-button {
             loadAd();
         }
 
-        // Function to insert ad-placeholder dynamically
         function insertAdPlaceholder() {
-            // List of task box IDs
             const taskBoxIds = [
-                'youtube-task',
-                'x-task',
-                'x1-task',
-                'x2-task',
-                'x3-task',
-                'x4-task',
-                'x5-task',
-                'instagram-task',
-                'tiktok-task',
-                'telegram-task'
+                'youtube-task', 'x-task', 'x1-task', 'x2-task', 'x3-task',
+                'x4-task', 'x5-task', 'instagram-task', 'tiktok-task', 'telegram-task'
             ];
-
-            // Randomly select an index to insert the ad-placeholder after a task box
-            const randomIndex = Math.floor(Math.random() * (taskBoxIds.length - 1));
+            const randomIndex = Math.floor(Math.random() * taskBoxIds.length);
             const selectedTaskBox = document.getElementById(taskBoxIds[randomIndex]);
 
-            // Create ad-placeholder div
+            if (!selectedTaskBox) {
+                console.error(`Task box with ID ${taskBoxIds[randomIndex]} not found. Falling back to incomeSection.`);
+                const incomeSection = document.getElementById('incomeSection');
+                if (incomeSection) {
+                    const adPlaceholder = document.createElement('div');
+                    adPlaceholder.id = 'ad-placeholder';
+                    adPlaceholder.className = 'ad-placeholder';
+                    incomeSection.appendChild(adPlaceholder);
+                    loadAd();
+                }
+                return;
+            }
+
             const adPlaceholder = document.createElement('div');
             adPlaceholder.id = 'ad-placeholder';
             adPlaceholder.className = 'ad-placeholder';
-
-            // Insert ad-placeholder after the selected task box
             selectedTaskBox.insertAdjacentElement('afterend', adPlaceholder);
-
-            // Load the ad into the placeholder
             loadAd();
         }
 
@@ -566,7 +571,10 @@ CTA, .go-button {
                 }
 
                 const newTokens = (userData.tokens || 0) + TASK_BONUS;
-                const history = userData.history || [];
+                let history = Array.isArray(userData.history) ? [...userData.history] : [];
+                if (!Array.isArray(userData.history)) {
+                    console.warn(`userData.history is not an array: ${JSON.stringify(userData.history)}. Initializing as empty array.`);
+                }
                 history.push({
                     type: 'Complete Tasks',
                     amount: TASK_BONUS,
@@ -586,7 +594,10 @@ CTA, .go-button {
                         const referrerData = referrerSnapshot.val();
                         const bonus = TASK_BONUS * REFERRAL_BONUS_PERCENT;
                         const referrerTokens = (referrerData.tokens || 0) + bonus;
-                        const referrerHistory = referrerData.history || [];
+                        let referrerHistory = Array.isArray(referrerData.history) ? [...referrerData.history] : [];
+                        if (!Array.isArray(referrerData.history)) {
+                            console.warn(`referrerData.history is not an array: ${JSON.stringify(referrerData.history)}. Initializing as empty array.`);
+                        }
                         referrerHistory.push({
                             type: 'Referral Bonus',
                             amount: bonus,
@@ -640,7 +651,7 @@ CTA, .go-button {
                     await updateTaskButton('telegram', userData);
                 }
                 await showLoadingScreen();
-                insertAdPlaceholder(); // Insert ad-placeholder dynamically
+                insertAdPlaceholder();
             } else {
                 alert('Please login to access this page!');
                 window.location.href = 'index.html';
