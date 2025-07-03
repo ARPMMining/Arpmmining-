@@ -4,7 +4,22 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARPM MINING - Login</title>
+    <meta name="description" content="Login or register to ARPM Mining for secure cryptocurrency mining. Join now to start earning with our trusted platform.">
+    <meta name="keywords" content="ARPM Mining, cryptocurrency mining, login, register, blockchain, crypto platform, secure mining">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ARPM Mining">
+    <meta property="og:title" content="ARPM Mining - Secure Login & Registration">
+    <meta property="og:description" content="Access your ARPM Mining account or sign up to start mining cryptocurrency securely.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.arpmining.com/login">
+    <meta property="og:image" content="https://www.arpmining.com/assets/images/logo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ARPM Mining - Secure Login & Registration">
+    <meta name="twitter:description" content="Join ARPM Mining to mine cryptocurrency securely. Login or register today!">
+    <meta name="twitter:image" content="https://www.arpmining.com/assets/images/logo.jpg">
+    <title>ARPM Mining - Secure Login & Registration</title>
+    <link rel="canonical" href="https://www.arpmining.com/login">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     <!-- External Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" async>
@@ -20,7 +35,7 @@
             --bg-opacity: 0.5;
         }
         [data-theme="dark"] {
-            --text-color: #e5e7eb;
+            --text-color: #e'aider;
             --bg-opacity: 0.7;
         }
         * {
@@ -215,10 +230,6 @@
             font-weight: 700;
             font-size: 24px;
             color: #fff;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0;
         }
         .error-message {
             display: none;
@@ -323,26 +334,49 @@
             .flex-container { margin: 8px 0; }
         }
     </style>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "ARPM Mining - Secure Login & Registration",
+        "description": "Login or register to ARPM Mining for secure cryptocurrency mining. Join now to start earning with our trusted platform.",
+        "url": "https://www.arpmining.com/login",
+        "publisher": {
+            "@type": "Organization",
+            "name": "ARPM Mining",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.arpmining.com/assets/images/logo.jpg"
+            }
+        },
+        "mainEntity": {
+            "@type": "WebSite",
+            "name": "ARPM Mining",
+            "url": "https://www.arpmining.com"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Theme Toggle -->
     <button class="theme-toggle" aria-label="Toggle dark/light mode">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-moon" alt="Toggle dark mode icon"></i>
     </button>
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
-        <div class="spinner"></div>
+        <div class="spinner" aria-label="Loading spinner"></div>
     </div>
 
     <!-- Header Box with Text -->
-    <div class="header-box" aria-label="Header Box">
+    <header class="header-box" aria-label="Header Box">
         <p class="welcome-text">Welcome to ARPM Mining</p>
-    </div>
+    </header>
 
     <!-- Login Page -->
-    <div id="login-container" class="container" role="region" aria-label="Login Form">
-        <h2 class="fw-bold mb-4">Login</h2>
+    <main id="login-container" class="container" role="region" aria-label="Login Form">
+        <h1 class="fw-bold mb-4">Login to ARPM Mining</h1>
         <form id="login-form">
             <div class="form-group">
                 <input type="email" class="form-control" id="login-email" placeholder="Email" required aria-describedby="login-email-error">
@@ -350,7 +384,7 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="login-password" placeholder="Password" required aria-describedby="login-password-error">
-                <i class="fas fa-eye password-toggle" id="toggle-login-password" aria-label="Toggle password visibility"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-login-password" aria-label="Toggle password visibility" alt="Toggle password visibility icon"></i>
                 <div class="error-message" id="login-password-error"></div>
             </div>
             <div class="flex-container">
@@ -362,15 +396,16 @@
             </div>
             <button type="submit" class="btn btn-primary mb-3">Login</button>
             <p class="footer-text">
-                <span>Don't have an account? <a href="#" class="link" id="register-link">register</a></span>
+                <span>Don't have an account? <a href="#" class="link" id="register-link">Register</a></span>
                 <span>Invite code can only be used during registration.</span>
+                <span><a href="https://www.arpmining.com/about" class="link">Learn more about ARPM Mining</a></span>
             </p>
         </form>
-    </div>
+    </main>
 
     <!-- Registration Page -->
-    <div id="signup-container" class="container hidden" role="region" aria-label="Registration Form">
-        <h2 class="fw-bold mb-4">Register</h2>
+    <main id="signup-container" class="container hidden" role="region" aria-label="Registration Form">
+        <h1 class="fw-bold mb-4">Register for ARPM Mining</h1>
         <form id="signup-form">
             <div class="form-group">
                 <input type="text" class="form-control" id="signup-username" placeholder="Username" required aria-describedby="signup-username-error">
@@ -382,13 +417,13 @@
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-password" placeholder="Password" required aria-describedby="signup-password-error password-strength">
-                <i class="fas fa-eye password-toggle" id="toggle-signup-password" aria-label="Toggle password visibility"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-password" aria-label="Toggle password visibility" alt="Toggle password visibility icon"></i>
                 <div class="error-message" id="signup-password-error"></div>
                 <div class="password-strength" id="password-strength"></div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="signup-confirm-password" placeholder="Confirm password" required aria-describedby="signup-confirm-password-error">
-                <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" aria-label="Toggle password visibility"></i>
+                <i class="fas fa-eye password-toggle" id="toggle-signup-confirm-password" aria-label="Toggle password visibility" alt="Toggle password visibility icon"></i>
                 <div class="error-message" id="signup-confirm-password-error"></div>
             </div>
             <div class="form-group">
@@ -398,13 +433,14 @@
             <button type="submit" class="btn btn-success mb-3">Register</button>
             <p class="footer-text">
                 <span>Back to login? <a href="#" class="link" id="login-link">Login</a></span>
+                <span><a href="https://www.arpmining.com/about" class="link">Learn more about ARPM Mining</a></span>
             </p>
         </form>
-    </div>
+    </main>
 
     <!-- Password Reset Page -->
-    <div id="reset-container" class="container hidden" role="region" aria-label="Password Reset Form">
-        <h2 class="fw-bold mb-4">Reset password</h2>
+    <main id="reset-container" class="container hidden" role="region" aria-label="Password Reset Form">
+        <h1 class="fw-bold mb-4">Reset Your Password</h1>
         <form id="reset-form">
             <div class="form-group">
                 <input type="email" class="form-control" id="reset-email" placeholder="Email" required aria-describedby="reset-email-error">
@@ -413,13 +449,14 @@
             <button type="submit" class="btn btn-success mb-3">Submit</button>
             <p class="footer-text">
                 <span>Back to login? <a href="#" class="link" id="login-link-reset">Login</a></span>
-                <span>Don't have an account? <a href="#" class="link" id="register-link-reset">register</a></span>
+                <span>Don't have an account? <a href="#" class="link" id="register-link-reset">Register</a></span>
+                <span><a href="https://www.arpmining.com/about" class="link">Learn more about ARPM Mining</a></span>
             </p>
         </form>
-    </div>
+    </main>
 
     <!-- JavaScript -->
-    <script type="module">
+    <script type="module" defer>
         // Import Firebase functions from external file
         import { auth, db, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, ref, get, set, update, query, orderByChild, equalTo } from './firebase-config.js';
 
@@ -555,7 +592,7 @@
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             document.documentElement.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
-            themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'light' ? 'sun' : 'moon'}"></i>`;
+            themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'light' ? 'sun' : 'moon'}" alt="Toggle ${currentTheme === 'light' ? 'light' : 'dark'} mode icon"></i>`;
         });
 
         // Password visibility toggle
@@ -565,9 +602,11 @@
             if (input.type === 'password') {
                 input.type = 'text';
                 toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                toggleIcon.setAttribute('alt', 'Hide password icon');
             } else {
                 input.type = 'password';
                 toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                toggleIcon.setAttribute('alt', 'Show password icon');
             }
         }
 
