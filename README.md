@@ -1,69 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+# ARPM Mining Network
 
-  <!-- 🔍 SEO Tags -->
-  <title>ARPM Mining - Earn Free ARPM Tokens</title>
-  <meta name="description" content="Start mining free ARPM tokens with your mobile. Invite friends and earn more. Fast, secure, and easy to use." />
-  <meta name="keywords" content="ARPM, mining app, crypto mining, earn tokens, invite and earn, ARPM Network" />
-  <meta name="author" content="ARPM Mining Team" />
+![ARPM Mining Logo](https://www.arpmining.com/assets/images/logo.jpg)
 
-  <!-- 📱 Mobile Friendly -->
-  <meta name="theme-color" content="#1A73E8" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+**ARPM Mining** is a secure and user-friendly platform designed to make cryptocurrency mining accessible to everyone. With features like referral programs, task-based rewards, and a seamless user experience, ARPM Mining empowers users to earn ARPM tokens through mining, social media tasks, and referrals. Built with modern web technologies and integrated with Firebase for authentication and data storage, ARPM Mining ensures a robust and secure environment for all users.
 
-  <!-- 🌐 Open Graph (for link sharing previews) -->
-  <meta property="og:title" content="ARPM Mining - Earn Free ARPM Tokens" />
-  <meta property="og:description" content="Mine ARPM tokens every day and grow your digital wallet. Invite friends and earn bonus!" />
-  <meta property="og:image" content="https://arpmmining.github.io/logo.png" />
-  <meta property="og:url" content="https://arpmmining.github.io/" />
-  <meta property="og:type" content="website" />
+🌐 **Website**: [arpmining.com](https://www.arpmining.com)  
+📧 **Contact**: [ainetworkmining22@gmail.com](mailto:ainetworkmining22@gmail.com)  
+📱 **Follow Us**: [YouTube](https://www.youtube.com/@arpmining) | [X](https://x.com/arpmining) | [Instagram](https://www.instagram.com/arpmining)
 
-  <!-- 🐦 Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ARPM Mining - Earn Free ARPM Tokens" />
-  <meta name="twitter:description" content="Start mining ARPM tokens on mobile with just one click. Secure & easy!" />
-  <meta name="twitter:image" content="https://arpmmining.github.io/logo.png" />
+---
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://arpmmining.github.io/favicon.png" />
+## Table of Contents
 
-  <!-- ✅ Add CSS for responsiveness -->
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f2f2f2;
-    }
-    .container {
-      max-width: 480px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #1A73E8;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      font-size: 16px;
-    }
-  </style>
-</head>
+- [Features](#features)
+- [Pages](#pages)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+- [Privacy Policy](#privacy-policy)
+- [Roadmap](#roadmap)
 
-<body>
-  <div class="container">
-    <h1>Welcome to ARPM Mining</h1>
-    <p>Start mining free ARPM tokens now.</p>
-    <a href="register.html"><button>Register</button></a>
-    <a href="invite.html"><button>Invite Friends</button></a>
-  </div>
-</body>
-</html>
+---
+
+## Features
+
+ARPM Mining offers a range of features to enhance your cryptocurrency mining experience:
+
+- **Secure Authentication**: User login and registration powered by Firebase Authentication, with password reset functionality.
+- **Mining System**: Start mining ARPM tokens with a 24-hour session cycle and track progress in real-time.
+- **Referral Program**: Earn bonuses by inviting friends using your unique referral link (5% bonus per referral).
+- **Task-Based Rewards**: Complete daily login bonuses and social media tasks (YouTube, X, Instagram) to earn additional ARPM tokens.
+- **Wallet Management**: View your balance and manage your earnings with a secure wallet interface.
+- **User Profile**: Update personal information, view referral statistics, and manage account settings.
+- **Responsive Design**: Optimized for mobile and desktop devices with a sleek, gradient-based UI using Bootstrap and Poppins font.
+- **SEO Optimized**: All pages include meta tags, structured data (Schema.org), and canonical URLs for better search engine visibility.
+- **Accessibility**: ARIA labels and semantic HTML ensure an inclusive experience for all users.
+
+---
+
+## Pages
+
+The ARPM Mining platform consists of the following pages:
+
+1. **Home (`index.html`)**: The main landing page with mining controls, referral link, and balance display.
+2. **Income (`income.html`)**: Earn tokens through daily login bonuses and social media tasks (YouTube, X, Instagram).
+3. **Profile (`profile.html`)**: Manage user information, view registration details, and share referral links.
+4. **Wallet (`wallet.html`)**: View your ARPM token balance and access withdrawal options (currently disabled).
+5. **Login (`login.html`)**: Secure login, registration, and password reset functionality with rate limiting and input validation.
+6. **Roadmap (`roadmap.html`)**: Overview of ARPM Mining's journey, current features, and goal to reach 10,000+ active users.
+7. **Privacy Policy (`privacy-policy.html`)**: Details on data collection, usage, and user rights.
+8. **Contact Us (`contact.html`)**: A form to reach out to the ARPM Mining team, powered by EmailJS.
+
+---
+
+## Technologies Used
+
+- **Frontend**:
+  - HTML5, CSS3, JavaScript (ES6+)
+  - Bootstrap 5.3 for responsive design
+  - Font Awesome 6.5.1 for icons
+  - Poppins font for consistent typography
+- **Backend**:
+  - Firebase Authentication for secure user management
+  - Firebase Realtime Database for storing user data and mining statistics
+- **Third-Party Services**:
+  - EmailJS for contact form functionality
+  - AdMob (placeholder) for potential ad integration
+- **SEO & Accessibility**:
+  - Schema.org structured data for better search engine indexing
+  - ARIA labels and semantic HTML for accessibility
+
+---
+
+## Installation
+
+To set up the ARPM Mining project locally, follow these steps:
+
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Safari, etc.)
+- Node.js (optional, for local development with a server)
+- Firebase account and project for authentication and database
+- EmailJS account for contact form integration
+
+### Steps
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/arpmining/Arpmmining-.git
+   cd Arpmmining-
