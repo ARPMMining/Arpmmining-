@@ -438,6 +438,7 @@
         .roadmap-button::after, .invite-button::after, .daily-bonus-button::after, .login-bonus-button::after {
             content: '';
             position: absolute;
+            Estates General
             top: 0;
             left: -100%;
             width: 200%;
@@ -472,7 +473,7 @@
         }
 
         /* Content Popups */
-        .roadmap-content, .invite-content, .login-bonus-content {
+        .invite-content, .login-bonus-content {
             display: none;
             position: absolute;
             bottom: 65px;
@@ -490,15 +491,11 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        .roadmap-content {
-            right: 15px;
-        }
-
         .invite-content, .login-bonus-content {
             left: 15px;
         }
 
-        .roadmap-content.active, .invite-content.active, .login-bonus-content.active {
+        .invite-content.active, .login-bonus-content.active {
             display: block;
         }
 
@@ -690,7 +687,7 @@
                 right: 8px;
             }
 
-            .roadmap-content, .invite-content, .login-bonus-content {
+            .invite-content, .login-bonus-content {
                 bottom: 60px;
             }
 
@@ -751,7 +748,7 @@
                 box-shadow: 0 0 20px rgba(216, 27, 96, 0.8), 0 0 8px rgba(216, 27, 96, 0.6);
             }
 
-            .roadmap-content, .invite-content, .login-bonus-content {
+            .invite-content, .login-bonus-content {
                 width: 200px;
                 max-height: 300px;
                 bottom: 50px;
@@ -820,12 +817,8 @@
             <p>Claim a one-time login bonus of 50 ARPM tokens!</p>
             <button class="copy-button" id="menu-claim-login-bonus-btn" onclick="claimLoginBonus()">Claim Bonus</button>
         </div>
-        <div class="menu-item" onclick="toggleMenuItem('menu-roadmap-content')">
+        <div class="menu-item" onclick="window.location.href='roadmap.html'">
             <i class="fas fa-map"></i>Roadmap
-        </div>
-        <div class="menu-item-content" id="menu-roadmap-content">
-            <h1>Roadmap</h1>
-            <p>Coming Soon</p>
         </div>
         <div class="menu-item" onclick="toggleMenuItem('menu-daily-bonus-content')">
             <i class="fas fa-coins"></i>Daily Bonus
@@ -862,7 +855,7 @@
                 <div class="button-group">
                     <div class="invite-button" onclick="toggleInvite()">Invite</div>
                     <div class="login-bonus-button" id="login-bonus-btn" onclick="toggleLoginBonus()">Bonus</div>
-                    <div class="roadmap-button" onclick="toggleRoadmap()">Roadmap</div>
+                    <div class="roadmap-button" onclick="window.location.href='roadmap.html'">Roadmap</div>
                     <div class="daily-bonus-button" id="daily-bonus-btn">Daily Bonus</div>
                     <div class="invite-content" id="invite-content">
                         <h1>Invite Friends</h1>
@@ -876,9 +869,6 @@
                         <h1>Login Bonus</h1>
                         <p>Claim a one-time login bonus of 50 ARPM tokens!</p>
                         <button class="copy-button" id="claim-login-bonus-btn" onclick="claimLoginBonus()">Claim Bonus</button>
-                    </div>
-                    <div class="roadmap-content" id="roadmap-content">
-                        <p>Coming Soon</p>
                     </div>
                 </div>
             </div>
@@ -1497,26 +1487,12 @@
         };
 
         /**
-         * Toggles the roadmap content visibility.
-         */
-        window.toggleRoadmap = () => {
-            const roadmapContent = document.getElementById('roadmap-content');
-            const inviteContent = document.getElementById('invite-content');
-            const loginBonusContent = document.getElementById('login-bonus-content');
-            roadmapContent.classList.toggle('active');
-            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
-            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
-        };
-
-        /**
          * Toggles the invite content visibility.
          */
         window.toggleInvite = () => {
             const inviteContent = document.getElementById('invite-content');
-            const roadmapContent = document.getElementById('roadmap-content');
             const loginBonusContent = document.getElementById('login-bonus-content');
             inviteContent.classList.toggle('active');
-            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
@@ -1525,10 +1501,8 @@
          */
         window.toggleLoginBonus = () => {
             const loginBonusContent = document.getElementById('login-bonus-content');
-            const roadmapContent = document.getElementById('roadmap-content');
             const inviteContent = document.getElementById('invite-content');
             loginBonusContent.classList.toggle('active');
-            if (roadmapContent.classList.contains('active')) roadmapContent.classList.remove('active');
             if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
