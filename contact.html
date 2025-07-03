@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Contact ARPM Mining Network for support, inquiries, or feedback about our cryptocurrency mining platform.">
+  <meta name="keywords" content="ARPM Mining, contact us, cryptocurrency mining, blockchain, crypto support, mining inquiries">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ARPM Mining">
+  <meta property="og:title" content="Contact Us | ARPM Mining Network">
+  <meta property="og:description" content="Reach out to ARPM Mining for assistance with our secure cryptocurrency mining platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.arpmining.com/contact">
+  <meta property="og:image" content="https://www.arpmining.com/assets/images/logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Us | ARPM Mining Network">
+  <meta name="twitter:description" content="Get in touch with ARPM Mining for support or inquiries about cryptocurrency mining.">
+  <meta name="twitter:image" content="https://www.arpmining.com/assets/images/logo.jpg">
   <title>Contact Us | ARPM Mining Network</title>
+  <link rel="canonical" href="https://www.arpmining.com/contact">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script type="text/javascript">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+  <script type="text/javascript" defer>
     (function(){
       emailjs.init("xXY4-X6Yck0j0UQ35"); // EmailJS Public Key
     })();
@@ -26,7 +41,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
-    h2 {
+    h1 {
       text-align: center;
       color: #333;
     }
@@ -86,7 +101,7 @@
       .contact-container {
         padding: 20px;
       }
-      h2 {
+      h1 {
         font-size: 22px;
       }
       button {
@@ -97,31 +112,64 @@
       }
     }
   </style>
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Us | ARPM Mining Network",
+    "description": "Contact ARPM Mining Network for support, inquiries, or feedback about our cryptocurrency mining platform.",
+    "url": "https://www.arpmining.com/contact",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ARPM Mining",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.arpmining.com/assets/images/logo.jpg"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "ainetworkmining22@gmail.com",
+        "contactType": "Customer Support"
+      }
+    },
+    "mainEntity": {
+      "@type": "WebSite",
+      "name": "ARPM Mining",
+      "url": "https://www.arpmining.com"
+    }
+  }
+  </script>
 </head>
 <body>
-  <div class="contact-container">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" required>
-      <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" required>
-      <label for="message">Your Message</label>
-      <textarea id="message" name="message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <div class="info">
-      <!-- Email hidden for regular users -->
-      <!-- Developer can access email via developer tools or code -->
-      <span class="developer-only" data-email="ainetworkmining22@gmail.com"></span>
-      Use the form above to send us a message.
+  <header>
+    <div class="contact-container" role="region" aria-label="Contact Form Section">
+      <h1>Contact ARPM Mining</h1>
+      <main>
+        <form id="contactForm">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required aria-required="true">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" required aria-required="true">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" required aria-required="true"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div class="info">
+          <!-- Email hidden for regular users -->
+          <!-- Developer can access email via developer tools or code -->
+          <span class="developer-only" data-email="ainetworkmining22@gmail.com"></span>
+          Use the form above to send us a message.
+        </div>
+        <div class="footer-links">
+          <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">Privacy Policy</a>
+          <a href="https://www.arpmining.com/about">About ARPM Mining</a>
+        </div>
+      </main>
     </div>
-    <div class="footer-links">
-      <a href="https://arpmmining.github.io/Arpmmining-/privacy-policy.html" target="_blank">Privacy Policy</a>
-    </div>
-  </div>
+  </header>
 
-  <script>
+  <script defer>
     document.getElementById('contactForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent default form submission
 
