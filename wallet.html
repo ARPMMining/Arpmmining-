@@ -68,9 +68,10 @@
             position: fixed;
             top: 0;
             z-index: 1000;
+            min-height: 50px; /* Added to increase topbar size */
         }
         .title {
-            font-size: 16px;
+            font-size: 18px; /* Increased from 16px to make it larger */
             font-weight: bold;
             text-align: left;
             margin-left: 10px;
@@ -79,10 +80,10 @@
         .balance-box {
             background: #000;
             color: #00ffcc;
-            padding: 3px 8px;
+            padding: 5px 10px; /* Slightly increased padding for larger appearance */
             border-radius: 5px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px; /* Increased from 12px to make it larger */
             white-space: nowrap;
         }
         .bottom-nav {
@@ -131,6 +132,7 @@
             overflow-y: auto;
             flex: 1;
             padding-bottom: 20px;
+            position: relative; /* Added to support absolute positioning of ad-placeholder */
         }
         .icon-container {
             display: flex;
@@ -160,16 +162,18 @@
             font-size: 12px;
             margin: 0;
         }
-        .icon-box.disabled {
+        .icon-box銷disabled {
             filter: blur(1px);
             pointer-events: none;
             opacity: 0.7;
         }
         .ad-placeholder {
-            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #2a2a4e;
             padding: 12px;
-            margin: 20px auto;
             border-radius: 10px;
             max-width: 320px;
             width: 100%;
@@ -177,6 +181,7 @@
             font-size: 14px;
             color: #fff;
             border: 1px solid #3a3a50;
+            z-index: 10;
         }
         .ad-placeholder.active {
             display: block;
@@ -195,15 +200,16 @@
                 margin: 50px 10px 50px 10px;
             }
             .topbar {
-                padding: 6px 10px;
+                padding: 8px 12px;
+                min-height: 45px; /* Adjusted for smaller screens */
             }
             .title {
-                font-size: 14px;
+                font-size: 16px; /* Adjusted for smaller screens */
                 margin-left: 8px;
             }
             .balance-box {
-                font-size: 10px;
-                padding: 2px 6px;
+                font-size: 12px; /* Adjusted for smaller screens */
+                padding: 3px 8px;
             }
             .bottom-nav {
                 height: 45px;
@@ -229,9 +235,12 @@
             }
             .ad-placeholder {
                 padding: 8px;
-                margin: 15px auto;
                 max-width: 260px;
                 font-size: 12px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
         @media (min-width: 481px) and (max-width: 768px) {
@@ -242,7 +251,10 @@
                 margin: 8px 0;
             }
             .ad-placeholder {
-                margin: 20px auto;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
     </style>
@@ -258,16 +270,22 @@
     <div id="walletSection" class="wallet-section">
         <div class="section-title">Wallet</div>
         <div class="icon-container">
-            <div class="icon-box" id="superArpmAceBtn">
-                <i class="fas fa-gamepad"></i>
-                <p>Super Arpm Ace</p>
-            </div>
-            <div class="icon-box disabled" id="withdrawBtn">
+            <div class="icon-box" id="withdrawBtn">
                 <i class="fas fa-money-bill-wave"></i>
                 <p>Withdraw</p>
             </div>
+            <div class="icon-box" id="convertBtn">
+                <i class="fas fa-exchange-alt"></i>
+                <p>Convert</p>
+            </div>
+            <div class="icon-box" id="kycBtn">
+                <i class="fas fa-id-card"></i>
+                <p>KYC</p>
+            </div>
         </div>
-        <div class="ad-placeholder" id="ad-placeholder"></div>
+        <div class="ad-placeholder active" id="ad-placeholder">
+            <p>Ad Manager</p>
+        </div>
     </div>
     <div class="bottom-nav" id="bottom-nav">
         <div class="nav-item" data-target="homeSection">
@@ -288,8 +306,10 @@
 
         const loadingOverlay = document.getElementById('loading-overlay');
         const balanceBox = document.getElementById('balance-box');
-        const superArpmAceBtn = document.getElementById('superArpmAceBtn');
         const walletSection = document.getElementById('walletSection');
+        const withdrawBtn = document.getElementById('withdrawBtn');
+        const convertBtn = document.getElementById('convertBtn');
+        const kycBtn = document.getElementById('kycBtn');
 
         const adConfigs = [
             {
@@ -387,9 +407,17 @@
             }
         });
 
-        superArpmAceBtn.addEventListener('click', () => {
-            console.log('Super Arpm Ace button clicked');
-            window.location.href = './super_arpm_ace.html';
+        // Add click event listeners for buttons
+        withdrawBtn.addEventListener('click', () => {
+            alert('Withdraw is not available at the moment.');
+        });
+
+        convertBtn.addEventListener('click', () => {
+            alert('Convert is not available at the moment.');
+        });
+
+        kycBtn.addEventListener('click', () => {
+            alert('KYC is not available at the moment.');
         });
 
         const navItems = document.querySelectorAll('.nav-item');
