@@ -64,7 +64,7 @@
         }
         .topbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             background: #000;
             color: #fff;
@@ -82,8 +82,9 @@
         .title {
             font-size: 16px;
             font-weight: bold;
-            text-align: center;
-            flex-grow: 1;
+            text-align: left;
+            margin-right: auto;
+            padding-left: 5px;
         }
         .balance-box {
             background: #000;
@@ -286,7 +287,6 @@
 
     <!-- Topbar -->
     <div class="topbar">
-        <div class="menu-icon" id="menuBtn" onclick="signOut()">⋮</div>
         <div class="title">ARPM Mining</div>
         <div class="balance-box" id="balance-box">Balance: 0.000 ARPM</div>
     </div>
