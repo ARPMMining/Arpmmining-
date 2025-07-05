@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy - ARPM Mining Network</title>
+  <!-- Font Awesome for Back Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,9 +17,10 @@
     .container {
       max-width: 900px;
       margin: auto;
-      padding: 20px;
+      padding: 60px 20px 20px 20px; /* Increased top padding to push content down */
       background: #ffffff;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      position: relative; /* For positioning back button */
     }
     h1, h2 {
       color: #0a74da;
@@ -34,6 +37,9 @@
       text-align: center;
       font-size: 14px;
       color: #666;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
     .footer-links a {
       color: #0a74da;
@@ -43,9 +49,31 @@
     .footer-links a:hover {
       text-decoration: underline;
     }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #0a74da;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .back-button:hover {
+      background-color: #0860b8;
+      transform: scale(1.1);
+    }
     @media (max-width: 600px) {
       .container {
-        padding: 15px;
+        padding: 50px 15px 15px 15px; /* Adjusted top padding for mobile */
       }
       h1 {
         font-size: 24px;
@@ -59,11 +87,21 @@
       .footer-links {
         font-size: 13px;
       }
+      .back-button {
+        font-size: 18px;
+        width: 36px;
+        height: 36px;
+        top: 8px;
+        left: 8px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <button class="back-button" onclick="window.location.href='https://arpmmining.github.io/Arpmmining-/profile.html'" title="Back to Profile">
+      <i class="fas fa-arrow-left"></i>
+    </button>
     <h1>Privacy Policy</h1>
     <p>At <strong>ARPM Mining Network</strong>, accessible from <a href="https://arpmmining.github.io/Arpmmining-/login.html" target="_blank">ARPM Mining Login</a>, one of our main priorities is the privacy of our users. This Privacy Policy document describes the types of information that we collect and how we use it.</p>
     <h2>1. Information We Collect</h2>
