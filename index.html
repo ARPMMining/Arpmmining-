@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE CG84I4GG2S>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -63,11 +63,11 @@
         /* Top Bar */
         .topbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Changed to flex-start to reduce spacing */
             align-items: center;
             background: linear-gradient(90deg, #1c2526, #2a3d45);
             color: #e0e0e0;
-            padding: 8px 12px;
+            padding: 8px 10px; /* Reduced padding slightly */
             height: 40px;
             z-index: 2000;
             position: fixed;
@@ -80,6 +80,7 @@
             cursor: pointer;
             touch-action: manipulation;
             transition: transform 0.2s;
+            margin-right: 5px; /* Minimal spacing between menu icon and title */
         }
 
         .menu-icon:hover {
@@ -99,6 +100,7 @@
             font-weight: bold;
             font-size: 12px;
             border: 1px solid #4DD0E1;
+            margin-left: auto; /* Pushes balance to the right */
         }
 
         /* Menu Panel */
@@ -296,7 +298,7 @@
             }
         }
 
-        .start-button:hover {
+        .start-button:hover:not(:disabled) {
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(76, 175, 80, 1);
         }
@@ -438,7 +440,6 @@
         .roadmap-button::after, .invite-button::after, .daily-bonus-button::after, .login-bonus-button::after {
             content: '';
             position: absolute;
-            Estates General
             top: 0;
             left: -100%;
             width: 200%;
@@ -447,17 +448,17 @@
             transition: left 0.4s ease;
         }
 
-        .roadmap-button:hover::after, .invite-button:hover::after, .daily-bonus-button:hover::after, .login-bonus-button:hover::after {
+        .roadmap-button:hover:not(:disabled)::after, .invite-button:hover:not(:disabled)::after, .daily-bonus-button:hover:not(:disabled)::after, .login-bonus-button:hover:not(:disabled)::after {
             left: 100%;
         }
 
-        .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+        .roadmap-button:hover:not(:disabled), .invite-button:hover:not(:disabled), .daily-bonus-button:hover:not(:disabled), .login-bonus-button:hover:not(:disabled) {
             transform: scale(1.05);
             box-shadow: 0 0 25px rgba(76, 175, 80, 0.9), 0 0 10px rgba(76, 175, 80, 0.7);
             animation: pulse-button 1s infinite;
         }
 
-        .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+        .invite-button:hover:not(:disabled), .daily-bonus-button:hover:not(:disabled), .login-bonus-button:hover:not(:disabled) {
             box-shadow: 0 0 25px rgba(216, 27, 96, 0.9), 0 0 10px rgba(216, 27, 96, 0.7);
         }
 
@@ -540,7 +541,7 @@
             touch-action: manipulation;
         }
 
-        .copy-button:hover {
+        .copy-button:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.9);
         }
@@ -740,11 +741,11 @@
                 box-shadow: 0 0 12px rgba(216, 27, 96, 0.6), 0 0 4px rgba(216, 27, 96, 0.4);
             }
 
-            .roadmap-button:hover, .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+            .roadmap-button:hover:not(:disabled), .invite-button:hover:not(:disabled), .daily-bonus-button:hover:not(:disabled), .login-bonus-button:hover:not(:disabled) {
                 box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 8px rgba(76, 175, 80, 0.6);
             }
 
-            .invite-button:hover, .daily-bonus-button:hover, .login-bonus-button:hover {
+            .invite-button:hover:not(:disabled), .daily-bonus-button:hover:not(:disabled), .login-bonus-button:hover:not(:disabled) {
                 box-shadow: 0 0 20px rgba(216, 27, 96, 0.8), 0 0 8px rgba(216, 27, 96, 0.6);
             }
 
@@ -900,8 +901,15 @@
     </div>
 
     <script type="module">
-        // Import Firebase functions
-        import { auth, db, onAuthStateChanged, signOut, ref, get, update, push } from './firebase-config.js';
+        // Import Firebase functions with error handling
+        let auth, db, onAuthStateChanged, signOut, ref, get, update, push;
+        try {
+            const firebaseModule = await import('./firebase-config.js');
+            ({ auth, db, onAuthStateChanged, signOut, ref, get, update, push } = firebaseModule);
+        } catch (error) {
+            console.error('Failed to load Firebase configuration:', error);
+            alert('Error loading Firebase configuration. Please try again later.');
+        }
 
         // DOM Elements
         const elements = {
@@ -942,40 +950,48 @@
         const message = 'Update Notice – ARPM Mining: Website upgrade in progress. Some features may be unavailable. Follow us on X for updates: <span id="x-link" onclick="window.open(\'https://x.com/Arpmmining22\', \'_blank\')">@Arpmmining22</span>';
 
         function updateMarquee() {
-            if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
-                marqueeText.innerHTML = message;
-                const textWidth = marqueeText.offsetWidth;
-                const viewportWidth = window.innerWidth;
-                const duration = (textWidth / viewportWidth) * 30 + 5;
+            if (!banner || !marqueeText || banner.classList.contains('hidden') || !elements.homeSection?.classList.contains('active') || elements.menuPanel?.classList.contains('active')) return;
 
-                marqueeText.classList.remove('active');
-                marqueeText.style.transform = 'translateX(0)';
-                marqueeText.offsetHeight; // Trigger reflow
+            marqueeText.innerHTML = message;
+            const textWidth = marqueeText.offsetWidth;
+            const viewportWidth = window.innerWidth;
+            const duration = (textWidth / viewportWidth) * 30 + 5;
+
+            marqueeText.classList.remove('active');
+            marqueeText.style.transform = 'translateX(0)';
+            requestAnimationFrame(() => {
                 marqueeText.classList.add('active');
+            });
 
-                const timeToFullExit = duration * 1000;
-                setTimeout(() => {
-                    if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
-                        updateMarquee();
-                    }
-                }, timeToFullExit);
-            }
+            const timeToFullExit = duration * 1000;
+            setTimeout(() => {
+                if (!banner.classList.contains('hidden') && elements.homeSection?.classList.contains('active') && !elements.menuPanel?.classList.contains('active')) {
+                    updateMarquee();
+                }
+            }, timeToFullExit);
         }
 
-        setTimeout(() => {
-            if (!banner.classList.contains('hidden') && elements.homeSection.classList.contains('active') && !elements.menuPanel.classList.contains('active')) {
-                updateMarquee();
-            }
-        }, 1000);
-
-        closeBtn.addEventListener('click', () => {
-            banner.classList.add('hidden');
+        if (banner && marqueeText) {
             setTimeout(() => {
-                banner.style.display = 'none';
-            }, 300);
-        });
+                if (!banner.classList.contains('hidden') && elements.homeSection?.classList.contains('active') && !elements.menuPanel?.classList.contains('active')) {
+                    updateMarquee();
+                }
+            }, 1000);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                if (banner) {
+                    banner.classList.add('hidden');
+                    setTimeout(() => {
+                        banner.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
 
         // Advertisement Configurations
+        // Array of ad configurations for displaying random advertisements
         const adConfigs = [
             { key: '0e76a0edb900a6f53aa1a75d1b26bd27', format: 'iframe', height: 250, width: 300, params: {}, scriptSrc: '//www.highperformanceformat.com/0e76a0edb900a6f53aa1a75d1b26bd27/invoke.js' },
             { key: 'eb117daf94e120e0ae0e6f682c2e34f5', format: 'iframe', height: 50, width: 320, params: {}, scriptSrc: '//www.highperformanceformat.com/eb117daf94e120e0ae0e6f682c2e34f5/invoke.js' },
@@ -991,18 +1007,20 @@
          * Toggles the menu panel visibility and controls update banner visibility.
          */
         function toggleMenu() {
-            elements.menuPanel.classList.toggle('active');
-            elements.menuOverlay.classList.toggle('active');
-            if (elements.menuPanel.classList.contains('active')) {
-                elements.updateBanner.classList.add('hidden');
-            } else {
-                if (elements.homeSection.classList.contains('active') && !elements.updateBanner.style.display) {
-                    elements.updateBanner.classList.remove('hidden');
-                    setTimeout(updateMarquee, 1000);
+            if (elements.menuPanel && elements.menuOverlay && elements.updateBanner) {
+                elements.menuPanel.classList.toggle('active');
+                elements.menuOverlay.classList.toggle('active');
+                if (elements.menuPanel.classList.contains('active')) {
+                    elements.updateBanner.classList.add('hidden');
+                } else {
+                    if (elements.homeSection?.classList.contains('active') && !elements.updateBanner.style.display) {
+                        elements.updateBanner.classList.remove('hidden');
+                        setTimeout(updateMarquee, 1000);
+                    }
+                    document.querySelectorAll('.menu-item-content').forEach(item => {
+                        item.classList.remove('active');
+                    });
                 }
-                document.querySelectorAll('.menu-item-content').forEach(item => {
-                    item.classList.remove('active');
-                });
             }
         }
 
@@ -1012,6 +1030,7 @@
          */
         window.toggleMenuItem = (contentId) => {
             const content = document.getElementById(contentId);
+            if (!content) return;
             const isActive = content.classList.contains('active');
             document.querySelectorAll('.menu-item-content').forEach(item => {
                 item.classList.remove('active');
@@ -1026,7 +1045,7 @@
          */
         function displayRandomAd() {
             const adContainer = document.getElementById('ad-container');
-            if (!adContainer) return;
+            if (!adContainer || !elements.adSection) return;
 
             const randomIndex = Math.floor(Math.random() * adConfigs.length);
             const selectedAd = adConfigs[randomIndex];
@@ -1058,6 +1077,7 @@
          * @param {boolean} withDelay - Whether to include a delay before hiding.
          */
         async function showLoadingScreen(withDelay = false) {
+            if (!elements.loadingOverlay) return;
             elements.loadingOverlay.classList.add('active');
             if (withDelay) await new Promise(resolve => setTimeout(resolve, 1000));
             elements.loadingOverlay.classList.remove('active');
@@ -1081,6 +1101,7 @@
          * @param {number} tokens - The new token balance.
          */
         async function updateBalance(user, tokens) {
+            if (!user || !elements.balanceBox || !elements.menuBalance) return;
             try {
                 const userRef = ref(db, `users/${user.uid}`);
                 await update(userRef, { tokens });
@@ -1097,7 +1118,7 @@
          * @param {Object} userData - The user's data from Firebase.
          */
         async function updateDailyBonusButton(userData) {
-            if (!elements.dailyBonusBtn || !elements.menuDailyBonusBtn) return;
+            if (!elements.dailyBonusBtn || !elements.menuDailyBonusBtn || !elements.menuDailyBonusText) return;
 
             const lastClaimed = userData.lastDailyBonus || 0;
             const currentDay = userData.dailyBonusDay || 0;
@@ -1256,23 +1277,25 @@
             const menuLoginBonusContent = document.getElementById('menu-login-bonus-content');
 
             if (isClaimed) {
-                elements.loginBonusBtn.style.display = 'none';
-                loginBonusContent.style.display = 'none';
-                elements.menuLoginBonusBtn.parentElement.style.display = 'none';
-                menuLoginBonusContent.style.display = 'none';
+                if (elements.loginBonusBtn) elements.loginBonusBtn.style.display = 'none';
+                if (loginBonusContent) loginBonusContent.style.display = 'none';
+                if (elements.menuLoginBonusBtn?.parentElement) elements.menuLoginBonusBtn.parentElement.style.display = 'none';
+                if (menuLoginBonusContent) menuLoginBonusContent.style.display = 'none';
             } else {
-                elements.loginBonusBtn.style.display = 'flex';
-                elements.menuLoginBonusBtn.parentElement.style.display = 'flex';
+                if (elements.loginBonusBtn) elements.loginBonusBtn.style.display = 'flex';
+                if (elements.menuLoginBonusBtn?.parentElement) elements.menuLoginBonusBtn.parentElement.style.display = 'flex';
                 elements.loginBonusBtn.disabled = false;
                 elements.menuLoginBonusBtn.disabled = false;
                 elements.loginBonusBtn.textContent = 'Bonus';
                 elements.menuLoginBonusBtn.textContent = 'Claim Bonus';
                 elements.loginBonusBtn.style.cursor = 'pointer';
                 elements.menuLoginBonusBtn.style.cursor = 'pointer';
-                claimButton.textContent = 'Claim Bonus';
-                claimButton.disabled = false;
-                claimButton.style.cursor = 'pointer';
-                claimButton.onclick = claimLoginBonus;
+                if (claimButton) {
+                    claimButton.textContent = 'Claim Bonus';
+                    claimButton.disabled = false;
+                    claimButton.style.cursor = 'pointer';
+                    claimButton.onclick = claimLoginBonus;
+                }
                 elements.menuLoginBonusBtn.onclick = claimLoginBonus;
             }
         }
@@ -1336,10 +1359,10 @@
                 }
 
                 updateBalance(user, newTokens);
-                elements.loginBonusBtn.style.display = 'none';
-                document.getElementById('login-bonus-content').style.display = 'none';
-                elements.menuLoginBonusBtn.parentElement.style.display = 'none';
-                document.getElementById('menu-login-bonus-content').style.display = 'none';
+                if (elements.loginBonusBtn) elements.loginBonusBtn.style.display = 'none';
+                if (document.getElementById('login-bonus-content')) document.getElementById('login-bonus-content').style.display = 'none';
+                if (elements.menuLoginBonusBtn?.parentElement) elements.menuLoginBonusBtn.parentElement.style.display = 'none';
+                if (document.getElementById('menu-login-bonus-content')) document.getElementById('menu-login-bonus-content').style.display = 'none';
                 alert(`Successfully claimed ${LOGIN_BONUS} ARPM login bonus!`);
             } catch (error) {
                 console.error('Error claiming login bonus:', error);
@@ -1437,17 +1460,17 @@
         async function showPage(page) {
             await showLoadingScreen(true);
             Object.values(elements).forEach(c => {
-                if (c.classList && c !== elements.menuPanel && c !== elements.menuOverlay && c !== elements.updateBanner) {
+                if (c?.classList && c !== elements.menuPanel && c !== elements.menuOverlay && c !== elements.updateBanner) {
                     c.classList.remove('active');
                 }
             });
-            elements[page].classList.add('active');
+            if (elements[page]) elements[page].classList.add('active');
 
-            if (page === 'homeSection' && !elements.menuPanel.classList.contains('active') && !elements.updateBanner.style.display) {
-                elements.updateBanner.classList.remove('hidden');
+            if (page === 'homeSection' && !elements.menuPanel?.classList.contains('active') && !elements.updateBanner?.style.display) {
+                elements.updateBanner?.classList.remove('hidden');
                 setTimeout(updateMarquee, 1000);
             } else {
-                elements.updateBanner.classList.add('hidden');
+                elements.updateBanner?.classList.add('hidden');
             }
 
             if (page === 'homeSection') {
@@ -1477,11 +1500,24 @@
          * @param {string} elementId - The ID of the element containing the referral link.
          */
         window.copyReferralLink = async (elementId) => {
-            const referralLink = document.getElementById(elementId).textContent;
+            const referralLinkElement = document.getElementById(elementId);
+            if (!referralLinkElement) return;
+            const referralLink = referralLinkElement.textContent;
             try {
-                await navigator.clipboard.writeText(referralLink);
-                alert('Referral link copied to clipboard!');
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(referralLink);
+                    alert('Referral link copied to clipboard!');
+                } else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = referralLink;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    alert('Referral link copied to clipboard!');
+                }
             } catch (error) {
+                console.error('Failed to copy referral link:', error);
                 alert('Failed to copy referral link: ' + error.message);
             }
         };
@@ -1492,8 +1528,8 @@
         window.toggleInvite = () => {
             const inviteContent = document.getElementById('invite-content');
             const loginBonusContent = document.getElementById('login-bonus-content');
-            inviteContent.classList.toggle('active');
-            if (loginBonusContent.classList.contains('active')) loginBonusContent.classList.remove('active');
+            if (inviteContent) inviteContent.classList.toggle('active');
+            if (loginBonusContent?.classList.contains('active')) loginBonusContent.classList.remove('active');
         };
 
         /**
@@ -1502,8 +1538,8 @@
         window.toggleLoginBonus = () => {
             const loginBonusContent = document.getElementById('login-bonus-content');
             const inviteContent = document.getElementById('invite-content');
-            loginBonusContent.classList.toggle('active');
-            if (inviteContent.classList.contains('active')) inviteContent.classList.remove('active');
+            if (loginBonusContent) loginBonusContent.classList.toggle('active');
+            if (inviteContent?.classList.contains('active')) inviteContent.classList.remove('active');
         };
 
         /**
@@ -1642,80 +1678,101 @@
         /**
          * Handles authentication state changes and initializes the UI.
          */
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const userRef = ref(db, `users/${user.uid}`);
-                try {
-                    const snapshot = await get(userRef);
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        updateBalance(user, userData.tokens || 0);
-                        if (elements.homeSection.classList.contains('active')) {
-                            updateDailyBonusButton(userData);
-                            updateLoginBonusButton(userData);
-                            updateMiningButton(user, userData);
-                            updateReferralInfo(user, userData);
-                            setTimeout(displayRandomAd, 500);
-                            if (!elements.menuPanel.classList.contains('active') && !elements.updateBanner.style.display) {
-                                elements.updateBanner.classList.remove('hidden');
-                                setTimeout(updateMarquee, 1000);
+        if (auth && onAuthStateChanged) {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userRef = ref(db, `users/${user.uid}`);
+                    try {
+                        const snapshot = await get(userRef);
+                        if (snapshot.exists()) {
+                            const userData = snapshot.val();
+                            updateBalance(user, userData.tokens || 0);
+                            if (elements.homeSection?.classList.contains('active')) {
+                                updateDailyBonusButton(userData);
+                                updateLoginBonusButton(userData);
+                                updateMiningButton(user, userData);
+                                updateReferralInfo(user, userData);
+                                setTimeout(displayRandomAd, 500);
+                                if (!elements.menuPanel?.classList.contains('active') && !elements.updateBanner?.style.display) {
+                                    elements.updateBanner?.classList.remove('hidden');
+                                    setTimeout(updateMarquee, 1000);
+                                }
                             }
                         }
+                        showPage('homeSection');
+                    } catch (error) {
+                        console.error('Error loading user data:', error);
+                        alert('Failed to load user data. Please try again.');
                     }
-                    showPage('homeSection');
-                } catch (error) {
-                    console.error('Error loading user data:', error);
-                    alert('Failed to load user data. Please try again.');
+                } else {
+                    if (miningInterval) clearInterval(miningInterval);
+                    if (dailyBonusInterval) clearInterval(dailyBonusInterval);
+                    window.location.href = 'login.html';
                 }
-            } else {
-                if (miningInterval) clearInterval(miningInterval);
-                if (dailyBonusInterval) clearInterval(dailyBonusInterval);
-                window.location.href = 'login.html';
-            }
-        });
+            });
+        }
 
         /**
          * Initializes navigation event listeners.
          */
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
-            item.addEventListener('click', async () => {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
-                const target = item.getAttribute('data-target');
-                if (target === 'incomeSection') {
-                    window.location.href = 'income.html';
-                } else if (target === 'profileSection') {
-                    window.location.href = 'profile.html';
-                } else if (target === 'walletSection') {
-                    window.location.href = 'wallet.html';
-                } else {
-                    await showPage(target);
-                }
-                toggleMenu();
-            });
+            // Remove existing listeners to prevent duplicates
+            item.removeEventListener('click', handleNavClick);
+            item.removeEventListener('touchstart', handleTouchStart);
+            item.removeEventListener('touchend', handleTouchEnd);
 
-            item.addEventListener('touchstart', () => {
-                item.style.transform = 'scale(0.95)';
-            });
-
-            item.addEventListener('touchend', () => {
-                item.style.transform = 'scale(1)';
-            });
+            item.addEventListener('click', handleNavClick);
+            item.addEventListener('touchstart', handleTouchStart);
+            item.addEventListener('touchend', handleTouchEnd);
         });
+
+        function handleNavClick() {
+            const target = this.getAttribute('data-target');
+            navItems.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+            if (target === 'incomeSection') {
+                window.location.href = 'income.html';
+            } else if (target === 'profileSection') {
+                window.location.href = 'profile.html';
+            } else if (target === 'walletSection') {
+                window.location.href = 'wallet.html';
+            } else {
+                showPage(target);
+            }
+            toggleMenu();
+        }
+
+        function handleTouchStart() {
+            this.style.transform = 'scale(0.95)';
+        }
+
+        function handleTouchEnd() {
+            this.style.transform = 'scale(1)';
+        }
 
         /**
          * Adds touch feedback for the start mining button.
          */
-        elements.startMiningBtn.addEventListener('touchstart', () => {
+        if (elements.startMiningBtn) {
+            elements.startMiningBtn.removeEventListener('touchstart', handleMiningTouchStart);
+            elements.startMiningBtn.removeEventListener('touchend', handleMiningTouchEnd);
+            elements.startMiningBtn.removeEventListener('click', startMining);
+
+            elements.startMiningBtn.addEventListener('touchstart', handleMiningTouchStart);
+            elements.startMiningBtn.addEventListener('touchend', handleMiningTouchEnd);
+            elements.startMiningBtn.addEventListener('click', startMining);
+        }
+
+        function handleMiningTouchStart() {
             if (!elements.startMiningBtn.disabled) {
                 elements.startMiningBtn.style.transform = 'scale(0.95)';
             }
-        });
+        }
 
-        elements.startMiningBtn.addEventListener('touchend', () => {
+        function handleMiningTouchEnd() {
             elements.startMiningBtn.style.transform = 'scale(1)';
-        });
+        }
 
         /**
          * Signs out the user and redirects to the login page.
@@ -1736,10 +1793,10 @@
          * Initializes the page with a loading screen.
          */
         window.addEventListener('load', async () => {
-            elements.menuPanel.classList.remove('active');
-            elements.menuOverlay.classList.remove('active');
-            if (elements.homeSection.classList.contains('active') && !elements.updateBanner.style.display) {
-                elements.updateBanner.classList.remove('hidden');
+            if (elements.menuPanel) elements.menuPanel.classList.remove('active');
+            if (elements.menuOverlay) elements.menuOverlay.classList.remove('active');
+            if (elements.homeSection?.classList.contains('active') && !elements.updateBanner?.style.display) {
+                elements.updateBanner?.classList.remove('hidden');
                 setTimeout(updateMarquee, 1000);
             }
             await showLoadingScreen(true);
@@ -1748,12 +1805,9 @@
         /**
          * Menu event listeners
          */
-        elements.menuBtn.addEventListener('click', toggleMenu);
-        elements.closeMenu.addEventListener('click', toggleMenu);
-        elements.menuOverlay.addEventListener('click', toggleMenu);
-
-        // Initialize startMining button event listener
-        elements.startMiningBtn.addEventListener('click', startMining);
+        if (elements.menuBtn) elements.menuBtn.addEventListener('click', toggleMenu);
+        if (elements.closeMenu) elements.closeMenu.addEventListener('click', toggleMenu);
+        if (elements.menuOverlay) elements.menuOverlay.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
